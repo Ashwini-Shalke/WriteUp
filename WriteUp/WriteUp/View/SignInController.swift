@@ -17,17 +17,15 @@ class SignInController: UIViewController {
         setupAutolayout()
     }
     
- 
-    
     let logoImageView: UIImageView = {
         let logo = UIImageView()
         logo.image = UIImage(named: "AppLogo")
         logo.translatesAutoresizingMaskIntoConstraints = false
         logo.contentMode = .scaleAspectFit
-   
         return logo
     }()
      
+    
     let appleButton: ASAuthorizationAppleIDButton = {
         let button = ASAuthorizationAppleIDButton(type: .signIn, style: .white)
         button.layer.shadowColor = UIColor.black.cgColor
@@ -66,12 +64,11 @@ class SignInController: UIViewController {
     }
     
     
-    func handleNextScreen(sender : Any?){
-       let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let swipingController = onBoarding()
-        navigationController?.pushViewController(swipingController, animated: true)
-        
+    func finishSignIn(sender : Any?){
+        let onboarding = onBoarding()
+        onboarding.defaultPresenatationStyle()
+        present(onboarding, animated: true, completion: nil)
+        UserDefaults.standard.setIsSignedIn(value: true)
     }
 }
 
@@ -85,7 +82,8 @@ extension SignInController: ASAuthorizationControllerDelegate {
         switch authorization.credential {
         case let credential as ASAuthorizationAppleIDCredential :
             let user = User(credentials: credential)
-           handleNextScreen(sender: user)
+            finishSignIn(sender: user)
+          
         default:
             break
         }

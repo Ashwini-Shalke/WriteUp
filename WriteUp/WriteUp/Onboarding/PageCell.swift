@@ -54,17 +54,18 @@ class PageCell : UICollectionViewCell{
         textView.textAlignment = .center
         textView.isEditable = false
         textView.isScrollEnabled = false
-        textView.backgroundColor = .white
+    textView.backgroundColor = .white
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
+    
+  
 
     
     private func layout() {
         topImageContainerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         topImageContainerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         topImageContainerView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        
         
         bearImage.centerXAnchor.constraint(equalTo: topImageContainerView.centerXAnchor).isActive = true
         bearImage.centerYAnchor.constraint(equalTo: topImageContainerView.centerYAnchor).isActive = true

@@ -8,10 +8,7 @@
 
 import UIKit
 
-
-
 class onBoarding: UIViewController {
-  
     
     lazy var collectionVC: UICollectionViewController = {
         let layout = UICollectionViewFlowLayout()
@@ -35,20 +32,15 @@ class onBoarding: UIViewController {
 
 
 class SwipingController : UICollectionViewController,UICollectionViewDelegateFlowLayout {
-    
-    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-            coordinator.animate(alongsideTransition: { (_) in
+        coordinator.animate(alongsideTransition: { (_) in
             self.collectionViewLayout.invalidateLayout()
-            
             let indexPath = IndexPath(item: self.pageController.currentPage, section: 0)
             self.collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }) { (_) in
         }
     }
     
-//  let imageNames = ["bear_first","heart_second","leaf_third"]
-//  let descriptionText = ["Join use today in our fun and games!", "Subscribe and get coupons on our daily events", "VIP members special services"]
     let pages = [
         Page(images: "bear_first", headerText: "Join use today in our fun and games!",bodyText : "Are you ready for loads and loads of fun? Don't wait any longer! We hope to see you in our stores soon."),
         Page(images: "heart_second", headerText: "Subscribe and get coupons on our daily events",bodyText : "Get notified of the savings immediately when we announce them on our website. Make sure to also give us any feedback you have."),
@@ -77,9 +69,23 @@ class SwipingController : UICollectionViewController,UICollectionViewDelegateFlo
         return button
     }()
     
-    @objc func HandlePrev()
-    {
-        
+    private let skipButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(UIColor.systemPink, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitle("SKIP", for: .normal)
+        button.addTarget(self, action: #selector(handleSkip), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func handleSkip(){
+        let homeController = HomeController()
+        homeController.modalPresentationStyle = .fullScreen
+        show(homeController, sender: nil)
+    }
+    
+    @objc func HandlePrev(){
         let prevpage : Int = max (pageController.currentPage - 1 ,0)
         let indexpath = IndexPath(item: prevpage, section: 0)
         pageController.currentPage = prevpage
@@ -87,17 +93,14 @@ class SwipingController : UICollectionViewController,UICollectionViewDelegateFlo
         collectionView?.scrollToItem(at: indexpath, at: .centeredHorizontally, animated: true)
     }
     
-    @objc func HandleNext()
-    {
+    @objc func HandleNext(){
         let nextpage : Int = min(pageController.currentPage + 1,pageController.numberOfPages - 1)
         let indexpath = IndexPath(item: nextpage, section: 0)
         pageController.currentPage = nextpage
         collectionView?.scrollToItem(at: indexpath, at: .centeredHorizontally, animated: true)
-        if (pageController.currentPage > 0)
-        {
+        if (pageController.currentPage > 0){
             previousButton.isEnabled = true
             previousButton.setTitleColor(UIColor.darkGray, for: .normal)
-            
         }
     }
     
@@ -119,6 +122,7 @@ class SwipingController : UICollectionViewController,UICollectionViewDelegateFlo
         let bottomStackView = UIStackView(arrangedSubviews: [previousButton,pageController,NextButton])
         bottomStackView.distribution = UIStackView.Distribution.fillEqually
         bottomStackView.translatesAutoresizingMaskIntoConstraints = false
+        
         view.addSubview(bottomStackView)
         NSLayoutConstraint.activate([
             bottomStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -126,21 +130,27 @@ class SwipingController : UICollectionViewController,UICollectionViewDelegateFlo
             bottomStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             bottomStackView.heightAnchor.constraint(equalToConstant: 50)])
         
+        view.addSubview(skipButton)
+                NSLayoutConstraint.activate([
+                    skipButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor,constant: -30),
+                    skipButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                    skipButton.heightAnchor.constraint(equalToConstant: 50)])
+        
     }
-
+    
     
     override func viewDidLoad() {
         super .viewDidLoad()
         setupCollectionView()
         bottomControlLayout()
     }
-    
+
     
     func setupCollectionView(){
-      if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-                 flowLayout.scrollDirection = .horizontal
-                 flowLayout.minimumLineSpacing = 0
-             }
+        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.scrollDirection = .horizontal
+            flowLayout.minimumLineSpacing = 0
+        }
         collectionView?.backgroundColor = .white
         collectionView?.register(PageCell.self, forCellWithReuseIdentifier: "cellId")
         collectionView?.isPagingEnabled = true
@@ -150,7 +160,7 @@ class SwipingController : UICollectionViewController,UICollectionViewDelegateFlo
         if indexPath.row == 0 {
             previousButton.isEnabled = false
             previousButton.setTitleColor(UIColor.lightGray, for: .normal)
-
+            
         }
         else
         {
@@ -174,30 +184,22 @@ class SwipingController : UICollectionViewController,UICollectionViewDelegateFlo
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return pages.count
-       
+        return pages.count
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! PageCell
-//      cell.backgroundColor = indexPath.item % 2 == 0 ? .red : .green
-        
-//       let imageName = imageNames[indexPath.item]
-//       cell.bearImage.image = UIImage(named: imageName)
-//       cell.descriptionTextView.text = descriptionText[indexPath.item]
-        
         let page = pages[indexPath.item]
         cell.page = page
-//      cell.bearImage.image = UIImage(named: page.images)
-//      cell.descriptionTextView.text = page.headerText
         return cell
     }
     
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: view.frame.height)
         
     }
     
-   
+    
 }

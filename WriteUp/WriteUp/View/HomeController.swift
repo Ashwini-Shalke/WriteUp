@@ -13,7 +13,7 @@ class HomeController: UIViewController {
     
     var homeView: UIView = {
         let home = UIView()
-        home.backgroundColor = UIColor.systemPink
+        home.backgroundColor = UIColor.yellow
         home.translatesAutoresizingMaskIntoConstraints = false
         return home
     }()
@@ -23,7 +23,15 @@ class HomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         homeView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(handleSignOut))
         view.addSubview(homeView)
+    }
+    
+    @objc func handleSignOut(){
+        UserDefaults.standard.setIsSignedIn(value: false)
+        let signInController = SignInController()
+        signInController.defaultPresenatationStyle()
+        present(signInController, animated: true, completion: nil)
     }
     
     
