@@ -9,7 +9,9 @@
 import UIKit
 import AuthenticationServices
 
-class SignInController: UIViewController {
+
+class SignInController: UIViewController, onBoardingViewControllerDelegate {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.systemPink
@@ -66,6 +68,7 @@ class SignInController: UIViewController {
     
     func finishSignIn(sender : Any?){
         let onboarding = onBoarding()
+        onboarding.delegate = self
         onboarding.defaultPresenatationStyle()
         present(onboarding, animated: true, completion: nil)
         UserDefaults.standard.setIsSignedIn(value: true)
@@ -96,7 +99,10 @@ extension SignInController : ASAuthorizationControllerPresentationContextProvidi
         return view.window!
     }
     
-    
+    func showHome() {
+                self.dismiss(animated: true){
+                }
+    }
 }
 
 

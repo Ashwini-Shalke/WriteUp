@@ -9,32 +9,40 @@
 import UIKit
 
 class HomeController: UIViewController {
-    var user: User?
     
-    var homeView: UIView = {
-        let home = UIView()
-        home.backgroundColor = UIColor.yellow
-        home.translatesAutoresizingMaskIntoConstraints = false
-        return home
-    }()
-    
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        homeView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(handleSignOut))
-        view.addSubview(homeView)
-    }
+   private let profileButton : UIButton = {
+         let button = UIButton(type: .system)
+         button.setTitle("SIGNOUT", for: .normal)
+         button.setTitleColor(UIColor.mainPink, for: .normal)
+         button.translatesAutoresizingMaskIntoConstraints = false
+         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+         button.addTarget(self, action: #selector(handleSignOut), for: UIControl.Event.touchUpInside)
+         return button
+     }()
     
     @objc func handleSignOut(){
         UserDefaults.standard.setIsSignedIn(value: false)
         let signInController = SignInController()
         signInController.defaultPresenatationStyle()
-        present(signInController, animated: true, completion: nil)
+       present(signInController, animated: true, completion: nil)
+    }
+    
+    func setLayout(){
+        view.addSubview(profileButton)
+        NSLayoutConstraint.activate([
+            profileButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            profileButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            profileButton.widthAnchor.constraint(equalToConstant: 200)])
+    }
+    
+    override func viewDidLoad() {
+        view.backgroundColor = UIColor.white
+        
+        setLayout()
+       
     }
     
     
-    
-    
 }
+
+

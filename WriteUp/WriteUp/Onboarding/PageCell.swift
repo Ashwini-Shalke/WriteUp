@@ -15,9 +15,9 @@ class PageCell : UICollectionViewCell{
             guard let unwrappedPage = page else {return}
             bearImage.image = UIImage(named: unwrappedPage.images)
             
-            let attributedText = NSMutableAttributedString(string: unwrappedPage.headerText, attributes : [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
+            let attributedText = NSMutableAttributedString(string: unwrappedPage.headerText, attributes : [NSAttributedString.Key.font: UIFont().appTitleFont()])
             attributedText.append(NSAttributedString(string: "\n\n\(unwrappedPage.bodyText)", attributes : [NSAttributedString.Key.font
-                : UIFont.systemFont(ofSize: 13)]))
+                : UIFont().appSubTitleFont()]))
             descriptionTextView.attributedText = attributedText
             descriptionTextView.textAlignment = .center
             }
@@ -32,7 +32,7 @@ class PageCell : UICollectionViewCell{
     }
     
    private let bearImage: UIImageView = {
-        let imageview = UIImageView(image:#imageLiteral(resourceName: "bear_first"))
+        let imageview = UIImageView(image:#imageLiteral(resourceName: "Page1"))
         imageview.translatesAutoresizingMaskIntoConstraints = false
         imageview.contentMode = .scaleAspectFit
         return imageview
@@ -47,9 +47,9 @@ class PageCell : UICollectionViewCell{
     
    private let descriptionTextView: UITextView = {
         let textView =  UITextView()
-        let attributedText = NSMutableAttributedString(string: "Work is fun, join us for more fun", attributes : [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
-        attributedText.append(NSAttributedString(string: "\n\nAre you ready for loads and loads of fun ? Come lets join our stores for more fun", attributes : [NSAttributedString.Key.font
-            : UIFont.systemFont(ofSize: 13)]))
+    let attributedText = NSMutableAttributedString(string: Constant.Pages.firstPageTitle, attributes : [NSAttributedString.Key.font: UIFont().appTitleFont()])
+    attributedText.append(NSAttributedString(string: "\n\n \(Constant.Pages.firstPageDescripation)", attributes : [NSAttributedString.Key.font
+        : UIFont().appSubTitleFont()]))
         textView.attributedText = attributedText
         textView.textAlignment = .center
         textView.isEditable = false
@@ -59,9 +59,7 @@ class PageCell : UICollectionViewCell{
         return textView
     }()
     
-  
 
-    
     private func layout() {
         topImageContainerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         topImageContainerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
@@ -79,6 +77,7 @@ class PageCell : UICollectionViewCell{
         descriptionTextView.rightAnchor.constraint(equalTo: rightAnchor, constant: -24).isActive = true
         descriptionTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
     }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
