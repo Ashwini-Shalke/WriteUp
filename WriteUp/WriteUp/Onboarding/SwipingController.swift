@@ -14,7 +14,8 @@ protocol SwipingControllerDelegate {
 
 class SwipingController : UICollectionViewController,UICollectionViewDelegateFlowLayout {
     
-    var delegate: SwipingControllerDelegate?
+//    Weak delegate
+    weak var onboarding: onBoardingController?
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animate(alongsideTransition: { (_) in
@@ -63,13 +64,15 @@ class SwipingController : UICollectionViewController,UICollectionViewDelegateFlo
         return button
     }()
     
+   
+    
     @objc func handleSkip(){
-
-         let homeController = HomeController()
-        homeController.defaultPresenatationStyle()
-        present(homeController, animated: true, completion: nil)
-//        delegate?.dismissOnboardingView()
-        
+////        let homeController = HomeController()
+////        homeController.defaultPresenatationStyle()
+////        present(homeController, animated: true, completion: nil)
+//        var rootViewController: RootViewController?
+//        rootViewController?.handleChild()
+        onboarding?.dismissOnboardingView()
     }
     
     @objc func HandlePrev(){

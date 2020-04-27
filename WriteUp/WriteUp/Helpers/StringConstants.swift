@@ -20,9 +20,9 @@ struct Constant {
         static let secondPageTitle = "Subscribe and get coupons on our daily events"
         static let secondPageDescripation = "Get notified of the savings immediately when we announce them on our website. Make sure to also give us any feedback you have."
         
-        static let thirdPageTitle = "Page3"
-        static let thirdPageImageName = "leaf_third"
-        static let thirdPageDescripation = ""
+        static let thirdPageImageName = "Page3"
+        static let thirdPageTitle = "leaf_third"
+        static let thirdPageDescripation = "Need to add something"
                 
         static let nextButtonTitle = "NEXT"
         static let prevButtonTitle = "PREV"

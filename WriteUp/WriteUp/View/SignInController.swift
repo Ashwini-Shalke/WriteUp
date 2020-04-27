@@ -9,8 +9,15 @@
 import UIKit
 import AuthenticationServices
 
+protocol signInProtocol{
+    func handleRoot()
+}
 
-class SignInController: UIViewController, onBoardingViewControllerDelegate {
+//onBoardingViewControllerDelegate
+class SignInController: UIViewController,onBoardingViewControllerDelegate{
+    
+    //Weak delegate 
+    weak var rootViewController: RootViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,9 +73,10 @@ class SignInController: UIViewController, onBoardingViewControllerDelegate {
     }
     
     
-    func finishSignIn(sender : Any?){
+    func launchOnboard(sender : Any?){
         let onboarding = onBoarding()
-        onboarding.delegate = self
+//        onboarding.delegate = self
+        onboarding.signInController = self
         onboarding.defaultPresenatationStyle()
         present(onboarding, animated: true, completion: nil)
         UserDefaults.standard.setIsSignedIn(value: true)
@@ -85,7 +93,7 @@ extension SignInController: ASAuthorizationControllerDelegate {
         switch authorization.credential {
         case let credential as ASAuthorizationAppleIDCredential :
             let user = User(credentials: credential)
-            finishSignIn(sender: user)
+            launchOnboard(sender: user)
           
         default:
             break
@@ -95,13 +103,21 @@ extension SignInController: ASAuthorizationControllerDelegate {
 
 
 extension SignInController : ASAuthorizationControllerPresentationContextProviding {
+    
+    
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return view.window!
     }
     
-    func showHome() {
-                self.dismiss(animated: true){
-                }
+    func dismissSignIn() {
+        UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: {
+            self.view.alpha = 0
+            self.dismiss(animated: false, completion: nil)
+        }, completion: nil)
+        
+        UIView.animate(withDuration: 1, delay: 1, options: .curveLinear, animations: {
+                self.rootViewController?.handleRoot()
+            }, completion: nil)
     }
 }
 

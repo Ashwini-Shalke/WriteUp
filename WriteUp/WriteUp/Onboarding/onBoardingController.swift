@@ -9,17 +9,18 @@
 import UIKit
 
 protocol onBoardingViewControllerDelegate {
-    func showHome()
+    func dismissSignIn()
 }
-
-class onBoarding: UIViewController, SwipingControllerDelegate {
+//SwipingControllerDelegate
+class onBoardingController: UIViewController,SwipingControllerDelegate {
     
-    var delegate: onBoardingViewControllerDelegate?
+    //Weak delegate
+    var signInController:SignInController?
     
     lazy var collectionVC: UICollectionViewController = {
         let layout = UICollectionViewFlowLayout()
         let cv = SwipingController(collectionViewLayout: layout)
-        cv.delegate = self
+        cv.onboarding = self
         return cv
     }()
     
@@ -37,9 +38,9 @@ class onBoarding: UIViewController, SwipingControllerDelegate {
     }
     
     func dismissOnboardingView() {
-//        self.dismiss(animated: true) {
-//            self.delegate?.showHome()
-//        }
+        dismiss(animated: true) {
+        self.signInController?.dismissSignIn()
+        }
     }
 }
 

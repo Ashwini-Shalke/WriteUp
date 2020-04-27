@@ -8,8 +8,16 @@
 
 import UIKit
 
-class RootViewController: UIViewController{
-    let signInController = SignInController()
+
+class RootViewController: UIViewController,signInProtocol{
+    
+    lazy var signInController : SignInController = {
+        var sc = SignInController()
+        sc.rootViewController = self
+        return sc
+    }()
+    
+ 
     let homeController = HomeController()
     
     override func viewDidLoad() {
@@ -34,8 +42,13 @@ class RootViewController: UIViewController{
                 homeController.remove()
             }
             self.addChild(signInController)
+            
             setupLayout(signInController)
         }
+    }
+    
+    func handleRoot() {
+        handleChild()
     }
 }
 
