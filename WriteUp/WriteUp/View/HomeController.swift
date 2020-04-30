@@ -10,38 +10,45 @@ import UIKit
 
 class HomeController: UIViewController {
     
-   private let profileButton : UIButton = {
-         let button = UIButton(type: .system)
-         button.setTitle("SIGNOUT", for: .normal)
-         button.setTitleColor(UIColor.mainPink, for: .normal)
-         button.translatesAutoresizingMaskIntoConstraints = false
-         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-         button.addTarget(self, action: #selector(handleSignOut), for: UIControl.Event.touchUpInside)
-         return button
-     }()
+    private let profileButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 0)
+        button.layer.cornerRadius = button.frame.width/2
+        button.backgroundColor = UIColor.systemPink
+        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.titleLabel?.font = UIFont().boldSystemFont()
+        return button
+    }()
     
     @objc func handleSignOut(){
         UserDefaults.standard.setIsSignedIn(value: false)
-        let signInController = SignInController()
-        signInController.defaultPresenatationStyle()
-       present(signInController, animated: true, completion: nil)
+        let profileLauncher = ProfileLauncher()
+        navigationController?.pushViewController(profileLauncher, animated: true)
     }
     
-    func setLayout(){
-        view.addSubview(profileButton)
-        NSLayoutConstraint.activate([
-            profileButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            profileButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            profileButton.widthAnchor.constraint(equalToConstant: 200)])
+    let barlabel: UILabel = {
+        let label = UILabel()
+        label.text = Constant.HomeSC.barLabel
+        label.font = UIFont().appNavFont()
+        label.textColor = UIColor.systemPink
+        return label
+    }()
+    
+    func setupLayout(){
+        barlabel.frame = CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height)
+        navigationController?.navigationBar.topItem?.titleView = barlabel
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
+       
+       
+        profileButton.addTarget(self, action: #selector(handleSignOut), for: UIControl.Event.touchUpInside)
+        profileButton.addTarget(self, action: #selector(handleSignOut), for: UIControl.Event.touchUpInside)
     }
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
         
-        setLayout()
-       
+        setupLayout()
     }
-    
     
 }
 

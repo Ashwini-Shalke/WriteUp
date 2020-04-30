@@ -13,27 +13,23 @@ protocol signInProtocol{
     func handleRoot()
 }
 
-//onBoardingViewControllerDelegate
 class SignInController: UIViewController,onBoardingViewControllerDelegate{
-    
-    //Weak delegate 
     weak var rootViewController: RootViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.systemPink
-        // Do any additional setup after loading the view.
         setupAutolayout()
     }
     
     let logoImageView: UIImageView = {
         let logo = UIImageView()
-        logo.image = UIImage(named: "AppLogo")
+        logo.image = UIImage(named: Constant.SignInSC.logoImageName)
         logo.translatesAutoresizingMaskIntoConstraints = false
         logo.contentMode = .scaleAspectFit
         return logo
     }()
-     
+    
     
     let appleButton: ASAuthorizationAppleIDButton = {
         let button = ASAuthorizationAppleIDButton(type: .signIn, style: .white)
@@ -43,7 +39,7 @@ class SignInController: UIViewController,onBoardingViewControllerDelegate{
         return button
     }()
     
-  
+    
     func setupAutolayout(){
         view.addSubview(logoImageView)
         NSLayoutConstraint.activate([logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -55,9 +51,6 @@ class SignInController: UIViewController,onBoardingViewControllerDelegate{
                                      appleButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
                                      appleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
                                      appleButton.heightAnchor.constraint(equalToConstant: 35)])
-        
-        
-        
     }
     
     
@@ -74,8 +67,7 @@ class SignInController: UIViewController,onBoardingViewControllerDelegate{
     
     
     func launchOnboard(sender : Any?){
-        let onboarding = onBoarding()
-//        onboarding.delegate = self
+        let onboarding = onBoardingController()
         onboarding.signInController = self
         onboarding.defaultPresenatationStyle()
         present(onboarding, animated: true, completion: nil)
@@ -86,7 +78,7 @@ class SignInController: UIViewController,onBoardingViewControllerDelegate{
 
 extension SignInController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-      print("Something is Wrong")
+        print("Something is Wrong")
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
@@ -94,7 +86,7 @@ extension SignInController: ASAuthorizationControllerDelegate {
         case let credential as ASAuthorizationAppleIDCredential :
             let user = User(credentials: credential)
             launchOnboard(sender: user)
-          
+            
         default:
             break
         }
@@ -103,8 +95,6 @@ extension SignInController: ASAuthorizationControllerDelegate {
 
 
 extension SignInController : ASAuthorizationControllerPresentationContextProviding {
-    
-    
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return view.window!
     }
@@ -116,8 +106,8 @@ extension SignInController : ASAuthorizationControllerPresentationContextProvidi
         }, completion: nil)
         
         UIView.animate(withDuration: 1, delay: 1, options: .curveLinear, animations: {
-                self.rootViewController?.handleRoot()
-            }, completion: nil)
+            self.rootViewController?.handleRoot()
+        }, completion: nil)
     }
 }
 

@@ -11,12 +11,9 @@ import UIKit
 protocol onBoardingViewControllerDelegate {
     func dismissSignIn()
 }
-//SwipingControllerDelegate
+
 class onBoardingController: UIViewController,SwipingControllerDelegate {
-    
-    //Weak delegate
     var signInController:SignInController?
-    
     lazy var collectionVC: UICollectionViewController = {
         let layout = UICollectionViewFlowLayout()
         let cv = SwipingController(collectionViewLayout: layout)
@@ -24,11 +21,9 @@ class onBoardingController: UIViewController,SwipingControllerDelegate {
         return cv
     }()
     
-    
     override func viewDidLoad() {
         collectionVC.view.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(collectionVC.view)
-        
         NSLayoutConstraint.activate([
             collectionVC.view.topAnchor.constraint(equalTo: self.view.topAnchor),
             collectionVC.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
@@ -39,7 +34,7 @@ class onBoardingController: UIViewController,SwipingControllerDelegate {
     
     func dismissOnboardingView() {
         dismiss(animated: true) {
-        self.signInController?.dismissSignIn()
+            self.signInController?.dismissSignIn()
         }
     }
 }

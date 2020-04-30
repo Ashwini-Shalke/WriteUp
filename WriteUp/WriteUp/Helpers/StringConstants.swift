@@ -6,7 +6,7 @@
 //  Copyright © 2020 Ashwini Shalke. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Constant {
     
@@ -29,6 +29,22 @@ struct Constant {
         static let skipButtonTitle = "SKIP"
     }
     
-    //MARK: home screen
+    //MARK: Home screen
+    struct HomeSC {
+     static let barLabel = "WriteUp"
+    }
     
+    
+    //MARK: SignIn Screen
+    struct  SignInSC {
+        static let logoImageName = "AppLogo"
+    }
+    
+
+    //MARK: ProfileLauncher Screen
+    struct ProfileSC {
+        static let Labelheight = CGFloat(32)
+        static let TextFieldheight = CGFloat(37)
+    }
+   
 }

@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         let navigationController = UINavigationController(rootViewController: RootViewController())
-        navigationController.navigationBar.setTransparentNavigationBar()
+//        navigationController.navigationBar.setTransparentNavigationBar()
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         guard let _ = (scene as? UIWindowScene) else { return }

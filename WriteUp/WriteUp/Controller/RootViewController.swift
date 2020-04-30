@@ -8,18 +8,15 @@
 
 import UIKit
 
-
 class RootViewController: UIViewController,signInProtocol{
+    let homeController = HomeController()
     
     lazy var signInController : SignInController = {
         var sc = SignInController()
         sc.rootViewController = self
         return sc
     }()
-    
- 
-    let homeController = HomeController()
-    
+
     override func viewDidLoad() {
         view.backgroundColor = UIColor.green
         handleChild()
@@ -27,37 +24,31 @@ class RootViewController: UIViewController,signInProtocol{
     
     fileprivate func isSignedIn() -> Bool {
         return UserDefaults.standard.isSignedIn()
-       
     }
     
     func handleChild(){
-        if isSignedIn() {
+//        if isSignedIn() {
             if children == [signInController] {
                 signInController.remove()
             }
             self.addChild(homeController)
             setupLayout(homeController)
-        } else {
-            if children == [homeController] {
-                homeController.remove()
-            }
-            self.addChild(signInController)
-            
-            setupLayout(signInController)
-        }
+//        } else {
+//            if children == [homeController] {
+//                homeController.remove()
+//            }
+//            self.addChild(signInController)
+//            setupLayout(signInController)
+//        }
     }
     
-    func handleRoot() {
-        handleChild()
-    }
-}
+    func handleRoot(){ handleChild() }}
 
 extension RootViewController{
     func setupLayout(_ child: UIViewController){
         self.view.addSubview(child.view)
         child.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            child.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             child.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             child.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             child.view.heightAnchor.constraint(equalTo: view.heightAnchor)

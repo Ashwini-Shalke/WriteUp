@@ -8,7 +8,19 @@
 
 import UIKit
 
-class PageCell : UICollectionViewCell{
+class BaseCell: UICollectionViewCell {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    func setup(){}
+   required init?(coder: NSCoder) {
+           fatalError("init(coder:) has not been implemented")
+       }
+    
+}
+class PageCell: BaseCell{
     
     var page: Page? {
         didSet {
@@ -23,13 +35,14 @@ class PageCell : UICollectionViewCell{
             }
     }
     
-// init
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addSubview(topImageContainerView)
-        topImageContainerView.addSubview(bearImage)
-        layout()
-    }
+//// init
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        addSubview(topImageContainerView)
+//        topImageContainerView.addSubview(bearImage)
+//        setup()
+//    }
+   
     
    private let bearImage: UIImageView = {
         let imageview = UIImageView(image:#imageLiteral(resourceName: "Page1"))
@@ -60,7 +73,10 @@ class PageCell : UICollectionViewCell{
     }()
     
 
-    private func layout() {
+    override func setup() {
+        super.setup()
+        addSubview(topImageContainerView)
+        topImageContainerView.addSubview(bearImage)
         topImageContainerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         topImageContainerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         topImageContainerView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
@@ -75,12 +91,9 @@ class PageCell : UICollectionViewCell{
         descriptionTextView.topAnchor.constraint(equalTo: topImageContainerView.bottomAnchor).isActive = true
         descriptionTextView.leftAnchor.constraint(equalTo: leftAnchor, constant: 24).isActive = true
         descriptionTextView.rightAnchor.constraint(equalTo: rightAnchor, constant: -24).isActive = true
-        descriptionTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+        descriptionTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -100).isActive = true
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+
 }
 
 
