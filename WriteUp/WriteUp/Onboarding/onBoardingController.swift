@@ -13,11 +13,15 @@ protocol onBoardingViewControllerDelegate {
 }
 
 class onBoardingController: UIViewController,SwipingControllerDelegate {
-    var signInController:SignInController?
+    
+    var onboardingdelegate: onBoardingViewControllerDelegate?
+    
+//    weak var signInViewController: SignInViewController?
+    
     lazy var collectionVC: UICollectionViewController = {
         let layout = UICollectionViewFlowLayout()
         let cv = SwipingController(collectionViewLayout: layout)
-        cv.onboarding = self
+        cv.swipingDelegate = self
         return cv
     }()
     
@@ -34,7 +38,8 @@ class onBoardingController: UIViewController,SwipingControllerDelegate {
     
     func dismissOnboardingView() {
         dismiss(animated: true) {
-            self.signInController?.dismissSignIn()
+            self.onboardingdelegate?.dismissSignIn()
+//            self.signInViewController?.dismissSignIn()
         }
     }
 }

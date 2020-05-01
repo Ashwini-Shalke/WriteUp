@@ -19,8 +19,17 @@ class BaseView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
- 
+
+protocol ProfileLauncherDelegate {
+    func dismissHome()
+}
+
 class ProfileLauncher: UIViewController {
+    
+    var profiledelegate: ProfileLauncherDelegate?
+    let signoutButton = PrimaryButton(titletext: "SignOut")
+    
+    
     let topViewContainer : UIView = {
         let topView = UIView()
         topView.translatesAutoresizingMaskIntoConstraints = false
@@ -51,9 +60,10 @@ class ProfileLauncher: UIViewController {
     }()
     
     @objc func pickImage() {
-       
+        
     }
-
+    
+    
     var nameView: UIView = UIView()
     var emailView: UIView = UIView()
     let phoneView: UIView = UIView()
@@ -162,7 +172,7 @@ class ProfileLauncher: UIViewController {
             topViewContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             topViewContainer.heightAnchor.constraint(equalToConstant: 200)
         ])
-    
+        
         topViewContainer.addSubview(placeHolderImageView)
         NSLayoutConstraint.activate([
             placeHolderImageView.topAnchor.constraint(equalTo: topViewContainer.topAnchor, constant: 19),
@@ -170,23 +180,37 @@ class ProfileLauncher: UIViewController {
             placeHolderImageView.bottomAnchor.constraint(equalTo: topViewContainer.bottomAnchor, constant: -18),
             placeHolderImageView.widthAnchor.constraint(equalToConstant: 160)
         ])
-    
+        
         topViewContainer.addSubview(addImageButton)
         NSLayoutConstraint.activate([
             addImageButton.topAnchor.constraint(equalTo: placeHolderImageView.topAnchor, constant: 109),
             addImageButton.leftAnchor.constraint(equalTo: placeHolderImageView.leftAnchor, constant: 111),
             addImageButton.widthAnchor.constraint(equalToConstant: 41),
             addImageButton.heightAnchor.constraint(equalToConstant: 41)])
+        
+        view.addSubview(signoutButton)
+        
+        NSLayoutConstraint.activate([
+            signoutButton.heightAnchor.constraint(equalToConstant: 44),
+            signoutButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 27),
+            signoutButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -27),
+            signoutButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15)])
+    }
+    
+    @objc func handleSignout(){
+        self.navigationController?.popViewController(animated: false)
+        profiledelegate?.dismissHome()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         navigationController?.navigationBar.topItem?.title = "Profile"
-       navigationController?.navigationBar.tintColor = UIColor.systemPink
-        navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(handleEdit))
+        navigationController?.navigationBar.tintColor = UIColor.systemPink
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(handleEdit))
         autolayout()
         setupProfileDetails()
+        signoutButton.addTarget(self, action: #selector(handleSignout), for: .touchUpInside)
     }
     
     @objc func handleEdit(){

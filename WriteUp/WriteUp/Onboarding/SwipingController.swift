@@ -15,7 +15,10 @@ protocol SwipingControllerDelegate {
 class SwipingController : UICollectionViewController,UICollectionViewDelegateFlowLayout {
     
 //    Weak delegate
-    weak var onboarding: onBoardingController?
+    var swipingDelegate: SwipingControllerDelegate?
+    
+//    weak var onboarding: onBoardingController?
+    
     
     lazy var pageBar: PageBar = {
        var pb = PageBar()
@@ -75,7 +78,8 @@ class SwipingController : UICollectionViewController,UICollectionViewDelegateFlo
 
 
     @objc func handleSkip(){
-        onboarding?.dismissOnboardingView()
+        swipingDelegate?.dismissOnboardingView()
+//        onboarding?.dismissOnboardingView()
     }
 //
 //    @objc func HandlePrev(){

@@ -10,14 +10,15 @@
 		33306BC22456E7A1003CA89E /* PageBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306BC12456E7A1003CA89E /* PageBar.swift */; };
 		33306BC424589BC2003CA89E /* PrimaryLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306BC324589BC2003CA89E /* PrimaryLabel.swift */; };
 		33306BC6245985AD003CA89E /* PrimaryText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306BC5245985AD003CA89E /* PrimaryText.swift */; };
+		33306BC8245C1AE7003CA89E /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306BC7245C1AE7003CA89E /* PrimaryButton.swift */; };
 		3333CDEA2445CB7A00E6EF3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333CDE92445CB7A00E6EF3B /* AppDelegate.swift */; };
 		3333CDEC2445CB7A00E6EF3B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333CDEB2445CB7A00E6EF3B /* SceneDelegate.swift */; };
-		3333CDEE2445CB7A00E6EF3B /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333CDED2445CB7A00E6EF3B /* SignInController.swift */; };
+		3333CDEE2445CB7A00E6EF3B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333CDED2445CB7A00E6EF3B /* SignInViewController.swift */; };
 		3333CDF12445CB7A00E6EF3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3333CDEF2445CB7A00E6EF3B /* Main.storyboard */; };
 		3333CDF32445CB7D00E6EF3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3333CDF22445CB7D00E6EF3B /* Assets.xcassets */; };
 		3333CDF62445CB7D00E6EF3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3333CDF42445CB7D00E6EF3B /* LaunchScreen.storyboard */; };
 		3333CE002445CC3B00E6EF3B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333CDFF2445CC3B00E6EF3B /* User.swift */; };
-		3333CE022445CD8100E6EF3B /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333CE012445CD8100E6EF3B /* HomeController.swift */; };
+		3333CE022445CD8100E6EF3B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333CE012445CD8100E6EF3B /* HomeViewController.swift */; };
 		3372E5F224471444009D3983 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E5F124471444009D3983 /* Extension.swift */; };
 		3372E5FE2447170F009D3983 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E5FD2447170F009D3983 /* PageCell.swift */; };
 		3372E60024471714009D3983 /* onBoardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E5FF24471714009D3983 /* onBoardingController.swift */; };
@@ -32,16 +33,17 @@
 		33306BC12456E7A1003CA89E /* PageBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageBar.swift; sourceTree = "<group>"; };
 		33306BC324589BC2003CA89E /* PrimaryLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryLabel.swift; sourceTree = "<group>"; };
 		33306BC5245985AD003CA89E /* PrimaryText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryText.swift; sourceTree = "<group>"; };
+		33306BC7245C1AE7003CA89E /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		3333CDE62445CB7A00E6EF3B /* WriteUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WriteUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3333CDE92445CB7A00E6EF3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3333CDEB2445CB7A00E6EF3B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3333CDED2445CB7A00E6EF3B /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
+		3333CDED2445CB7A00E6EF3B /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		3333CDF02445CB7A00E6EF3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3333CDF22445CB7D00E6EF3B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3333CDF52445CB7D00E6EF3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3333CDF72445CB7D00E6EF3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3333CDFF2445CC3B00E6EF3B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		3333CE012445CD8100E6EF3B /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		3333CE012445CD8100E6EF3B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3333CE032445DD8E00E6EF3B /* WriteUp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WriteUp.entitlements; sourceTree = "<group>"; };
 		3372E5F124471444009D3983 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		3372E5FD2447170F009D3983 /* PageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
@@ -110,8 +112,8 @@
 		3333CDFE2445CC0900E6EF3B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3333CE012445CD8100E6EF3B /* HomeController.swift */,
-				3333CDED2445CB7A00E6EF3B /* SignInController.swift */,
+				3333CE012445CD8100E6EF3B /* HomeViewController.swift */,
+				3333CDED2445CB7A00E6EF3B /* SignInViewController.swift */,
 				3372E60E244F074D009D3983 /* ProfileLauncher.swift */,
 			);
 			path = View;
@@ -124,6 +126,7 @@
 				3372E607244DEF9D009D3983 /* StringConstants.swift */,
 				33306BC324589BC2003CA89E /* PrimaryLabel.swift */,
 				33306BC5245985AD003CA89E /* PrimaryText.swift */,
+				33306BC7245C1AE7003CA89E /* PrimaryButton.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -221,11 +224,12 @@
 			files = (
 				3372E5F224471444009D3983 /* Extension.swift in Sources */,
 				3333CE002445CC3B00E6EF3B /* User.swift in Sources */,
-				3333CDEE2445CB7A00E6EF3B /* SignInController.swift in Sources */,
-				3333CE022445CD8100E6EF3B /* HomeController.swift in Sources */,
+				3333CDEE2445CB7A00E6EF3B /* SignInViewController.swift in Sources */,
+				3333CE022445CD8100E6EF3B /* HomeViewController.swift in Sources */,
 				33306BC22456E7A1003CA89E /* PageBar.swift in Sources */,
 				33306BC6245985AD003CA89E /* PrimaryText.swift in Sources */,
 				3372E60D244ED71D009D3983 /* RootViewController.swift in Sources */,
+				33306BC8245C1AE7003CA89E /* PrimaryButton.swift in Sources */,
 				3333CDEA2445CB7A00E6EF3B /* AppDelegate.swift in Sources */,
 				3372E60224471719009D3983 /* Page.swift in Sources */,
 				3372E60F244F074D009D3983 /* ProfileLauncher.swift in Sources */,

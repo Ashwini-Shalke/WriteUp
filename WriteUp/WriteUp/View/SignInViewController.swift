@@ -9,11 +9,11 @@
 import UIKit
 import AuthenticationServices
 
-protocol signInProtocol{
+protocol signInDelegate{
     func handleRoot()
 }
 
-class SignInController: UIViewController,onBoardingViewControllerDelegate{
+class SignInViewController: UIViewController,onBoardingViewControllerDelegate{
     weak var rootViewController: RootViewController?
     
     override func viewDidLoad() {
@@ -68,7 +68,8 @@ class SignInController: UIViewController,onBoardingViewControllerDelegate{
     
     func launchOnboard(sender : Any?){
         let onboarding = onBoardingController()
-        onboarding.signInController = self
+        onboarding.onboardingdelegate = self
+//        onboarding.signInViewController = self
         onboarding.defaultPresenatationStyle()
         present(onboarding, animated: true, completion: nil)
         UserDefaults.standard.setIsSignedIn(value: true)
@@ -76,7 +77,7 @@ class SignInController: UIViewController,onBoardingViewControllerDelegate{
 }
 
 
-extension SignInController: ASAuthorizationControllerDelegate {
+extension SignInViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print("Something is Wrong")
     }
@@ -86,7 +87,6 @@ extension SignInController: ASAuthorizationControllerDelegate {
         case let credential as ASAuthorizationAppleIDCredential :
             let user = User(credentials: credential)
             launchOnboard(sender: user)
-            
         default:
             break
         }
@@ -94,7 +94,7 @@ extension SignInController: ASAuthorizationControllerDelegate {
 }
 
 
-extension SignInController : ASAuthorizationControllerPresentationContextProviding {
+extension SignInViewController : ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return view.window!
     }

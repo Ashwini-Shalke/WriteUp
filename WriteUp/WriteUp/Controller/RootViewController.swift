@@ -8,41 +8,60 @@
 
 import UIKit
 
-class RootViewController: UIViewController,signInProtocol{
-    let homeController = HomeController()
+
+class RootViewController: UIViewController,signInDelegate,homeDelegate{
     
-    lazy var signInController : SignInController = {
-        var sc = SignInController()
+    lazy var homeViewController: HomeViewController = {
+        var hc = HomeViewController()
+        hc.rootViewController = self
+        return hc
+    }()
+       
+    
+    lazy var signinViewController : SignInViewController = {
+        var sc = SignInViewController()
         sc.rootViewController = self
         return sc
     }()
 
     override func viewDidLoad() {
-        view.backgroundColor = UIColor.green
-        handleChild()
+        view.backgroundColor = UIColor.green        
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        handleChild()
+    }
+
     fileprivate func isSignedIn() -> Bool {
         return UserDefaults.standard.isSignedIn()
     }
     
     func handleChild(){
-//        if isSignedIn() {
-            if children == [signInController] {
-                signInController.remove()
+        if isSignedIn() {
+            if children == [signinViewController] {
+                signinViewController.remove()
             }
-            self.addChild(homeController)
-            setupLayout(homeController)
-//        } else {
-//            if children == [homeController] {
-//                homeController.remove()
-//            }
-//            self.addChild(signInController)
-//            setupLayout(signInController)
-//        }
+            self.addChild(homeViewController)
+            setupLayout(homeViewController)
+        } else {
+            if children == [homeViewController] {
+                homeViewController.remove()
+            }
+            self.addChild(signinViewController)
+            setupLayout(signinViewController)
+        }
     }
     
-    func handleRoot(){ handleChild() }}
+    func handleRoot(){
+        handleChild()
+    }
+    
+    func handleSignOut(){
+        handleChild()
+    }
+}
 
 extension RootViewController{
     func setupLayout(_ child: UIViewController){

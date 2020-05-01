@@ -8,7 +8,13 @@
 
 import UIKit
 
-class HomeController: UIViewController {
+protocol homeDelegate {
+    func handleSignOut()
+}
+
+class HomeViewController: UIViewController, ProfileLauncherDelegate{
+    
+    weak var rootViewController : RootViewController?
     
     private let profileButton : UIButton = {
         let button = UIButton(type: .system)
@@ -20,9 +26,9 @@ class HomeController: UIViewController {
         return button
     }()
     
-    @objc func handleSignOut(){
-        UserDefaults.standard.setIsSignedIn(value: false)
+    @objc func handleProfileButton(){
         let profileLauncher = ProfileLauncher()
+        profileLauncher.profiledelegate = self
         navigationController?.pushViewController(profileLauncher, animated: true)
     }
     
@@ -38,18 +44,19 @@ class HomeController: UIViewController {
         barlabel.frame = CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height)
         navigationController?.navigationBar.topItem?.titleView = barlabel
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
-       
-       
-        profileButton.addTarget(self, action: #selector(handleSignOut), for: UIControl.Event.touchUpInside)
-        profileButton.addTarget(self, action: #selector(handleSignOut), for: UIControl.Event.touchUpInside)
+        profileButton.addTarget(self, action: #selector(handleProfileButton), for: UIControl.Event.touchUpInside)
     }
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
-        
         setupLayout()
     }
     
+    func dismissHome() {
+        dismiss(animated: true, completion: nil)
+        UserDefaults.standard.setIsSignedIn(value: false)
+        rootViewController?.handleSignOut()
+    }
 }
 
 
