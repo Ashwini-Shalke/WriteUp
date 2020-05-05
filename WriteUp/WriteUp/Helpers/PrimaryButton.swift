@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PrimaryButton : UIButton {
+class PrimaryButton: UIButton {
     let button = UIButton()
     
     init(titletext: String){
@@ -27,3 +27,20 @@ class PrimaryButton : UIButton {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+class OnboardingButton: UIButton {
+    let button = UIButton()
+    init(titletext: String){
+        super.init(frame: .zero)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.setTitleColor(UIColor.darkGray, for: .normal)
+        self.titleLabel?.font = UIFont().onboardingbuttonTitleFont()
+        self.setTitle(titletext, for: .normal)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+

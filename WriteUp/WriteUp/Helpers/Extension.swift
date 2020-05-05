@@ -36,7 +36,7 @@ extension UIFont {
         return UIFont.systemFont(ofSize: size ?? 34)
     }
     
-    func appTitleFont(size: CGFloat? = 18) -> UIFont {
+    func appMainTitleFont(size: CGFloat? = 18) -> UIFont {
         return UIFont.systemFont(ofSize: size ?? 18)
     }
     
@@ -44,7 +44,11 @@ extension UIFont {
         return UIFont.systemFont(ofSize: size ?? 14)
     }
     
-    func boldTitleFont(size: CGFloat? = 22) -> UIFont {
+    func onboardingbuttonTitleFont(size: CGFloat? = 14) -> UIFont {
+        return UIFont.boldSystemFont(ofSize: size ?? 14)
+    }
+    
+    func appLabelTitleFont(size: CGFloat? = 22) -> UIFont {
         return UIFont.boldSystemFont(ofSize: size ?? 22)
     }
 }
@@ -96,6 +100,34 @@ extension UIView {
             borderLayer.leadingAnchor.constraint(equalTo: leadingAnchor),
             borderLayer.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
+    }
+    
+    func anchor(top: NSLayoutYAxisAnchor?,leading: NSLayoutXAxisAnchor?,bottom: NSLayoutYAxisAnchor?,trailing: NSLayoutXAxisAnchor?, padding: UIEdgeInsets = .zero, size: CGSize = .zero) {
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        if let top = top {
+            topAnchor.constraint(equalTo: top, constant: padding.top).isActive = true
+        }
+        
+        if let leading = leading {
+            leadingAnchor.constraint(equalTo: leading, constant: padding.left).isActive = true
+        }
+        
+        if let bottom = bottom {
+            bottomAnchor.constraint(equalTo: bottom, constant: padding.bottom).isActive = true
+        }
+        
+        if let trailing = trailing {
+            trailingAnchor.constraint(equalTo: trailing, constant: padding.right).isActive = true
+        }
+        
+        if size.width != 0 {
+            widthAnchor.constraint(equalToConstant: size.width).isActive = true
+        }
+        
+        if size.height != 0 {
+            heightAnchor.constraint(equalToConstant: size.height).isActive = true
+        }
     }
 }
 

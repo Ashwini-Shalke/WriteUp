@@ -7,16 +7,13 @@
 //
 
 import UIKit
-
 class PageBar: UIView {
+    weak var swipingController: SwipingController?
     let pageData: [Page] = [
           Page(images: Constant.Pages.firstPageImageName, headerText: Constant.Pages.firstPageTitle,bodyText : Constant.Pages.firstPageDescripation),
           Page(images: Constant.Pages.secondPageImageName, headerText: Constant.Pages.secondPageTitle, bodyText: Constant.Pages.secondPageDescripation),
           Page(images: Constant.Pages.thirdPageImageName, headerText: Constant.Pages.thirdPageDescripation,bodyText: Constant.Pages.thirdPageDescripation)
       ]
-   
-   
-    weak var swipingController: SwipingController?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,27 +24,9 @@ class PageBar: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let previousButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(UIColor.darkGray, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        button.setTitle(Constant.Pages.prevButtonTitle, for: .normal)
-//        button.addTarget(self , action: #selector(HandlePrev), for: UIControl.Event.touchUpInside)
-        return button
-    }()
+    let previousButton = OnboardingButton(titletext: Constant.Pages.prevButtonTitle)
+    let NextButton = OnboardingButton(titletext: Constant.Pages.nextButtonTitle)
     
-    let NextButton : UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle(Constant.Pages.nextButtonTitle, for: .normal)
-        button.setTitleColor(UIColor.mainPink, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        button.addTarget(self, action: #selector(HandleNext), for: UIControl.Event.touchUpInside)
-        return button
-    }()
-    
-  
     @objc func HandlePrev(){
         let prevpage : Int = max (pageController.currentPage - 1 ,0)
         let indexpath = IndexPath(item: prevpage, section: 0)
@@ -77,6 +56,8 @@ class PageBar: UIView {
     }()
     
     func bottomControlLayout(){
+        previousButton.setTitleColor(.darkGray, for: .normal)
+        NextButton.setTitleColor(.systemPink, for: .normal)
         let bottomStackView = UIStackView(arrangedSubviews: [previousButton,pageController,NextButton])
         bottomStackView.distribution = UIStackView.Distribution.fillEqually
         bottomStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -84,15 +65,8 @@ class PageBar: UIView {
         addSubview(bottomStackView)
         previousButton.addTarget(self , action: #selector(HandlePrev), for: UIControl.Event.touchUpInside)
         NextButton.addTarget(self, action: #selector(HandleNext), for: UIControl.Event.touchUpInside)
-        NSLayoutConstraint.activate([
-            bottomStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            bottomStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            bottomStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            bottomStackView.heightAnchor.constraint(equalToConstant: 50)])
-
-        
+        bottomStackView.anchor(top: nil, leading: safeAreaLayoutGuide.leadingAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, size: CGSize(width: 0, height: 50))
     }
-    
 }
 
 

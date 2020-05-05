@@ -12,7 +12,7 @@ class PrimaryLabel: UILabel {
     init(labelName: String) {
         super.init(frame: .zero)
         self.text = labelName
-        self.font = UIFont().boldTitleFont()
+        self.font = UIFont().appLabelTitleFont()
         self.backgroundColor = .white
         self.adjustsFontSizeToFitWidth = true
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -27,4 +27,6 @@ class PrimaryLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+
 

@@ -7,28 +7,15 @@
 //
 
 import UIKit
-class BaseView: UIView {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    func setup(){}
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
 
 protocol ProfileLauncherDelegate {
     func dismissHome()
 }
 
 class ProfileLauncher: UIViewController {
-    
     var profiledelegate: ProfileLauncherDelegate?
-    let signoutButton = PrimaryButton(titletext: "SignOut")
-    
+    let signoutButton = PrimaryButton(titletext: Constant.ProfileSC.signoutButtonTitle)
+    let stackHeight = CGSize(width: 0, height: (32 * 4) + (37 * 4) + 4)
     
     let topViewContainer : UIView = {
         let topView = UIView()
@@ -37,184 +24,92 @@ class ProfileLauncher: UIViewController {
         return topView
     }()
     
-    let placeHolderImageView : UIImageView = {
-        let image = UIImage(named: "placeholder_photo")
-        let placeholder = UIImageView()
-        placeholder.image = image
-        placeholder.contentMode = .scaleAspectFit
-        placeholder.clipsToBounds = true
-        placeholder.frame = CGRect(x: 0, y: 0, width: 160, height: 0)
-        placeholder.round()
-        placeholder.translatesAutoresizingMaskIntoConstraints = false
-        return placeholder
+    let placeHolderButton: UIButton = {
+        let button = UIButton()
+        
+        let bImage = UIImage(named: Constant.ProfileSC.placeholderImageName)
+        button.setImage(bImage, for: .normal)
+        button.contentMode = .scaleAspectFit
+        button.clipsToBounds = true
+        button.frame = CGRect(x: 0, y: 0, width: 120, height: 120 )
+        button.layer.cornerRadius = button.bounds.size.width * 0.5
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
+        return button
     }()
     
-    let addImageButton: UIButton = {
-        let image = UIImage(named: "camera_button")
-        let addButton = UIButton()
-        addButton.setImage(image, for: .normal)
-        addButton.clipsToBounds = true
-        addButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
-        addButton.translatesAutoresizingMaskIntoConstraints = false
-        return addButton
-    }()
-    
-    @objc func pickImage() {
-        
-    }
-    
-    
-    var nameView: UIView = UIView()
-    var emailView: UIView = UIView()
-    let phoneView: UIView = UIView()
-    let noteView: UIView = UIView()
-    
-    
-    func constractNameView() {
-        let nameLabel = PrimaryLabel(labelName: "Name")
-        nameView.addSubview(nameLabel)
-        NSLayoutConstraint.activate([
-            nameLabel.heightAnchor.constraint(equalToConstant: Constant.ProfileSC.Labelheight),
-            nameLabel.trailingAnchor.constraint(equalTo: nameView.trailingAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: nameView.leadingAnchor),
-            nameLabel.topAnchor.constraint(equalTo: nameView.topAnchor)
-        ])
-        
-        let nameTextField = PrimaryTextField(placeholderString: "Name")
-        nameView.addSubview(nameTextField)
-        NSLayoutConstraint.activate([
-            nameTextField.heightAnchor.constraint(equalToConstant: Constant.ProfileSC.TextFieldheight),
-            nameTextField.trailingAnchor.constraint(equalTo: nameView.trailingAnchor),
-            nameTextField.leadingAnchor.constraint(equalTo: nameView.leadingAnchor),
-            nameTextField.topAnchor.constraint(equalTo: nameLabel.bottomAnchor)
-        ])
-        
-        let emailLabel = PrimaryLabel(labelName: "Email-ID")
-        emailView.addSubview(emailLabel)
-        NSLayoutConstraint.activate([
-            emailLabel.heightAnchor.constraint(equalToConstant: Constant.ProfileSC.Labelheight),
-            emailLabel.trailingAnchor.constraint(equalTo: emailView.trailingAnchor),
-            emailLabel.leadingAnchor.constraint(equalTo: emailView.leadingAnchor),
-            emailLabel.topAnchor.constraint(equalTo: emailView.topAnchor)
-        ])
-        
-        let emailTextField = PrimaryTextField(placeholderString: "Email-ID")
-        emailView.addSubview(emailTextField)
-        NSLayoutConstraint.activate([
-            emailTextField.heightAnchor.constraint(equalToConstant: Constant.ProfileSC.TextFieldheight),
-            emailTextField.trailingAnchor.constraint(equalTo: emailView.trailingAnchor),
-            emailTextField.leadingAnchor.constraint(equalTo: emailView.leadingAnchor),
-            emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor)
-        ])
-        
-        let phoneLabel = PrimaryLabel(labelName: "Phone number")
-        phoneView.addSubview(phoneLabel)
-        NSLayoutConstraint.activate([
-            phoneLabel.heightAnchor.constraint(equalToConstant: Constant.ProfileSC.Labelheight),
-            phoneLabel.trailingAnchor.constraint(equalTo: phoneView.trailingAnchor),
-            phoneLabel.leadingAnchor.constraint(equalTo: phoneView.leadingAnchor),
-            phoneLabel.topAnchor.constraint(equalTo: phoneView.topAnchor)
-        ])
-        
-        let phoneTextField = PrimaryTextField(placeholderString: "Phone number")
-        phoneView.addSubview(phoneTextField)
-        NSLayoutConstraint.activate([
-            phoneTextField.heightAnchor.constraint(equalToConstant: Constant.ProfileSC.TextFieldheight),
-            phoneTextField.trailingAnchor.constraint(equalTo: phoneView.trailingAnchor),
-            phoneTextField.leadingAnchor.constraint(equalTo: phoneView.leadingAnchor),
-            phoneTextField.topAnchor.constraint(equalTo: phoneLabel.bottomAnchor)
-        ])
-        
-        let noteLabel = PrimaryLabel(labelName: "Total Notes")
-        noteView.addSubview(noteLabel)
-        NSLayoutConstraint.activate([
-            noteLabel.heightAnchor.constraint(equalToConstant: Constant.ProfileSC.Labelheight),
-            noteLabel.trailingAnchor.constraint(equalTo: noteView.trailingAnchor),
-            noteLabel.leadingAnchor.constraint(equalTo: noteView.leadingAnchor),
-            noteLabel.topAnchor.constraint(equalTo: noteView.topAnchor)
-        ])
-        
-        let noteTextField = PrimaryTextField(placeholderString: "0")
-        noteView.addSubview(noteTextField)
-        NSLayoutConstraint.activate([
-            noteTextField.heightAnchor.constraint(equalToConstant: Constant.ProfileSC.TextFieldheight),
-            noteTextField.trailingAnchor.constraint(equalTo: noteView.trailingAnchor),
-            noteTextField.leadingAnchor.constraint(equalTo: noteView.leadingAnchor),
-            noteTextField.topAnchor.constraint(equalTo: noteLabel.bottomAnchor)
-        ])
-        
-    }
-    
-    func setupProfileDetails(){
-        self.constractNameView()
-        let stackView = UIStackView(arrangedSubviews: [nameView,emailView,phoneView,noteView])
-        stackView.distribution = .fillProportionally
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.backgroundColor = .orange
-        
-        view.addSubview(stackView)
-        // stack View :- need to calculate the number of items in stack view 
-        let stackHeight = CGFloat((32 * 4) + (37 * 4))
-        NSLayoutConstraint.activate([
-            stackView.heightAnchor.constraint(equalToConstant: stackHeight),
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: topViewContainer.bottomAnchor)
-        ])
-    }
-    
+
     func autolayout() {
         view.addSubview(topViewContainer)
-        NSLayoutConstraint.activate([
-            topViewContainer.leftAnchor.constraint(equalTo: view.leftAnchor),
-            topViewContainer.rightAnchor.constraint(equalTo: view.rightAnchor),
-            topViewContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            topViewContainer.heightAnchor.constraint(equalToConstant: 200)
-        ])
+        topViewContainer.anchor(top: view.safeAreaLayoutGuide.topAnchor , leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,size: CGSize(width: 0, height: 200))
         
-        topViewContainer.addSubview(placeHolderImageView)
-        NSLayoutConstraint.activate([
-            placeHolderImageView.topAnchor.constraint(equalTo: topViewContainer.topAnchor, constant: 19),
-            placeHolderImageView.centerXAnchor.constraint(equalTo: topViewContainer.centerXAnchor),
-            placeHolderImageView.bottomAnchor.constraint(equalTo: topViewContainer.bottomAnchor, constant: -18),
-            placeHolderImageView.widthAnchor.constraint(equalToConstant: 160)
-        ])
-        
-        topViewContainer.addSubview(addImageButton)
-        NSLayoutConstraint.activate([
-            addImageButton.topAnchor.constraint(equalTo: placeHolderImageView.topAnchor, constant: 109),
-            addImageButton.leftAnchor.constraint(equalTo: placeHolderImageView.leftAnchor, constant: 111),
-            addImageButton.widthAnchor.constraint(equalToConstant: 41),
-            addImageButton.heightAnchor.constraint(equalToConstant: 41)])
+        topViewContainer.addSubview(placeHolderButton)
+        placeHolderButton.centerXAnchor.constraint(equalTo: topViewContainer.centerXAnchor).isActive = true
+        placeHolderButton.centerYAnchor.constraint(equalTo: topViewContainer.centerYAnchor).isActive = true
         
         view.addSubview(signoutButton)
-        
-        NSLayoutConstraint.activate([
-            signoutButton.heightAnchor.constraint(equalToConstant: 44),
-            signoutButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 27),
-            signoutButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -27),
-            signoutButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15)])
-    }
-    
-    @objc func handleSignout(){
-        self.navigationController?.popViewController(animated: false)
-        profiledelegate?.dismissHome()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor.white
-        navigationController?.navigationBar.topItem?.title = "Profile"
-        navigationController?.navigationBar.tintColor = UIColor.systemPink
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(handleEdit))
-        autolayout()
-        setupProfileDetails()
+        signoutButton.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 27, bottom: 0, right: -27), size: CGSize(width: 0, height: 44))
         signoutButton.addTarget(self, action: #selector(handleSignout), for: .touchUpInside)
-    }
-    
-    @objc func handleEdit(){
         
+        let profileDetail = ProfileDetail()
+        view.addSubview(profileDetail)
+        profileDetail.anchor(top: topViewContainer.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, size :stackHeight)
+    }
+        
+        @objc func handleSignout(){
+            self.navigationController?.popViewController(animated: false)
+            profiledelegate?.dismissHome()
+        }
+        
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            view.backgroundColor = UIColor.white
+            navigationController?.navigationBar.topItem?.title = Constant.ProfileSC.navTitle
+            navigationController?.navigationBar.tintColor = UIColor.systemPink
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(handleEdit))
+            autolayout()
+        }
+        
+        @objc func handleEdit(){
+        }
+    
+}
+
+extension ProfileLauncher: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    @objc func imagePicker() {
+    let imagePickerController = UIImagePickerController()
+           imagePickerController.delegate = self
+           let actionsheet = UIAlertController(title: "Photo Source", message: "Choose a source", preferredStyle: .actionSheet)
+           actionsheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action: UIAlertAction) in
+               if UIImagePickerController.isSourceTypeAvailable(.camera){
+                   imagePickerController.sourceType = .camera
+                   self.present(imagePickerController,animated: true, completion: nil)
+               }
+               print("Camera not available")
+           }))
+           
+           actionsheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (action: UIAlertAction) in
+               imagePickerController.sourceType = .photoLibrary
+               self.present(imagePickerController,animated: true, completion: nil)
+           }))
+           
+           actionsheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+           self.present(actionsheet,animated: true, completion: nil)
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        //to get the real information of image which the user has picked
+        let imageData = info[.originalImage] as! UIImage
+        print(imageData)
+        let image_Data:Data = imageData.pngData()!
+        let imgstr = image_Data.base64EncodedData()
+        print(imgstr)
+      
+        placeHolderButton.setImage(imageData, for: .normal)
+        picker.dismiss(animated: true, completion: nil)
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
 }

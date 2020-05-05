@@ -7,30 +7,24 @@
 //
 
 import UIKit
-
 protocol SwipingControllerDelegate {
     func dismissOnboardingView()
 }
 
-class SwipingController : UICollectionViewController,UICollectionViewDelegateFlowLayout {
-    
-//    Weak delegate
+class SwipingController : UICollectionViewController {
     var swipingDelegate: SwipingControllerDelegate?
-    
-//    weak var onboarding: onBoardingController?
-    
+    let cellID = "cellId"
     
     lazy var pageBar: PageBar = {
-       var pb = PageBar()
-       pb.swipingController = self
-       pb.translatesAutoresizingMaskIntoConstraints = false
-      return pb
+        var pb = PageBar()
+        pb.swipingController = self
+        pb.translatesAutoresizingMaskIntoConstraints = false
+        return pb
     }()
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animate(alongsideTransition: { (_) in
             self.collectionViewLayout.invalidateLayout()
-            
             let indexPath = IndexPath(item: self.pageBar.pageController.currentPage, section: 0)
             self.collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }) { (_) in
@@ -38,115 +32,25 @@ class SwipingController : UICollectionViewController,UICollectionViewDelegateFlo
         }
     }
     
-//    let pageData: [Page] = [
-//        Page(images: Constant.Pages.firstPageImageName, headerText: Constant.Pages.firstPageTitle,bodyText : Constant.Pages.firstPageDescripation),
-//        Page(images: Constant.Pages.secondPageImageName, headerText: Constant.Pages.secondPageTitle, bodyText: Constant.Pages.secondPageDescripation),
-//        Page(images: Constant.Pages.thirdPageImageName, headerText: Constant.Pages.thirdPageDescripation,bodyText: Constant.Pages.thirdPageDescripation)
-//    ]
+    let skipButton = OnboardingButton(titletext:Constant.Pages.skipButtonTitle)
     
-    // controls at the bottom
-//    private let previousButton: UIButton = {
-//        let button = UIButton(type: .system)
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.setTitleColor(UIColor.darkGray, for: .normal)
-//        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-//        button.setTitle(Constant.Pages.prevButtonTitle, for: .normal)
-//        button.addTarget(self , action: #selector(HandlePrev), for: UIControl.Event.touchUpInside)
-//        return button
-//    }()
-//
-//    private let NextButton : UIButton = {
-//        let button = UIButton(type: .system)
-//        button.setTitle(Constant.Pages.nextButtonTitle, for: .normal)
-//        button.setTitleColor(UIColor.mainPink, for: .normal)
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-//        button.addTarget(self, action: #selector(HandleNext), for: UIControl.Event.touchUpInside)
-//        return button
-//    }()
-//
-    private let skipButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(UIColor.systemPink, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        button.setTitle(Constant.Pages.skipButtonTitle, for: .normal)
-        button.addTarget(self, action: #selector(handleSkip), for: .touchUpInside)
-        return button
-    }()
-
-
-
-    @objc func handleSkip(){
-        swipingDelegate?.dismissOnboardingView()
-//        onboarding?.dismissOnboardingView()
-    }
-//
-//    @objc func HandlePrev(){
-//        let prevpage : Int = max (pageController.currentPage - 1 ,0)
-//        let indexpath = IndexPath(item: prevpage, section: 0)
-//        pageController.currentPage = prevpage
-//        print(pageController.currentPage)
-//        collectionView?.scrollToItem(at: indexpath, at: .centeredHorizontally, animated: true)
-//    }
-//
-//    @objc func HandleNext(){
-//        let nextpage : Int = min(pageController.currentPage + 1,pageController.numberOfPages - 1)
-//        let indexpath = IndexPath(item: nextpage, section: 0)
-//        pageController.currentPage = nextpage
-//        collectionView?.scrollToItem(at: indexpath, at: .centeredHorizontally, animated: true)
-//        if (pageController.currentPage > 0){
-//            previousButton.isEnabled = true
-//            previousButton.setTitleColor(UIColor.darkGray, for: .normal)
-//        }
-//    }
-    
-    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let x = targetContentOffset.pointee.x
-        self.pageBar.pageController.currentPage = Int(x / view.frame.width)
-    }
-    
-//    private lazy var pageController: UIPageControl = {
-//        let pc = UIPageControl()
-//        pc.currentPage = 0
-//        pc.numberOfPages = pageData.count
-//        pc.pageIndicatorTintColor = UIColor.gray
-//        pc.currentPageIndicatorTintColor = UIColor.mainPink
-//        return pc
-//    }()
-//
     fileprivate func setUpLayout(){
-//        let bottomStackView = UIStackView(arrangedSubviews: [previousButton,pageController,NextButton])
-//        bottomStackView.distribution = UIStackView.Distribution.fillEqually
-//        bottomStackView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        view.addSubview(bottomStackView)
-//        NSLayoutConstraint.activate([
-//            bottomStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-//            bottomStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-//            bottomStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-//            bottomStackView.heightAnchor.constraint(equalToConstant: 50)])
-
         view.addSubview(skipButton)
-        NSLayoutConstraint.activate([
-            skipButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor,constant: -30),
-            skipButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            skipButton.heightAnchor.constraint(equalToConstant: 50)])
-
+        skipButton.setTitleColor(.systemPink, for: .normal)
+        skipButton.addTarget(self, action: #selector(handleSkip), for: .touchUpInside)
+        skipButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -30),size: CGSize(width: 0, height: 50))
     }
     
+    @objc func handleSkip(){
+           swipingDelegate?.dismissOnboardingView()
+       }
     
     override func viewDidLoad() {
         super .viewDidLoad()
         setupCollectionView()
         view.addSubview(pageBar)
-        NSLayoutConstraint.activate([
-//            pageBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            pageBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            pageBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            pageBar.leadingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leadingAnchor)
-        ])
-       setUpLayout()
+        pageBar.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
+        setUpLayout()
     }
     
     func setupCollectionView(){
@@ -155,11 +59,36 @@ class SwipingController : UICollectionViewController,UICollectionViewDelegateFlo
             flowLayout.minimumLineSpacing = 0
         }
         collectionView?.backgroundColor = .white
-        collectionView?.register(PageCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView?.register(PageCell.self, forCellWithReuseIdentifier: cellID)
         collectionView?.isPagingEnabled = true
-       
+    }
+}
+
+
+extension SwipingController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return pageBar.pageData.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! PageCell
+        let page = pageBar.pageData[indexPath.item]
+        cell.page = page
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: view.frame.height)
+    }
+    
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let x = targetContentOffset.pointee.x
+        self.pageBar.pageController.currentPage = Int(x / view.frame.width)
+    }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
@@ -176,28 +105,12 @@ class SwipingController : UICollectionViewController,UICollectionViewDelegateFlo
             pageBar.NextButton.isEnabled = true
             pageBar.NextButton.setTitleColor(UIColor.mainPink, for: .normal)
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pageBar.pageData.count
         
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! PageCell
-        let page = pageBar.pageData[indexPath.item]
-        cell.page = page
-        return cell
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height)
-        
+        if indexPath.row == pageBar.pageData.count - 1 {
+            skipButton.setTitle(Constant.Pages.doneButtonTitle, for: .normal)
+        }else {
+            skipButton.setTitle(Constant.Pages.skipButtonTitle, for: .normal)
+        }
     }
 }
 

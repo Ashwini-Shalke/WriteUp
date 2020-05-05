@@ -13,15 +13,22 @@ protocol signInDelegate{
     func handleRoot()
 }
 
-class SignInViewController: UIViewController,onBoardingViewControllerDelegate{
-    weak var rootViewController: RootViewController?
+class SignInViewController: UIViewController,onBoardingViewControllerDelegate {
+    
+    var signInDelegate: signInDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.systemPink
         setupAutolayout()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+
+            super.viewDidAppear(animated)
+   
+    }
+
     let logoImageView: UIImageView = {
         let logo = UIImageView()
         logo.image = UIImage(named: Constant.SignInSC.logoImageName)
@@ -69,7 +76,6 @@ class SignInViewController: UIViewController,onBoardingViewControllerDelegate{
     func launchOnboard(sender : Any?){
         let onboarding = onBoardingController()
         onboarding.onboardingdelegate = self
-//        onboarding.signInViewController = self
         onboarding.defaultPresenatationStyle()
         present(onboarding, animated: true, completion: nil)
         UserDefaults.standard.setIsSignedIn(value: true)
@@ -101,12 +107,11 @@ extension SignInViewController : ASAuthorizationControllerPresentationContextPro
     
     func dismissSignIn() {
         UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: {
-            self.view.alpha = 0
             self.dismiss(animated: false, completion: nil)
         }, completion: nil)
         
         UIView.animate(withDuration: 1, delay: 1, options: .curveLinear, animations: {
-            self.rootViewController?.handleRoot()
+            self.signInDelegate?.handleRoot()
         }, completion: nil)
     }
 }

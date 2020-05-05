@@ -27,6 +27,7 @@ struct Constant {
         static let nextButtonTitle = "NEXT"
         static let prevButtonTitle = "PREV"
         static let skipButtonTitle = "SKIP"
+        static let doneButtonTitle = "DONE"
     }
     
     //MARK: Home screen
@@ -43,8 +44,16 @@ struct Constant {
 
     //MARK: ProfileLauncher Screen
     struct ProfileSC {
-        static let Labelheight = CGFloat(32)
-        static let TextFieldheight = CGFloat(37)
+        static let Labelheight = CGSize(width: 0, height: 32)
+        static let TextFieldheight = CGSize(width: 0, height: 37)
+        static let signoutButtonTitle = "Sign out"
+        static let placeholderImageName = "placeholder_photo"
+        static let nameLabel = "Name"
+        static let emailLabel = "Email"
+        static let phoneLabel = "Phone Number"
+        static let noteLabel = "Total notes"
+        static let noOfNotes = "0"
+        static let navTitle = "Profile"
     }
    
 }

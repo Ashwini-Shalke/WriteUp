@@ -13,11 +13,7 @@ protocol onBoardingViewControllerDelegate {
 }
 
 class onBoardingController: UIViewController,SwipingControllerDelegate {
-    
     var onboardingdelegate: onBoardingViewControllerDelegate?
-    
-//    weak var signInViewController: SignInViewController?
-    
     lazy var collectionVC: UICollectionViewController = {
         let layout = UICollectionViewFlowLayout()
         let cv = SwipingController(collectionViewLayout: layout)
@@ -28,18 +24,12 @@ class onBoardingController: UIViewController,SwipingControllerDelegate {
     override func viewDidLoad() {
         collectionVC.view.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(collectionVC.view)
-        NSLayoutConstraint.activate([
-            collectionVC.view.topAnchor.constraint(equalTo: self.view.topAnchor),
-            collectionVC.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            collectionVC.view.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            collectionVC.view.rightAnchor.constraint(equalTo: self.view.rightAnchor)
-        ])
+        collectionVC.view.anchor(top:self.view.topAnchor, leading: self.view.leadingAnchor, bottom: self.view.bottomAnchor, trailing: self.view.trailingAnchor)
     }
     
     func dismissOnboardingView() {
         dismiss(animated: true) {
             self.onboardingdelegate?.dismissSignIn()
-//            self.signInViewController?.dismissSignIn()
         }
     }
 }

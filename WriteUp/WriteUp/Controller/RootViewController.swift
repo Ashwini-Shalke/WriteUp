@@ -13,27 +13,23 @@ class RootViewController: UIViewController,signInDelegate,homeDelegate{
     
     lazy var homeViewController: HomeViewController = {
         var hc = HomeViewController()
-        hc.rootViewController = self
+        hc.homeDelegate = self
         return hc
     }()
        
     
     lazy var signinViewController : SignInViewController = {
         var sc = SignInViewController()
-        sc.rootViewController = self
+        sc.signInDelegate = self
         return sc
     }()
 
     override func viewDidLoad() {
-        view.backgroundColor = UIColor.green        
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewDidLoad()
+        view.backgroundColor = UIColor.green
         handleChild()
     }
-
+ 
     fileprivate func isSignedIn() -> Bool {
         return UserDefaults.standard.isSignedIn()
     }
@@ -59,11 +55,11 @@ class RootViewController: UIViewController,signInDelegate,homeDelegate{
     }
     
     func handleSignOut(){
-        handleChild()
+       handleChild()
     }
 }
 
-extension RootViewController{
+extension RootViewController {
     func setupLayout(_ child: UIViewController){
         self.view.addSubview(child.view)
         child.view.translatesAutoresizingMaskIntoConstraints = false

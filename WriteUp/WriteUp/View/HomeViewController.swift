@@ -14,7 +14,7 @@ protocol homeDelegate {
 
 class HomeViewController: UIViewController, ProfileLauncherDelegate{
     
-    weak var rootViewController : RootViewController?
+     var homeDelegate : homeDelegate?
     
     private let profileButton : UIButton = {
         let button = UIButton(type: .system)
@@ -22,7 +22,6 @@ class HomeViewController: UIViewController, ProfileLauncherDelegate{
         button.layer.cornerRadius = button.frame.width/2
         button.backgroundColor = UIColor.systemPink
         button.translatesAutoresizingMaskIntoConstraints = false
-//        button.titleLabel?.font = UIFont().boldSystemFont()
         return button
     }()
     
@@ -53,9 +52,8 @@ class HomeViewController: UIViewController, ProfileLauncherDelegate{
     }
     
     func dismissHome() {
-        dismiss(animated: true, completion: nil)
         UserDefaults.standard.setIsSignedIn(value: false)
-        rootViewController?.handleSignOut()
+        self.homeDelegate?.handleSignOut()
     }
 }
 
