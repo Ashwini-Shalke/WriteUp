@@ -19,7 +19,7 @@ class SignInViewController: UIViewController,onBoardingViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.systemPink
+        view.backgroundColor = UIColor.white
         setupAutolayout()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +40,7 @@ class SignInViewController: UIViewController,onBoardingViewControllerDelegate {
     
     let appleButton: ASAuthorizationAppleIDButton = {
         let button = ASAuthorizationAppleIDButton(type: .signIn, style: .white)
+        
         button.layer.shadowColor = UIColor.black.cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleTapAppleButton), for: .touchUpInside)

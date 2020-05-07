@@ -19,11 +19,52 @@ class BaseView: UIView {
     }
 }
 
-class ProfileDetail: BaseView {
+//protocol ProfileDetailDelegate {
+//    func handleProfile()
+//}
+
+class ProfileDetail: BaseView,EditProfileDelegate{
+    
+    func handleEdit() {
+        self.nameTextField.isUserInteractionEnabled = true
+    }
+
+    lazy var editProfile : EditProfileLauncher = {
+        var eP = EditProfileLauncher()
+        eP.editProfileDelegate = self
+        return eP
+    }()
+    
     var nameView: UIView = UIView()
     var emailView: UIView = UIView()
     let phoneView: UIView = UIView()
     let noteView: UIView = UIView()
+    
+    let nameTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.nameLabel)
+    let emailTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.emailLabel)
+    let phoneTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.phoneLabel)
+    let noteTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.noOfNotes)
+    
+    let topViewContainer : UIView = {
+        let topView = UIView()
+        topView.translatesAutoresizingMaskIntoConstraints = false
+        topView.backgroundColor = UIColor.systemPink
+        return topView
+    }()
+    
+    let placeHolderButton: UIButton = {
+        let button = UIButton()
+        let bImage = UIImage(named: Constant.ProfileSC.placeholderImageName)
+        button.setImage(bImage, for: .normal)
+        button.contentMode = .scaleAspectFit
+        button.clipsToBounds = true
+        button.frame = CGRect(x: 0, y: 0, width: 120, height: 120 )
+        button.layer.cornerRadius = button.bounds.size.width * 0.5
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isUserInteractionEnabled = false
+        return button
+    }()
+    
     
     override func setup() {
         super.setup()
@@ -36,7 +77,7 @@ class ProfileDetail: BaseView {
         nameView.addSubview(nameLabel)
         nameLabel.anchor(top: nameView.topAnchor, leading: nameView.leadingAnchor, bottom: nil, trailing: nameView.trailingAnchor, size: Constant.ProfileSC.Labelheight)
         
-        let nameTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.nameLabel)
+        //         let nameTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.nameLabel)
         nameView.addSubview(nameTextField)
         nameTextField.anchor(top: nameLabel.bottomAnchor, leading: nameView.leadingAnchor, bottom: nil, trailing: nameView.trailingAnchor,size: Constant.ProfileSC.TextFieldheight)
         
@@ -44,7 +85,7 @@ class ProfileDetail: BaseView {
         emailView.addSubview(emailLabel)
         emailLabel.anchor(top: emailView.topAnchor,leading: emailView.leadingAnchor, bottom: nil, trailing: emailView.trailingAnchor,size: Constant.ProfileSC.Labelheight)
         
-        let emailTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.emailLabel)
+        //        let emailTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.emailLabel)
         emailView.addSubview(emailTextField)
         emailTextField.anchor(top: emailLabel.bottomAnchor, leading: emailView.leadingAnchor, bottom: nil, trailing: emailView.trailingAnchor,size: Constant.ProfileSC.TextFieldheight)
         
@@ -52,7 +93,7 @@ class ProfileDetail: BaseView {
         phoneView.addSubview(phoneLabel)
         phoneLabel.anchor(top: phoneView.topAnchor, leading: phoneView.leadingAnchor, bottom: nil, trailing: phoneView.trailingAnchor, size: Constant.ProfileSC.Labelheight)
         
-        let phoneTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.phoneLabel)
+        //         let phoneTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.phoneLabel)
         phoneView.addSubview(phoneTextField)
         phoneTextField.anchor(top: phoneLabel.bottomAnchor, leading: phoneView.leadingAnchor, bottom: nil,trailing: phoneView.trailingAnchor, size: Constant.ProfileSC.TextFieldheight)
         
@@ -60,20 +101,32 @@ class ProfileDetail: BaseView {
         noteView.addSubview(noteLabel)
         noteLabel.anchor(top: noteView.topAnchor,leading: noteView.leadingAnchor, bottom: nil, trailing: noteView.trailingAnchor,size: Constant.ProfileSC.Labelheight)
         
-        let noteTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.noOfNotes)
+        //        let noteTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.noOfNotes)
         noteView.addSubview(noteTextField)
         noteTextField.anchor(top: noteLabel.bottomAnchor, leading: noteView.leadingAnchor, bottom: nil, trailing: noteView.trailingAnchor, size: Constant.ProfileSC.TextFieldheight)
     }
     
     func setupProfileDetails(){
+        addSubview(topViewContainer)
+        topViewContainer.anchor(top: safeAreaLayoutGuide.topAnchor , leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor,size: CGSize(width: 0, height: 200))
+        
+        topViewContainer.addSubview(placeHolderButton)
+        placeHolderButton.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, size: CGSize(width: 120, height: 120))
+        placeHolderButton.centerXAnchor.constraint(equalTo: topViewContainer.centerXAnchor).isActive = true
+        placeHolderButton.centerYAnchor.constraint(equalTo: topViewContainer.centerYAnchor).isActive = true
+        
         self.constractNameView()
         let stackView = UIStackView(arrangedSubviews: [nameView,emailView,phoneView,noteView])
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
-      addSubview(stackView)
+        addSubview(stackView)
         // stack View :- need to calculate the number of items in stack view
         let stackHeight = CGSize(width: 0, height: (32 * 4) + (37 * 4) + 4)
-        stackView.anchor(top: topAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor, size: stackHeight)
+        stackView.anchor(top: topViewContainer.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor, size: stackHeight)
     }
+
 }
+
+
+
