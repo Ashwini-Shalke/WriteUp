@@ -21,7 +21,7 @@ class ProfileLauncher: UIViewController {
         signoutButton.addTarget(self, action: #selector(handleSignout), for: .touchUpInside)
         
         view.addSubview(signoutButton)
-        signoutButton.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 27, bottom: 0, right: -27), size: CGSize(width: 0, height: 44))
+        signoutButton.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 28, bottom: -30, right: -28), size: CGSize(width: 0, height: 44))
         
         let profileDetail = ProfileDetail()
         view.addSubview(profileDetail)
@@ -44,7 +44,8 @@ class ProfileLauncher: UIViewController {
     
     @objc func handleEdit(){
         let editProfileLauncher = EditProfileLauncher()
-        navigationController?.pushViewController(editProfileLauncher, animated: true)
+        let navController = UINavigationController(rootViewController: editProfileLauncher)
+        self.present(navController, animated: true, completion: nil)
     }
 }
 

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class BaseView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,14 +18,9 @@ class BaseView: UIView {
     }
 }
 
-//protocol ProfileDetailDelegate {
-//    func handleProfile()
-//}
-
 class ProfileDetail: BaseView,EditProfileDelegate{
-    
     func handleEdit() {
-        self.nameTextField.isUserInteractionEnabled = true
+        
     }
 
     lazy var editProfile : EditProfileLauncher = {

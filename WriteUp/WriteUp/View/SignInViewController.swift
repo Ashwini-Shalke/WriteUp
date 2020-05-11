@@ -14,21 +14,24 @@ protocol signInDelegate{
 }
 
 class SignInViewController: UIViewController,onBoardingViewControllerDelegate {
-    
     var signInDelegate: signInDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.systemPink
         setupAutolayout()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
-
-            super.viewDidAppear(animated)
-   
+        super.viewWillAppear(true)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     let logoImageView: UIImageView = {
         let logo = UIImageView()
         logo.image = UIImage(named: Constant.SignInSC.logoImageName)
@@ -37,30 +40,22 @@ class SignInViewController: UIViewController,onBoardingViewControllerDelegate {
         return logo
     }()
     
-    
     let appleButton: ASAuthorizationAppleIDButton = {
         let button = ASAuthorizationAppleIDButton(type: .signIn, style: .white)
-        
+        button.cornerRadius = 25
         button.layer.shadowColor = UIColor.black.cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleTapAppleButton), for: .touchUpInside)
         return button
     }()
     
-    
     func setupAutolayout(){
         view.addSubview(logoImageView)
-        NSLayoutConstraint.activate([logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                                     logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -30),
-                                     logoImageView.heightAnchor.constraint(equalToConstant: 200)])
-        
+        logoImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 199, left: 69, bottom: -199, right: -69))
+      
         view.addSubview(appleButton)
-        NSLayoutConstraint.activate([appleButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 200),
-                                     appleButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-                                     appleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-                                     appleButton.heightAnchor.constraint(equalToConstant: 35)])
+        appleButton.anchor(top: logoImageView.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil,trailing: view.safeAreaLayoutGuide.trailingAnchor, padding:  UIEdgeInsets(top: 131, left: 28, bottom: 0, right: -28), size: CGSize(width: 0, height: 44))
     }
-    
     
     @objc func handleTapAppleButton(){
         let provider = ASAuthorizationAppleIDProvider()
@@ -73,7 +68,6 @@ class SignInViewController: UIViewController,onBoardingViewControllerDelegate {
         controller.performRequests()
     }
     
-    
     func launchOnboard(sender : Any?){
         let onboarding = onBoardingController()
         onboarding.onboardingdelegate = self
@@ -82,7 +76,6 @@ class SignInViewController: UIViewController,onBoardingViewControllerDelegate {
         UserDefaults.standard.setIsSignedIn(value: true)
     }
 }
-
 
 extension SignInViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
@@ -99,7 +92,6 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
         }
     }
 }
-
 
 extension SignInViewController : ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {

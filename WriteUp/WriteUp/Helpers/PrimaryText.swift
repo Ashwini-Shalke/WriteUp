@@ -15,6 +15,7 @@ class PrimaryTextField: UITextField {
         let borderLayer = UIView()
         borderLayer.translatesAutoresizingMaskIntoConstraints = false
         self.isUserInteractionEnabled = false
+        self.clearButtonMode = .whileEditing
         self.placeholder = placeholderString
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: self.frame.height))
         self.leftView = paddingView

@@ -13,72 +13,96 @@ protocol EditProfileDelegate {
 }
 
 class EditProfileLauncher: UIViewController,UITextFieldDelegate {
-    
     var editProfileDelegate: EditProfileDelegate?
     let profileDetail = ProfileDetail()
+    var activeTextField = UITextField()
+    var parentView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDone))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.systemPink
 
         view.addSubview(profileDetail)
         profileDetail.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
-        handleTextField()
+        handleComponenets()
+        hideKeyboard()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification){
+        guard let userInfo = notification.userInfo else { return }
+        guard let keyboardSize = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else { return }
+        let keybardFrame = keyboardSize.cgRectValue
+        let keyboardYaxis = self.view.frame.size.height - keybardFrame.height
+        let editTextFieldY: CGFloat = parentView.frame.origin.y
+        
+        if self.view.frame.origin.y >= 0 {
+            if editTextFieldY > keyboardYaxis - 60 {
+                UIView.animate(withDuration: 0.25, delay: 0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+                    self.view.frame = CGRect(x: 0, y: self.view.frame.origin.y - (editTextFieldY - (keyboardYaxis - 80)), width: self.view.bounds.width, height: self.view.bounds.height)
+                }, completion: nil)
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification){
+        UIView.animate(withDuration: 0.25, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+        }, completion: nil)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
+        activeTextField.autocorrectionType = .no
+        guard let superView = activeTextField.superview else {return}
+        parentView = superView
     }
     
     @objc func handleDone(){
-        print("done")
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    func handleTextField(){
+    func handleComponenets(){
         profileDetail.emailTextField.isUserInteractionEnabled = true
         profileDetail.nameTextField.isUserInteractionEnabled = true
         profileDetail.phoneTextField.isUserInteractionEnabled = true
+        profileDetail.placeHolderButton.isUserInteractionEnabled = true
         profileDetail.emailTextField.delegate = self
         profileDetail.phoneTextField.delegate = self
         profileDetail.nameTextField.delegate = self
-        
+        profileDetail.placeHolderButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
+    }
+    
+    func hideKeyboard(){
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func dismissKeyboard(){
+        view.endEditing(true)
     }
     
 }
 
+extension EditProfileLauncher: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    @objc func imagePicker() {
+     UIImagePickerController().pickImage(view: self)
+    }
 
-
-//extension ProfileLauncher: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-//
-//    @objc func imagePicker() {
-//    let imagePickerController = UIImagePickerController()
-//           imagePickerController.delegate = self
-//           let actionsheet = UIAlertController(title: "Photo Source", message: "Choose a source", preferredStyle: .actionSheet)
-//           actionsheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action: UIAlertAction) in
-//               if UIImagePickerController.isSourceTypeAvailable(.camera){
-//                   imagePickerController.sourceType = .camera
-//                   self.present(imagePickerController,animated: true, completion: nil)
-//               }
-//               print("Camera not available")
-//           }))
-//
-//           actionsheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (action: UIAlertAction) in
-//               imagePickerController.sourceType = .photoLibrary
-//               self.present(imagePickerController,animated: true, completion: nil)
-//           }))
-//
-//           actionsheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//           self.present(actionsheet,animated: true, completion: nil)
-//    }
-//
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//        //to get the real information of image which the user has picked
-//        let imageData = info[.originalImage] as! UIImage
-//        print(imageData)
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        //to get the real information of image which the user has picked
+        let imageData = info[.originalImage] as! UIImage
 //        let image_Data:Data = imageData.pngData()!
 //        let imgstr = image_Data.base64EncodedData()
-//        print(imgstr)
-//
-//        placeHolderButton.setImage(imageData, for: .normal)
-//        picker.dismiss(animated: true, completion: nil)
-//    }
-//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-//        picker.dismiss(animated: true, completion: nil)
-//    }
-//}
+        profileDetail.placeHolderButton.setImage(imageData, for: .normal)
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
