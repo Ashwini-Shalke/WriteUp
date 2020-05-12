@@ -13,8 +13,14 @@ protocol homeDelegate {
 }
 
 class HomeViewController: UIViewController, ProfileLauncherDelegate{
+    var homeDelegate : homeDelegate?
     
-     var homeDelegate : homeDelegate?
+    let notesBar:NotesBar = {
+       let nb = NotesBar()
+        nb.translatesAutoresizingMaskIntoConstraints = false
+        return nb
+    }()
+    
     
     private let profileButton : UIButton = {
         let button = UIButton(type: .system)
@@ -42,12 +48,16 @@ class HomeViewController: UIViewController, ProfileLauncherDelegate{
     func setupLayout(){
         barlabel.frame = CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height)
         navigationController?.navigationBar.topItem?.titleView = barlabel
+        self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
         profileButton.addTarget(self, action: #selector(handleProfileButton), for: UIControl.Event.touchUpInside)
     }
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
+        view.addSubview(notesBar)
+        notesBar.anchor(top:view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16),size: CGSize(width: 0, height: 205))
         setupLayout()
     }
     

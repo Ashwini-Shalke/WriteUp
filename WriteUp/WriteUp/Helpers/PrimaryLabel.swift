@@ -29,4 +29,20 @@ class PrimaryLabel: UILabel {
 }
 
 
+class NoteBarLabel: UILabel {
+   private var labelName = UILabel()
+    init(labelName: String) {
+        super.init(frame: .zero)
+        self.text = labelName
+        self.font = UIFont().appSubTitleFont(size: 22)
+        self.backgroundColor = .white
+        self.adjustsFontSizeToFitWidth = true
+        self.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 

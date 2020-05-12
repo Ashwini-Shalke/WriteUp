@@ -54,7 +54,7 @@ class SignInViewController: UIViewController,onBoardingViewControllerDelegate {
         logoImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 199, left: 69, bottom: -199, right: -69))
       
         view.addSubview(appleButton)
-        appleButton.anchor(top: logoImageView.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil,trailing: view.safeAreaLayoutGuide.trailingAnchor, padding:  UIEdgeInsets(top: 131, left: 28, bottom: 0, right: -28), size: CGSize(width: 0, height: 44))
+        appleButton.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,trailing: view.safeAreaLayoutGuide.trailingAnchor, padding:  UIEdgeInsets(top: 0, left: 28, bottom: -30, right: -28), size: CGSize(width: 0, height: 44))
     }
     
     @objc func handleTapAppleButton(){

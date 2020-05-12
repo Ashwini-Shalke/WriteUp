@@ -17,7 +17,7 @@ class SwipingController : UICollectionViewController {
     
     lazy var pageBar: PageBar = {
         var pb = PageBar()
-        pb.swipingController = self
+//        pb.swipingController = self
         pb.translatesAutoresizingMaskIntoConstraints = false
         return pb
     }()
@@ -52,7 +52,8 @@ class SwipingController : UICollectionViewController {
         pageBar.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
         setUpLayout()
     }
-    
+
+
     func setupCollectionView(){
         if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.scrollDirection = .horizontal

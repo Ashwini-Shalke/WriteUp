@@ -29,14 +29,17 @@ class PrimaryButton: UIButton {
 }
 
 class OnboardingButton: UIButton {
-    let button = UIButton()
+    let button = UIButton(frame: CGRect.zero)
     init(titletext: String){
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.setTitleColor(UIColor.darkGray, for: .normal)
         self.titleLabel?.font = UIFont().onboardingbuttonTitleFont()
         self.setTitle(titletext, for: .normal)
+    
     }
+    
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

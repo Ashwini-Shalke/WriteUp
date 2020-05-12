@@ -13,6 +13,7 @@
 		33306BC424589BC2003CA89E /* PrimaryLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306BC324589BC2003CA89E /* PrimaryLabel.swift */; };
 		33306BC6245985AD003CA89E /* PrimaryText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306BC5245985AD003CA89E /* PrimaryText.swift */; };
 		33306BC8245C1AE7003CA89E /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306BC7245C1AE7003CA89E /* PrimaryButton.swift */; };
+		33329B43246A9D5900C40379 /* NotesBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33329B42246A9D5900C40379 /* NotesBar.swift */; };
 		3333CDEA2445CB7A00E6EF3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333CDE92445CB7A00E6EF3B /* AppDelegate.swift */; };
 		3333CDEC2445CB7A00E6EF3B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333CDEB2445CB7A00E6EF3B /* SceneDelegate.swift */; };
 		3333CDEE2445CB7A00E6EF3B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333CDED2445CB7A00E6EF3B /* SignInViewController.swift */; };
@@ -38,6 +39,7 @@
 		33306BC324589BC2003CA89E /* PrimaryLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryLabel.swift; sourceTree = "<group>"; };
 		33306BC5245985AD003CA89E /* PrimaryText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryText.swift; sourceTree = "<group>"; };
 		33306BC7245C1AE7003CA89E /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		33329B42246A9D5900C40379 /* NotesBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesBar.swift; sourceTree = "<group>"; };
 		3333CDE62445CB7A00E6EF3B /* WriteUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WriteUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3333CDE92445CB7A00E6EF3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3333CDEB2445CB7A00E6EF3B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,9 +118,8 @@
 		3333CDFE2445CC0900E6EF3B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3333CE012445CD8100E6EF3B /* HomeViewController.swift */,
-				3333CDED2445CB7A00E6EF3B /* SignInViewController.swift */,
 				332D45FC246142660078BEA2 /* ProfileDetail.swift */,
+				33329B42246A9D5900C40379 /* NotesBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -151,6 +152,8 @@
 			isa = PBXGroup;
 			children = (
 				3372E60C244ED71D009D3983 /* RootViewController.swift */,
+				3333CDED2445CB7A00E6EF3B /* SignInViewController.swift */,
+				3333CE012445CD8100E6EF3B /* HomeViewController.swift */,
 				3372E60E244F074D009D3983 /* ProfileLauncher.swift */,
 				332C576A2463DD0700891BBB /* EditProfileLauncher.swift */,
 			);
@@ -235,6 +238,7 @@
 				332D45FD246142660078BEA2 /* ProfileDetail.swift in Sources */,
 				33306BC22456E7A1003CA89E /* PageBar.swift in Sources */,
 				33306BC6245985AD003CA89E /* PrimaryText.swift in Sources */,
+				33329B43246A9D5900C40379 /* NotesBar.swift in Sources */,
 				3372E60D244ED71D009D3983 /* RootViewController.swift in Sources */,
 				33306BC8245C1AE7003CA89E /* PrimaryButton.swift in Sources */,
 				3333CDEA2445CB7A00E6EF3B /* AppDelegate.swift in Sources */,

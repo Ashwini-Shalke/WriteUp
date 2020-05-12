@@ -88,6 +88,7 @@ extension UIImageView {
 }
 
 extension UIView {
+    
     func setupBorder(){
         let borderLayer = UIView()
         borderLayer.backgroundColor = UIColor().borderColor()
@@ -129,6 +130,18 @@ extension UIView {
             heightAnchor.constraint(equalToConstant: size.height).isActive = true
         }
     }
+    
+//    func animateButton(){
+//        UIView.animate(withDuration: 0.2,
+//        animations: {
+//            self.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)
+//        },
+//        completion: { finish in
+//        UIButton.animate(withDuration: 0.2, animations: {
+//            self.transform = CGAffineTransform.identity
+//        })
+//        })
+//    }
 }
 
 extension UILabel {

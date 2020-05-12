@@ -20,7 +20,7 @@ class BaseView: UIView {
 
 class ProfileDetail: BaseView,EditProfileDelegate{
     func handleEdit() {
-        
+
     }
 
     lazy var editProfile : EditProfileLauncher = {
