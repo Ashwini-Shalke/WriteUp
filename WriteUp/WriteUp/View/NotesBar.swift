@@ -8,8 +8,9 @@
 
 import UIKit
 
-class NotesBar: BaseView,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+class NotesBar: BaseView {
     let cellId = "CellID"
+    let headerID = "HeaderID"
     let notesLabel = NoteBarLabel(labelName: "Notes")
     let showAll = OnboardingButton(titletext: "Show All")
     
@@ -31,6 +32,7 @@ class NotesBar: BaseView,UICollectionViewDelegate,UICollectionViewDataSource,UIC
         
         addSubview(collectionView)
         collectionView.register(NoteCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(HeaderNoteBar.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
         collectionView.anchor(top: topView.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, trailing: safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0))
     }
     
@@ -42,9 +44,10 @@ class NotesBar: BaseView,UICollectionViewDelegate,UICollectionViewDataSource,UIC
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.sectionHeadersPinToVisibleBounds = true
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .blue
+        cv.backgroundColor = .white
         cv.delegate = self
         cv.dataSource = self
         return cv
@@ -53,9 +56,11 @@ class NotesBar: BaseView,UICollectionViewDelegate,UICollectionViewDataSource,UIC
     @objc func handleShowAll(){
         print("handle")
     }
-    
+}
+
+extension NotesBar: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 15
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,25 +70,21 @@ class NotesBar: BaseView,UICollectionViewDelegate,UICollectionViewDataSource,UIC
       }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 102, height: 150)
+        return CGSize(width: 102, height: 145)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
     
-}
-
-class NoteCell: BaseCell {
-   let noteLabel = NoteBarLabel(labelName: "note1")
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as! HeaderNoteBar
+        return header
+    }
     
-    override func setup() {
-        super.setup()
-        addSubview(noteLabel)
-        noteLabel.textAlignment = .center
-        noteLabel.font = UIFont().appSubTitleFont(size: 12)
-        
-        noteLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 9, bottom: -2, right: -9),size: CGSize(width: 0, height: 18))
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: 102, height: 145)
     }
 }
+
 

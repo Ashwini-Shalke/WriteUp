@@ -18,6 +18,7 @@ class HomeViewController: UIViewController, ProfileLauncherDelegate{
     let notesBar:NotesBar = {
        let nb = NotesBar()
         nb.translatesAutoresizingMaskIntoConstraints = false
+//        nb.backgroundColor = .green
         return nb
     }()
     
