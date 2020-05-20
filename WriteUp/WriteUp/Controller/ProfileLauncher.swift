@@ -36,7 +36,8 @@ class ProfileLauncher: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        navigationController?.navigationBar.topItem?.title = Constant.ProfileSC.navTitle
+        navigationItem.title = Constant.ProfileSC.navTitle
+        navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.tintColor = UIColor.systemPink
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(handleEdit))
         autolayout()

@@ -7,12 +7,17 @@
 //
 
 import UIKit
+protocol NoteBarDelegate {
+    func showAddNote()
+}
 
-class NotesBar: BaseView {
+class NotesBar: BaseView,HeaderNoteDelegate {
+    var notedelegate: NoteBarDelegate?
+    
     let cellId = "CellID"
     let headerID = "HeaderID"
-    let notesLabel = NoteBarLabel(labelName: "Notes")
-    let showAll = OnboardingButton(titletext: "Show All")
+    let notesLabel = NoteBarLabel(labelName: Constant.NoteBar.notesLabel)
+    let showAllButton = OnboardingButton(titletext: Constant.NoteBar.showAllButton)
     
     override func setup() {
         super.setup()
@@ -23,12 +28,12 @@ class NotesBar: BaseView {
         notesLabel.translatesAutoresizingMaskIntoConstraints = false
         notesLabel.anchor(top: topView.topAnchor, leading: leadingAnchor, bottom: topView.bottomAnchor, trailing: nil)
         
-        topView.addSubview(showAll)
-        showAll.isUserInteractionEnabled = true
-        showAll.setTitleColor(.systemPink, for: .normal)
+        topView.addSubview(showAllButton)
+        showAllButton.isUserInteractionEnabled = true
+        showAllButton.setTitleColor(.systemPink, for: .normal)
         
-        showAll.addTarget(self, action: #selector(handleShowAll), for: .touchUpInside)
-        showAll.anchor(top: topView.topAnchor, leading: notesLabel.trailingAnchor, bottom: topView.bottomAnchor, trailing: trailingAnchor,padding: UIEdgeInsets(top: 0, left: 125, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
+        showAllButton.addTarget(self, action: #selector(handleShowAll), for: .touchUpInside)
+        showAllButton.anchor(top: topView.topAnchor, leading: notesLabel.trailingAnchor, bottom: topView.bottomAnchor, trailing: trailingAnchor,padding: UIEdgeInsets(top: 0, left: 125, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
         
         addSubview(collectionView)
         collectionView.register(NoteCell.self, forCellWithReuseIdentifier: cellId)
@@ -56,6 +61,10 @@ class NotesBar: BaseView {
     @objc func handleShowAll(){
         print("handle")
     }
+    
+    func addNote() {
+        notedelegate?.showAddNote()
+    }
 }
 
 extension NotesBar: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -65,7 +74,6 @@ extension NotesBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId , for: indexPath) as! NoteCell
-        cell.backgroundColor = UIColor.red
         return cell
       }
     
@@ -79,12 +87,14 @@ extension NotesBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as! HeaderNoteBar
+        header.headerDelegate = self
         return header
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: 102, height: 145)
     }
+   
 }
 
 

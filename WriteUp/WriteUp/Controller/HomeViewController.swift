@@ -7,21 +7,28 @@
 //
 
 import UIKit
+import FSCalendar
 
 protocol homeDelegate {
     func handleSignOut()
 }
 
-class HomeViewController: UIViewController, ProfileLauncherDelegate{
+class HomeViewController: UIViewController,ProfileLauncherDelegate,FSCalendarDataSource,FSCalendarDelegate {
     var homeDelegate : homeDelegate?
+    let calendar = Calendar()
     
-    let notesBar:NotesBar = {
-       let nb = NotesBar()
+    lazy var notesBar:NotesBar = {
+        let nb = NotesBar()
+        nb.notedelegate = self
         nb.translatesAutoresizingMaskIntoConstraints = false
-//        nb.backgroundColor = .green
         return nb
     }()
     
+    var noteListView: NotesListView = {
+       var noteView = NotesListView()
+        noteView.translatesAutoresizingMaskIntoConstraints = false
+        return noteView
+    }()
     
     private let profileButton : UIButton = {
         let button = UIButton(type: .system)
@@ -32,33 +39,36 @@ class HomeViewController: UIViewController, ProfileLauncherDelegate{
         return button
     }()
     
+    func setupLayout(){
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .never
+        navigationController?.navigationBar.topItem?.title = "Write UP"
+        self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+        navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
+        profileButton.addTarget(self, action: #selector(handleProfileButton), for: UIControl.Event.touchUpInside)
+    }
+    
     @objc func handleProfileButton(){
         let profileLauncher = ProfileLauncher()
         profileLauncher.profiledelegate = self
         navigationController?.pushViewController(profileLauncher, animated: true)
     }
     
-    let barlabel: UILabel = {
-        let label = UILabel()
-        label.text = Constant.HomeSC.barLabel
-        label.font = UIFont().appNavFont()
-        label.textColor = UIColor.systemPink
-        return label
-    }()
-    
-    func setupLayout(){
-        barlabel.frame = CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height)
-        navigationController?.navigationBar.topItem?.titleView = barlabel
-        self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
-        profileButton.addTarget(self, action: #selector(handleProfileButton), for: UIControl.Event.touchUpInside)
-    }
-    
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
         view.addSubview(notesBar)
-        notesBar.anchor(top:view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16),size: CGSize(width: 0, height: 205))
+        view.addSubview(calendar)
+        view.addSubview(noteListView)
+      
+        
+        notesBar.anchor(top:view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16), size: CGSize(width: 0, height: 200))
+
+
+        calendar.translatesAutoresizingMaskIntoConstraints = false
+        calendar.anchor(top: notesBar.bottomAnchor, leading: nil, bottom: nil, trailing: nil ,padding: UIEdgeInsets(top: 15, left:  5, bottom: 0, right: -5),size: CGSize(width: view.frame.width, height: 300))
+
+        noteListView.anchor(top: calendar.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0) ,size: CGSize(width: 0, height: 500))
         setupLayout()
     }
     
@@ -66,6 +76,16 @@ class HomeViewController: UIViewController, ProfileLauncherDelegate{
         UserDefaults.standard.setIsSignedIn(value: false)
         self.homeDelegate?.handleSignOut()
     }
+}
+
+extension HomeViewController: NoteBarDelegate {
+    
+    func showAddNote(){
+        let addNote = AddNoteController()
+        navigationController?.pushViewController(addNote, animated: true)
+    }
+    
+    
 }
 
 

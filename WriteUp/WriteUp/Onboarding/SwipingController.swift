@@ -17,7 +17,6 @@ class SwipingController : UICollectionViewController {
     
     lazy var pageBar: PageBar = {
         var pb = PageBar()
-//        pb.swipingController = self
         pb.translatesAutoresizingMaskIntoConstraints = false
         return pb
     }()

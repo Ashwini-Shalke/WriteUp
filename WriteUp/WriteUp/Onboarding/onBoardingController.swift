@@ -14,6 +14,7 @@ protocol onBoardingViewControllerDelegate {
 
 class onBoardingController: UIViewController,SwipingControllerDelegate {
     var onboardingdelegate: onBoardingViewControllerDelegate?
+    
     lazy var collectionVC: UICollectionViewController = {
         let layout = UICollectionViewFlowLayout()
         let cv = SwipingController(collectionViewLayout: layout)

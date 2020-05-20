@@ -55,5 +55,15 @@ struct Constant {
         static let noOfNotes = "0"
         static let navTitle = "Profile"
     }
-   
+    struct NoteBar {
+        static let notesLabel = "Notes"
+        static let showAllButton = "Show All"
+    }
+    
+    struct HeaderNoteBar {
+        static let addNoteImage = "addNote"
+        static let addNoteLabel =  "Add Note"
+    }
 }
+
+

@@ -1,0 +1,16 @@
+PODS:
+  - FSCalendar (2.8.1)
+
+DEPENDENCIES:
+  - FSCalendar
+
+SPEC REPOS:
+  trunk:
+    - FSCalendar
+
+SPEC CHECKSUMS:
+  FSCalendar: 5245140456fcbcac5824c203b98bd8068bdfee1a
+
+PODFILE CHECKSUM: 07f10a847c4f131f79c948dfcc69d88ba5543f1d
+
+COCOAPODS: 1.8.4

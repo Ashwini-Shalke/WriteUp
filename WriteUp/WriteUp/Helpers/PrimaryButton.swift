@@ -36,10 +36,7 @@ class OnboardingButton: UIButton {
         self.setTitleColor(UIColor.darkGray, for: .normal)
         self.titleLabel?.font = UIFont().onboardingbuttonTitleFont()
         self.setTitle(titletext, for: .normal)
-    
     }
-    
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
