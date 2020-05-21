@@ -9,6 +9,7 @@
 import UIKit
 protocol NoteBarDelegate {
     func showAddNote()
+    func showAllNotes()
 }
 
 class NotesBar: BaseView,HeaderNoteDelegate {
@@ -59,7 +60,7 @@ class NotesBar: BaseView,HeaderNoteDelegate {
     }()
     
     @objc func handleShowAll(){
-        print("handle")
+        notedelegate?.showAllNotes()
     }
     
     func addNote() {

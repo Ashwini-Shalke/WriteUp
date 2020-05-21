@@ -25,7 +25,7 @@ class AddNoteController: UIViewController {
     }
     
     @objc func handleNext(){
-        let newNote = AddNewNote()
+        let newNote = AddNewNoteController()
         navigationController?.pushViewController(newNote, animated: true)
     }
 }

@@ -41,9 +41,7 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,FSCalendarDat
     
     func setupLayout(){
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.topItem?.title = "Write UP"
-        self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
         profileButton.addTarget(self, action: #selector(handleProfileButton), for: UIControl.Event.touchUpInside)
@@ -58,16 +56,13 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,FSCalendarDat
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
         view.addSubview(notesBar)
-        view.addSubview(calendar)
-        view.addSubview(noteListView)
-      
-        
         notesBar.anchor(top:view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16), size: CGSize(width: 0, height: 200))
 
-
+        view.addSubview(calendar)
         calendar.translatesAutoresizingMaskIntoConstraints = false
         calendar.anchor(top: notesBar.bottomAnchor, leading: nil, bottom: nil, trailing: nil ,padding: UIEdgeInsets(top: 15, left:  5, bottom: 0, right: -5),size: CGSize(width: view.frame.width, height: 300))
 
+        view.addSubview(noteListView)
         noteListView.anchor(top: calendar.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0) ,size: CGSize(width: 0, height: 500))
         setupLayout()
     }
@@ -79,12 +74,17 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,FSCalendarDat
 }
 
 extension HomeViewController: NoteBarDelegate {
-    
     func showAddNote(){
-        let addNote = AddNoteController()
-        navigationController?.pushViewController(addNote, animated: true)
+        let addNoteView = AddNoteController()
+        navigationController?.pushViewController(addNoteView, animated: true)
     }
     
+    func showAllNotes() {
+        let showAllNotesView = ShowAllNotesController()
+        navigationController?.pushViewController(showAllNotesView, animated: true)
+        
+    }
+  
     
 }
 

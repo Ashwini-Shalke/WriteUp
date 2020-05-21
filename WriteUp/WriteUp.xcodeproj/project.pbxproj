@@ -10,8 +10,9 @@
 		047474D01A2491ED97D2B09C /* Pods_WriteUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 138510ED9EF30FAFEBB80E34 /* Pods_WriteUp.framework */; };
 		332C576B2463DD0700891BBB /* EditProfileLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332C576A2463DD0700891BBB /* EditProfileLauncher.swift */; };
 		332D45FD246142660078BEA2 /* ProfileDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D45FC246142660078BEA2 /* ProfileDetail.swift */; };
-		332D81812475229500944CA5 /* AddNewNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81802475229500944CA5 /* AddNewNote.swift */; };
+		332D81812475229500944CA5 /* AddNewNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81802475229500944CA5 /* AddNewNoteController.swift */; };
 		332D81832475276000944CA5 /* NotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81822475276000944CA5 /* NotesListView.swift */; };
+		332D81852476466C00944CA5 /* ShowAllNotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81842476466C00944CA5 /* ShowAllNotesController.swift */; };
 		33306BC22456E7A1003CA89E /* PageBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306BC12456E7A1003CA89E /* PageBar.swift */; };
 		33306BC424589BC2003CA89E /* PrimaryLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306BC324589BC2003CA89E /* PrimaryLabel.swift */; };
 		33306BC6245985AD003CA89E /* PrimaryText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306BC5245985AD003CA89E /* PrimaryText.swift */; };
@@ -43,8 +44,9 @@
 		138510ED9EF30FAFEBB80E34 /* Pods_WriteUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WriteUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		332C576A2463DD0700891BBB /* EditProfileLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileLauncher.swift; sourceTree = "<group>"; };
 		332D45FC246142660078BEA2 /* ProfileDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetail.swift; sourceTree = "<group>"; };
-		332D81802475229500944CA5 /* AddNewNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNote.swift; sourceTree = "<group>"; };
+		332D81802475229500944CA5 /* AddNewNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNoteController.swift; sourceTree = "<group>"; };
 		332D81822475276000944CA5 /* NotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListView.swift; sourceTree = "<group>"; };
+		332D81842476466C00944CA5 /* ShowAllNotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllNotesController.swift; sourceTree = "<group>"; };
 		33306BC12456E7A1003CA89E /* PageBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageBar.swift; sourceTree = "<group>"; };
 		33306BC324589BC2003CA89E /* PrimaryLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryLabel.swift; sourceTree = "<group>"; };
 		33306BC5245985AD003CA89E /* PrimaryText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryText.swift; sourceTree = "<group>"; };
@@ -180,7 +182,8 @@
 				3372E60E244F074D009D3983 /* ProfileLauncher.swift */,
 				332C576A2463DD0700891BBB /* EditProfileLauncher.swift */,
 				33DBC322246FFCF200E6462A /* AddNoteController.swift */,
-				332D81802475229500944CA5 /* AddNewNote.swift */,
+				332D81802475229500944CA5 /* AddNewNoteController.swift */,
+				332D81842476466C00944CA5 /* ShowAllNotesController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				33329B43246A9D5900C40379 /* NotesBar.swift in Sources */,
 				3372E60D244ED71D009D3983 /* RootViewController.swift in Sources */,
 				33306BC8245C1AE7003CA89E /* PrimaryButton.swift in Sources */,
+				332D81852476466C00944CA5 /* ShowAllNotesController.swift in Sources */,
 				33329B45246D4AF300C40379 /* NoteBarCell.swift in Sources */,
 				33DBC321246EB50100E6462A /* Calendar.swift in Sources */,
 				3333CDEA2445CB7A00E6EF3B /* AppDelegate.swift in Sources */,
@@ -335,7 +339,7 @@
 				3372E60F244F074D009D3983 /* ProfileLauncher.swift in Sources */,
 				3333CDEC2445CB7A00E6EF3B /* SceneDelegate.swift in Sources */,
 				3372E5FE2447170F009D3983 /* PageCell.swift in Sources */,
-				332D81812475229500944CA5 /* AddNewNote.swift in Sources */,
+				332D81812475229500944CA5 /* AddNewNoteController.swift in Sources */,
 				33348D0F2472A5C3002093B8 /* PrimaryBarLabel.swift in Sources */,
 				33306BC424589BC2003CA89E /* PrimaryLabel.swift in Sources */,
 				332C576B2463DD0700891BBB /* EditProfileLauncher.swift in Sources */,
