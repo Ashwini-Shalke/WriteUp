@@ -27,7 +27,7 @@ class ShowAllNotesController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(searchBar)
-        searchBar.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor)
+        searchBar.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16),size: CGSize(width: 0, height: 36))
         
         view.addSubview(notesListView)
         notesListView.anchor(top: searchBar.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0))
@@ -42,7 +42,9 @@ class ShowAllNotesController: UIViewController {
 extension ShowAllNotesController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        notesListView.searchNote = notesListView.noteArray.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
+        notesListView.searchNote = notesListView.noteArray.filter({($0.title?.lowercased().prefix(searchText.count).elementsEqual(searchText.lowercased()))!
+        })
+//        notesListView.searchNote = notesListView.noteArray.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
         notesListView.searching = true
         notesListView.reloadData()
     }
