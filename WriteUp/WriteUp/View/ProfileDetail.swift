@@ -29,8 +29,8 @@ class ProfileDetail: BaseView,EditProfileDelegate{
         return eP
     }()
     
-    var nameView: UIView = UIView()
-    var emailView: UIView = UIView()
+    let nameView: UIView = UIView()
+    let emailView: UIView = UIView()
     let phoneView: UIView = UIView()
     let noteView: UIView = UIView()
     
@@ -42,7 +42,7 @@ class ProfileDetail: BaseView,EditProfileDelegate{
     let topViewContainer : UIView = {
         let topView = UIView()
         topView.translatesAutoresizingMaskIntoConstraints = false
-        topView.backgroundColor = UIColor.systemPink
+        topView.backgroundColor = UIColor.systemYellow
         return topView
     }()
     
@@ -66,12 +66,11 @@ class ProfileDetail: BaseView,EditProfileDelegate{
         setupProfileDetails()
     }
     
-    func constractNameView() {
+    func constructBottomView() {
         let nameLabel = PrimaryLabel(labelName: Constant.ProfileSC.nameLabel)
         nameView.addSubview(nameLabel)
         nameLabel.anchor(top: nameView.topAnchor, leading: nameView.leadingAnchor, bottom: nil, trailing: nameView.trailingAnchor, size: Constant.ProfileSC.Labelheight)
         
-        //         let nameTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.nameLabel)
         nameView.addSubview(nameTextField)
         nameTextField.anchor(top: nameLabel.bottomAnchor, leading: nameView.leadingAnchor, bottom: nil, trailing: nameView.trailingAnchor,size: Constant.ProfileSC.TextFieldheight)
         
@@ -79,7 +78,7 @@ class ProfileDetail: BaseView,EditProfileDelegate{
         emailView.addSubview(emailLabel)
         emailLabel.anchor(top: emailView.topAnchor,leading: emailView.leadingAnchor, bottom: nil, trailing: emailView.trailingAnchor,size: Constant.ProfileSC.Labelheight)
         
-        //        let emailTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.emailLabel)
+       
         emailView.addSubview(emailTextField)
         emailTextField.anchor(top: emailLabel.bottomAnchor, leading: emailView.leadingAnchor, bottom: nil, trailing: emailView.trailingAnchor,size: Constant.ProfileSC.TextFieldheight)
         
@@ -87,7 +86,6 @@ class ProfileDetail: BaseView,EditProfileDelegate{
         phoneView.addSubview(phoneLabel)
         phoneLabel.anchor(top: phoneView.topAnchor, leading: phoneView.leadingAnchor, bottom: nil, trailing: phoneView.trailingAnchor, size: Constant.ProfileSC.Labelheight)
         
-        //         let phoneTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.phoneLabel)
         phoneView.addSubview(phoneTextField)
         phoneTextField.anchor(top: phoneLabel.bottomAnchor, leading: phoneView.leadingAnchor, bottom: nil,trailing: phoneView.trailingAnchor, size: Constant.ProfileSC.TextFieldheight)
         
@@ -95,7 +93,6 @@ class ProfileDetail: BaseView,EditProfileDelegate{
         noteView.addSubview(noteLabel)
         noteLabel.anchor(top: noteView.topAnchor,leading: noteView.leadingAnchor, bottom: nil, trailing: noteView.trailingAnchor,size: Constant.ProfileSC.Labelheight)
         
-        //        let noteTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.noOfNotes)
         noteView.addSubview(noteTextField)
         noteTextField.anchor(top: noteLabel.bottomAnchor, leading: noteView.leadingAnchor, bottom: nil, trailing: noteView.trailingAnchor, size: Constant.ProfileSC.TextFieldheight)
     }
@@ -109,7 +106,7 @@ class ProfileDetail: BaseView,EditProfileDelegate{
         placeHolderButton.centerXAnchor.constraint(equalTo: topViewContainer.centerXAnchor).isActive = true
         placeHolderButton.centerYAnchor.constraint(equalTo: topViewContainer.centerYAnchor).isActive = true
         
-        self.constractNameView()
+        self.constructBottomView()
         let stackView = UIStackView(arrangedSubviews: [nameView,emailView,phoneView,noteView])
         stackView.distribution = .fillEqually
         stackView.axis = .vertical

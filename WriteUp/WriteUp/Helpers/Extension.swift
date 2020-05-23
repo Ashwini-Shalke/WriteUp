@@ -33,7 +33,7 @@ extension UIViewController {
 
 extension UIFont {
     func appNavFont(size: CGFloat? = 34) -> UIFont {
-        return UIFont.systemFont(ofSize: size ?? 34)
+        return UIFont.boldSystemFont(ofSize: size ?? 34)
     }
     
     func appMainTitleFont(size: CGFloat? = 18) -> UIFont {

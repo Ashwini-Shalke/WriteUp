@@ -13,10 +13,8 @@ class AddNewNoteController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-//        navigationItem.title = " New Note"
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(handleNewNote))
-        navigationController?.navigationBar.tintColor = UIColor.systemPink
     }
     
     @objc func handleNewNote(){

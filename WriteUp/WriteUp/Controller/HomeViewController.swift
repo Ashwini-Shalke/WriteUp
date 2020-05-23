@@ -24,8 +24,9 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,FSCalendarDat
         return nb
     }()
     
-    var noteListView: NotesListView = {
+   lazy var noteListView: NotesListView = {
        var noteView = NotesListView()
+        noteView.noteListDelegate = self
         noteView.translatesAutoresizingMaskIntoConstraints = false
         return noteView
     }()
@@ -38,24 +39,11 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,FSCalendarDat
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    func setupLayout(){
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.topItem?.title = "Write UP"
-        navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
-        profileButton.addTarget(self, action: #selector(handleProfileButton), for: UIControl.Event.touchUpInside)
-    }
-    
-    @objc func handleProfileButton(){
-        let profileLauncher = ProfileLauncher()
-        profileLauncher.profiledelegate = self
-        navigationController?.pushViewController(profileLauncher, animated: true)
-    }
-    
+   
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
         view.addSubview(notesBar)
+        setupNav()
         notesBar.anchor(top:view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16), size: CGSize(width: 0, height: 200))
 
         view.addSubview(calendar)
@@ -64,7 +52,24 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,FSCalendarDat
 
         view.addSubview(noteListView)
         noteListView.anchor(top: calendar.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0) ,size: CGSize(width: 0, height: 500))
-        setupLayout()
+        
+         profileButton.addTarget(self, action: #selector(handleProfileButton), for: UIControl.Event.touchUpInside)
+    }
+    
+    func setupNav(){
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.topItem?.title = "Write UP"
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemIndigo, NSAttributedString.Key.font: UIFont().appNavFont()]
+        navigationController?.navigationItem.largeTitleDisplayMode = .automatic
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
+        navigationController?.navigationBar.tintColor = UIColor.systemPink
+        navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+    @objc func handleProfileButton(){
+        let profileLauncher = ProfileLauncher()
+        profileLauncher.profiledelegate = self
+        navigationController?.pushViewController(profileLauncher, animated: true)
     }
     
     func dismissHome() {
@@ -73,7 +78,7 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,FSCalendarDat
     }
 }
 
-extension HomeViewController: NoteBarDelegate {
+extension HomeViewController: NoteBarDelegate, noteListViewDelegate {
     func showAddNote(){
         let addNoteView = AddNoteController()
         navigationController?.pushViewController(addNoteView, animated: true)
@@ -82,10 +87,12 @@ extension HomeViewController: NoteBarDelegate {
     func showAllNotes() {
         let showAllNotesView = ShowAllNotesController()
         navigationController?.pushViewController(showAllNotesView, animated: true)
-        
     }
   
-    
+    func handleDidSelectRow() {
+        let editNoteView = EditNoteScreen()
+        navigationController?.pushViewController(editNoteView, animated: true)
+    }
 }
 
 

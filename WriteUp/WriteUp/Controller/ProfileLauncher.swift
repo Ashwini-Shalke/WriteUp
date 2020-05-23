@@ -37,11 +37,10 @@ class ProfileLauncher: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         navigationItem.title = Constant.ProfileSC.navTitle
-        navigationItem.largeTitleDisplayMode = .never
-        navigationController?.navigationBar.tintColor = UIColor.systemPink
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(handleEdit))
         autolayout()
     }
+
     
     @objc func handleEdit(){
         let editProfileLauncher = EditProfileLauncher()

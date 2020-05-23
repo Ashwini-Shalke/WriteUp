@@ -9,8 +9,10 @@
 import UIKit
 
 class ShowAllNotesController: UIViewController {
-    let notesListView: NotesListView = {
-        let notesView = NotesListView()
+
+    lazy var notesListView: NotesListView = {
+        var notesView = NotesListView()
+        notesView.noteListDelegate = self
         notesView.translatesAutoresizingMaskIntoConstraints = false
         return notesView
     }()
@@ -20,7 +22,9 @@ class ShowAllNotesController: UIViewController {
         bar.translatesAutoresizingMaskIntoConstraints = false
         bar.showsCancelButton = true
         bar.delegate = self
+        bar.backgroundColor = .white
         bar.tintColor = .systemPink
+        bar.backgroundImage = UIImage()
         return bar
     }()
     
@@ -34,17 +38,18 @@ class ShowAllNotesController: UIViewController {
         
         view.backgroundColor = .white
         navigationItem.title = "Notes"
-        navigationItem.largeTitleDisplayMode = .never
-        navigationController?.navigationBar.shadowImage = UIImage()
     }
 }
 
-extension ShowAllNotesController: UISearchBarDelegate {
+extension ShowAllNotesController: UISearchBarDelegate, noteListViewDelegate {
+    func handleDidSelectRow() {
+        let editNoteView = EditNoteScreen()
+        navigationController?.pushViewController(editNoteView, animated: true)
+    }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         notesListView.searchNote = notesListView.noteArray.filter({($0.title?.lowercased().prefix(searchText.count).elementsEqual(searchText.lowercased()))!
         })
-//        notesListView.searchNote = notesListView.noteArray.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
         notesListView.searching = true
         notesListView.reloadData()
     }
