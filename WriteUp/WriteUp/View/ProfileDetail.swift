@@ -54,7 +54,6 @@ class ProfileDetail: BaseView,EditProfileDelegate{
         button.clipsToBounds = true
         button.frame = CGRect(x: 0, y: 0, width: 120, height: 120 )
         button.layer.cornerRadius = button.bounds.size.width * 0.5
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.isUserInteractionEnabled = false
         return button
     }()
@@ -110,7 +109,6 @@ class ProfileDetail: BaseView,EditProfileDelegate{
         let stackView = UIStackView(arrangedSubviews: [nameView,emailView,phoneView,noteView])
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
         // stack View :- need to calculate the number of items in stack view
         let stackHeight = CGSize(width: 0, height: (32 * 4) + (37 * 4) + 4)

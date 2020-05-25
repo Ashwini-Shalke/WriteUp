@@ -20,7 +20,6 @@ class Calendar: BaseView {
         calendar.delegate = self
         addSubview(calendar)
         self.calendar = calendar
-        calendar.translatesAutoresizingMaskIntoConstraints = false
         calendar.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
         calendar.register(FSCalendarCell.self, forCellReuseIdentifier: cellID)
     }

@@ -44,7 +44,6 @@ class NotesBar: BaseView,HeaderNoteDelegate {
     
     let topView: UIView = {
        let tv = UIView()
-        tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
     

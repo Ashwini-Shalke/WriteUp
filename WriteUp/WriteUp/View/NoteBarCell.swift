@@ -35,7 +35,6 @@ class HeaderNoteBar: BaseCell {
     let containerView: UIView = {
         let v = UIView()
         v.backgroundColor = .white
-        v.translatesAutoresizingMaskIntoConstraints = false
         return v
     }()
     
@@ -44,7 +43,6 @@ class HeaderNoteBar: BaseCell {
         let image = UIImage(named: Constant.HeaderNoteBar.addNoteImage)
         button.setImage(image, for: .normal)
         button.contentMode = .scaleAspectFit
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     

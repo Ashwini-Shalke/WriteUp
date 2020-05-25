@@ -6,5 +6,5 @@ target 'WriteUp' do
   use_frameworks!
 
   # Pods for WriteUp
-pod 'FSCalendar'
+    pod 'FSCalendar'
 end

@@ -13,13 +13,11 @@ class ShowAllNotesController: UIViewController {
     lazy var notesListView: NotesListView = {
         var notesView = NotesListView()
         notesView.noteListDelegate = self
-        notesView.translatesAutoresizingMaskIntoConstraints = false
         return notesView
     }()
     
     lazy var searchBar: UISearchBar = {
         var bar = UISearchBar()
-        bar.translatesAutoresizingMaskIntoConstraints = false
         bar.showsCancelButton = true
         bar.delegate = self
         bar.backgroundColor = .white

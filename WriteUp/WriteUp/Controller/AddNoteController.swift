@@ -15,10 +15,15 @@ class AddNoteController: UIViewController {
     let summaryLabel = PrimaryLabel(labelName: "Summary")
     let summaryTextField = PrimaryTextField(placeholderString: "Add small description")
     let chooseTagLabel = PrimaryLabel(labelName: "Choose tag")
-
     let titleView: UIView = UIView()
     let summaryView: UIView = UIView()
     let chooseTagView: UIView = UIView()
+    
+    let colorPickerView: ColorPickerView = {
+       let pickerView = ColorPickerView()
+       return pickerView
+    }()
+    
     
     func contructView(){
         titleView.addSubview(titleLabel)
@@ -37,6 +42,10 @@ class AddNoteController: UIViewController {
         chooseTagView.addSubview(chooseTagLabel)
         chooseTagLabel.anchor(top: chooseTagView.topAnchor, leading: chooseTagView.leadingAnchor, bottom: nil, trailing: chooseTagView.trailingAnchor, size: Constant.ProfileSC.Labelheight)
         
+        chooseTagView.addSubview(colorPickerView)
+        colorPickerView.anchor(top: chooseTagLabel.bottomAnchor, leading: chooseTagView.leadingAnchor, bottom: nil, trailing: chooseTagView.trailingAnchor,size: Constant.ProfileSC.TextFieldheight)
+        
+       
     }
    
     override func viewDidLoad() {
@@ -50,7 +59,6 @@ class AddNoteController: UIViewController {
         let stackView = UIStackView(arrangedSubviews: [titleView,summaryView,chooseTagView])
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
         // stack View :- need to calculate the number of items in stack view
         let stackHeight = CGSize(width: 0, height: (32 * 3) + (37 * 3) + 3)
@@ -62,3 +70,5 @@ class AddNoteController: UIViewController {
         navigationController?.pushViewController(newNote, animated: true)
     }
 }
+
+

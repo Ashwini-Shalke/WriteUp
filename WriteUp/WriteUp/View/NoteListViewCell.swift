@@ -25,7 +25,6 @@ class NotesListCell: UITableViewCell {
     
     let customView: UIView = {
         let cv = UIView()
-        cv.translatesAutoresizingMaskIntoConstraints = false
         cv.backgroundColor = .systemGray6
         cv.layer.cornerRadius = 10
         return cv
@@ -36,7 +35,6 @@ class NotesListCell: UITableViewCell {
         title.text = "My plans for weekend"
         title.font = UIFont.systemFont(ofSize: 18)
         title.textColor = UIColor.black
-        title.translatesAutoresizingMaskIntoConstraints = false
         return title
     }()
     
@@ -47,7 +45,6 @@ class NotesListCell: UITableViewCell {
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = UIColor.darkGray
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -58,7 +55,6 @@ class NotesListCell: UITableViewCell {
         button.layer.cornerRadius = button.frame.width/2
         button.backgroundColor = UIColor.systemRed
         button.isUserInteractionEnabled = false
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -67,7 +63,6 @@ class NotesListCell: UITableViewCell {
         label.text = "20/05/20"
         label.font = UIFont.systemFont(ofSize: 10)
         label.textColor = UIColor.darkGray
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     

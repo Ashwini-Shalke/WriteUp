@@ -20,14 +20,12 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,FSCalendarDat
     lazy var notesBar:NotesBar = {
         let nb = NotesBar()
         nb.notedelegate = self
-        nb.translatesAutoresizingMaskIntoConstraints = false
         return nb
     }()
     
    lazy var noteListView: NotesListView = {
        var noteView = NotesListView()
         noteView.noteListDelegate = self
-        noteView.translatesAutoresizingMaskIntoConstraints = false
         return noteView
     }()
     
@@ -36,7 +34,6 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,FSCalendarDat
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 0)
         button.layer.cornerRadius = button.frame.width/2
         button.backgroundColor = UIColor.systemPink
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
    
@@ -47,7 +44,6 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,FSCalendarDat
         notesBar.anchor(top:view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16), size: CGSize(width: 0, height: 200))
 
         view.addSubview(calendar)
-        calendar.translatesAutoresizingMaskIntoConstraints = false
         calendar.anchor(top: notesBar.bottomAnchor, leading: nil, bottom: nil, trailing: nil ,padding: UIEdgeInsets(top: 15, left:  5, bottom: 0, right: -5),size: CGSize(width: view.frame.width, height: 300))
 
         view.addSubview(noteListView)
