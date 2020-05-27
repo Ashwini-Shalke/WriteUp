@@ -9,8 +9,8 @@
 import UIKit
 import FSCalendar
 
-class Calendar: BaseView {
-    fileprivate weak var calendar: FSCalendar!
+class Calendar: BaseView, UIGestureRecognizerDelegate {
+    weak var calendar: FSCalendar!
     let cellID = "CellID"
     
     override func setup() {
@@ -20,6 +20,7 @@ class Calendar: BaseView {
         calendar.delegate = self
         addSubview(calendar)
         self.calendar = calendar
+        self.calendar.setScope(.week, animated: true)
         calendar.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
         calendar.register(FSCalendarCell.self, forCellReuseIdentifier: cellID)
     }
@@ -38,3 +39,6 @@ extension Calendar: FSCalendarDelegate, FSCalendarDataSource {
         print(dateString)
     }
 }
+
+
+

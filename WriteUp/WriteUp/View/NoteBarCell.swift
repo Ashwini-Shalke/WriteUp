@@ -8,12 +8,24 @@
 
 import UIKit
 
-protocol HeaderNoteDelegate {
+protocol HeaderNoteDelegate: AnyObject {
     func addNote()
 }
 
+class BaseCell: UICollectionViewCell {
+  override init(frame: CGRect) {
+      super.init(frame: frame)
+      setup()
+  }
+  
+  func setup(){}
+  required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+  }
+}
+
 class HeaderNoteBar: BaseCell {
-    var headerDelegate: HeaderNoteDelegate?
+   weak var headerDelegate: HeaderNoteDelegate?
     let addNoteLabel = NoteBarLabel(labelName: Constant.HeaderNoteBar.addNoteLabel)
     
     override func setup() {

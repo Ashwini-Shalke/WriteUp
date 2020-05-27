@@ -7,12 +7,12 @@
 //
 
 import UIKit
-protocol noteListViewDelegate {
+protocol noteListViewDelegate: AnyObject {
     func handleDidSelectRow()
 }
 
 class NotesListView: UITableView, UITableViewDelegate, UITableViewDataSource {
-    var noteListDelegate: noteListViewDelegate?
+   weak var noteListDelegate: noteListViewDelegate?
     let cellId = "CellID"
     var searching = false
     var searchNote = [Note]()

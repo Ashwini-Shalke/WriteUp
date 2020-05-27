@@ -7,13 +7,13 @@
 //
 
 import UIKit
-protocol NoteBarDelegate {
+protocol NoteBarDelegate: AnyObject {
     func showAddNote()
     func showAllNotes()
 }
 
 class NotesBar: BaseView,HeaderNoteDelegate {
-    var notedelegate: NoteBarDelegate?
+    weak var notedelegate: NoteBarDelegate?
     
     let cellId = "CellID"
     let headerID = "HeaderID"

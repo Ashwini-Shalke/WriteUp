@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol EditProfileDelegate {
+protocol EditProfileDelegate: AnyObject {
     func handleEdit()
 }
 
 class EditProfileLauncher: UIViewController,UITextFieldDelegate {
-    var editProfileDelegate: EditProfileDelegate?
+    weak var editProfileDelegate: EditProfileDelegate?
     let profileDetail = ProfileDetail()
     var activeTextField = UITextField()
     var parentView = UIView()

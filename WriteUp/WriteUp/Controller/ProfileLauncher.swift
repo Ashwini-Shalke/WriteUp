@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol ProfileLauncherDelegate {
+protocol ProfileLauncherDelegate: AnyObject {
     func dismissHome()
 }
 
 class ProfileLauncher: UIViewController {
-    var profiledelegate: ProfileLauncherDelegate?
+    weak var profiledelegate: ProfileLauncherDelegate?
     let stackHeight = CGSize(width: 0, height: (32 * 4) + (37 * 4) + 4)
     
     func autolayout() {

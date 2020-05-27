@@ -9,14 +9,14 @@
 import UIKit
 import FSCalendar
 
-protocol homeDelegate {
+protocol homeDelegate: AnyObject{
     func handleSignOut()
 }
 
-class HomeViewController: UIViewController,ProfileLauncherDelegate,FSCalendarDataSource,FSCalendarDelegate {
-    var homeDelegate : homeDelegate?
+class HomeViewController: UIViewController,ProfileLauncherDelegate {
+    weak var homeDelegate : homeDelegate?
     let calendar = Calendar()
-    
+        
     lazy var notesBar:NotesBar = {
         let nb = NotesBar()
         nb.notedelegate = self

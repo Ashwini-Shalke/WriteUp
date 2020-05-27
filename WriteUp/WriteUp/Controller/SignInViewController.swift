@@ -9,12 +9,12 @@
 import UIKit
 import AuthenticationServices
 
-protocol signInDelegate{
+protocol signInDelegate: AnyObject{
     func handleRoot()
 }
 
-class SignInViewController: UIViewController,onBoardingViewControllerDelegate {
-    var signInDelegate: signInDelegate?
+class SignInViewController: UIViewController {
+    weak var signInDelegate: signInDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,13 +67,13 @@ class SignInViewController: UIViewController,onBoardingViewControllerDelegate {
         controller.presentationContextProvider = self
         controller.performRequests()
     }
-    
-    func launchOnboard(sender : Any?){
-        let onboarding = onBoardingController()
-        onboarding.onboardingdelegate = self
-        onboarding.defaultPresenatationStyle()
-        present(onboarding, animated: true, completion: nil)
+      
+    func launchOnboard(sender : Any?) {
+        UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: {
+            self.dismiss(animated: false, completion: nil)
+        }, completion: nil)
         UserDefaults.standard.setIsSignedIn(value: true)
+        self.signInDelegate?.handleRoot()
     }
 }
 
@@ -96,16 +96,6 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
 extension SignInViewController : ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return view.window!
-    }
-    
-    func dismissSignIn() {
-        UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: {
-            self.dismiss(animated: false, completion: nil)
-        }, completion: nil)
-        
-        UIView.animate(withDuration: 1, delay: 1, options: .curveLinear, animations: {
-            self.signInDelegate?.handleRoot()
-        }, completion: nil)
     }
 }
 
