@@ -46,6 +46,7 @@ class ProfileLauncher: UIViewController {
         let editProfileLauncher = EditProfileLauncher()
         let navController = UINavigationController(rootViewController: editProfileLauncher)
         self.present(navController, animated: true, completion: nil)
+        
     }
 }
 
