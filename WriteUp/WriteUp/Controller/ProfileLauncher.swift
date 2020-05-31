@@ -40,7 +40,6 @@ class ProfileLauncher: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(handleEdit))
         autolayout()
     }
-
     
     @objc func handleEdit(){
         let editProfileLauncher = EditProfileLauncher()
