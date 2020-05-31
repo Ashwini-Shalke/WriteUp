@@ -75,7 +75,7 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate {
 }
 
 extension HomeViewController: NoteBarDelegate, noteListViewDelegate {
-    func showAddNote(){
+    func showAddNote() {
         let addNoteView = AddNoteController()
         navigationController?.pushViewController(addNoteView, animated: true)
     }

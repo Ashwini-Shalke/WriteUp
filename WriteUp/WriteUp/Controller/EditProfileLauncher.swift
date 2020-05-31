@@ -112,6 +112,7 @@ extension EditProfileLauncher: UIImagePickerControllerDelegate, UINavigationCont
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         //to get the real information of image which the user has picked
         let imageData = info[.originalImage] as! UIImage
+        //TODO: Remove this
         //        let image_Data:Data = imageData.pngData()!
         //        let imgstr = image_Data.base64EncodedData()
         profileDetail.placeHolderButton.setImage(imageData, for: .normal)
