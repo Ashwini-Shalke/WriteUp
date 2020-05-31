@@ -64,6 +64,13 @@ class EditProfileLauncher: UIViewController,UITextFieldDelegate {
         return true
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        return updatedText.count <= 50
+    }
+    
     @objc func handleDone(){
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
@@ -73,13 +80,11 @@ class EditProfileLauncher: UIViewController,UITextFieldDelegate {
         profileDetail.nameTextField.isUserInteractionEnabled = true
         profileDetail.phoneTextField.isUserInteractionEnabled = true
         profileDetail.placeHolderButton.isUserInteractionEnabled = true
-        profileDetail.noteTextField.isUserInteractionEnabled = true
         
         profileDetail.emailTextField.delegate = self
         profileDetail.phoneTextField.delegate = self
         profileDetail.nameTextField.delegate = self
-        profileDetail.noteTextField.delegate = self
-        
+
         profileDetail.placeHolderButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
     }
     
@@ -90,6 +95,11 @@ class EditProfileLauncher: UIViewController,UITextFieldDelegate {
     
     @objc func dismissKeyboard(){
         view.endEditing(true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
 }

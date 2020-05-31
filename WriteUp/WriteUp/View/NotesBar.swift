@@ -55,6 +55,7 @@ class NotesBar: BaseView,HeaderNoteDelegate {
         cv.backgroundColor = .white
         cv.delegate = self
         cv.dataSource = self
+        cv.bounces = false
         return cv
     }()
     
