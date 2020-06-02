@@ -7,14 +7,12 @@
 //
 
 import UIKit
-
 class AddNoteController: UIViewController {
-    let nextButton = OnboardingButton(titletext: "Next")
-    let titleLabel = PrimaryLabel(labelName: "Title")
-    let titleTextField = PrimaryTextField(placeholderString: "Keep it short")
-    let summaryLabel = PrimaryLabel(labelName: "Summary")
-    let summaryTextField = PrimaryTextField(placeholderString: "Add small description")
-    let chooseTagLabel = PrimaryLabel(labelName: "Choose tag")
+    let titleLabel = PrimaryLabel(labelName: Constant.AddNote.titleLabel)
+    let titleTextField = PrimaryTextField(placeholderString: Constant.AddNote.titleTextFieldPlaceHolder)
+    let summaryLabel = PrimaryLabel(labelName: Constant.AddNote.summaryLabel)
+    let summaryTextField = PrimaryTextField(placeholderString: Constant.AddNote.summaryTextFieldPlaceHolder)
+    let chooseTagLabel = PrimaryLabel(labelName: Constant.AddNote.chooseTagLabel)
     let titleView: UIView = UIView()
     let summaryView: UIView = UIView()
     let chooseTagView: UIView = UIView()
@@ -54,10 +52,9 @@ class AddNoteController: UIViewController {
     
     override func viewDidLoad() {
         view.backgroundColor = .white
-        navigationItem.title = "Add Note"
-        nextButton.setTitleColor(.systemPink, for: .normal)
-        nextButton.addTarget(self, action: #selector(handleNext), for: .touchUpInside)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: nextButton)
+        navigationItem.title = Constant.AddNote.barLabel
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(handleSaveNote))
+        self.navigationItem.setHidesBackButton(true, animated: false)
         self.contructView()
         
         let stackView = UIStackView(arrangedSubviews: [titleView,summaryView,chooseTagView])
@@ -66,21 +63,19 @@ class AddNoteController: UIViewController {
         view.addSubview(stackView)
         // stack View :- need to calculate the number of items in stack view
         let stackHeight = CGSize(width: 0, height: (32 * 3) + (37 * 3) + 3)
-        stackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, size: stackHeight)
+        stackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0),size: stackHeight)
         hideKeyboard()
     }
     
-    @objc func handleNext(){
-        let newNote = AddNewNoteController()
-        navigationController?.pushViewController(newNote, animated: true)
+    @objc func handleSaveNote() {
+        guard let controllersInStack = navigationController?.viewControllers else { return }
+        if let _ = controllersInStack.first(where: { $0 is RootViewController }) {
+            navigationController?.popToRootViewController(animated: true)
+        }
     }
-    
-    
 }
 
-
 extension AddNoteController: UITextFieldDelegate {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

@@ -7,26 +7,25 @@
 //
 import UIKit
 
-class RootViewController: UIViewController,signInDelegate,homeDelegate{
-   
+class RootViewController: UIViewController,signInDelegate,homeDelegate {
     lazy var homeViewController: HomeViewController = {
         var hc = HomeViewController()
         hc.homeDelegate = self
         return hc
     }()
-       
+    
     lazy var signinViewController : SignInViewController = {
         var sc = SignInViewController()
         sc.signInDelegate = self
         return sc
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.green
         handleChild()
     }
- 
+    
     fileprivate func isSignedIn() -> Bool {
         return UserDefaults.standard.isSignedIn()
     }
@@ -52,8 +51,9 @@ class RootViewController: UIViewController,signInDelegate,homeDelegate{
     }
     
     func handleSignOut(){
-       handleChild()
+        handleChild()
     }
+    
 }
 
 extension RootViewController {

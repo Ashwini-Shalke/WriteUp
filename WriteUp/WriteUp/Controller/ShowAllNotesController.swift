@@ -35,7 +35,7 @@ class ShowAllNotesController: UIViewController {
         notesListView.anchor(top: searchBar.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0))
         
         view.backgroundColor = .white
-        navigationItem.title = "Notes"
+        navigationItem.title = Constant.ShowAllNote.barLabel
     }
 }
 

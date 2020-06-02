@@ -54,7 +54,7 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate {
     
     func setupNav(){
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.topItem?.title = "Write UP"
+        navigationController?.navigationBar.topItem?.title = Constant.HomeSC.barLabel
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemIndigo, NSAttributedString.Key.font: UIFont().appNavFont()]
         navigationController?.navigationItem.largeTitleDisplayMode = .automatic
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
@@ -76,7 +76,7 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate {
 
 extension HomeViewController: NoteBarDelegate, noteListViewDelegate {
     func showAddNote() {
-        let addNoteView = AddNoteController()
+        let addNoteView = AddNewNoteController()
         navigationController?.pushViewController(addNoteView, animated: true)
     }
     

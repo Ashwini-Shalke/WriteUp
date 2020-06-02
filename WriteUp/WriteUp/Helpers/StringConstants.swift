@@ -35,13 +35,11 @@ struct Constant {
      static let barLabel = "WriteUp"
     }
     
-    
     //MARK: SignIn Screen
     struct  SignInSC {
         static let logoImageName = "AppLogo"
     }
     
-
     //MARK: ProfileLauncher Screen
     struct ProfileSC {
         static let Labelheight = CGSize(width: 0, height: 32)
@@ -55,14 +53,32 @@ struct Constant {
         static let noOfNotes = "0"
         static let navTitle = "Profile"
     }
+    
+    //MARK: NoteBar
     struct NoteBar {
         static let notesLabel = "Notes"
         static let showAllButton = "Show All"
     }
     
+  //MARK: HeaderNoteBar
     struct HeaderNoteBar {
         static let addNoteImage = "addNote"
         static let addNoteLabel =  "Add Note"
+    }
+    
+    //MARK: AddNote Screen
+    struct AddNote {
+        static let barLabel = "Add Note"
+        static let nextButtonTitle = "Next"
+        static let titleLabel = "Title"
+        static let titleTextFieldPlaceHolder = "Keep it short"
+        static let summaryLabel = "Summary"
+        static let summaryTextFieldPlaceHolder = "Add small description"
+        static let chooseTagLabel = "Choose Tag"
+    }
+    
+    struct ShowAllNote {
+        static let barLabel = "Notes"
     }
 }
 
