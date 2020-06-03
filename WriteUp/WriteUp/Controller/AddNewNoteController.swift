@@ -8,12 +8,12 @@
 
 import UIKit
 
-class AddNewNoteController: UIViewController, UITextViewDelegate{
-    var textfieldHeight:NSLayoutConstraint?
-    var textfieldHeightWithKeyBoard:CGFloat = (UIScreen.main.bounds.height - 200)
-    var textfieldHeightWithoutKeyBoard:CGFloat = (UIScreen.main.bounds.height - 150)
-    var alphaView = UIView()
+class AddNewNoteController: UIViewController, UITextViewDelegate {
     
+    var textfieldHeightConstraint:NSLayoutConstraint?
+    var textfieldHeightwithKeyboard = UIScreen.main.bounds.height - 85
+    var alphaView = UIView()
+    var verticalSafeAreaInset = CGFloat()
     let nextButton = OnboardingButton(titletext: Constant.AddNote.nextButtonTitle)
     
     let plusNoteButton: UIButton = {
@@ -30,6 +30,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate{
         let button = UIButton()
         button.setImage(trashImage, for: .normal)
         button.contentMode = .scaleAspectFit
+        button.addTarget(self, action: #selector(handleDeleteNote), for: .touchUpInside)
         return button
     }()
     
@@ -39,11 +40,30 @@ class AddNewNoteController: UIViewController, UITextViewDelegate{
         textview.isEditable = true
         textview.allowsEditingTextAttributes = true
         textview.keyboardDismissMode = .interactive
-  
         textview.font = UIFont.systemFont(ofSize: 20)
-        textview.backgroundColor = .systemGray6
+        textview.backgroundColor = .systemGray5
         return textview
     }()
+    
+    override func viewSafeAreaInsetsDidChange() {
+                if #available(iOS 11.0, *){
+                    verticalSafeAreaInset = self.view.safeAreaInsets.top + self.view.safeAreaInsets.bottom
+                    
+                } else {
+                    verticalSafeAreaInset = 0.0
+                    
+                }
+        
+        textfieldHeightConstraint = NSLayoutConstraint(item: textView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: textfieldHeightwithKeyboard - verticalSafeAreaInset)
+         view.layer.layoutIfNeeded()
+                 
+        textView.anchor(top: view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor,bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 16,left: 16,bottom: 0,right: -16))
+         
+         NSLayoutConstraint.activate([
+             textfieldHeightConstraint!
+         ])
+        print("bottom",self.view.safeAreaInsets.bottom,"top",self.view.safeAreaInsets.top)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,16 +73,9 @@ class AddNewNoteController: UIViewController, UITextViewDelegate{
         self.navigationItem.setHidesBackButton(true, animated: false)
         nextButton.setTitleColor(.systemPink, for: .normal)
         nextButton.addTarget(self, action: #selector(handleNewNote), for: .touchUpInside)
-        
+      
         textView.delegate = self
         view.addSubview(textView)
-        textfieldHeight = NSLayoutConstraint(item: textView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: UIScreen.main.bounds.height - 150)
-        
-        textView.anchor(top: view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor,bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 16,left: 16,bottom: 0,right: -16))
-        
-        NSLayoutConstraint.activate([
-            textfieldHeight!
-        ])
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -76,6 +89,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate{
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
             view.addGestureRecognizer(tapGesture)
+     
     }
     
     @objc func dismissKeyboard(){
@@ -95,6 +109,10 @@ class AddNewNoteController: UIViewController, UITextViewDelegate{
         }
     }
     
+    @objc func handleDeleteNote(){
+        navigationController?.popViewController(animated: true)
+    }
+    
     @objc func handleNewNote(){
         self.view.endEditing(true)
         let addNote = AddNoteController()
@@ -104,19 +122,19 @@ class AddNewNoteController: UIViewController, UITextViewDelegate{
     @objc func keyboardWillShow(notification: NSNotification){
         guard let userInfo = notification.userInfo else { return }
         guard let keyboardSize = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else { return }
-        let keybardFrame = keyboardSize.cgRectValue
-        let textfieldHeight = ((UIScreen.main.bounds.height - 150) - keybardFrame.height)
-        
+        let keyboardFrame = keyboardSize.cgRectValue
+        let textfieldHeighwithKeyboard = (textfieldHeightwithKeyboard - verticalSafeAreaInset) - keyboardFrame.height
+      
         UIView.animate(withDuration: 0,delay: 0,options: UIView.AnimationOptions.curveEaseIn,
                        animations: {
-                        self.textfieldHeight?.constant = textfieldHeight
+                        self.textfieldHeightConstraint?.constant = textfieldHeighwithKeyboard
                         self.view.layoutIfNeeded()
         }, completion: nil)
     }
     
     @objc func keyboardWillHide(notification: NSNotification){
         UIView.animate(withDuration: 0, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-            self.textfieldHeight?.constant = UIScreen.main.bounds.height - 150
+            self.textfieldHeightConstraint?.constant = self.textfieldHeightwithKeyboard - self.verticalSafeAreaInset
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
