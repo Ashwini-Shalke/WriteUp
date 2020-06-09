@@ -16,6 +16,7 @@
 		332D81872477BA4D00944CA5 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81862477BA4D00944CA5 /* Note.swift */; };
 		332D81892477E16100944CA5 /* EditNoteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81882477E16100944CA5 /* EditNoteScreen.swift */; };
 		332D818B2477E1DF00944CA5 /* NoteListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D818A2477E1DF00944CA5 /* NoteListViewCell.swift */; };
+		332F5AE3248E0894003181E1 /* BottonToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332F5AE2248E0894003181E1 /* BottonToolBar.swift */; };
 		33306BC424589BC2003CA89E /* PrimaryLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306BC324589BC2003CA89E /* PrimaryLabel.swift */; };
 		33306BC6245985AD003CA89E /* PrimaryText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306BC5245985AD003CA89E /* PrimaryText.swift */; };
 		33306BC8245C1AE7003CA89E /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306BC7245C1AE7003CA89E /* PrimaryButton.swift */; };
@@ -49,6 +50,7 @@
 		332D81862477BA4D00944CA5 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		332D81882477E16100944CA5 /* EditNoteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteScreen.swift; sourceTree = "<group>"; };
 		332D818A2477E1DF00944CA5 /* NoteListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListViewCell.swift; sourceTree = "<group>"; };
+		332F5AE2248E0894003181E1 /* BottonToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottonToolBar.swift; sourceTree = "<group>"; };
 		33306BC324589BC2003CA89E /* PrimaryLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryLabel.swift; sourceTree = "<group>"; };
 		33306BC5245985AD003CA89E /* PrimaryText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryText.swift; sourceTree = "<group>"; };
 		33306BC7245C1AE7003CA89E /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				332D81822475276000944CA5 /* NotesListView.swift */,
 				332D818A2477E1DF00944CA5 /* NoteListViewCell.swift */,
 				3351F704247B8C7D0041C3CC /* ColorPickerView.swift */,
+				332F5AE2248E0894003181E1 /* BottonToolBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				3333CDEA2445CB7A00E6EF3B /* AppDelegate.swift in Sources */,
 				3372E60F244F074D009D3983 /* ProfileLauncher.swift in Sources */,
 				3333CDEC2445CB7A00E6EF3B /* SceneDelegate.swift in Sources */,
+				332F5AE3248E0894003181E1 /* BottonToolBar.swift in Sources */,
 				332D81812475229500944CA5 /* AddNewNoteController.swift in Sources */,
 				33348D0F2472A5C3002093B8 /* PrimaryBarLabel.swift in Sources */,
 				33306BC424589BC2003CA89E /* PrimaryLabel.swift in Sources */,

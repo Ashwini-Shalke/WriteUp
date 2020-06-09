@@ -8,61 +8,51 @@
 
 import UIKit
 
-class AddNewNoteController: UIViewController, UITextViewDelegate {
+class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarDelegate {
     
     var textfieldHeightConstraint:NSLayoutConstraint?
-    var textfieldHeightwithKeyboard = UIScreen.main.bounds.height - 85
+    var textfieldHeightwithKeyboard = (UIScreen.main.bounds.height)
+    var texfieldHeightwithoutKeyboard = (UIScreen.main.bounds.height - 70)
     var alphaView = UIView()
     var verticalSafeAreaInset = CGFloat()
     let nextButton = OnboardingButton(titletext: Constant.AddNote.nextButtonTitle)
     
-    let plusNoteButton: UIButton = {
-        let addImage = UIImage(named: "add")
-        let button = UIButton()
-        button.setImage(addImage, for: .normal)
-        button.contentMode = .scaleAspectFit
-        button.addTarget(self, action: #selector(handlePlusNote), for: .touchUpInside)
-        return button
+    
+    lazy var inputAccesssoryView: BottomToolBar = {
+        var  toolView = BottomToolBar()
+        toolView.toolbarDelegate = self
+        toolView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
+        return toolView
     }()
     
-    let deleteNoteButton: UIButton = {
-        let trashImage = UIImage(named: "trash")
-        let button = UIButton()
-        button.setImage(trashImage, for: .normal)
-        button.contentMode = .scaleAspectFit
-        button.addTarget(self, action: #selector(handleDeleteNote), for: .touchUpInside)
-        return button
+    lazy var bottomToolBar : BottomToolBar = {
+        var bottomBar = BottomToolBar()
+        bottomBar.toolbarDelegate = self
+        return bottomBar
     }()
-    
     
     let textView: UITextView = {
         let textview = UITextView()
-        textview.isEditable = true
         textview.allowsEditingTextAttributes = true
-        textview.keyboardDismissMode = .interactive
         textview.font = UIFont.systemFont(ofSize: 20)
-        textview.backgroundColor = .systemGray5
+        textview.keyboardDismissMode = .interactive
+        textview.backgroundColor = .white
         return textview
     }()
     
+    
     override func viewSafeAreaInsetsDidChange() {
-                if #available(iOS 11.0, *){
-                    verticalSafeAreaInset = self.view.safeAreaInsets.top + self.view.safeAreaInsets.bottom
-                    
-                } else {
-                    verticalSafeAreaInset = 0.0
-                    
-                }
+        if #available(iOS 11.0, *){
+            verticalSafeAreaInset = self.view.safeAreaInsets.top + self.view.safeAreaInsets.bottom
+        } else {
+            verticalSafeAreaInset = self.view.safeAreaInsets.top
+        }
         
-        textfieldHeightConstraint = NSLayoutConstraint(item: textView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: textfieldHeightwithKeyboard - verticalSafeAreaInset)
-         view.layer.layoutIfNeeded()
-                 
         textView.anchor(top: view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor,bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 16,left: 16,bottom: 0,right: -16))
-         
-         NSLayoutConstraint.activate([
-             textfieldHeightConstraint!
-         ])
-        print("bottom",self.view.safeAreaInsets.bottom,"top",self.view.safeAreaInsets.top)
+        
+        textfieldHeightConstraint = NSLayoutConstraint(item: textView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: texfieldHeightwithoutKeyboard - verticalSafeAreaInset)
+        view.layer.layoutIfNeeded()
+        NSLayoutConstraint.activate([ textfieldHeightConstraint! ])
     }
     
     override func viewDidLoad() {
@@ -73,44 +63,30 @@ class AddNewNoteController: UIViewController, UITextViewDelegate {
         self.navigationItem.setHidesBackButton(true, animated: false)
         nextButton.setTitleColor(.systemPink, for: .normal)
         nextButton.addTarget(self, action: #selector(handleNewNote), for: .touchUpInside)
-      
+        
         textView.delegate = self
         view.addSubview(textView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        let stackView = UIStackView(arrangedSubviews: [deleteNoteButton,plusNoteButton])
-        stackView.distribution = .fillEqually
-        
-        view.addSubview(stackView)
-        stackView.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 50))
-        
-        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tapGesture.cancelsTouchesInView = false
-            view.addGestureRecognizer(tapGesture)
-     
+        view.addSubview(bottomToolBar)
+        bottomToolBar.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: -1, right: 0))
     }
     
-    @objc func dismissKeyboard(){
-        view.endEditing(true)
-        textView.resignFirstResponder()
-        textView.endEditing(true)
+    func trashButton() {
+        navigationController?.popViewController(animated: true)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-        textView.resignFirstResponder()
-    }
-        
-    @objc func handlePlusNote(){
+    func clearButton() {
         if textView.text != "" {
             textView.text = ""
         }
     }
     
-    @objc func handleDeleteNote(){
-        navigationController?.popViewController(animated: true)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+        textView.resignFirstResponder()
     }
     
     @objc func handleNewNote(){
@@ -120,27 +96,41 @@ class AddNewNoteController: UIViewController, UITextViewDelegate {
     }
     
     @objc func keyboardWillShow(notification: NSNotification){
-        guard let userInfo = notification.userInfo else { return }
-        guard let keyboardSize = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else { return }
-        let keyboardFrame = keyboardSize.cgRectValue
-        let textfieldHeighwithKeyboard = (textfieldHeightwithKeyboard - verticalSafeAreaInset) - keyboardFrame.height
-      
-        UIView.animate(withDuration: 0,delay: 0,options: UIView.AnimationOptions.curveEaseIn,
-                       animations: {
-                        self.textfieldHeightConstraint?.constant = textfieldHeighwithKeyboard
-                        self.view.layoutIfNeeded()
-        }, completion: nil)
+        let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
+        let keyboardDuration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
+                
+        let textfieldHeightwithKeyboard = (self.textfieldHeightwithKeyboard - verticalSafeAreaInset) - keyboardFrame!.height
+        
+        UIView.animate(withDuration: keyboardDuration!) {
+            self.textfieldHeightConstraint?.constant = textfieldHeightwithKeyboard
+            self.view.layoutIfNeeded()
+        }
     }
     
     @objc func keyboardWillHide(notification: NSNotification){
-        UIView.animate(withDuration: 0, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-            self.textfieldHeightConstraint?.constant = self.textfieldHeightwithKeyboard - self.verticalSafeAreaInset
+        self.textfieldHeightConstraint?.constant = self.texfieldHeightwithoutKeyboard - self.verticalSafeAreaInset
+        let keyboardDuration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
+        UIView.animate(withDuration: keyboardDuration!) {
             self.view.layoutIfNeeded()
-        }, completion: nil)
+        }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+}
+
+extension AddNewNoteController {
+    
+    override var inputAccessoryView: UIView? {
+        get {
+            return self.inputAccesssoryView
+        }
+    }
+    
+    override func resignFirstResponder() -> Bool {
+        return true
     }
 }
