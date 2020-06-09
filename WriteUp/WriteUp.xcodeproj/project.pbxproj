@@ -37,7 +37,7 @@
 		3372E60D244ED71D009D3983 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E60C244ED71D009D3983 /* RootViewController.swift */; };
 		3372E60F244F074D009D3983 /* ProfileLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E60E244F074D009D3983 /* ProfileLauncher.swift */; };
 		33DBC321246EB50100E6462A /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DBC320246EB50100E6462A /* Calendar.swift */; };
-		33DBC323246FFCF200E6462A /* AddNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DBC322246FFCF200E6462A /* AddNoteController.swift */; };
+		33DBC323246FFCF200E6462A /* SaveNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DBC322246FFCF200E6462A /* SaveNoteController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,7 +74,7 @@
 		3372E60C244ED71D009D3983 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		3372E60E244F074D009D3983 /* ProfileLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLauncher.swift; sourceTree = "<group>"; };
 		33DBC320246EB50100E6462A /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
-		33DBC322246FFCF200E6462A /* AddNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteController.swift; sourceTree = "<group>"; };
+		33DBC322246FFCF200E6462A /* SaveNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNoteController.swift; sourceTree = "<group>"; };
 		5BFF92A6436B42077046868A /* Pods-WriteUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUp.debug.xcconfig"; path = "Target Support Files/Pods-WriteUp/Pods-WriteUp.debug.xcconfig"; sourceTree = "<group>"; };
 		6E401186B47F4F0C3DDF07E6 /* Pods-WriteUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUp.release.xcconfig"; path = "Target Support Files/Pods-WriteUp/Pods-WriteUp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -172,7 +172,7 @@
 				3333CE012445CD8100E6EF3B /* HomeViewController.swift */,
 				3372E60E244F074D009D3983 /* ProfileLauncher.swift */,
 				332C576A2463DD0700891BBB /* EditProfileLauncher.swift */,
-				33DBC322246FFCF200E6462A /* AddNoteController.swift */,
+				33DBC322246FFCF200E6462A /* SaveNoteController.swift */,
 				332D81802475229500944CA5 /* AddNewNoteController.swift */,
 				332D81842476466C00944CA5 /* ShowAllNotesController.swift */,
 				332D81882477E16100944CA5 /* EditNoteScreen.swift */,
@@ -337,7 +337,7 @@
 				332D81892477E16100944CA5 /* EditNoteScreen.swift in Sources */,
 				332C576B2463DD0700891BBB /* EditProfileLauncher.swift in Sources */,
 				332D81872477BA4D00944CA5 /* Note.swift in Sources */,
-				33DBC323246FFCF200E6462A /* AddNoteController.swift in Sources */,
+				33DBC323246FFCF200E6462A /* SaveNoteController.swift in Sources */,
 				3372E608244DEF9D009D3983 /* StringConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

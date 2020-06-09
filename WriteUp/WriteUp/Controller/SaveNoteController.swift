@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class AddNoteController: UIViewController {
+class SaveNoteController: UIViewController {
     let titleLabel = PrimaryLabel(labelName: Constant.AddNote.titleLabel)
     let titleTextField = PrimaryTextField(placeholderString: Constant.AddNote.titleTextFieldPlaceHolder)
     let summaryLabel = PrimaryLabel(labelName: Constant.AddNote.summaryLabel)
@@ -75,7 +75,7 @@ class AddNoteController: UIViewController {
     }
 }
 
-extension AddNoteController: UITextFieldDelegate {
+extension SaveNoteController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

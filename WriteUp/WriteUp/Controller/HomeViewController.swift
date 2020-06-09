@@ -59,6 +59,8 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate {
         navigationController?.navigationItem.largeTitleDisplayMode = .automatic
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
         navigationController?.navigationBar.tintColor = UIColor.systemPink
+        
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
     }
     

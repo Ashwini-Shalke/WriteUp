@@ -11,14 +11,14 @@ import UIKit
 class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarDelegate {
     
     var textfieldHeightConstraint:NSLayoutConstraint?
-    var textfieldHeightwithKeyboard = (UIScreen.main.bounds.height)
+    var textfieldHeightwithKeyboard = (UIScreen.main.bounds.height - 16)
     var texfieldHeightwithoutKeyboard = (UIScreen.main.bounds.height - 70)
     var alphaView = UIView()
     var verticalSafeAreaInset = CGFloat()
     let nextButton = OnboardingButton(titletext: Constant.AddNote.nextButtonTitle)
     
     
-    lazy var inputAccesssoryView: BottomToolBar = {
+    lazy var inputAccesssoryToolView: BottomToolBar = {
         var  toolView = BottomToolBar()
         toolView.toolbarDelegate = self
         toolView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
@@ -36,7 +36,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         textview.allowsEditingTextAttributes = true
         textview.font = UIFont.systemFont(ofSize: 20)
         textview.keyboardDismissMode = .interactive
-        textview.backgroundColor = .white
+        textview.backgroundColor = .systemGray6
         return textview
     }()
     
@@ -72,7 +72,9 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         
         view.addSubview(bottomToolBar)
         bottomToolBar.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: -1, right: 0))
+        bottomToolBar.hideBackground()
     }
+
     
     func trashButton() {
         navigationController?.popViewController(animated: true)
@@ -91,8 +93,8 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     
     @objc func handleNewNote(){
         self.view.endEditing(true)
-        let addNote = AddNoteController()
-        navigationController?.pushViewController(addNote, animated: true)
+        let saveNote = SaveNoteController()
+        navigationController?.pushViewController(saveNote, animated: true)
     }
     
     @objc func keyboardWillShow(notification: NSNotification){
@@ -126,7 +128,8 @@ extension AddNewNoteController {
     
     override var inputAccessoryView: UIView? {
         get {
-            return self.inputAccesssoryView
+            inputAccesssoryToolView.hideBackground()
+            return self.inputAccesssoryToolView
         }
     }
     
