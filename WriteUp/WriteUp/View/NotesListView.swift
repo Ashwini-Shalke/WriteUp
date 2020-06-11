@@ -12,11 +12,11 @@ protocol noteListViewDelegate: AnyObject {
 }
 
 class NotesListView: UITableView, UITableViewDelegate, UITableViewDataSource {
-   weak var noteListDelegate: noteListViewDelegate?
+    weak var noteListDelegate: noteListViewDelegate?
     let cellId = "CellID"
     var searching = false
     var searchNote = [Note]()
-    let noteArray = [Note(title: "NewYork Holiday Plan", description: "Top things to see during hoildays in NewYork and many other places, time to explore New york. yippppppppppppppppeeeeeeeeeeeeeeeeeeeee!!!", date: "21/05/20"),Note(title: "Paris Holiday Plan", description: "Top things to see during hoildays in Paris and many other places", date: "24/05/20"),Note(title: "Maldives Holiday Plan", description: "Top things to see during hoildays in Maldives and many other places", date: "26/05/20"),Note(title: "Indonesia Holiday Plan", description: "Top things to see during hoildays in Indonesia and many other places, time to explore New york. yippppppppppppppppeeeeeeeeeeeeeeeeeeeee!!!", date: "21/05/20"),Note(title: "US Holiday Plan", description: "Top things to see during hoildays in US and many other places", date: "24/05/20"),Note(title: "Japan Holiday Plan", description: "Top things to see during hoildays in Japan and many other places", date: "26/05/20")]
+    var noteArray = [Note(title: "NewYork Holiday Plan", description: "Top things to see during hoildays in NewYork and many other places, time to explore New york. yippppppppppppppppeeeeeeeeeeeeeeeeeeeee!!!", date: "21/05/20"),Note(title: "Paris Holiday Plan", description: "Top things to see during hoildays in Paris and many other places", date: "24/05/20"),Note(title: "Maldives Holiday Plan", description: "Top things to see during hoildays in Maldives and many other places", date: "26/05/20"),Note(title: "Indonesia Holiday Plan", description: "Top things to see during hoildays in Indonesia and many other places, time to explore New york. yippppppppppppppppeeeeeeeeeeeeeeeeeeeee!!!", date: "21/05/20"),Note(title: "US Holiday Plan", description: "Top things to see during hoildays in US and many other places", date: "24/05/20"),Note(title: "Japan Holiday Plan", description: "Top things to see during hoildays in Japan and many other places", date: "26/05/20")]
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -42,11 +42,11 @@ class NotesListView: UITableView, UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! NotesListCell
         cell.selectionStyle = .none
         cell.note = noteArray[indexPath.row]
-        if searching {
-            cell.note = searchNote[indexPath.row]
-        } else {
-            cell.note = noteArray[indexPath.row]
-        }
+                if searching {
+                    cell.note = searchNote[indexPath.row]
+                } else {
+                    cell.note = noteArray[indexPath.row]
+                }
         return cell
     }
     
@@ -57,4 +57,17 @@ class NotesListView: UITableView, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         noteListDelegate?.handleDidSelectRow()
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // handle delete (by removing the data from your array and updating the tableview)
+            self.noteArray.remove(at: indexPath.row)
+            tableView.deleteRows(at: [(indexPath as IndexPath)], with: .automatic)
+        }
+    }
+    
 }

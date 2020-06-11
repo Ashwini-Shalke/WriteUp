@@ -171,16 +171,19 @@ extension UIImagePickerController {
     }
 }
 
-extension UITextView {
-    
-    
-    func addDoneButton(title: String, target: Any, selector: Selector) {
-
-        let toolBar = UIToolbar(frame: CGRect(x: 0.0,y: 0.0,width: UIScreen.main.bounds.size.width,height: 44.0))
-        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let deletebutton = UIBarButtonItem(image: UIImage(named: "trash"), style: .plain, target: target, action: selector)
-        let barButton = UIBarButtonItem(title: title, style: .plain, target: target, action: selector)
-        toolBar.setItems([flexible, deletebutton, barButton], animated: false)
-        self.inputAccessoryView = toolBar
+extension String {
+    public func getTitle() -> String? {
+        if let i = self.firstIndex(of: "\n") {
+            return String(prefix(upTo: i))
+        }
+        return nil   
     }
+    
+    var lines : [String] {
+        return self.components(separatedBy: "\n")
+    }
+    
+    
+
 }
+

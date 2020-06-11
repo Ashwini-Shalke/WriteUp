@@ -16,12 +16,14 @@ class SaveNoteController: UIViewController {
     let titleView: UIView = UIView()
     let summaryView: UIView = UIView()
     let chooseTagView: UIView = UIView()
+    var sampleString: String = ""
     
     let colorPickerView: ColorPickerView = {
         let pickerView = ColorPickerView()
         return pickerView
     }()
     
+
     
     func contructView(){
         titleView.addSubview(titleLabel)
@@ -48,6 +50,8 @@ class SaveNoteController: UIViewController {
         colorPickerView.anchor(top: chooseTagLabel.bottomAnchor, leading: chooseTagView.leadingAnchor, bottom: nil, trailing: chooseTagView.trailingAnchor,size: Constant.ProfileSC.TextFieldheight)
         
         
+//        titleTextField.text = sampleString.lines[0]
+//        summaryTextField.text = sampleString.lines[1]
     }
     
     override func viewDidLoad() {
@@ -65,6 +69,7 @@ class SaveNoteController: UIViewController {
         let stackHeight = CGSize(width: 0, height: (32 * 3) + (37 * 3) + 3)
         stackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0),size: stackHeight)
         hideKeyboard()
+//        handleTitle()
     }
     
     @objc func handleSaveNote() {
@@ -97,6 +102,11 @@ extension SaveNoteController: UITextFieldDelegate {
         return updatedText.count <= 50
     }
     
+//    func handleTitle(){
+//        if let index = sampleString.firstIndex(of: "." || "\n") {
+//            titleTextField.text = sampleString.prefix(upTo: index)
+//        }
+//    }
 }
 
 

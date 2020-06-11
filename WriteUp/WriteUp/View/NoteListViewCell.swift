@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class NotesListCell: UITableViewCell {
     var note: Note? {
         didSet {
@@ -69,7 +68,7 @@ class NotesListCell: UITableViewCell {
     func setupLayout() {
         self.addSubview(customView)
         customView.anchor(top: self.topAnchor, leading: self.leadingAnchor, bottom: self.bottomAnchor, trailing: self.trailingAnchor,padding: UIEdgeInsets(top: 5, left: 16, bottom: -5, right: -16))
-
+        
         customView.addSubview(roundColorBar)
         roundColorBar.anchor(top: customView.topAnchor, leading: customView.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 12, left: 12, bottom: 0, right: 0),size: CGSize(width: 12, height: 12))
         
@@ -88,6 +87,7 @@ class NotesListCell: UITableViewCell {
                setupLayout()
     }
     
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
