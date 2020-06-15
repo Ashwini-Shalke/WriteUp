@@ -17,14 +17,13 @@ class SaveNoteController: UIViewController {
     let summaryView: UIView = UIView()
     let chooseTagView: UIView = UIView()
     var sampleString: String = ""
+      let i = 0
     
     let colorPickerView: ColorPickerView = {
         let pickerView = ColorPickerView()
         return pickerView
     }()
-    
-
-    
+        
     func contructView(){
         titleView.addSubview(titleLabel)
         titleLabel.anchor(top: titleView.topAnchor, leading: titleView.leadingAnchor, bottom: nil, trailing: titleView.trailingAnchor, size: Constant.ProfileSC.Labelheight)
@@ -43,24 +42,21 @@ class SaveNoteController: UIViewController {
         summaryTextField.anchor(top: summaryLabel.bottomAnchor, leading: summaryView.leadingAnchor, bottom: nil, trailing: summaryView.trailingAnchor,size: Constant.ProfileSC.TextFieldheight)
         
         
+        
         chooseTagView.addSubview(chooseTagLabel)
         chooseTagLabel.anchor(top: chooseTagView.topAnchor, leading: chooseTagView.leadingAnchor, bottom: nil, trailing: chooseTagView.trailingAnchor, size: Constant.ProfileSC.Labelheight)
         
         chooseTagView.addSubview(colorPickerView)
         colorPickerView.anchor(top: chooseTagLabel.bottomAnchor, leading: chooseTagView.leadingAnchor, bottom: nil, trailing: chooseTagView.trailingAnchor,size: Constant.ProfileSC.TextFieldheight)
-        
-        
-//        titleTextField.text = sampleString.lines[0]
-//        summaryTextField.text = sampleString.lines[1]
+    
     }
     
     override func viewDidLoad() {
         view.backgroundColor = .white
-        navigationItem.title = Constant.AddNote.barLabel
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(handleSaveNote))
-        self.navigationItem.setHidesBackButton(true, animated: false)
+        self.navigationItem.setHidesBackButton(false, animated: false)
         self.contructView()
-        
+    
         let stackView = UIStackView(arrangedSubviews: [titleView,summaryView,chooseTagView])
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
@@ -69,7 +65,7 @@ class SaveNoteController: UIViewController {
         let stackHeight = CGSize(width: 0, height: (32 * 3) + (37 * 3) + 3)
         stackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0),size: stackHeight)
         hideKeyboard()
-//        handleTitle()
+        handleTitle()
     }
     
     @objc func handleSaveNote() {
@@ -102,11 +98,10 @@ extension SaveNoteController: UITextFieldDelegate {
         return updatedText.count <= 50
     }
     
-//    func handleTitle(){
-//        if let index = sampleString.firstIndex(of: "." || "\n") {
-//            titleTextField.text = sampleString.prefix(upTo: index)
-//        }
-//    }
+    func handleTitle(){
+        titleTextField.text = sampleString.title
+        summaryTextField.text = sampleString.discription
+    }
 }
 
 

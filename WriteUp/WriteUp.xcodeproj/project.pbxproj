@@ -158,8 +158,8 @@
 				3372E607244DEF9D009D3983 /* StringConstants.swift */,
 				33306BC324589BC2003CA89E /* PrimaryLabel.swift */,
 				33306BC5245985AD003CA89E /* PrimaryText.swift */,
-				33306BC7245C1AE7003CA89E /* PrimaryButton.swift */,
 				33348D0E2472A5C3002093B8 /* PrimaryBarLabel.swift */,
+				33306BC7245C1AE7003CA89E /* PrimaryButton.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";

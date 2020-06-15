@@ -9,13 +9,13 @@
 import UIKit
 
 class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarDelegate {
-    
     var textfieldHeightConstraint:NSLayoutConstraint?
     var textfieldHeightwithKeyboard = (UIScreen.main.bounds.height - 16)
     var texfieldHeightwithoutKeyboard = (UIScreen.main.bounds.height - 70)
     var alphaView = UIView()
     var verticalSafeAreaInset = CGFloat()
     let nextButton = OnboardingButton(titletext: Constant.AddNote.nextButtonTitle)
+
     
     
     lazy var inputAccesssoryToolView: BottomToolBar = {
@@ -40,6 +40,15 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         return textview
     }()
     
+    let dateLabel: UILabel = {
+        let label = UILabel()
+        label.text = "10 June 2020 at 11:21 AM"
+        label.textColor = UIColor.systemPink
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.frame = CGRect(x: 0, y: 0, width: 154, height: 15)
+        return label
+    }()
+    
     
     override func viewSafeAreaInsetsDidChange() {
         if #available(iOS 11.0, *){
@@ -58,9 +67,10 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        navigationItem.largeTitleDisplayMode = .never
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: nextButton)
-        self.navigationItem.setHidesBackButton(true, animated: false)
+        navigationItem.titleView = dateLabel
+            
+        self.navigationItem.setHidesBackButton(false, animated: false)
         nextButton.setTitleColor(.systemPink, for: .normal)
         nextButton.addTarget(self, action: #selector(handleNewNote), for: .touchUpInside)
         
@@ -71,7 +81,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         view.addSubview(bottomToolBar)
-        bottomToolBar.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: -1, right: 0))
+        bottomToolBar.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 50, left: 0, bottom: -1, right: 0))
         bottomToolBar.hideBackground()
     }
 

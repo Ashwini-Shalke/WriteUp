@@ -172,18 +172,20 @@ extension UIImagePickerController {
 }
 
 extension String {
-    public func getTitle() -> String? {
-        if let i = self.firstIndex(of: "\n") {
-            return String(prefix(upTo: i))
-        }
-        return nil   
-    }
-    
     var lines : [String] {
-        return self.components(separatedBy: "\n")
+        var arrayToRet = self.components(separatedBy: "\n")
+        arrayToRet = arrayToRet.filter { !$0.isEmpty }
+        return arrayToRet
     }
     
+    var title: String {
+        return self.lines.first ?? self
+    }
     
-
+    var discription: String {
+        let string = self.replacingOccurrences(of: self.title, with: "")
+        let desc = string.trimmingCharacters(in: .whitespacesAndNewlines)
+        return desc
+    }
+    
 }
-
