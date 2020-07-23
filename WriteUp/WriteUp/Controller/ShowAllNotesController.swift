@@ -10,8 +10,8 @@ import UIKit
 
 class ShowAllNotesController: UIViewController {
 
-    lazy var notesListView: NotesListView = {
-        var notesView = NotesListView()
+    lazy var notesListView: NotesListTableView = {
+        var notesView = NotesListTableView()
         notesView.noteListDelegate = self
         return notesView
     }()
@@ -36,6 +36,7 @@ class ShowAllNotesController: UIViewController {
         
         view.backgroundColor = .white
         navigationItem.title = Constant.ShowAllNote.barLabel
+        
     }
 }
 

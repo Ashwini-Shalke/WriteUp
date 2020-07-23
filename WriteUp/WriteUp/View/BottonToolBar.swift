@@ -28,7 +28,7 @@ class BottomToolBar: UIToolbar {
         clearButton.tintColor = .systemPink
         toolBar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
         toolBar.setShadowImage(UIImage(), forToolbarPosition: UIBarPosition.any)
-        toolBar.setItems([trashButton,flexible,clearButton], animated: false)
+        toolBar.setItems([trashButton,flexible, clearButton], animated: false)
         addSubview(toolBar)
     }
     

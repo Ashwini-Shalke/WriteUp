@@ -39,7 +39,7 @@ class HeaderNoteBar: BaseCell {
         
         containerView.addSubview(addNoteLabel)
         addNoteLabel.textAlignment = .center
-        addNoteLabel.font = UIFont().appSubTitleFont(size: 12)
+        addNoteLabel.font = UIFont().tabBarTitle()
         
         addNoteLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 9, bottom: -5, right: -9),size: CGSize(width: 0, height: 18))
     }
@@ -70,7 +70,7 @@ class NoteCell: BaseCell {
         backgroundColor = UIColor().notecellColor()
         addSubview(noteLabel)
         noteLabel.textAlignment = .center
-        noteLabel.font = UIFont().appSubTitleFont(size: 12)
+        noteLabel.font = UIFont().tabBarTitle()
         noteLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 9, bottom: -2, right: -9),size: CGSize(width: 0, height: 18))
     }
 }

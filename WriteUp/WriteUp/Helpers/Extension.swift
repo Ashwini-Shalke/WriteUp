@@ -31,26 +31,40 @@ extension UIViewController {
     }
 }
 
+
 extension UIFont {
-    func appNavFont(size: CGFloat? = 34) -> UIFont {
-        return UIFont.boldSystemFont(ofSize: size ?? 34)
+    func pageTitle(size:CGFloat? = 34) -> UIFont {
+        return UIFont.systemFont(ofSize: 34, weight: .semibold)
     }
     
-    func appMainTitleFont(size: CGFloat? = 18) -> UIFont {
-        return UIFont.systemFont(ofSize: size ?? 18)
+    func navLink(size: CGFloat? = 17) -> UIFont {
+        return UIFont.systemFont(ofSize: 17, weight: .regular)
     }
     
-    func appSubTitleFont(size: CGFloat? = 14) -> UIFont {
-        return UIFont.systemFont(ofSize: size ?? 14)
+    func itemTitle(size: CGFloat? = 17) -> UIFont {
+        return UIFont.systemFont(ofSize: 17, weight: .medium)
     }
     
-    func onboardingbuttonTitleFont(size: CGFloat? = 14) -> UIFont {
-        return UIFont.boldSystemFont(ofSize: size ?? 14)
+    func itemDesc(size: CGFloat? = 15) -> UIFont {
+        return UIFont.systemFont(ofSize: 15, weight: .regular)
     }
     
-    func appLabelTitleFont(size: CGFloat? = 22) -> UIFont {
-        return UIFont.boldSystemFont(ofSize: size ?? 22)
+    func formControlTitle(size: CGFloat? = 17) -> UIFont{
+        return UIFont.systemFont(ofSize: 17, weight: .semibold)
     }
+    
+    func formControlSegmented(size: CGFloat? = 13) -> UIFont {
+        return UIFont.systemFont(ofSize: 13, weight: .regular)
+    }
+    
+    func textInput(size: CGFloat? = 17) -> UIFont {
+        return UIFont.systemFont(ofSize: 17, weight: .regular)
+    }
+    
+    func tabBarTitle(size: CGFloat? = 10) -> UIFont {
+        return UIFont.systemFont(ofSize: 10, weight: .medium)
+    }
+    
 }
 
 extension UIColor {
@@ -141,7 +155,7 @@ extension UILabel {
     func setupLeftNavBar(title: String) -> UILabel {
         let label = UILabel()
         label.text = title
-        label.font = UIFont().appNavFont()
+        label.font = UIFont().navLink()
         label.textColor = UIColor.systemPink
         return label
         

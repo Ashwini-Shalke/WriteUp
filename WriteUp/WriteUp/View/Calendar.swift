@@ -20,7 +20,7 @@ class Calendar: BaseView, UIGestureRecognizerDelegate {
         calendar.delegate = self
         addSubview(calendar)
         self.calendar = calendar
-        self.calendar.setScope(.week, animated: true)
+//        calendar.scope = .week
         calendar.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
         calendar.register(FSCalendarCell.self, forCellReuseIdentifier: cellID)
     }

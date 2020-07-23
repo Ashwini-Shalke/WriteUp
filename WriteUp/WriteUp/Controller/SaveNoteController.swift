@@ -17,7 +17,7 @@ class SaveNoteController: UIViewController {
     let summaryView: UIView = UIView()
     let chooseTagView: UIView = UIView()
     var sampleString: String = ""
-      let i = 0
+    let i = 0
     
     let colorPickerView: ColorPickerView = {
         let pickerView = ColorPickerView()
@@ -54,6 +54,7 @@ class SaveNoteController: UIViewController {
     override func viewDidLoad() {
         view.backgroundColor = .white
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(handleSaveNote))
+        
         self.navigationItem.setHidesBackButton(false, animated: false)
         self.contructView()
     
@@ -63,7 +64,7 @@ class SaveNoteController: UIViewController {
         view.addSubview(stackView)
         // stack View :- need to calculate the number of items in stack view
         let stackHeight = CGSize(width: 0, height: (32 * 3) + (37 * 3) + 3)
-        stackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0),size: stackHeight)
+        stackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),size: stackHeight)
         hideKeyboard()
         handleTitle()
     }
@@ -75,6 +76,8 @@ class SaveNoteController: UIViewController {
         }
     }
 }
+
+
 
 extension SaveNoteController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

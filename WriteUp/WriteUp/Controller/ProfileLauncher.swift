@@ -38,6 +38,7 @@ class ProfileLauncher: UIViewController {
         view.backgroundColor = UIColor.white
         navigationItem.title = Constant.ProfileSC.navTitle
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(handleEdit))
+        
         autolayout()
     }
     

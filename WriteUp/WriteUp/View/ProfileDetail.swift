@@ -12,6 +12,7 @@ class BaseView: UIView {
         super.init(frame: frame)
         setup()
     }
+    
     func setup(){}
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

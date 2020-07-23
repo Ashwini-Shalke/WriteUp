@@ -80,6 +80,8 @@ struct Constant {
     struct ShowAllNote {
         static let barLabel = "Notes"
     }
+    
+    
 }
 
 

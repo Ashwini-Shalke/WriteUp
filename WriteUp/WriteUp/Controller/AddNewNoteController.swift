@@ -10,14 +10,11 @@ import UIKit
 
 class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarDelegate {
     var textfieldHeightConstraint:NSLayoutConstraint?
-    var textfieldHeightwithKeyboard = (UIScreen.main.bounds.height - 16)
-    var texfieldHeightwithoutKeyboard = (UIScreen.main.bounds.height - 70)
-    var alphaView = UIView()
+    var textfieldHeightwithKeyboard = (UIScreen.main.bounds.height)
+    var texfieldHeightwithoutKeyboard = (UIScreen.main.bounds.height - 50)
     var verticalSafeAreaInset = CGFloat()
     let nextButton = OnboardingButton(titletext: Constant.AddNote.nextButtonTitle)
 
-    
-    
     lazy var inputAccesssoryToolView: BottomToolBar = {
         var  toolView = BottomToolBar()
         toolView.toolbarDelegate = self
@@ -34,21 +31,21 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     let textView: UITextView = {
         let textview = UITextView()
         textview.allowsEditingTextAttributes = true
-        textview.font = UIFont.systemFont(ofSize: 20)
+        textview.font = UIFont().textInput()
         textview.keyboardDismissMode = .interactive
-        textview.backgroundColor = .systemGray6
+        textview.backgroundColor = .green
         return textview
     }()
     
     let dateLabel: UILabel = {
         let label = UILabel()
         label.text = "10 June 2020 at 11:21 AM"
+        label.font = UIFont().formControlSegmented()
         label.textColor = UIColor.systemPink
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.frame = CGRect(x: 0, y: 0, width: 154, height: 15)
+        label.frame = CGRect(x: 0, y: 0, width: 154, height: 0)
         return label
     }()
-    
     
     override func viewSafeAreaInsetsDidChange() {
         if #available(iOS 11.0, *){
@@ -56,12 +53,11 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         } else {
             verticalSafeAreaInset = self.view.safeAreaInsets.top
         }
-        
-        textView.anchor(top: view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor,bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 16,left: 16,bottom: 0,right: -16))
-        
-        textfieldHeightConstraint = NSLayoutConstraint(item: textView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: texfieldHeightwithoutKeyboard - verticalSafeAreaInset)
-        view.layer.layoutIfNeeded()
+        view.addSubview(textView)
+        textView.anchor(top: view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor,bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 0,left: 16,bottom: 0,right: -16))
+         textfieldHeightConstraint = NSLayoutConstraint(item: textView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: texfieldHeightwithoutKeyboard - verticalSafeAreaInset)
         NSLayoutConstraint.activate([ textfieldHeightConstraint! ])
+        view.layer.layoutIfNeeded()
     }
     
     override func viewDidLoad() {
@@ -69,23 +65,18 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         view.backgroundColor = .white
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: nextButton)
         navigationItem.titleView = dateLabel
-            
+        navigationItem.largeTitleDisplayMode = .never
+        
         self.navigationItem.setHidesBackButton(false, animated: false)
         nextButton.setTitleColor(.systemPink, for: .normal)
         nextButton.addTarget(self, action: #selector(handleNewNote), for: .touchUpInside)
-        
         textView.delegate = self
-        view.addSubview(textView)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         view.addSubview(bottomToolBar)
         bottomToolBar.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 50, left: 0, bottom: -1, right: 0))
         bottomToolBar.hideBackground()
     }
 
-    
     func trashButton() {
         navigationController?.popViewController(animated: true)
     }
@@ -112,7 +103,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
         let keyboardDuration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
                 
-        let textfieldHeightwithKeyboard = (self.textfieldHeightwithKeyboard - verticalSafeAreaInset) - keyboardFrame!.height
+        let textfieldHeightwithKeyboard = (self.textfieldHeightwithKeyboard - verticalSafeAreaInset) -  keyboardFrame!.height
         
         UIView.animate(withDuration: keyboardDuration!) {
             self.textfieldHeightConstraint?.constant = textfieldHeightwithKeyboard
@@ -128,6 +119,11 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         }
     }
     
+   override func viewWillAppear(_ animated: Bool) {
+      NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -136,7 +132,6 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
 }
 
 extension AddNewNoteController {
-    
     override var inputAccessoryView: UIView? {
         get {
             inputAccesssoryToolView.hideBackground()

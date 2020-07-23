@@ -11,7 +11,7 @@ protocol noteListViewDelegate: AnyObject {
     func handleDidSelectRow()
 }
 
-class NotesListView: UITableView, UITableViewDelegate, UITableViewDataSource {
+class NotesListTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     weak var noteListDelegate: noteListViewDelegate?
     let cellId = "CellID"
     var searching = false

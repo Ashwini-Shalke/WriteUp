@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FSCalendar
+
 
 protocol homeDelegate: AnyObject{
     func handleSignOut()
@@ -23,8 +23,8 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate {
         return nb
     }()
     
-   lazy var noteListView: NotesListView = {
-       var noteView = NotesListView()
+   lazy var noteListView: NotesListTableView = {
+       var noteView = NotesListTableView()
         noteView.noteListDelegate = self
         return noteView
     }()
@@ -50,18 +50,25 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate {
         noteListView.anchor(top: calendar.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0) ,size: CGSize(width: 0, height: 500))
         
          profileButton.addTarget(self, action: #selector(handleProfileButton), for: UIControl.Event.touchUpInside)
+        
+        #if DEVELOPMENT
+                   print("DEV")
+               #else
+                   print("prod")
+               #endif
     }
     
     func setupNav(){
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.topItem?.title = Constant.HomeSC.barLabel
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemIndigo, NSAttributedString.Key.font: UIFont().appNavFont()]
-        navigationController?.navigationItem.largeTitleDisplayMode = .automatic
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemIndigo, NSAttributedString.Key.font: UIFont(name: "MarkerFelt-Thin", size: 34)!]
+        navigationController?.navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
         navigationController?.navigationBar.tintColor = UIColor.systemPink
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemPink,NSAttributedString.Key.font: UIFont().navLink()]
         
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.shadowImage = UIImage()      
     }
     
     @objc func handleProfileButton(){
@@ -88,6 +95,7 @@ extension HomeViewController: NoteBarDelegate, noteListViewDelegate {
     }
   
     func handleDidSelectRow() {
+//        let calEdit = TestCal()
         let editNoteView = EditNoteScreen()
         navigationController?.pushViewController(editNoteView, animated: true)
     }

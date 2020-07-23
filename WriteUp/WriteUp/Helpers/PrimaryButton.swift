@@ -34,7 +34,7 @@ class OnboardingButton: UIButton {
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.setTitleColor(UIColor.darkGray, for: .normal)
-        self.titleLabel?.font = UIFont().onboardingbuttonTitleFont()
+        self.titleLabel?.font = UIFont().formControlTitle(size: 20)
         self.setTitle(titletext, for: .normal)
     }
     

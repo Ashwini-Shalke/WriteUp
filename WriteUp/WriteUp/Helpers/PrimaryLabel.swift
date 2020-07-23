@@ -12,7 +12,7 @@ class PrimaryLabel: UILabel {
     init(labelName: String) {
         super.init(frame: .zero)
         self.text = labelName
-        self.font = UIFont().appLabelTitleFont()
+        self.font = UIFont().formControlTitle()
         self.backgroundColor = .white
         self.adjustsFontSizeToFitWidth = true
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -34,7 +34,7 @@ class NoteBarLabel: UILabel {
     init(labelName: String) {
         super.init(frame: .zero)
         self.text = labelName
-        self.font = UIFont().appSubTitleFont(size: 22)
+        self.font = UIFont().formControlTitle(size: 20)
         self.backgroundColor = .white
         self.adjustsFontSizeToFitWidth = true
         self.translatesAutoresizingMaskIntoConstraints = false

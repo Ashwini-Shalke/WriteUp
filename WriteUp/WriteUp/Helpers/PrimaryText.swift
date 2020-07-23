@@ -21,6 +21,7 @@ class PrimaryTextField: UITextField {
         self.leftView = paddingView
         self.leftViewMode = UITextField.ViewMode.always
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.font = UIFont().textInput()
     }
     
     

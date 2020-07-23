@@ -32,7 +32,7 @@ class NotesListCell: UITableViewCell {
     let noteTitlelabel: UILabel = {
         let title = UILabel()
         title.text = "My plans for weekend"
-        title.font = UIFont.systemFont(ofSize: 18)
+        title.font = UIFont().itemTitle()
         title.textColor = UIColor.black
         return title
     }()
@@ -42,11 +42,10 @@ class NotesListCell: UITableViewCell {
         label.text = "Top things to see during hoildays in HongKong and many other places"
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 2
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont().itemDesc()
         label.textColor = UIColor.darkGray
         return label
     }()
-    
     
      let roundColorBar : UIButton = {
         let button = UIButton(type: .system)
@@ -60,7 +59,7 @@ class NotesListCell: UITableViewCell {
     let dateLabel: UILabel = {
         let label = UILabel()
         label.text = "20/05/20"
-        label.font = UIFont.systemFont(ofSize: 10)
+        label.font = UIFont().tabBarTitle()
         label.textColor = UIColor.darkGray
         return label
     }()
