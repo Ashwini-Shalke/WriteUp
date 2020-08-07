@@ -31,6 +31,8 @@
 		3333CE022445CD8100E6EF3B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333CE012445CD8100E6EF3B /* HomeViewController.swift */; };
 		33348D0F2472A5C3002093B8 /* PrimaryBarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33348D0E2472A5C3002093B8 /* PrimaryBarLabel.swift */; };
 		3351F705247B8C7D0041C3CC /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3351F704247B8C7D0041C3CC /* ColorPickerView.swift */; };
+		335324B024DC533A008A5D3D /* ActivityBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335324AF24DC533A008A5D3D /* ActivityBar.swift */; };
+		335324B124DC533A008A5D3D /* ActivityBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335324AF24DC533A008A5D3D /* ActivityBar.swift */; };
 		3372E5F224471444009D3983 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E5F124471444009D3983 /* Extension.swift */; };
 		3372E608244DEF9D009D3983 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E607244DEF9D009D3983 /* StringConstants.swift */; };
 		3372E60D244ED71D009D3983 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E60C244ED71D009D3983 /* RootViewController.swift */; };
@@ -104,6 +106,7 @@
 		3333CE032445DD8E00E6EF3B /* WriteUp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WriteUp.entitlements; sourceTree = "<group>"; };
 		33348D0E2472A5C3002093B8 /* PrimaryBarLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryBarLabel.swift; sourceTree = "<group>"; };
 		3351F704247B8C7D0041C3CC /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
+		335324AF24DC533A008A5D3D /* ActivityBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityBar.swift; sourceTree = "<group>"; };
 		3372E5F124471444009D3983 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		3372E607244DEF9D009D3983 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		3372E60C244ED71D009D3983 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -196,6 +199,7 @@
 		3333CDFE2445CC0900E6EF3B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				335324AF24DC533A008A5D3D /* ActivityBar.swift */,
 				332D45FC246142660078BEA2 /* ProfileDetail.swift */,
 				33DBC320246EB50100E6462A /* Calendar.swift */,
 				33329B44246D4AF300C40379 /* NoteBarCell.swift */,
@@ -453,6 +457,7 @@
 				332D81832475276000944CA5 /* NotesListView.swift in Sources */,
 				332D818B2477E1DF00944CA5 /* NoteListViewCell.swift in Sources */,
 				3333CE002445CC3B00E6EF3B /* User.swift in Sources */,
+				335324B024DC533A008A5D3D /* ActivityBar.swift in Sources */,
 				3333CDEE2445CB7A00E6EF3B /* SignInViewController.swift in Sources */,
 				3333CE022445CD8100E6EF3B /* HomeViewController.swift in Sources */,
 				332D45FD246142660078BEA2 /* ProfileDetail.swift in Sources */,
@@ -488,6 +493,7 @@
 				33FB4EE124B843570079B84C /* NotesListView.swift in Sources */,
 				33FB4EE224B843570079B84C /* NoteListViewCell.swift in Sources */,
 				33FB4EE324B843570079B84C /* User.swift in Sources */,
+				335324B124DC533A008A5D3D /* ActivityBar.swift in Sources */,
 				33FB4EE424B843570079B84C /* SignInViewController.swift in Sources */,
 				33FB4EE524B843570079B84C /* HomeViewController.swift in Sources */,
 				33FB4EE624B843570079B84C /* ProfileDetail.swift in Sources */,

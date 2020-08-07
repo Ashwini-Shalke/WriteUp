@@ -67,7 +67,8 @@ class NoteCell: BaseCell {
     let noteLabel = NoteBarLabel(labelName: "note1")
     override func setup() {
         super.setup()
-        backgroundColor = UIColor().notecellColor()
+        backgroundColor = Constant.SecondaryColor
+        
         addSubview(noteLabel)
         noteLabel.textAlignment = .center
         noteLabel.font = UIFont().tabBarTitle()

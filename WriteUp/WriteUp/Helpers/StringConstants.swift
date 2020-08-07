@@ -14,15 +14,15 @@ struct Constant {
     struct Pages {
         static let firstPageImageName = "Page1"
         static let firstPageTitle = "Join use today in our fun and games!"
-        static let firstPageDescripation = "Are you ready for loads and loads of fun? Don't wait any longer! We hope to see you in our stores soon."
+        static let firstPageDescription = "Are you ready for loads and loads of fun? Don't wait any longer! We hope to see you in our stores soon."
         
         static let secondPageImageName = "Page2"
         static let secondPageTitle = "Subscribe and get coupons on our daily events"
-        static let secondPageDescripation = "Get notified of the savings immediately when we announce them on our website. Make sure to also give us any feedback you have."
+        static let secondPageDescription = "Get notified of the savings immediately when we announce them on our website. Make sure to also give us any feedback you have."
         
         static let thirdPageImageName = "Page3"
         static let thirdPageTitle = "leaf_third"
-        static let thirdPageDescripation = "Need to add something"
+        static let thirdPageDescription = "Need to add something"
                 
         static let nextButtonTitle = "NEXT"
         static let prevButtonTitle = "PREV"
@@ -42,9 +42,9 @@ struct Constant {
     
     //MARK: ProfileLauncher Screen
     struct ProfileSC {
-        static let Labelheight = CGSize(width: 0, height: 32)
-        static let TextFieldheight = CGSize(width: 0, height: 37)
-        static let signoutButtonTitle = "Sign out"
+        static let labelHeight = CGSize(width: 0, height: 32)
+        static let textfieldHeight = CGSize(width: 0, height: 37)
+        static let signOutButtonTitle = "Sign out"
         static let placeholderImageName = "placeholder_photo"
         static let nameLabel = "Name"
         static let emailLabel = "Email"
@@ -82,6 +82,9 @@ struct Constant {
     }
     
     
+    
+    static let MainColor: UIColor = UIColor(red: 137/255, green: 70/255, blue: 157/255, alpha: 1.0)
+    static let SecondaryColor: UIColor = UIColor(red: 240/255, green: 111/255, blue: 56/255, alpha: 1.0)
 }
 
 

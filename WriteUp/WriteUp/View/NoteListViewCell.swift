@@ -11,7 +11,7 @@ class NotesListCell: UITableViewCell {
     var note: Note? {
         didSet {
             if let title = note?.title {
-                 noteTitlelabel.text = title
+                 noteTitleLabel.text = title
             }
             if let description = note?.description {
                 noteDescription.text = description
@@ -25,11 +25,17 @@ class NotesListCell: UITableViewCell {
     let customView: UIView = {
         let cv = UIView()
         cv.backgroundColor = .systemGray6
-        cv.layer.cornerRadius = 10
+        cv.layer.shadowColor = Constant.MainColor.cgColor
+        cv.layer.shadowOpacity = 0.5
+        cv.layer.shadowOffset = .zero
+        cv.layer.shadowRadius = 2 
+        
+//        cv.layer.backgroundColor = Constant.SecondaryColor.cgColor
+        cv.layer.cornerRadius = 5
         return cv
     }()
     
-    let noteTitlelabel: UILabel = {
+    let noteTitleLabel: UILabel = {
         let title = UILabel()
         title.text = "My plans for weekend"
         title.font = UIFont().itemTitle()
@@ -49,9 +55,9 @@ class NotesListCell: UITableViewCell {
     
      let roundColorBar : UIButton = {
         let button = UIButton(type: .system)
-        button.frame = CGRect(x: 0, y: 0, width: 15, height: 0)
+        button.frame = CGRect(x: 0, y: 0, width: 12, height: 0)
         button.layer.cornerRadius = button.frame.width/2
-        button.backgroundColor = UIColor.systemRed
+        button.backgroundColor = Constant.SecondaryColor
         button.isUserInteractionEnabled = false
         return button
     }()
@@ -71,14 +77,14 @@ class NotesListCell: UITableViewCell {
         customView.addSubview(roundColorBar)
         roundColorBar.anchor(top: customView.topAnchor, leading: customView.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 12, left: 12, bottom: 0, right: 0),size: CGSize(width: 12, height: 12))
         
-        customView.addSubview(noteTitlelabel)
-        noteTitlelabel.anchor(top: customView.topAnchor, leading: roundColorBar.trailingAnchor, bottom: nil, trailing: customView.trailingAnchor, padding: UIEdgeInsets(top: 8 , left: 8, bottom: 0, right: -75),size: CGSize(width: 0, height: 20))
+        customView.addSubview(noteTitleLabel)
+        noteTitleLabel.anchor(top: customView.topAnchor, leading: roundColorBar.trailingAnchor, bottom: nil, trailing: customView.trailingAnchor, padding: UIEdgeInsets(top: 8 , left: 8, bottom: 0, right: -75),size: CGSize(width: 0, height: 20))
         
         customView.addSubview(noteDescription)
-        noteDescription.anchor(top: noteTitlelabel.bottomAnchor, leading: customView.leadingAnchor, bottom: nil, trailing: customView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 12, bottom: 0, right: -10),size: CGSize(width: 0, height: 34))
+        noteDescription.anchor(top: noteTitleLabel.bottomAnchor, leading: customView.leadingAnchor, bottom: nil, trailing: customView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 12, bottom: 0, right: -10),size: CGSize(width: 0, height: 34))
         
         customView.addSubview(dateLabel)
-        dateLabel.anchor(top: customView.topAnchor, leading: noteTitlelabel.trailingAnchor, bottom: nil, trailing: customView.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 12, bottom: 0, right: -10), size: CGSize(width: 0, height: 14))
+        dateLabel.anchor(top: customView.topAnchor, leading: noteTitleLabel.trailingAnchor, bottom: nil, trailing: customView.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 12, bottom: 0, right: -10), size: CGSize(width: 0, height: 14))
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

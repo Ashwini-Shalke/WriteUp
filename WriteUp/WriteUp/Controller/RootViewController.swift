@@ -7,17 +7,17 @@
 //
 import UIKit
 
-class RootViewController: UIViewController,signInDelegate,homeDelegate {
+class RootViewController: UIViewController,signInDelegate,homeDelegate{
     lazy var homeViewController: HomeViewController = {
-        var hc = HomeViewController()
-        hc.homeDelegate = self
-        return hc
+        var homeController = HomeViewController()
+        homeController.homeDelegate = self
+        return homeController
     }()
     
-    lazy var signinViewController : SignInViewController = {
-        var sc = SignInViewController()
-        sc.signInDelegate = self
-        return sc
+    lazy var signInViewController : SignInViewController = {
+        var signInController = SignInViewController()
+        signInController.signInDelegate = self
+        return signInController
     }()
     
     override func viewDidLoad() {
@@ -32,8 +32,8 @@ class RootViewController: UIViewController,signInDelegate,homeDelegate {
     
     func handleChild(){
         if isSignedIn() {
-            if children == [signinViewController] {
-                signinViewController.remove()
+            if children == [signInViewController] {
+                signInViewController.remove()
             }
             self.addChild(homeViewController)
             setupLayout(homeViewController)
@@ -41,8 +41,8 @@ class RootViewController: UIViewController,signInDelegate,homeDelegate {
             if children == [homeViewController] {
                 homeViewController.remove()
             }
-            self.addChild(signinViewController)
-            setupLayout(signinViewController)
+            self.addChild(signInViewController)
+            setupLayout(signInViewController)
         }
     }
     

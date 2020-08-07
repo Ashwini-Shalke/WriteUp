@@ -21,7 +21,7 @@ class ShowAllNotesController: UIViewController {
         bar.showsCancelButton = true
         bar.delegate = self
         bar.backgroundColor = .white
-        bar.tintColor = .systemPink
+        bar.tintColor = Constant.SecondaryColor
         bar.backgroundImage = UIImage()
         return bar
     }()

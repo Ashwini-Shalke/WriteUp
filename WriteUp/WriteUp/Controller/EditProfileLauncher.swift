@@ -21,7 +21,7 @@ class EditProfileLauncher: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDone))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.systemPink
+        navigationItem.rightBarButtonItem?.tintColor = Constant.SecondaryColor
        
         
         view.addSubview(profileDetail)

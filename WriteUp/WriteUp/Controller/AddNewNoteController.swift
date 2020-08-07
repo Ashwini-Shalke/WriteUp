@@ -10,10 +10,10 @@ import UIKit
 
 class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarDelegate {
     var textfieldHeightConstraint:NSLayoutConstraint?
-    var textfieldHeightwithKeyboard = (UIScreen.main.bounds.height)
-    var texfieldHeightwithoutKeyboard = (UIScreen.main.bounds.height - 50)
+    var textfieldHeightWithKeyboard = (UIScreen.main.bounds.height)
+    var textfieldHeightWithoutKeyboard = (UIScreen.main.bounds.height - 50)
     var verticalSafeAreaInset = CGFloat()
-    let nextButton = OnboardingButton(titletext: Constant.AddNote.nextButtonTitle)
+    let nextButton = OnboardingButton(titleText: Constant.AddNote.nextButtonTitle)
 
     lazy var inputAccesssoryToolView: BottomToolBar = {
         var  toolView = BottomToolBar()
@@ -33,7 +33,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         textview.allowsEditingTextAttributes = true
         textview.font = UIFont().textInput()
         textview.keyboardDismissMode = .interactive
-        textview.backgroundColor = .green
+        textview.backgroundColor = .white
         return textview
     }()
     
@@ -41,7 +41,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         let label = UILabel()
         label.text = "10 June 2020 at 11:21 AM"
         label.font = UIFont().formControlSegmented()
-        label.textColor = UIColor.systemPink
+        label.textColor = Constant.SecondaryColor
         label.translatesAutoresizingMaskIntoConstraints = false
         label.frame = CGRect(x: 0, y: 0, width: 154, height: 0)
         return label
@@ -55,7 +55,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         }
         view.addSubview(textView)
         textView.anchor(top: view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor,bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 0,left: 16,bottom: 0,right: -16))
-         textfieldHeightConstraint = NSLayoutConstraint(item: textView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: texfieldHeightwithoutKeyboard - verticalSafeAreaInset)
+         textfieldHeightConstraint = NSLayoutConstraint(item: textView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: textfieldHeightWithoutKeyboard - verticalSafeAreaInset)
         NSLayoutConstraint.activate([ textfieldHeightConstraint! ])
         view.layer.layoutIfNeeded()
     }
@@ -68,7 +68,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         navigationItem.largeTitleDisplayMode = .never
         
         self.navigationItem.setHidesBackButton(false, animated: false)
-        nextButton.setTitleColor(.systemPink, for: .normal)
+        nextButton.setTitleColor(Constant.MainColor, for: .normal)
         nextButton.addTarget(self, action: #selector(handleNewNote), for: .touchUpInside)
         textView.delegate = self
         
@@ -103,16 +103,16 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
         let keyboardDuration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
                 
-        let textfieldHeightwithKeyboard = (self.textfieldHeightwithKeyboard - verticalSafeAreaInset) -  keyboardFrame!.height
+        let textfieldHeightWithKeyboard = (self.textfieldHeightWithKeyboard - verticalSafeAreaInset) -  keyboardFrame!.height
         
         UIView.animate(withDuration: keyboardDuration!) {
-            self.textfieldHeightConstraint?.constant = textfieldHeightwithKeyboard
+            self.textfieldHeightConstraint?.constant = textfieldHeightWithKeyboard
             self.view.layoutIfNeeded()
         }
     }
     
     @objc func keyboardWillHide(notification: NSNotification){
-        self.textfieldHeightConstraint?.constant = self.texfieldHeightwithoutKeyboard - self.verticalSafeAreaInset
+        self.textfieldHeightConstraint?.constant = self.textfieldHeightWithoutKeyboard - self.verticalSafeAreaInset
         let keyboardDuration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
         UIView.animate(withDuration: keyboardDuration!) {
             self.view.layoutIfNeeded()

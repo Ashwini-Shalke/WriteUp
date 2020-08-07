@@ -20,12 +20,11 @@ class BottomToolBar: UIToolbar {
     
     func setupBarButtons(){
         toolBar.frame = CGRect(x: 0.0,y: 0.0,width: UIScreen.main.bounds.size.width,height: 44.0)
-        
         let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let trashButton = UIBarButtonItem(image: UIImage(named: "trash"), style: .plain, target:self, action: #selector(handleTrashButton))
-        trashButton.tintColor = .systemPink
+        trashButton.tintColor = Constant.SecondaryColor
         let clearButton = UIBarButtonItem(title: "clear", style: .plain, target: self, action: #selector(handleClearButton))
-        clearButton.tintColor = .systemPink
+        clearButton.tintColor = Constant.SecondaryColor
         toolBar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
         toolBar.setShadowImage(UIImage(), forToolbarPosition: UIBarPosition.any)
         toolBar.setItems([trashButton,flexible, clearButton], animated: false)

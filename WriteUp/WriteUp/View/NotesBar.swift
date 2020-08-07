@@ -12,41 +12,28 @@ protocol NoteBarDelegate: AnyObject {
     func showAllNotes()
 }
 
-class NotesBar: BaseView,HeaderNoteDelegate {
-    weak var notedelegate: NoteBarDelegate?
-    
+class NotesBar: BaseView,HeaderNoteDelegate,ActivityDelegate {
     let cellId = "CellID"
     let headerID = "HeaderID"
-    let notesLabel = NoteBarLabel(labelName: Constant.NoteBar.notesLabel)
-    let showAllButton = OnboardingButton(titletext: Constant.NoteBar.showAllButton)
+    weak var noteDelegate: NoteBarDelegate?
+    
+    lazy var activityBar: ActivityBar = {
+       var bar = ActivityBar()
+        bar.activityDelegate = self
+       return bar
+    }()
     
     override func setup() {
         super.setup()
-        addSubview(topView)
-        topView.anchor(top: safeAreaLayoutGuide.topAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor,padding:UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 25))
-        
-        topView.addSubview(notesLabel)
-        notesLabel.translatesAutoresizingMaskIntoConstraints = false
-        notesLabel.anchor(top: topView.topAnchor, leading: leadingAnchor, bottom: topView.bottomAnchor, trailing: nil)
-        
-        topView.addSubview(showAllButton)
-        showAllButton.isUserInteractionEnabled = true
-        showAllButton.setTitleColor(.systemPink, for: .normal)
-        
-        showAllButton.addTarget(self, action: #selector(handleShowAll), for: .touchUpInside)
-        showAllButton.anchor(top: topView.topAnchor, leading: notesLabel.trailingAnchor, bottom: topView.bottomAnchor, trailing: trailingAnchor,padding: UIEdgeInsets(top: 0, left: 125, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
-        
+        addSubview(activityBar)
+        activityBar.anchor(top: safeAreaLayoutGuide.topAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor,padding:UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 25))
+
         addSubview(collectionView)
         collectionView.register(NoteCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.register(HeaderNoteBar.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
-        collectionView.anchor(top: topView.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, trailing: safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0))
+        collectionView.anchor(top: activityBar.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, trailing: safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0))
     }
-    
-    let topView: UIView = {
-       let tv = UIView()
-        return tv
-    }()
-    
+
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true
@@ -58,13 +45,13 @@ class NotesBar: BaseView,HeaderNoteDelegate {
         cv.bounces = false
         return cv
     }()
-    
-    @objc func handleShowAll(){
-        notedelegate?.showAllNotes()
+ 
+    func addNote() {
+        noteDelegate?.showAddNote()
     }
     
-    func addNote() {
-        notedelegate?.showAddNote()
+    func showAllNote() {
+       noteDelegate?.showAllNotes()
     }
 }
 
@@ -95,7 +82,6 @@ extension NotesBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: 102, height: 145)
     }
-   
 }
 
 

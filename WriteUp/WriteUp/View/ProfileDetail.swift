@@ -43,9 +43,11 @@ class ProfileDetail: BaseView,EditProfileDelegate{
     let topViewContainer : UIView = {
         let topView = UIView()
         topView.translatesAutoresizingMaskIntoConstraints = false
-        topView.backgroundColor = UIColor.systemYellow
+//        topView.backgroundColor = Constant.SecondaryColor
         return topView
     }()
+    
+ 
     
     let placeHolderButton: UIButton = {
         let button = UIButton()
@@ -69,37 +71,38 @@ class ProfileDetail: BaseView,EditProfileDelegate{
     func constructBottomView() {
         let nameLabel = PrimaryLabel(labelName: Constant.ProfileSC.nameLabel)
         nameView.addSubview(nameLabel)
-        nameLabel.anchor(top: nameView.topAnchor, leading: nameView.leadingAnchor, bottom: nil, trailing: nameView.trailingAnchor, size: Constant.ProfileSC.Labelheight)
+        nameLabel.anchor(top: nameView.topAnchor, leading: nameView.leadingAnchor, bottom: nil, trailing: nameView.trailingAnchor, size: Constant.ProfileSC.labelHeight)
         
         nameView.addSubview(nameTextField)
-        nameTextField.anchor(top: nameLabel.bottomAnchor, leading: nameView.leadingAnchor, bottom: nil, trailing: nameView.trailingAnchor,size: Constant.ProfileSC.TextFieldheight)
+        nameTextField.anchor(top: nameLabel.bottomAnchor, leading: nameView.leadingAnchor, bottom: nil, trailing: nameView.trailingAnchor,size: Constant.ProfileSC.textfieldHeight)
         
         let emailLabel = PrimaryLabel(labelName: Constant.ProfileSC.emailLabel)
         emailView.addSubview(emailLabel)
-        emailLabel.anchor(top: emailView.topAnchor,leading: emailView.leadingAnchor, bottom: nil, trailing: emailView.trailingAnchor,size: Constant.ProfileSC.Labelheight)
+        emailLabel.anchor(top: emailView.topAnchor,leading: emailView.leadingAnchor, bottom: nil, trailing: emailView.trailingAnchor,size: Constant.ProfileSC.labelHeight)
         
        
         emailView.addSubview(emailTextField)
-        emailTextField.anchor(top: emailLabel.bottomAnchor, leading: emailView.leadingAnchor, bottom: nil, trailing: emailView.trailingAnchor,size: Constant.ProfileSC.TextFieldheight)
+        emailTextField.anchor(top: emailLabel.bottomAnchor, leading: emailView.leadingAnchor, bottom: nil, trailing: emailView.trailingAnchor,size: Constant.ProfileSC.textfieldHeight)
         
         let phoneLabel = PrimaryLabel(labelName: Constant.ProfileSC.phoneLabel)
         phoneView.addSubview(phoneLabel)
-        phoneLabel.anchor(top: phoneView.topAnchor, leading: phoneView.leadingAnchor, bottom: nil, trailing: phoneView.trailingAnchor, size: Constant.ProfileSC.Labelheight)
+        phoneLabel.anchor(top: phoneView.topAnchor, leading: phoneView.leadingAnchor, bottom: nil, trailing: phoneView.trailingAnchor, size: Constant.ProfileSC.labelHeight)
         
         phoneView.addSubview(phoneTextField)
-        phoneTextField.anchor(top: phoneLabel.bottomAnchor, leading: phoneView.leadingAnchor, bottom: nil,trailing: phoneView.trailingAnchor, size: Constant.ProfileSC.TextFieldheight)
+        phoneTextField.anchor(top: phoneLabel.bottomAnchor, leading: phoneView.leadingAnchor, bottom: nil,trailing: phoneView.trailingAnchor, size: Constant.ProfileSC.textfieldHeight)
         
         let noteLabel = PrimaryLabel(labelName: Constant.ProfileSC.noteLabel)
         noteView.addSubview(noteLabel)
-        noteLabel.anchor(top: noteView.topAnchor,leading: noteView.leadingAnchor, bottom: nil, trailing: noteView.trailingAnchor,size: Constant.ProfileSC.Labelheight)
+        noteLabel.anchor(top: noteView.topAnchor,leading: noteView.leadingAnchor, bottom: nil, trailing: noteView.trailingAnchor,size: Constant.ProfileSC.labelHeight)
         
         noteView.addSubview(noteTextField)
-        noteTextField.anchor(top: noteLabel.bottomAnchor, leading: noteView.leadingAnchor, bottom: nil, trailing: noteView.trailingAnchor, size: Constant.ProfileSC.TextFieldheight)
+        noteTextField.anchor(top: noteLabel.bottomAnchor, leading: noteView.leadingAnchor, bottom: nil, trailing: noteView.trailingAnchor, size: Constant.ProfileSC.textfieldHeight)
     }
     
     func setupProfileDetails(){
         addSubview(topViewContainer)
         topViewContainer.anchor(top: safeAreaLayoutGuide.topAnchor , leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor,size: CGSize(width: 0, height: 200))
+   
         
         topViewContainer.addSubview(placeHolderButton)
         placeHolderButton.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, size: CGSize(width: 120, height: 120))

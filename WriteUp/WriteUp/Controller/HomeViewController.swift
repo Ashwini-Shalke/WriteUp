@@ -8,72 +8,98 @@
 
 import UIKit
 
-
 protocol homeDelegate: AnyObject{
     func handleSignOut()
 }
 
-class HomeViewController: UIViewController,ProfileLauncherDelegate {
+class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeightDelegate{
     weak var homeDelegate : homeDelegate?
-    let calendar = Calendar()
-        
+    var calendarHeightConstraint:NSLayoutConstraint?
+
+    lazy var calendar:Calendar = {
+        let cal = Calendar()
+        cal.calendarDelegate = self
+        return cal
+    }()
+
     lazy var notesBar:NotesBar = {
-        let nb = NotesBar()
-        nb.notedelegate = self
-        return nb
+        let noteBar = NotesBar()
+        noteBar.noteDelegate = self
+        return noteBar
     }()
     
-   lazy var noteListView: NotesListTableView = {
-       var noteView = NotesListTableView()
+    lazy var noteListView: NotesListTableView = {
+        var noteView = NotesListTableView()
         noteView.noteListDelegate = self
         return noteView
+    }()
+    
+    lazy var activityBar: ActivityBar = {
+       var bar = ActivityBar()
+        bar.activityDelegate = self
+        return bar
     }()
     
     private let profileButton : UIButton = {
         let button = UIButton(type: .system)
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 0)
         button.layer.cornerRadius = button.frame.width/2
-        button.backgroundColor = UIColor.systemPink
+        button.backgroundColor = Constant.SecondaryColor
         return button
     }()
-   
+    
+    func sendCalendarHeight(height: CGFloat?) {
+        UIView.animate(withDuration: 0.1, delay: 0.1, options: .curveEaseInOut, animations: {
+            self.calendarHeightConstraint?.constant = height ?? 0
+        }, completion: nil)
+    }
+    
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
         view.addSubview(notesBar)
         setupNav()
         notesBar.anchor(top:view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16), size: CGSize(width: 0, height: 200))
-
+      
         view.addSubview(calendar)
-        calendar.anchor(top: notesBar.bottomAnchor, leading: nil, bottom: nil, trailing: nil ,padding: UIEdgeInsets(top: 15, left:  5, bottom: 0, right: -5),size: CGSize(width: view.frame.width, height: 300))
+        calendar.anchor(top: notesBar.bottomAnchor, leading: nil, bottom: nil, trailing: nil ,padding: UIEdgeInsets(top: 0, left:  5, bottom: 0, right: -5))
+        calendar.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
+        calendarHeightConstraint = NSLayoutConstraint(item: calendar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 300)
+        NSLayoutConstraint.activate([calendarHeightConstraint!])
+        view.layer.layoutIfNeeded()
+
+        view.addSubview(activityBar)
+        activityBar.anchor(top: calendar.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding:UIEdgeInsets(top: 5, left: 16, bottom: 0, right: -16),size: CGSize(width: 0, height: 25))
 
         view.addSubview(noteListView)
-        noteListView.anchor(top: calendar.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0) ,size: CGSize(width: 0, height: 500))
-        
-         profileButton.addTarget(self, action: #selector(handleProfileButton), for: UIControl.Event.touchUpInside)
+        noteListView.anchor(top: activityBar.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0) ,size: CGSize(width: 0, height: 500))
+
+        profileButton.addTarget(self, action: #selector(handleProfileButton), for: UIControl.Event.touchUpInside)
         
         #if DEVELOPMENT
-                   print("DEV")
-               #else
-                   print("prod")
-               #endif
+        print("DEV")
+        #else
+        print("prod")
+        #endif
+        
     }
     
     func setupNav(){
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.topItem?.title = Constant.HomeSC.barLabel
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemIndigo, NSAttributedString.Key.font: UIFont(name: "MarkerFelt-Thin", size: 34)!]
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: Constant.MainColor, NSAttributedString.Key.font: UIFont(name: "MarkerFelt-Thin", size: 34)!]
         navigationController?.navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
-        navigationController?.navigationBar.tintColor = UIColor.systemPink
+        navigationController?.navigationBar.tintColor = Constant.MainColor
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemPink,NSAttributedString.Key.font: UIFont().navLink()]
         
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()      
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
     }
     
     @objc func handleProfileButton(){
         let profileLauncher = ProfileLauncher()
-        profileLauncher.profiledelegate = self
+        profileLauncher.profileDelegate = self
         navigationController?.pushViewController(profileLauncher, animated: true)
     }
     
@@ -83,7 +109,11 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate {
     }
 }
 
-extension HomeViewController: NoteBarDelegate, noteListViewDelegate {
+extension HomeViewController: NoteBarDelegate,noteListViewDelegate,ActivityDelegate{
+    func showAllNote() {
+       showAllNotes()
+    }
+    
     func showAddNote() {
         let addNoteView = AddNewNoteController()
         navigationController?.pushViewController(addNoteView, animated: true)
@@ -93,9 +123,9 @@ extension HomeViewController: NoteBarDelegate, noteListViewDelegate {
         let showAllNotesView = ShowAllNotesController()
         navigationController?.pushViewController(showAllNotesView, animated: true)
     }
-  
+
     func handleDidSelectRow() {
-//        let calEdit = TestCal()
+        //        let calEdit = TestCal()
         let editNoteView = EditNoteScreen()
         navigationController?.pushViewController(editNoteView, animated: true)
     }

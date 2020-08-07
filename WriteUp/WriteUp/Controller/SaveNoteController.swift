@@ -26,28 +26,28 @@ class SaveNoteController: UIViewController {
         
     func contructView(){
         titleView.addSubview(titleLabel)
-        titleLabel.anchor(top: titleView.topAnchor, leading: titleView.leadingAnchor, bottom: nil, trailing: titleView.trailingAnchor, size: Constant.ProfileSC.Labelheight)
+        titleLabel.anchor(top: titleView.topAnchor, leading: titleView.leadingAnchor, bottom: nil, trailing: titleView.trailingAnchor, size: Constant.ProfileSC.labelHeight)
         
         titleView.addSubview(titleTextField)
         titleTextField.delegate = self
         titleTextField.isUserInteractionEnabled = true
-        titleTextField.anchor(top: titleLabel.bottomAnchor, leading: titleView.leadingAnchor, bottom: nil, trailing: titleView.trailingAnchor,size: Constant.ProfileSC.TextFieldheight)
+        titleTextField.anchor(top: titleLabel.bottomAnchor, leading: titleView.leadingAnchor, bottom: nil, trailing: titleView.trailingAnchor,size: Constant.ProfileSC.textfieldHeight)
         
         summaryView.addSubview(summaryLabel)
-        summaryLabel.anchor(top: summaryView.topAnchor,leading: summaryView.leadingAnchor, bottom: nil, trailing: summaryView.trailingAnchor,size: Constant.ProfileSC.Labelheight)
+        summaryLabel.anchor(top: summaryView.topAnchor,leading: summaryView.leadingAnchor, bottom: nil, trailing: summaryView.trailingAnchor,size: Constant.ProfileSC.labelHeight)
         
         summaryView.addSubview(summaryTextField)
         summaryTextField.delegate = self
         summaryTextField.isUserInteractionEnabled = true
-        summaryTextField.anchor(top: summaryLabel.bottomAnchor, leading: summaryView.leadingAnchor, bottom: nil, trailing: summaryView.trailingAnchor,size: Constant.ProfileSC.TextFieldheight)
+        summaryTextField.anchor(top: summaryLabel.bottomAnchor, leading: summaryView.leadingAnchor, bottom: nil, trailing: summaryView.trailingAnchor,size: Constant.ProfileSC.textfieldHeight)
         
         
         
         chooseTagView.addSubview(chooseTagLabel)
-        chooseTagLabel.anchor(top: chooseTagView.topAnchor, leading: chooseTagView.leadingAnchor, bottom: nil, trailing: chooseTagView.trailingAnchor, size: Constant.ProfileSC.Labelheight)
+        chooseTagLabel.anchor(top: chooseTagView.topAnchor, leading: chooseTagView.leadingAnchor, bottom: nil, trailing: chooseTagView.trailingAnchor, size: Constant.ProfileSC.labelHeight)
         
         chooseTagView.addSubview(colorPickerView)
-        colorPickerView.anchor(top: chooseTagLabel.bottomAnchor, leading: chooseTagView.leadingAnchor, bottom: nil, trailing: chooseTagView.trailingAnchor,size: Constant.ProfileSC.TextFieldheight)
+        colorPickerView.anchor(top: chooseTagLabel.bottomAnchor, leading: chooseTagView.leadingAnchor, bottom: nil, trailing: chooseTagView.trailingAnchor,size: Constant.ProfileSC.textfieldHeight)
     
     }
     
@@ -103,7 +103,7 @@ extension SaveNoteController: UITextFieldDelegate {
     
     func handleTitle(){
         titleTextField.text = sampleString.title
-        summaryTextField.text = sampleString.discription
+        summaryTextField.text = sampleString.description
     }
 }
 

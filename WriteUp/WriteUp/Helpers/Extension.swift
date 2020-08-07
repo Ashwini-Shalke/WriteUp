@@ -26,7 +26,7 @@ extension UserDefaults {
 }
 
 extension UIViewController {
-    func defaultPresenatationStyle(){
+    func defaultPresentationStyle(){
         modalPresentationStyle = .fullScreen
     }
 }
@@ -166,8 +166,8 @@ extension UIImagePickerController {
     func pickImage(view: UIViewController){
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = view as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
-        let actionsheet = UIAlertController(title: "Photo Source", message: "Choose a source", preferredStyle: .actionSheet)
-        actionsheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action: UIAlertAction) in
+        let actionSheet = UIAlertController(title: "Photo Source", message: "Choose a source", preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action: UIAlertAction) in
             if UIImagePickerController.isSourceTypeAvailable(.camera){
                 imagePickerController.sourceType = .camera
                 view.present(imagePickerController,animated: true, completion: nil)
@@ -175,13 +175,13 @@ extension UIImagePickerController {
             print("Camera not available")
         }))
         
-        actionsheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (action: UIAlertAction) in
+        actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (action: UIAlertAction) in
             imagePickerController.sourceType = .photoLibrary
             view.present(imagePickerController,animated: true, completion: nil)
         }))
         
-        actionsheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        view.present(actionsheet,animated: true, completion: nil)
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        view.present(actionSheet,animated: true, completion: nil)
     }
 }
 
@@ -196,7 +196,7 @@ extension String {
         return self.lines.first ?? self
     }
     
-    var discription: String {
+    var description: String {
         let string = self.replacingOccurrences(of: self.title, with: "")
         let desc = string.trimmingCharacters(in: .whitespacesAndNewlines)
         return desc

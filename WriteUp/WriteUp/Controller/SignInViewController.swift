@@ -18,7 +18,7 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.systemPink
+        view.backgroundColor = UIColor.white
         setupAutolayout()
     }
     
@@ -41,9 +41,8 @@ class SignInViewController: UIViewController {
     }()
     
     let appleButton: ASAuthorizationAppleIDButton = {
-        let button = ASAuthorizationAppleIDButton(type: .signIn, style: .white)
-        button.cornerRadius = 25
-        button.layer.shadowColor = UIColor.black.cgColor
+        let button = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
+        button.cornerRadius = 5
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleTapAppleButton), for: .touchUpInside)
         return button
@@ -54,7 +53,7 @@ class SignInViewController: UIViewController {
         logoImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 199, left: 69, bottom: -199, right: -69))
       
         view.addSubview(appleButton)
-        appleButton.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,trailing: view.safeAreaLayoutGuide.trailingAnchor, padding:  UIEdgeInsets(top: 0, left: 28, bottom: -30, right: -28), size: CGSize(width: 0, height: 44))
+        appleButton.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,trailing: view.safeAreaLayoutGuide.trailingAnchor, padding:  UIEdgeInsets(top: 0, left: 16, bottom: -30, right: -16), size: CGSize(width: 0, height: 44))
     }
     
     @objc func handleTapAppleButton(){

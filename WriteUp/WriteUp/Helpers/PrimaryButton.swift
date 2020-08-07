@@ -11,14 +11,14 @@ import UIKit
 class PrimaryButton: UIButton {
     let button = UIButton()
     
-    init(titletext: String){
+    init(titleText: String){
         super.init(frame: .zero)
-        self.backgroundColor     = UIColor.systemPink
+        self.backgroundColor     = Constant.SecondaryColor
         self.titleLabel?.font    = UIFont(name: "georgia", size: 20)
-        self.setTitle(titletext, for: .normal)
+        self.setTitle(titleText, for: .normal)
         self.setTitleColor(.white, for: .normal)
         self.layer.borderColor   = UIColor.white.cgColor
-        self.layer.cornerRadius  = 25
+        self.layer.cornerRadius  = 5
         self.layer.borderWidth   = 4.0
         self.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -30,12 +30,12 @@ class PrimaryButton: UIButton {
 
 class OnboardingButton: UIButton {
     let button = UIButton(frame: CGRect.zero)
-    init(titletext: String){
+    init(titleText: String){
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.setTitleColor(UIColor.darkGray, for: .normal)
         self.titleLabel?.font = UIFont().formControlTitle(size: 20)
-        self.setTitle(titletext, for: .normal)
+        self.setTitle(titleText, for: .normal)
     }
     
     required init?(coder: NSCoder) {
