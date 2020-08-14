@@ -9,7 +9,7 @@
 import UIKit
 
 class ShowAllNotesController: UIViewController {
-
+    
     lazy var notesListView: NotesListTableView = {
         var notesView = NotesListTableView()
         notesView.noteListDelegate = self
@@ -28,6 +28,10 @@ class ShowAllNotesController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
+    }
+    
+    func setupViews(){
         view.addSubview(searchBar)
         searchBar.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16),size: CGSize(width: 0, height: 36))
         
@@ -36,13 +40,13 @@ class ShowAllNotesController: UIViewController {
         
         view.backgroundColor = .white
         navigationItem.title = Constant.ShowAllNote.barLabel
-        
     }
 }
 
 extension ShowAllNotesController: UISearchBarDelegate, noteListViewDelegate {
     func handleDidSelectRow() {
-        let editNoteView = EditNoteScreen()
+        let editNoteView = AddNewNoteController()
+        editNoteView.context = Constant.contextName.EditScreen
         navigationController?.pushViewController(editNoteView, animated: true)
     }
     

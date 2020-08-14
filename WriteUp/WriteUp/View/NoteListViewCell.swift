@@ -29,8 +29,6 @@ class NotesListCell: UITableViewCell {
         cv.layer.shadowOpacity = 0.5
         cv.layer.shadowOffset = .zero
         cv.layer.shadowRadius = 2 
-        
-//        cv.layer.backgroundColor = Constant.SecondaryColor.cgColor
         cv.layer.cornerRadius = 5
         return cv
     }()

@@ -13,8 +13,10 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     var textfieldHeightWithKeyboard = (UIScreen.main.bounds.height)
     var textfieldHeightWithoutKeyboard = (UIScreen.main.bounds.height - 50)
     var verticalSafeAreaInset = CGFloat()
-    let nextButton = OnboardingButton(titleText: Constant.AddNote.nextButtonTitle)
-
+    let nextButton = SecondaryButton(titleText: Constant.AddNote.nextButtonTitle)
+    let saveButton = SecondaryButton(titleText: "Save")
+    var context = Constant.contextName.NewScreen
+    
     lazy var inputAccesssoryToolView: BottomToolBar = {
         var  toolView = BottomToolBar()
         toolView.toolbarDelegate = self
@@ -47,6 +49,24 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         return label
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViews()
+        setUpScreenButtons()
+    }
+    
+    func setUpScreenButtons(){
+        if context == Constant.contextName.NewScreen {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(customView: nextButton)
+            nextButton.setTitleColor(Constant.MainColor, for: .normal)
+            nextButton.addTarget(self, action: #selector(handleNewNote), for: .touchUpInside)
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
+            saveButton.setTitleColor(Constant.MainColor, for: .normal)
+            saveButton.addTarget(self, action: #selector(handleSaveNote), for: .touchUpInside)
+        }
+    }
+    
     override func viewSafeAreaInsetsDidChange() {
         if #available(iOS 11.0, *){
             verticalSafeAreaInset = self.view.safeAreaInsets.top + self.view.safeAreaInsets.bottom
@@ -55,28 +75,22 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         }
         view.addSubview(textView)
         textView.anchor(top: view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor,bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 0,left: 16,bottom: 0,right: -16))
-         textfieldHeightConstraint = NSLayoutConstraint(item: textView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: textfieldHeightWithoutKeyboard - verticalSafeAreaInset)
+        textfieldHeightConstraint = NSLayoutConstraint(item: textView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: textfieldHeightWithoutKeyboard - verticalSafeAreaInset)
         NSLayoutConstraint.activate([ textfieldHeightConstraint! ])
         view.layer.layoutIfNeeded()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func setupViews(){
         view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: nextButton)
         navigationItem.titleView = dateLabel
         navigationItem.largeTitleDisplayMode = .never
-        
         self.navigationItem.setHidesBackButton(false, animated: false)
-        nextButton.setTitleColor(Constant.MainColor, for: .normal)
-        nextButton.addTarget(self, action: #selector(handleNewNote), for: .touchUpInside)
-        textView.delegate = self
         
         view.addSubview(bottomToolBar)
         bottomToolBar.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 50, left: 0, bottom: -1, right: 0))
         bottomToolBar.hideBackground()
     }
-
+    
     func trashButton() {
         navigationController?.popViewController(animated: true)
     }
@@ -99,12 +113,15 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         navigationController?.pushViewController(saveNote, animated: true)
     }
     
+    @objc func handleSaveNote(){
+        self.view.endEditing(true)
+        navigationController?.popViewController(animated: true)
+    }
+    
     @objc func keyboardWillShow(notification: NSNotification){
         let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
         let keyboardDuration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue
-                
         let textfieldHeightWithKeyboard = (self.textfieldHeightWithKeyboard - verticalSafeAreaInset) -  keyboardFrame!.height
-        
         UIView.animate(withDuration: keyboardDuration!) {
             self.textfieldHeightConstraint?.constant = textfieldHeightWithKeyboard
             self.view.layoutIfNeeded()
@@ -119,9 +136,9 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         }
     }
     
-   override func viewWillAppear(_ animated: Bool) {
-      NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-      NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {

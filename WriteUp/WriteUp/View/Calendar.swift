@@ -23,6 +23,7 @@ class Calendar: BaseView, UIGestureRecognizerDelegate {
         let calendar = FSCalendar(frame: CGRect(x: 0, y: 0, width: 320, height: 300))
         calendar.dataSource = self
         calendar.delegate = self
+        
         addSubview(calendar)
         self.calendar = calendar
         calendar.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
@@ -60,7 +61,7 @@ class Calendar: BaseView, UIGestureRecognizerDelegate {
                 print("Swiped left")
             case UISwipeGestureRecognizer.Direction.up:
                 //[self.calendar setScope:FSCalendarScopeWeek animated:YES];
-                    self.calendar.setScope(FSCalendarScope.week, animated: true)
+                self.calendar.setScope(FSCalendarScope.week, animated: true)
                 print("Swiped up")
             default:
                 break
@@ -102,6 +103,3 @@ extension Calendar: FSCalendarDelegate, FSCalendarDataSource {
         print(dateString)
     }
 }
-
-
-

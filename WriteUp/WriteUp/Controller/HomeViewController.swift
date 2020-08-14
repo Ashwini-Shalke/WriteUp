@@ -15,13 +15,14 @@ protocol homeDelegate: AnyObject{
 class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeightDelegate{
     weak var homeDelegate : homeDelegate?
     var calendarHeightConstraint:NSLayoutConstraint?
-
+    let notesLabel = SecondaryButton(titleText: Constant.NoteBar.notesLabel)
+    
     lazy var calendar:Calendar = {
         let cal = Calendar()
         cal.calendarDelegate = self
         return cal
     }()
-
+    
     lazy var notesBar:NotesBar = {
         let noteBar = NotesBar()
         noteBar.noteDelegate = self
@@ -35,7 +36,7 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
     }()
     
     lazy var activityBar: ActivityBar = {
-       var bar = ActivityBar()
+        var bar = ActivityBar()
         bar.activityDelegate = self
         return bar
     }()
@@ -48,39 +49,46 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
         return button
     }()
     
-    func sendCalendarHeight(height: CGFloat?) {
-        UIView.animate(withDuration: 0.1, delay: 0.1, options: .curveEaseInOut, animations: {
-            self.calendarHeightConstraint?.constant = height ?? 0
-        }, completion: nil)
-    }
-    
     override func viewDidLoad() {
-        view.backgroundColor = UIColor.white
-        view.addSubview(notesBar)
         setupNav()
-        notesBar.anchor(top:view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16), size: CGSize(width: 0, height: 200))
-      
-        view.addSubview(calendar)
-        calendar.anchor(top: notesBar.bottomAnchor, leading: nil, bottom: nil, trailing: nil ,padding: UIEdgeInsets(top: 0, left:  5, bottom: 0, right: -5))
-        calendar.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
-        calendarHeightConstraint = NSLayoutConstraint(item: calendar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 300)
-        NSLayoutConstraint.activate([calendarHeightConstraint!])
-        view.layer.layoutIfNeeded()
-
-        view.addSubview(activityBar)
-        activityBar.anchor(top: calendar.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding:UIEdgeInsets(top: 5, left: 16, bottom: 0, right: -16),size: CGSize(width: 0, height: 25))
-
-        view.addSubview(noteListView)
-        noteListView.anchor(top: activityBar.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0) ,size: CGSize(width: 0, height: 500))
-
-        profileButton.addTarget(self, action: #selector(handleProfileButton), for: UIControl.Event.touchUpInside)
+        setupViews()
+        setupActions()
         
         #if DEVELOPMENT
         print("DEV")
         #else
         print("prod")
         #endif
+    }
+    
+    func sendCalendarHeight(height: CGFloat?) {
+        UIView.animate(withDuration: 0.1, delay: 0.1, options: .curveEaseInOut, animations: {
+            self.calendarHeightConstraint?.constant = height ?? 0
+        }, completion: nil)
+    }
+    
+    func setupViews(){
+        view.backgroundColor = UIColor.white
+        view.addSubview(notesBar)
+        notesBar.anchor(top:view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16), size: CGSize(width: 0, height: 200))
+        view.addSubview(calendar)
+        calendar.anchor(top: notesBar.bottomAnchor, leading: nil, bottom: nil, trailing: nil ,padding: UIEdgeInsets(top: 0, left:  5, bottom: 0, right: -5))
+        calendar.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
+        calendarHeightConstraint = NSLayoutConstraint(item: calendar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 300)
+        NSLayoutConstraint.activate([calendarHeightConstraint!])
+        view.layer.layoutIfNeeded()
         
+        view.addSubview(activityBar)
+        activityBar.anchor(top: calendar.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding:UIEdgeInsets(top: 5, left: 16, bottom: 0, right: -16),size: CGSize(width: 0, height: 25))
+        view.addSubview(notesLabel)
+        notesLabel.anchor(top: activityBar.topAnchor, leading:activityBar.leadingAnchor, bottom: activityBar.bottomAnchor,trailing: nil,padding : UIEdgeInsets(top: 0, left: -16, bottom: 16, right: 0),size: CGSize(width: 100, height: 0))
+        view.addSubview(noteListView)
+        noteListView.anchor(top: activityBar.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0) ,size: CGSize(width: 0, height: 500))
+        
+    }
+    
+    func setupActions(){
+        profileButton.addTarget(self, action: #selector(handleProfileButton), for: UIControl.Event.touchUpInside)
     }
     
     func setupNav(){
@@ -91,7 +99,6 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
         navigationController?.navigationBar.tintColor = Constant.MainColor
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemPink,NSAttributedString.Key.font: UIFont().navLink()]
-        
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
@@ -111,11 +118,12 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
 
 extension HomeViewController: NoteBarDelegate,noteListViewDelegate,ActivityDelegate{
     func showAllNote() {
-       showAllNotes()
+        showAllNotes()
     }
     
     func showAddNote() {
         let addNoteView = AddNewNoteController()
+        addNoteView.context = Constant.contextName.NewScreen
         navigationController?.pushViewController(addNoteView, animated: true)
     }
     
@@ -123,10 +131,10 @@ extension HomeViewController: NoteBarDelegate,noteListViewDelegate,ActivityDeleg
         let showAllNotesView = ShowAllNotesController()
         navigationController?.pushViewController(showAllNotesView, animated: true)
     }
-
+    
     func handleDidSelectRow() {
-        //        let calEdit = TestCal()
-        let editNoteView = EditNoteScreen()
+        let editNoteView = AddNewNoteController()
+        editNoteView.context = Constant.contextName.EditScreen
         navigationController?.pushViewController(editNoteView, animated: true)
     }
 }

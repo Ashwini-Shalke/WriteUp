@@ -10,14 +10,7 @@ import UIKit
 
 class ColorPickerView: BaseView {
     let cellId = "CellID"
-    
     let colors = [UIColor.systemRed, .systemGreen, .systemBlue,.systemYellow, .systemIndigo, .systemGray, .systemPurple, .systemOrange, .systemPink, .systemTeal]
-    override func setup() {
-        super.setup()
-        addSubview(collectionView)
-        collectionView.register(ColorPickerCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0))
-    }
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -29,9 +22,17 @@ class ColorPickerView: BaseView {
         cv.dataSource = self
         return cv
     }()
+    
+    override func setup() {
+        super.setup()
+        addSubview(collectionView)
+        collectionView.register(ColorPickerCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0))
+    }
 }
 
 extension ColorPickerView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return colors.count
     }

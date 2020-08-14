@@ -19,16 +19,22 @@ class EditProfileLauncher: UIViewController,UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
+        handleComponents()
+        hideKeyboard()
+        setupNotifications()
+    }
+    
+    func setupViews(){
         view.backgroundColor = UIColor.white
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDone))
         navigationItem.rightBarButtonItem?.tintColor = Constant.SecondaryColor
-       
         
         view.addSubview(profileDetail)
         profileDetail.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
-        handleComponenets()
-        hideKeyboard()
-        
+    }
+    
+    func setupNotifications(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -36,8 +42,8 @@ class EditProfileLauncher: UIViewController,UITextFieldDelegate {
     @objc func keyboardWillShow(notification: NSNotification){
         guard let userInfo = notification.userInfo else { return }
         guard let keyboardSize = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else { return }
-        let keybardFrame = keyboardSize.cgRectValue
-        let keyboardYaxis = self.view.frame.size.height - keybardFrame.height
+        let keyboardFrame = keyboardSize.cgRectValue
+        let keyboardYaxis = self.view.frame.size.height - keyboardFrame.height
         
         let editTextFieldY: CGFloat = activeTextFieldBounds.minY
         if self.view.frame.origin.y >= 0 {
@@ -76,7 +82,7 @@ class EditProfileLauncher: UIViewController,UITextFieldDelegate {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    func handleComponenets(){
+    func handleComponents(){
         profileDetail.emailTextField.isUserInteractionEnabled = true
         profileDetail.nameTextField.isUserInteractionEnabled = true
         profileDetail.phoneTextField.isUserInteractionEnabled = true
@@ -85,7 +91,7 @@ class EditProfileLauncher: UIViewController,UITextFieldDelegate {
         profileDetail.emailTextField.delegate = self
         profileDetail.phoneTextField.delegate = self
         profileDetail.nameTextField.delegate = self
-
+        
         profileDetail.placeHolderButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
     }
     

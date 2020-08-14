@@ -14,9 +14,13 @@ protocol bottomToolBarDelegate : AnyObject {
 }
 
 class BottomToolBar: UIToolbar {
-    
     weak var toolbarDelegate: bottomToolBarDelegate?
     let toolBar = UIToolbar()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupBarButtons()
+    }
     
     func setupBarButtons(){
         toolBar.frame = CGRect(x: 0.0,y: 0.0,width: UIScreen.main.bounds.size.width,height: 44.0)
@@ -42,11 +46,6 @@ class BottomToolBar: UIToolbar {
     
     @objc func handleClearButton(){
         toolbarDelegate?.clearButton()
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupBarButtons()
     }
     
     required init?(coder: NSCoder) {

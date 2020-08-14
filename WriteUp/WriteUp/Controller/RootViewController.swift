@@ -7,7 +7,8 @@
 //
 import UIKit
 
-class RootViewController: UIViewController,signInDelegate,homeDelegate{
+class RootViewController: UIViewController, signInDelegate, homeDelegate{
+    
     lazy var homeViewController: HomeViewController = {
         var homeController = HomeViewController()
         homeController.homeDelegate = self
@@ -53,10 +54,10 @@ class RootViewController: UIViewController,signInDelegate,homeDelegate{
     func handleSignOut(){
         handleChild()
     }
-    
 }
 
 extension RootViewController {
+    
     func setupLayout(_ child: UIViewController){
         self.view.addSubview(child.view)
         child.view.translatesAutoresizingMaskIntoConstraints = false

@@ -23,8 +23,29 @@ class SaveNoteController: UIViewController {
         let pickerView = ColorPickerView()
         return pickerView
     }()
+    
+    override func viewDidLoad() {
+        constructView()
+        setupStack()
+        hideKeyboard()
+        handleTitle()
+    }
+    
+    func setupStack(){
+        let stackView = UIStackView(arrangedSubviews: [titleView,summaryView,chooseTagView])
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        view.addSubview(stackView)
+        // stack View :- need to calculate the number of items in stack view
+        let stackHeight = CGSize(width: 0, height: (32 * 3) + (37 * 3) + 3)
+        stackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),size: stackHeight)
+    }
+    
+    func constructView(){
+        view.backgroundColor = .white
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(handleSaveNote))
+        self.navigationItem.setHidesBackButton(false, animated: false)
         
-    func contructView(){
         titleView.addSubview(titleLabel)
         titleLabel.anchor(top: titleView.topAnchor, leading: titleView.leadingAnchor, bottom: nil, trailing: titleView.trailingAnchor, size: Constant.ProfileSC.labelHeight)
         
@@ -41,32 +62,12 @@ class SaveNoteController: UIViewController {
         summaryTextField.isUserInteractionEnabled = true
         summaryTextField.anchor(top: summaryLabel.bottomAnchor, leading: summaryView.leadingAnchor, bottom: nil, trailing: summaryView.trailingAnchor,size: Constant.ProfileSC.textfieldHeight)
         
-        
-        
         chooseTagView.addSubview(chooseTagLabel)
         chooseTagLabel.anchor(top: chooseTagView.topAnchor, leading: chooseTagView.leadingAnchor, bottom: nil, trailing: chooseTagView.trailingAnchor, size: Constant.ProfileSC.labelHeight)
         
         chooseTagView.addSubview(colorPickerView)
         colorPickerView.anchor(top: chooseTagLabel.bottomAnchor, leading: chooseTagView.leadingAnchor, bottom: nil, trailing: chooseTagView.trailingAnchor,size: Constant.ProfileSC.textfieldHeight)
-    
-    }
-    
-    override func viewDidLoad() {
-        view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(handleSaveNote))
         
-        self.navigationItem.setHidesBackButton(false, animated: false)
-        self.contructView()
-    
-        let stackView = UIStackView(arrangedSubviews: [titleView,summaryView,chooseTagView])
-        stackView.distribution = .fillEqually
-        stackView.axis = .vertical
-        view.addSubview(stackView)
-        // stack View :- need to calculate the number of items in stack view
-        let stackHeight = CGSize(width: 0, height: (32 * 3) + (37 * 3) + 3)
-        stackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),size: stackHeight)
-        hideKeyboard()
-        handleTitle()
     }
     
     @objc func handleSaveNote() {
@@ -76,8 +77,6 @@ class SaveNoteController: UIViewController {
         }
     }
 }
-
-
 
 extension SaveNoteController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

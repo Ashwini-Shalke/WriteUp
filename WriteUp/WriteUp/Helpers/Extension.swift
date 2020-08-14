@@ -8,8 +8,6 @@
 
 import UIKit
 
-extension UIColor { static let mainPink = UIColor(red: 232/255, green: 68/255, blue: 133/255, alpha: 1)}
-
 extension UserDefaults {
     enum UserDefaultKey: String {
         case isSignedIn
@@ -30,7 +28,6 @@ extension UIViewController {
         modalPresentationStyle = .fullScreen
     }
 }
-
 
 extension UIFont {
     func pageTitle(size:CGFloat? = 34) -> UIFont {
@@ -64,26 +61,6 @@ extension UIFont {
     func tabBarTitle(size: CGFloat? = 10) -> UIFont {
         return UIFont.systemFont(ofSize: 10, weight: .medium)
     }
-    
-}
-
-extension UIColor {
-    func labelColor(color : UIColor? = .systemPink) -> UIColor {
-        return UIColor.systemPink
-    }
-    
-    func textFieldColor(color : UIColor? = .lightGray) -> UIColor {
-        return UIColor.lightGray
-    }
-    
-    func borderColor(color : UIColor? = .darkGray) -> UIColor {
-        return UIColor.darkGray
-    }
-    
-    func notecellColor(color: UIColor? = .systemYellow) -> UIColor {
-        return UIColor.systemYellow
-    }
-
 }
 
 @nonobjc extension UIViewController {
@@ -107,10 +84,9 @@ extension UIImageView {
 }
 
 extension UIView {
-    
     func setupBorder(){
         let borderLayer = UIView()
-        borderLayer.backgroundColor = UIColor().borderColor()
+        borderLayer.backgroundColor = .darkGray
         borderLayer.alpha = 0.5
         borderLayer.translatesAutoresizingMaskIntoConstraints = false
         addSubview(borderLayer)
@@ -124,27 +100,21 @@ extension UIView {
     
     func anchor(top: NSLayoutYAxisAnchor?,leading: NSLayoutXAxisAnchor?,bottom: NSLayoutYAxisAnchor?,trailing: NSLayoutXAxisAnchor?, padding: UIEdgeInsets = .zero, size: CGSize = .zero) {
         translatesAutoresizingMaskIntoConstraints = false
-        
         if let top = top {
             topAnchor.constraint(equalTo: top, constant: padding.top).isActive = true
         }
-        
         if let leading = leading {
             leadingAnchor.constraint(equalTo: leading, constant: padding.left).isActive = true
         }
-        
         if let bottom = bottom {
             bottomAnchor.constraint(equalTo: bottom, constant: padding.bottom).isActive = true
         }
-        
         if let trailing = trailing {
             trailingAnchor.constraint(equalTo: trailing, constant: padding.right).isActive = true
         }
-        
         if size.width != 0 {
             widthAnchor.constraint(equalToConstant: size.width).isActive = true
         }
-        
         if size.height != 0 {
             heightAnchor.constraint(equalToConstant: size.height).isActive = true
         }
@@ -158,7 +128,6 @@ extension UILabel {
         label.font = UIFont().navLink()
         label.textColor = UIColor.systemPink
         return label
-        
     }
 }
 
@@ -174,12 +143,10 @@ extension UIImagePickerController {
             }
             print("Camera not available")
         }))
-        
         actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (action: UIAlertAction) in
             imagePickerController.sourceType = .photoLibrary
             view.present(imagePickerController,animated: true, completion: nil)
         }))
-        
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         view.present(actionSheet,animated: true, completion: nil)
     }
@@ -201,5 +168,4 @@ extension String {
         let desc = string.trimmingCharacters(in: .whitespacesAndNewlines)
         return desc
     }
-    
 }

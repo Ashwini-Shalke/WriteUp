@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 class BaseView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,16 +21,6 @@ class BaseView: UIView {
 }
 
 class ProfileDetail: BaseView,EditProfileDelegate{
-    func handleEdit() {
-
-    }
-
-    lazy var editProfile : EditProfileLauncher = {
-        var eP = EditProfileLauncher()
-        eP.editProfileDelegate = self
-        return eP
-    }()
-    
     let nameView: UIView = UIView()
     let emailView: UIView = UIView()
     let phoneView: UIView = UIView()
@@ -42,12 +33,14 @@ class ProfileDetail: BaseView,EditProfileDelegate{
     
     let topViewContainer : UIView = {
         let topView = UIView()
-        topView.translatesAutoresizingMaskIntoConstraints = false
-//        topView.backgroundColor = Constant.SecondaryColor
         return topView
     }()
     
- 
+    lazy var editProfile : EditProfileLauncher = {
+        var eP = EditProfileLauncher()
+        eP.editProfileDelegate = self
+        return eP
+    }()
     
     let placeHolderButton: UIButton = {
         let button = UIButton()
@@ -60,7 +53,6 @@ class ProfileDetail: BaseView,EditProfileDelegate{
         button.isUserInteractionEnabled = false
         return button
     }()
-    
     
     override func setup() {
         super.setup()
@@ -80,7 +72,6 @@ class ProfileDetail: BaseView,EditProfileDelegate{
         emailView.addSubview(emailLabel)
         emailLabel.anchor(top: emailView.topAnchor,leading: emailView.leadingAnchor, bottom: nil, trailing: emailView.trailingAnchor,size: Constant.ProfileSC.labelHeight)
         
-       
         emailView.addSubview(emailTextField)
         emailTextField.anchor(top: emailLabel.bottomAnchor, leading: emailView.leadingAnchor, bottom: nil, trailing: emailView.trailingAnchor,size: Constant.ProfileSC.textfieldHeight)
         
@@ -102,7 +93,6 @@ class ProfileDetail: BaseView,EditProfileDelegate{
     func setupProfileDetails(){
         addSubview(topViewContainer)
         topViewContainer.anchor(top: safeAreaLayoutGuide.topAnchor , leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor,size: CGSize(width: 0, height: 200))
-   
         
         topViewContainer.addSubview(placeHolderButton)
         placeHolderButton.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, size: CGSize(width: 120, height: 120))
@@ -110,15 +100,19 @@ class ProfileDetail: BaseView,EditProfileDelegate{
         placeHolderButton.centerYAnchor.constraint(equalTo: topViewContainer.centerYAnchor).isActive = true
         
         self.constructBottomView()
-        let stackView = UIStackView(arrangedSubviews: [nameView,emailView,phoneView,noteView])
+        let stackView = UIStackView(arrangedSubviews: [nameView, emailView, phoneView, noteView])
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
+        
         addSubview(stackView)
         // stack View :- need to calculate the number of items in stack view
         let stackHeight = CGSize(width: 0, height: (32 * 4) + (37 * 4) + 4)
         stackView.anchor(top: topViewContainer.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor, size: stackHeight)
     }
-
+    
+    func handleEdit() {
+        //Todo: need to decide
+    }
 }
 
 

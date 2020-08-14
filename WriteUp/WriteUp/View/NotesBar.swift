@@ -23,17 +23,6 @@ class NotesBar: BaseView,HeaderNoteDelegate,ActivityDelegate {
        return bar
     }()
     
-    override func setup() {
-        super.setup()
-        addSubview(activityBar)
-        activityBar.anchor(top: safeAreaLayoutGuide.topAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor,padding:UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 25))
-
-        addSubview(collectionView)
-        collectionView.register(NoteCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.register(HeaderNoteBar.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
-        collectionView.anchor(top: activityBar.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, trailing: safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0))
-    }
-
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true
@@ -45,6 +34,17 @@ class NotesBar: BaseView,HeaderNoteDelegate,ActivityDelegate {
         cv.bounces = false
         return cv
     }()
+    
+    override func setup() {
+        super.setup()
+        addSubview(activityBar)
+        activityBar.anchor(top: safeAreaLayoutGuide.topAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor,padding:UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 25))
+
+        addSubview(collectionView)
+        collectionView.register(NoteCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(HeaderNoteBar.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
+        collectionView.anchor(top: activityBar.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, trailing: safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0))
+    }
  
     func addNote() {
         noteDelegate?.showAddNote()

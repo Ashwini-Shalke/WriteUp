@@ -17,7 +17,7 @@ class BaseCell: UICollectionViewCell {
       super.init(frame: frame)
       setup()
   }
-  
+    
   func setup(){}
   required init?(coder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
@@ -26,7 +26,21 @@ class BaseCell: UICollectionViewCell {
 
 class HeaderNoteBar: BaseCell {
    weak var headerDelegate: HeaderNoteDelegate?
-    let addNoteLabel = NoteBarLabel(labelName: Constant.HeaderNoteBar.addNoteLabel)
+   let addNoteLabel = NoteBarLabel(labelName: Constant.HeaderNoteBar.addNoteLabel)
+    
+   let containerView: UIView = {
+          let v = UIView()
+          v.backgroundColor = .white
+          return v
+      }()
+      
+      let addNoteButton: UIButton = {
+          let button = UIButton()
+          let image = UIImage(named: Constant.HeaderNoteBar.addNoteImage)
+          button.setImage(image, for: .normal)
+          button.contentMode = .scaleAspectFit
+          return button
+      }()
     
     override func setup() {
         super.setup()
@@ -44,20 +58,6 @@ class HeaderNoteBar: BaseCell {
         addNoteLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 0, left: 9, bottom: -5, right: -9),size: CGSize(width: 0, height: 18))
     }
     
-    let containerView: UIView = {
-        let v = UIView()
-        v.backgroundColor = .white
-        return v
-    }()
-    
-    let addNoteButton: UIButton = {
-        let button = UIButton()
-        let image = UIImage(named: Constant.HeaderNoteBar.addNoteImage)
-        button.setImage(image, for: .normal)
-        button.contentMode = .scaleAspectFit
-        return button
-    }()
-    
     @objc func handleAddNote() {
         headerDelegate?.addNote()
     }
@@ -65,9 +65,12 @@ class HeaderNoteBar: BaseCell {
 
 class NoteCell: BaseCell {
     let noteLabel = NoteBarLabel(labelName: "note1")
+    
     override func setup() {
         super.setup()
-        backgroundColor = Constant.SecondaryColor
+        backgroundColor = .white
+        layer.borderColor = UIColor.gray.cgColor
+        layer.borderWidth = 2
         
         addSubview(noteLabel)
         noteLabel.textAlignment = .center

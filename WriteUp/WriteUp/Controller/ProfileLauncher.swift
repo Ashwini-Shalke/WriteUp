@@ -16,7 +16,16 @@ class ProfileLauncher: UIViewController {
     weak var profileDelegate: ProfileLauncherDelegate?
     let stackHeight = CGSize(width: 0, height: (32 * 4) + (37 * 4) + 4)
     
+    override func viewDidLoad() {
+          super.viewDidLoad()
+          autolayout()
+      }
+    
     func autolayout() {
+        view.backgroundColor = UIColor.white
+        navigationItem.title = Constant.ProfileSC.navTitle
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(handleEdit))
+        
         let signOutButton = PrimaryButton(titleText: Constant.ProfileSC.signOutButtonTitle)
         signOutButton.addTarget(self, action: #selector(handleSignOut), for: .touchUpInside)
         
@@ -31,15 +40,6 @@ class ProfileLauncher: UIViewController {
     @objc func handleSignOut(){
         self.navigationController?.popViewController(animated: false)
         profileDelegate?.dismissHome()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor.white
-        navigationItem.title = Constant.ProfileSC.navTitle
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(handleEdit))
-        
-        autolayout()
     }
     
     @objc func handleEdit(){

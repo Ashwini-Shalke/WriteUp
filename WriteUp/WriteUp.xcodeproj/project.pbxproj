@@ -39,10 +39,8 @@
 		3372E60F244F074D009D3983 /* ProfileLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E60E244F074D009D3983 /* ProfileLauncher.swift */; };
 		3398D21E24C6F6990022F2F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3398D21D24C6F6990022F2F7 /* GoogleService-Info.plist */; };
 		3398D21F24C6F6990022F2F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3398D21D24C6F6990022F2F7 /* GoogleService-Info.plist */; };
-		33A8B31624977439006298C1 /* TestCal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A8B31524977438006298C1 /* TestCal.swift */; };
 		33DBC321246EB50100E6462A /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DBC320246EB50100E6462A /* Calendar.swift */; };
 		33DBC323246FFCF200E6462A /* SaveNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DBC322246FFCF200E6462A /* SaveNoteController.swift */; };
-		33FB4EDF24B843570079B84C /* TestCal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A8B31524977438006298C1 /* TestCal.swift */; };
 		33FB4EE024B843570079B84C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E5F124471444009D3983 /* Extension.swift */; };
 		33FB4EE124B843570079B84C /* NotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81822475276000944CA5 /* NotesListView.swift */; };
 		33FB4EE224B843570079B84C /* NoteListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D818A2477E1DF00944CA5 /* NoteListViewCell.swift */; };
@@ -112,7 +110,6 @@
 		3372E60C244ED71D009D3983 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		3372E60E244F074D009D3983 /* ProfileLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLauncher.swift; sourceTree = "<group>"; };
 		3398D21D24C6F6990022F2F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		33A8B31524977438006298C1 /* TestCal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCal.swift; sourceTree = "<group>"; };
 		33DBC320246EB50100E6462A /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		33DBC322246FFCF200E6462A /* SaveNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNoteController.swift; sourceTree = "<group>"; };
 		33FB4F0524B843570079B84C /* WriteUpDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WriteUpDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,7 +205,6 @@
 				332D818A2477E1DF00944CA5 /* NoteListViewCell.swift */,
 				3351F704247B8C7D0041C3CC /* ColorPickerView.swift */,
 				332F5AE2248E0894003181E1 /* BottonToolBar.swift */,
-				33A8B31524977438006298C1 /* TestCal.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -452,7 +448,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33A8B31624977439006298C1 /* TestCal.swift in Sources */,
 				3372E5F224471444009D3983 /* Extension.swift in Sources */,
 				332D81832475276000944CA5 /* NotesListView.swift in Sources */,
 				332D818B2477E1DF00944CA5 /* NoteListViewCell.swift in Sources */,
@@ -488,7 +483,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33FB4EDF24B843570079B84C /* TestCal.swift in Sources */,
 				33FB4EE024B843570079B84C /* Extension.swift in Sources */,
 				33FB4EE124B843570079B84C /* NotesListView.swift in Sources */,
 				33FB4EE224B843570079B84C /* NoteListViewCell.swift in Sources */,

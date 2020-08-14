@@ -10,7 +10,6 @@ import UIKit
 
 class PrimaryBarLabel: UILabel {
     let label = UILabel()
-    
     init(title: String){
         super.init(frame: .zero)
         self.text = title
