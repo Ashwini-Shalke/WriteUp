@@ -11,25 +11,23 @@ import AuthenticationServices
 
 struct User {
     let id : String
-    let firstname : String
-    let lastname : String
+    let firstName : String
+    let lastName : String
     let email : String
-    
     init(credentials: ASAuthorizationAppleIDCredential) {
         self.id = credentials.user
-        self.firstname = credentials.fullName?.givenName ?? ""
-        self.lastname = credentials.fullName?.familyName ?? ""
+        self.firstName = credentials.fullName?.givenName ?? ""
+        self.lastName = credentials.fullName?.familyName ?? ""
         self.email = credentials.email ?? ""
     }
 }
-
 
 extension User: CustomDebugStringConvertible {
     var debugDescription: String {
         return """
         ID: \(id)
-        First Name: \(firstname)
-        Last Name: \(lastname)
+        First Name: \(firstName)
+        Last Name: \(lastName)
         Email: \(email)
         """
     }

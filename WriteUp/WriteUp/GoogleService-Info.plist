@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>470049956989-uiuqihkdg8rtjqc1vtjigjf7u3j5d5ut.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.470049956989-uiuqihkdg8rtjqc1vtjigjf7u3j5d5ut</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAh4NXlVW10RodsFClIrInH38pFx6Uhw9E</string>
+	<key>GCM_SENDER_ID</key>
+	<string>470049956989</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.shalkeashwini.WriteUp</string>
+	<key>PROJECT_ID</key>
+	<string>writeupfirebaseproject</string>
+	<key>STORAGE_BUCKET</key>
+	<string>writeupfirebaseproject.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:470049956989:ios:b8d745b08014cbe4b3bd14</string>
+	<key>DATABASE_URL</key>
+	<string>https://writeupfirebaseproject.firebaseio.com</string>
+</dict>
+</plist>
