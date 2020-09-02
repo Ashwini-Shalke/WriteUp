@@ -71,6 +71,9 @@ class SaveNoteController: UIViewController {
     }
     
     @objc func handleSaveNote() {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
+        
         guard let controllersInStack = navigationController?.viewControllers else { return }
         if let _ = controllersInStack.first(where: { $0 is RootViewController }) {
             navigationController?.popToRootViewController(animated: true)

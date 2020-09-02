@@ -15,6 +15,7 @@ protocol NoteBarDelegate: AnyObject {
 class NotesBar: BaseView,HeaderNoteDelegate,ActivityDelegate {
     let cellId = "CellID"
     let headerID = "HeaderID"
+    var generator: UISelectionFeedbackGenerator?
     weak var noteDelegate: NoteBarDelegate?
     
     lazy var activityBar: ActivityBar = {
@@ -29,6 +30,7 @@ class NotesBar: BaseView,HeaderNoteDelegate,ActivityDelegate {
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .white
+        cv.showsHorizontalScrollIndicator = false
         cv.delegate = self
         cv.dataSource = self
         cv.bounces = false
@@ -82,6 +84,19 @@ extension NotesBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: 102, height: 145)
     }
+    
+    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        generator = UISelectionFeedbackGenerator()
+//        generator!.selectionChanged()
+//    }
+//
+//    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+//        generator = nil
+//    }
+    
 }
+
+
 
 

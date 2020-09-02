@@ -64,6 +64,8 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
     func sendCalendarHeight(height: CGFloat?) {
         UIView.animate(withDuration: 0.1, delay: 0.1, options: .curveEaseInOut, animations: {
             self.calendarHeightConstraint?.constant = height ?? 0
+            let generate = UIImpactFeedbackGenerator(style: .soft)
+            generate.impactOccurred()
         }, completion: nil)
     }
     
@@ -71,6 +73,7 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
         view.backgroundColor = UIColor.white
         view.addSubview(notesBar)
         notesBar.anchor(top:view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16), size: CGSize(width: 0, height: 200))
+        
         view.addSubview(calendar)
         calendar.anchor(top: notesBar.bottomAnchor, leading: nil, bottom: nil, trailing: nil ,padding: UIEdgeInsets(top: 0, left:  5, bottom: 0, right: -5))
         calendar.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
