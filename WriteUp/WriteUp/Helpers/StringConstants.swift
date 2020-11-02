@@ -23,7 +23,7 @@ struct Constant {
     //MARK: ProfileLauncher Screen
     struct ProfileSC {
         static let labelHeight = CGSize(width: 0, height: 32)
-        static let textfieldHeight = CGSize(width: 0, height: 37)
+        static let textfieldHeight = CGSize(width: 37, height: 32)
         static let signOutButtonTitle = "Sign out"
         static let placeholderImageName = "placeholder_photo"
         static let nameLabel = "Name"
@@ -32,6 +32,7 @@ struct Constant {
         static let noteLabel = "Total notes"
         static let noOfNotes = "0"
         static let navTitle = "Profile"
+        static let switchLabel = "Screen Lock"
     }
     
     //MARK: NoteBar
