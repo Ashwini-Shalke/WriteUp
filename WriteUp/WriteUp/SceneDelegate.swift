@@ -7,16 +7,15 @@
 //
 
 import UIKit
+import LocalAuthentication
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate, errorLockDelegate{
 
     var window: UIWindow?
-
+    let navigationController = UINavigationController(rootViewController: RootViewController())
+    let editProfileDetail = EditProfileLauncher()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
-        let navigationController = UINavigationController(rootViewController: RootViewController())
-//        navigationController.navigationBar.setTransparentNavigationBar()
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         guard let _ = (scene as? UIWindowScene) else { return }
@@ -40,16 +39,43 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
-    }
+            let context = LAContext()
+                   var error: NSError?
+//        UserDefaults.standard.isSignedIn() &&
+        if UserDefaults.standard.isSignedIn() && editProfileDetail.profileDetail.screenLockSwitch.isOn == false {
+                   if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error)
+                   {
+                    let reason = "Touch ID is required to use WriteUp"
+                    let lockScreen = WelcomeLockScreen()
+                    window?.rootViewController = lockScreen
+                    window?.makeKeyAndVisible()
+                    context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) {
+                           [weak self] success, authenticationError in
+                           DispatchQueue.main.async {
+                               if success {
+                                self?.window?.rootViewController = self?.navigationController
+                                self?.window?.makeKeyAndVisible()
+                               } else {
+                                   let errorScreen = ErrorLockScreen()
+                                   errorScreen.successScreenDelegate = self
+                                    self?.window?.rootViewController = errorScreen
+                                    self?.window?.makeKeyAndVisible()
+                               }
+                           }
+                       }
+                   } else {
+                       let ac = UIAlertController(title: "Biometry unavailable", message: "Your device is not configured for biometric authentication.", preferredStyle: .alert)
+                       ac.addAction(UIAlertAction(title: "OK", style: .default))
+            } }
+               }
+        
 
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
-    }
-
-
+    func handleSuccessScreen() {
+        self.window?.rootViewController = self.navigationController
+        self.window?.makeKeyAndVisible()
+       }
 }
+        
+    
 
+   

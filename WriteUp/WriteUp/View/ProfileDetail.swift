@@ -91,6 +91,7 @@ class ProfileDetail: BaseView,EditProfileDelegate {
     
     func constructBottomView() {
         screenLockSwitch.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+        screenLockSwitch.isUserInteractionEnabled = false
         switchView.addSubview(switchLabel)
         switchView.addSubview(screenLockSwitch)
         switchLabel.anchor(top: switchView.topAnchor, leading: switchView.leadingAnchor, bottom: switchView.bottomAnchor, trailing: nil, size: CGSize(width: 300, height: 0))
@@ -98,7 +99,7 @@ class ProfileDetail: BaseView,EditProfileDelegate {
     }
     
     func setupProfileDetailsView(){
-        topViewContainer.anchor(top: safeAreaLayoutGuide.topAnchor , leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor,size: CGSize(width: 0, height: 200))
+        topViewContainer.anchor(top: safeAreaLayoutGuide.topAnchor , leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor,size: CGSize(width: 0, height: 175))
         
         placeHolderButton.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, size: CGSize(width: 120, height: 120))
         placeHolderButton.centerXAnchor.constraint(equalTo: topViewContainer.centerXAnchor).isActive = true
@@ -119,7 +120,6 @@ class ProfileDetail: BaseView,EditProfileDelegate {
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.spacing = 5
-        stackView.backgroundColor = .green
     }
     
     func handleEdit() {

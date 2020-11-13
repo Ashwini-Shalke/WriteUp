@@ -87,8 +87,9 @@ class EditProfileLauncher: UIViewController,UITextFieldDelegate {
         profileDetail.nameTextField.isUserInteractionEnabled = true
         profileDetail.phoneTextField.isUserInteractionEnabled = true
         profileDetail.placeHolderButton.isUserInteractionEnabled = true
+        profileDetail.screenLockSwitch.isUserInteractionEnabled = true
         
-        
+        profileDetail.screenLockSwitch.isOn = false
         profileDetail.emailTextField.delegate = self
         profileDetail.phoneTextField.delegate = self
         profileDetail.nameTextField.delegate = self

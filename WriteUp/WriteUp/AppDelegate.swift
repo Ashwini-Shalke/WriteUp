@@ -9,9 +9,17 @@
 //import Firebase
 import FirebaseCore
 import UIKit
+import LocalAuthentication
 
 @UIApplicationMain
   class AppDelegate: UIResponder, UIApplicationDelegate {
+    let blurView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(white: 0.5, alpha: 0.75)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -32,7 +40,6 @@ import UIKit
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
+    
 }
 
