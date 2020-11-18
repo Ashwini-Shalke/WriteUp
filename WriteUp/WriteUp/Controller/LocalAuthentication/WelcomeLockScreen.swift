@@ -11,7 +11,7 @@ import LocalAuthentication
 class WelcomeLockScreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.white
     }
     
     @objc func handlePressMe() {
@@ -19,8 +19,8 @@ class WelcomeLockScreen: UIViewController {
         var error: NSError?
         if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error)
         {
-            let reason = "Touch ID is required to use WriteUp"
-            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) {
+            let localizedReason = "Unlock WriteUp"
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: localizedReason) {
                 [weak self] success, authenticationError in
                 DispatchQueue.main.async {
                     if success {

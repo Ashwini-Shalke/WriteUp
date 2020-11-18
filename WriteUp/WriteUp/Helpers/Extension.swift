@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 extension UserDefaults {
     enum UserDefaultKey: String {
