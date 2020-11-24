@@ -69,6 +69,18 @@ struct Constant {
         case NewScreen
         case EditScreen
     }
+    
+    struct LocalAuth {
+        static let localizedReason = "Unlock WriteUp"
+        static let errorAttributedString = "WriteUp Locked"
+        static let alertTitle = "Biometry unavailable"
+        static let alertMessage = "Your device is not configured for biometric authentication."
+    }
+    
+    struct tableCellId {
+        static let cellId = "CellID"
+        static let headerId = "HeaderID"
+    }
 }
 
 

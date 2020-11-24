@@ -15,10 +15,11 @@ protocol errorLockDelegate: AnyObject {
 class ErrorLockScreen: UIViewController {
     weak var successScreenDelegate: errorLockDelegate?
     let window = UIWindow()
+    
     let descriptionTextView: UITextView = {
         let textView =  UITextView()
         let text:String
-        let attributedText = NSMutableAttributedString(string: "WriteUp Locked", attributes : [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 27)])
+        let attributedText = NSMutableAttributedString(string: Constant.LocalAuth.errorAttributedString, attributes : [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 27)])
         textView.attributedText = attributedText
         textView.textAlignment = .center
         textView.isEditable = false
@@ -27,13 +28,13 @@ class ErrorLockScreen: UIViewController {
         return textView
     }()
     
-    let pressMeButton: UIButton = {
-        let pressMeButton = UIButton()
-        pressMeButton.translatesAutoresizingMaskIntoConstraints = false
-        pressMeButton.setTitle("Unlock WriteUp ", for: .normal)
-        pressMeButton.setTitleColor(.systemBlue, for: .normal)
-        pressMeButton.addTarget(self, action: #selector(handlePressMe), for: .touchUpInside)
-        return pressMeButton
+    let unlockButton: UIButton = {
+        let unlockButton = UIButton()
+        unlockButton.translatesAutoresizingMaskIntoConstraints = false
+        unlockButton.setTitle(Constant.LocalAuth.localizedReason, for: .normal)
+        unlockButton.setTitleColor(.systemBlue, for: .normal)
+        unlockButton.addTarget(self, action: #selector(handlePressMe), for: .touchUpInside)
+        return unlockButton 
     }()
     
     override func viewDidLoad() {
@@ -43,10 +44,10 @@ class ErrorLockScreen: UIViewController {
         NSLayoutConstraint.activate([
             descriptionTextView.centerXAnchor.constraint(equalTo:self.view.centerXAnchor),
             descriptionTextView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor,constant: -75)])
-        self.view.addSubview(pressMeButton)
+        self.view.addSubview(unlockButton)
         NSLayoutConstraint.activate([
-            pressMeButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            pressMeButton.topAnchor.constraint(equalTo: descriptionTextView.bottomAnchor, constant : 15)])
+            unlockButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            unlockButton.topAnchor.constraint(equalTo: descriptionTextView.bottomAnchor, constant : 15)])
     }
     
     @objc func handlePressMe() {
@@ -54,7 +55,7 @@ class ErrorLockScreen: UIViewController {
         var error: NSError?
         if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error)
         {
-            let localizedReason = "Unlock WriteUp"
+            let localizedReason = Constant.LocalAuth.localizedReason
             context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: localizedReason) {
                 [weak self] success, authenticationError in
                 DispatchQueue.main.async {

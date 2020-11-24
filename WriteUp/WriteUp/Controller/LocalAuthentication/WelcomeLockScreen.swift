@@ -19,7 +19,7 @@ class WelcomeLockScreen: UIViewController {
         var error: NSError?
         if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error)
         {
-            let localizedReason = "Unlock WriteUp"
+            let localizedReason = Constant.LocalAuth.localizedReason
             context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: localizedReason) {
                 [weak self] success, authenticationError in
                 DispatchQueue.main.async {

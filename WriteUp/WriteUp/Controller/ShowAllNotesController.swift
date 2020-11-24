@@ -9,7 +9,6 @@
 import UIKit
 
 class ShowAllNotesController: UIViewController {
-    
     lazy var notesListView: NotesListTableView = {
         var notesView = NotesListTableView()
         notesView.noteListDelegate = self
@@ -67,7 +66,6 @@ extension ShowAllNotesController: UISearchBarDelegate, noteListViewDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
-    
 }
 
 

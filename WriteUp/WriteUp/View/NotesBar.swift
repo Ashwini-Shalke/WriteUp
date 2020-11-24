@@ -13,8 +13,8 @@ protocol NoteBarDelegate: AnyObject {
 }
 
 class NotesBar: BaseView,HeaderNoteDelegate,ActivityDelegate {
-    let cellId = "CellID"
-    let headerID = "HeaderID"
+    let cellId = Constant.tableCellId.cellId
+    let headerID = Constant.tableCellId.headerId
     var generator: UISelectionFeedbackGenerator?
     weak var noteDelegate: NoteBarDelegate?
     
@@ -84,16 +84,6 @@ extension NotesBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: 102, height: 145)
     }
-    
-    
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        generator = UISelectionFeedbackGenerator()
-//        generator!.selectionChanged()
-//    }
-//
-//    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-//        generator = nil
-//    }
     
 }
 

@@ -10,7 +10,6 @@ import UIKit
 import LocalAuthentication
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate, errorLockDelegate{
-    
     var window: UIWindow?
     let navigationController = UINavigationController(rootViewController: RootViewController())
     let editProfileDetail = EditProfileLauncher()
@@ -45,7 +44,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, errorLockDelegate{
         if UserDefaults.standard.isSignedIn() && editProfileDetail.profileDetail.screenLockSwitch.isOn == false {
             if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error)
             {
-                var localizedReason = "Unlock device"
+                let localizedReason = Constant.LocalAuth.localizedReason
                 let lockScreen = WelcomeLockScreen()
                 window?.rootViewController = lockScreen
                 window?.makeKeyAndVisible()
@@ -64,11 +63,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, errorLockDelegate{
                     }
                 }
             } else {
-                let ac = UIAlertController(title: "Biometry unavailable", message: "Your device is not configured for biometric authentication.", preferredStyle: .alert)
+                let ac = UIAlertController(title: Constant.LocalAuth.alertTitle, message: Constant.LocalAuth.alertMessage, preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .default))
             } }
     }
-    
     
     func handleSuccessScreen() {
         self.window?.rootViewController = self.navigationController

@@ -21,7 +21,6 @@ class BaseView: UIView {
 }
 
 class ProfileDetail: BaseView,EditProfileDelegate {
-    
     let nameLabel = PrimaryLabel(labelName: Constant.ProfileSC.nameLabel)
     let emailLabel = PrimaryLabel(labelName: Constant.ProfileSC.emailLabel)
     let phoneLabel = PrimaryLabel(labelName: Constant.ProfileSC.phoneLabel)
@@ -91,11 +90,11 @@ class ProfileDetail: BaseView,EditProfileDelegate {
     
     func constructBottomView() {
         screenLockSwitch.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
-        screenLockSwitch.isUserInteractionEnabled = false
         switchView.addSubview(switchLabel)
         switchView.addSubview(screenLockSwitch)
         switchLabel.anchor(top: switchView.topAnchor, leading: switchView.leadingAnchor, bottom: switchView.bottomAnchor, trailing: nil, size: CGSize(width: 300, height: 0))
         screenLockSwitch.anchor(top: switchView.topAnchor , leading: switchLabel.trailingAnchor, bottom: nil, trailing: switchView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: -10))
+//        screenLockSwitch.addTarget(self, action: #selector(isScreenLocked), for: .valueChanged)
     }
     
     func setupProfileDetailsView(){
@@ -125,6 +124,17 @@ class ProfileDetail: BaseView,EditProfileDelegate {
     func handleEdit() {
         //Todo: need to decide
     }
+    
+//    @objc func isScreenLocked() {
+//        if screenLockSwitch.isOn {
+//            UserDefaults.standard.setIsScreenLockedOn(value: true)
+//            print(UserDefaults.standard.setIsScreenLockedOn(value: true))
+//        }
+//        else {
+//            UserDefaults.standard.setIsScreenLockedOn(value: false)
+//            print(UserDefaults.standard.setIsScreenLockedOn(value: true))
+//        }
+//    }
 }
 
 
