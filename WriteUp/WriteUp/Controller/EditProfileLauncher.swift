@@ -89,12 +89,13 @@ class EditProfileLauncher: UIViewController,UITextFieldDelegate {
         profileDetail.placeHolderButton.isUserInteractionEnabled = true
         profileDetail.screenLockSwitch.isUserInteractionEnabled = true
         
-        profileDetail.screenLockSwitch.isOn = false
         profileDetail.emailTextField.delegate = self
         profileDetail.phoneTextField.delegate = self
         profileDetail.nameTextField.delegate = self
         
+        
         profileDetail.placeHolderButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
+//        profileDetail.screenLockSwitch.addTarget(self, action: #selector(setScreenLocked), for: .valueChanged)
     }
     
     func hideKeyboard(){
@@ -131,4 +132,17 @@ extension EditProfileLauncher: UIImagePickerControllerDelegate, UINavigationCont
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
+    
+    
+    
+//    @objc func setScreenLocked() {
+//        profileDetail.screenLockSwitch.isOn ? UserDefaults.standard.setIsScreenLockedOn(value: true) : UserDefaults.standard.setIsScreenLockedOn(value: false)
+////            UserDefaults.standard.setIsScreenLockedOn(value: true)
+////            print(true)
+////        }
+////        else {
+////            UserDefaults.standard.setIsScreenLockedOn(value: false)
+////            print(false)
+////        }
+//    }
 }

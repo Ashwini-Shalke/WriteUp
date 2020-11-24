@@ -30,7 +30,7 @@ class PrimaryLabel: UILabel {
 
 
 class NoteBarLabel: UILabel {
-   private var labelName = UILabel()
+    private var labelName = UILabel()
     init(labelName: String) {
         super.init(frame: .zero)
         self.text = labelName

@@ -125,16 +125,7 @@ class ProfileDetail: BaseView,EditProfileDelegate {
         //Todo: need to decide
     }
     
-//    @objc func isScreenLocked() {
-//        if screenLockSwitch.isOn {
-//            UserDefaults.standard.setIsScreenLockedOn(value: true)
-//            print(UserDefaults.standard.setIsScreenLockedOn(value: true))
-//        }
-//        else {
-//            UserDefaults.standard.setIsScreenLockedOn(value: false)
-//            print(UserDefaults.standard.setIsScreenLockedOn(value: true))
-//        }
-//    }
+    
 }
 
 

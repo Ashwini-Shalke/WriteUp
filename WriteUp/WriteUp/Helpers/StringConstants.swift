@@ -9,7 +9,6 @@
 import UIKit
 
 struct Constant {
-    
     //MARK: Home screen
     struct HomeSC {
         static let barLabel = "WriteUp"
@@ -64,6 +63,7 @@ struct Constant {
     
     static let MainColor: UIColor = UIColor(red: 137/255, green: 70/255, blue: 157/255, alpha: 1.0)
     static let SecondaryColor: UIColor = UIColor(red: 240/255, green: 111/255, blue: 56/255, alpha: 1.0)
+    static let initFatalError:String = "init(coder:) has not been implemented"
     
     enum contextName {
         case NewScreen
