@@ -20,7 +20,7 @@ class BaseCell: UICollectionViewCell {
     
   func setup(){}
   required init?(coder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
+      fatalError(Constant.initFatalError)
   }
 }
 
@@ -64,6 +64,7 @@ class HeaderNoteBar: BaseCell {
 }
 
 class NoteCell: BaseCell {
+    //name of label is temporary
     let noteLabel = NoteBarLabel(labelName: "note1")
     
     override func setup() {

@@ -27,7 +27,7 @@ class NotesListTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Constant.initFatalError)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
