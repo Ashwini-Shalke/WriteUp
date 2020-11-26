@@ -87,12 +87,15 @@ class EditProfileLauncher: UIViewController,UITextFieldDelegate {
         profileDetail.nameTextField.isUserInteractionEnabled = true
         profileDetail.phoneTextField.isUserInteractionEnabled = true
         profileDetail.placeHolderButton.isUserInteractionEnabled = true
+        profileDetail.screenLockSwitch.isUserInteractionEnabled = true
         
         profileDetail.emailTextField.delegate = self
         profileDetail.phoneTextField.delegate = self
         profileDetail.nameTextField.delegate = self
         
+        
         profileDetail.placeHolderButton.addTarget(self, action: #selector(imagePicker), for: .touchUpInside)
+        profileDetail.switchView.isHidden = true
     }
     
     func hideKeyboard(){

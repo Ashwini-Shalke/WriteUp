@@ -24,13 +24,13 @@ class PrimaryLabel: UILabel {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Constant.initFatalError)
     }
 }
 
 
 class NoteBarLabel: UILabel {
-   private var labelName = UILabel()
+    private var labelName = UILabel()
     init(labelName: String) {
         super.init(frame: .zero)
         self.text = labelName
@@ -41,7 +41,7 @@ class NoteBarLabel: UILabel {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Constant.initFatalError)
     }
 }
 

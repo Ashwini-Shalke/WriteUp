@@ -20,7 +20,7 @@ class BaseCell: UICollectionViewCell {
     
   func setup(){}
   required init?(coder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
+      fatalError(Constant.initFatalError)
   }
 }
 
@@ -47,11 +47,8 @@ class HeaderNoteBar: BaseCell {
         addSubview(containerView)
         containerView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 2, left: 0, bottom: -2, right: -10))
         
-        
         containerView.addSubview(addNoteButton)
         addNoteButton.anchor(top: topAnchor, leading: nil, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 10, left: 10, bottom: -10, right: -10),size: CGSize(width: 90, height: 119))
-        
-//        addNoteButton.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: UIEdgeInsets(top: 10, left: 10, bottom: -10, right: -10))
         addNoteButton.addTarget(self, action: #selector(handleAddNote), for: .touchUpInside)
         
         containerView.addSubview(addNoteLabel)
@@ -67,6 +64,7 @@ class HeaderNoteBar: BaseCell {
 }
 
 class NoteCell: BaseCell {
+    //name of label is temporary
     let noteLabel = NoteBarLabel(labelName: "note1")
     
     override func setup() {

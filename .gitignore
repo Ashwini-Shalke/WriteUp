@@ -1,7 +1,3 @@
-Swift-project-.gitignore-
-
-Git ignore file for swift projects
-
 # Created by https://www.gitignore.io/api/xcode,swift,macos
 # Edit at https://www.gitignore.io/?templates=xcode,swift,macos
 
@@ -122,10 +118,9 @@ iOSInjectionProject/
 
 ## Xcode Patch
 *.xcodeproj/*
-!*.xcodeproj/project.pbxproj
+!*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata/
 !*.xcworkspace/contents.xcworkspacedata
-WriteUp/WriteUp.xcworkspace/xcuserdata/AshwiniShalke.xcuserdatad/UserInterfaceState.xcuserstate
 /*.gcno
 
 ### Xcode Patch ###

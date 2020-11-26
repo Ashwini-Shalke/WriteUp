@@ -57,7 +57,6 @@ class RootViewController: UIViewController, signInDelegate, homeDelegate{
 }
 
 extension RootViewController {
-    
     func setupLayout(_ child: UIViewController){
         self.view.addSubview(child.view)
         child.view.translatesAutoresizingMaskIntoConstraints = false

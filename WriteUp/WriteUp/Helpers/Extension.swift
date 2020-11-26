@@ -11,6 +11,7 @@ import UIKit
 extension UserDefaults {
     enum UserDefaultKey: String {
         case isSignedIn
+        case isLockedOn
     }
     
     func setIsSignedIn(value:Bool) {
@@ -18,8 +19,17 @@ extension UserDefaults {
         synchronize()
     }
     
+    func setIsScreenLockedOn(value:Bool){
+        set(value, forKey: UserDefaultKey.isLockedOn.rawValue)
+        synchronize()
+    }
+    
     func isSignedIn() -> Bool {
         return bool(forKey: UserDefaultKey.isSignedIn.rawValue)
+    }
+    
+    func isScreenLockedOn()-> Bool {
+        return bool(forKey: UserDefaultKey.isLockedOn.rawValue)
     }
 }
 

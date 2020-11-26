@@ -9,7 +9,7 @@
 import UIKit
 
 class ColorPickerView: BaseView {
-    let cellId = "CellID"
+    let cellId = Constant.tableCellId.cellId
     let colors = [UIColor.systemRed, .systemGreen, .systemBlue,.systemYellow, .systemIndigo, .systemGray, .systemPurple, .systemOrange, .systemPink, .systemTeal]
     
     lazy var collectionView: UICollectionView = {

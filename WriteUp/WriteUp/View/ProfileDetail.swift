@@ -16,20 +16,44 @@ class BaseView: UIView {
     
     func setup(){}
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Constant.initFatalError)
     }
 }
 
-class ProfileDetail: BaseView,EditProfileDelegate{
-    let nameView: UIView = UIView()
-    let emailView: UIView = UIView()
-    let phoneView: UIView = UIView()
-    let noteView: UIView = UIView()
+class ProfileDetail: BaseView,EditProfileDelegate {
+    let nameLabel = PrimaryLabel(labelName: Constant.ProfileSC.nameLabel)
+    let emailLabel = PrimaryLabel(labelName: Constant.ProfileSC.emailLabel)
+    let phoneLabel = PrimaryLabel(labelName: Constant.ProfileSC.phoneLabel)
+    let noteLabel = PrimaryLabel(labelName: Constant.ProfileSC.noteLabel)
+    let switchLabel = PrimaryLabel(labelName: Constant.ProfileSC.switchLabel)
     
     let nameTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.nameLabel)
     let emailTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.emailLabel)
     let phoneTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.phoneLabel)
     let noteTextField = PrimaryTextField(placeholderString: Constant.ProfileSC.noOfNotes)
+    
+    let containerStackView:UIView = {
+        let containerView = UIView()
+        return containerView
+    }()
+    
+    let scrollView:UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
+    
+    let switchView: UIView = {
+       let switchView = UIView()
+       return switchView
+    }()
+
+    let screenLockSwitch = UISwitch()
+    
+    let switchStackView: UIStackView = {
+       let switchStackView = UIStackView()
+       switchStackView.backgroundColor = UIColor.green
+       return switchStackView
+    }()
     
     let topViewContainer : UIView = {
         let topView = UIView()
@@ -57,62 +81,51 @@ class ProfileDetail: BaseView,EditProfileDelegate{
     override func setup() {
         super.setup()
         backgroundColor = UIColor.white
-        setupProfileDetails()
+        addSubview(topViewContainer)
+        topViewContainer.addSubview(placeHolderButton)
+        addSubview(scrollView)
+        scrollView.addSubview(containerStackView)
+        setupProfileDetailsView()
     }
     
     func constructBottomView() {
-        let nameLabel = PrimaryLabel(labelName: Constant.ProfileSC.nameLabel)
-        nameView.addSubview(nameLabel)
-        nameLabel.anchor(top: nameView.topAnchor, leading: nameView.leadingAnchor, bottom: nil, trailing: nameView.trailingAnchor, size: Constant.ProfileSC.labelHeight)
-        
-        nameView.addSubview(nameTextField)
-        nameTextField.anchor(top: nameLabel.bottomAnchor, leading: nameView.leadingAnchor, bottom: nil, trailing: nameView.trailingAnchor,size: Constant.ProfileSC.textfieldHeight)
-        
-        let emailLabel = PrimaryLabel(labelName: Constant.ProfileSC.emailLabel)
-        emailView.addSubview(emailLabel)
-        emailLabel.anchor(top: emailView.topAnchor,leading: emailView.leadingAnchor, bottom: nil, trailing: emailView.trailingAnchor,size: Constant.ProfileSC.labelHeight)
-        
-        emailView.addSubview(emailTextField)
-        emailTextField.anchor(top: emailLabel.bottomAnchor, leading: emailView.leadingAnchor, bottom: nil, trailing: emailView.trailingAnchor,size: Constant.ProfileSC.textfieldHeight)
-        
-        let phoneLabel = PrimaryLabel(labelName: Constant.ProfileSC.phoneLabel)
-        phoneView.addSubview(phoneLabel)
-        phoneLabel.anchor(top: phoneView.topAnchor, leading: phoneView.leadingAnchor, bottom: nil, trailing: phoneView.trailingAnchor, size: Constant.ProfileSC.labelHeight)
-        
-        phoneView.addSubview(phoneTextField)
-        phoneTextField.anchor(top: phoneLabel.bottomAnchor, leading: phoneView.leadingAnchor, bottom: nil,trailing: phoneView.trailingAnchor, size: Constant.ProfileSC.textfieldHeight)
-        
-        let noteLabel = PrimaryLabel(labelName: Constant.ProfileSC.noteLabel)
-        noteView.addSubview(noteLabel)
-        noteLabel.anchor(top: noteView.topAnchor,leading: noteView.leadingAnchor, bottom: nil, trailing: noteView.trailingAnchor,size: Constant.ProfileSC.labelHeight)
-        
-        noteView.addSubview(noteTextField)
-        noteTextField.anchor(top: noteLabel.bottomAnchor, leading: noteView.leadingAnchor, bottom: nil, trailing: noteView.trailingAnchor, size: Constant.ProfileSC.textfieldHeight)
+        screenLockSwitch.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+        switchView.addSubview(switchLabel)
+        switchView.addSubview(screenLockSwitch)
+        switchLabel.anchor(top: switchView.topAnchor, leading: switchView.leadingAnchor, bottom: switchView.bottomAnchor, trailing: nil, size: CGSize(width: 300, height: 0))
+        screenLockSwitch.anchor(top: switchView.topAnchor , leading: switchLabel.trailingAnchor, bottom: nil, trailing: switchView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: -10))
+//        screenLockSwitch.addTarget(self, action: #selector(isScreenLocked), for: .valueChanged)
     }
     
-    func setupProfileDetails(){
-        addSubview(topViewContainer)
-        topViewContainer.anchor(top: safeAreaLayoutGuide.topAnchor , leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor,size: CGSize(width: 0, height: 200))
+    func setupProfileDetailsView(){
+        topViewContainer.anchor(top: safeAreaLayoutGuide.topAnchor , leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor,size: CGSize(width: 0, height: 175))
         
-        topViewContainer.addSubview(placeHolderButton)
         placeHolderButton.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, size: CGSize(width: 120, height: 120))
         placeHolderButton.centerXAnchor.constraint(equalTo: topViewContainer.centerXAnchor).isActive = true
         placeHolderButton.centerYAnchor.constraint(equalTo: topViewContainer.centerYAnchor).isActive = true
         
-        self.constructBottomView()
-        let stackView = UIStackView(arrangedSubviews: [nameView, emailView, phoneView, noteView])
-        stackView.distribution = .fillEqually
+        scrollView.anchor(top: topViewContainer.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0))
+        containerStackView.anchor(top: scrollView.topAnchor, leading: scrollView.leadingAnchor, bottom: scrollView.bottomAnchor, trailing: scrollView.trailingAnchor)
+        constructBottomView()
+        setupStackView()
+    }
+    
+    func setupStackView(){
+        let viewArray = [nameLabel,nameTextField,phoneLabel,phoneTextField,emailLabel,emailTextField,noteLabel,noteTextField,switchView]
+        let stackView = UIStackView(arrangedSubviews: viewArray)
+        containerStackView.addSubview(stackView)
+        stackView.anchor(top: containerStackView.topAnchor, leading: containerStackView.leadingAnchor, bottom: containerStackView.bottomAnchor, trailing: containerStackView.trailingAnchor)
+        stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         stackView.axis = .vertical
-        
-        addSubview(stackView)
-        // stack View :- need to calculate the number of items in stack view
-        let stackHeight = CGSize(width: 0, height: (32 * 4) + (37 * 4) + 4)
-        stackView.anchor(top: topViewContainer.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor, size: stackHeight)
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 5
     }
     
     func handleEdit() {
         //Todo: need to decide
     }
+    
+    
 }
 
 

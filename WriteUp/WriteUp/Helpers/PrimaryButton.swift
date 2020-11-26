@@ -22,7 +22,7 @@ class PrimaryButton: UIButton {
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Constant.initFatalError)
     }
 }
 
@@ -36,7 +36,7 @@ class SecondaryButton: UIButton {
         self.setTitle(titleText, for: .normal)
     }
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Constant.initFatalError)
     }
 }
 
@@ -52,7 +52,7 @@ class ShowAllButton: UIButton {
         self.setTitle(titleText, for: .normal)
     }
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Constant.initFatalError)
     }
 }
 

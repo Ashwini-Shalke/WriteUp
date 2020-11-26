@@ -25,6 +25,6 @@ class PrimaryTextField: UITextField {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Constant.initFatalError)
     }
 }

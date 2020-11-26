@@ -13,7 +13,7 @@ protocol noteListViewDelegate: AnyObject {
 
 class NotesListTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     weak var noteListDelegate: noteListViewDelegate?
-    let cellId = "CellID"
+    let cellId = Constant.tableCellId.cellId
     var searching = false
     var searchNote = [Note]()
     var noteArray = [Note(title: "NewYork Holiday Plan", description: "Top things to see during hoildays in NewYork and many other places, time to explore New York. yippppppppppppppppeeeeeeeeeeeeeeeeeeeee!!!", date: "21/05/20"),Note(title: "Paris Holiday Plan", description: "Top things to see during hoildays in Paris and many other places", date: "24/05/20"),Note(title: "Maldives Holiday Plan", description: "Top things to see during holidays in Maldives and many other places", date: "26/05/20"),Note(title: "Indonesia Holiday Plan", description: "Top things to see during hoildays in Indonesia and many other places, time to explore New York. yippppppppppppppppeeeeeeeeeeeeeeeeeeeee!!!", date: "21/05/20"),Note(title: "US Holiday Plan", description: "Top things to see during holidays in US and many other places", date: "24/05/20"),Note(title: "Japan Holiday Plan", description: "Top things to see during hoildays in Japan and many other places", date: "26/05/20")]
@@ -27,7 +27,7 @@ class NotesListTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Constant.initFatalError)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
