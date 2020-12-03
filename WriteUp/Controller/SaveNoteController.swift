@@ -8,65 +8,32 @@
 
 import UIKit
 class SaveNoteController: UIViewController {
-    let titleLabel = PrimaryLabel(labelName: Constant.AddNote.titleLabel)
-    let titleTextField = PrimaryTextField(placeholderString: Constant.AddNote.titleTextFieldPlaceHolder)
-    let summaryLabel = PrimaryLabel(labelName: Constant.AddNote.summaryLabel)
-    let summaryTextField = PrimaryTextField(placeholderString: Constant.AddNote.summaryTextFieldPlaceHolder)
-    let chooseTagLabel = PrimaryLabel(labelName: Constant.AddNote.chooseTagLabel)
-    let titleView: UIView = UIView()
-    let summaryView: UIView = UIView()
-    let chooseTagView: UIView = UIView()
+    let saveNoteView = SaveNoteView()
     var sampleString: String = ""
     let i = 0
     
-    let colorPickerView: ColorPickerView = {
-        let pickerView = ColorPickerView()
-        return pickerView
-    }()
     
     override func viewDidLoad() {
+        view.backgroundColor = .white
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(handleSaveNote))
+        self.navigationItem.setHidesBackButton(false, animated: false)
+        handleComponents()
         constructView()
-        setupStack()
         hideKeyboard()
         handleTitle()
     }
     
-    func setupStack(){
-        let stackView = UIStackView(arrangedSubviews: [titleView,summaryView,chooseTagView])
-        stackView.distribution = .fillEqually
-        stackView.axis = .vertical
-        view.addSubview(stackView)
-        // stack View :- need to calculate the number of items in stack view
-        let stackHeight = CGSize(width: 0, height: (32 * 3) + (37 * 3) + 3)
-        stackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0),size: stackHeight)
+    func handleComponents(){
+        saveNoteView.titleTextField.isUserInteractionEnabled = true
+        saveNoteView.summaryTextField.isUserInteractionEnabled = true
+        
+        saveNoteView.titleTextField.delegate = self
+        saveNoteView.summaryTextField.delegate = self
     }
     
     func constructView(){
-        view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(handleSaveNote))
-        self.navigationItem.setHidesBackButton(false, animated: false)
-        
-        titleView.addSubview(titleLabel)
-        titleLabel.anchor(top: titleView.topAnchor, leading: titleView.leadingAnchor, bottom: nil, trailing: titleView.trailingAnchor, size: Constant.ProfileSC.labelHeight)
-        
-        titleView.addSubview(titleTextField)
-        titleTextField.delegate = self
-        titleTextField.isUserInteractionEnabled = true
-        titleTextField.anchor(top: titleLabel.bottomAnchor, leading: titleView.leadingAnchor, bottom: nil, trailing: titleView.trailingAnchor,size: Constant.ProfileSC.textfieldHeight)
-        
-        summaryView.addSubview(summaryLabel)
-        summaryLabel.anchor(top: summaryView.topAnchor,leading: summaryView.leadingAnchor, bottom: nil, trailing: summaryView.trailingAnchor,size: Constant.ProfileSC.labelHeight)
-        
-        summaryView.addSubview(summaryTextField)
-        summaryTextField.delegate = self
-        summaryTextField.isUserInteractionEnabled = true
-        summaryTextField.anchor(top: summaryLabel.bottomAnchor, leading: summaryView.leadingAnchor, bottom: nil, trailing: summaryView.trailingAnchor,size: Constant.ProfileSC.textfieldHeight)
-        
-        chooseTagView.addSubview(chooseTagLabel)
-        chooseTagLabel.anchor(top: chooseTagView.topAnchor, leading: chooseTagView.leadingAnchor, bottom: nil, trailing: chooseTagView.trailingAnchor, size: Constant.ProfileSC.labelHeight)
-        
-        chooseTagView.addSubview(colorPickerView)
-        colorPickerView.anchor(top: chooseTagLabel.bottomAnchor, leading: chooseTagView.leadingAnchor, bottom: nil, trailing: chooseTagView.trailingAnchor,size: Constant.ProfileSC.textfieldHeight)
+        view.addSubview(saveNoteView)
+        saveNoteView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
         
     }
     
@@ -104,8 +71,8 @@ extension SaveNoteController: UITextFieldDelegate {
     }
     
     func handleTitle(){
-        titleTextField.text = sampleString.title
-        summaryTextField.text = sampleString.description
+        saveNoteView.titleTextField.text = sampleString.title
+        saveNoteView.summaryTextField.text = sampleString.description
     }
 }
 
