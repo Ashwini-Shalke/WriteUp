@@ -44,6 +44,16 @@
 		3398D21F24C6F6990022F2F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3398D21D24C6F6990022F2F7 /* GoogleService-Info.plist */; };
 		33DBC321246EB50100E6462A /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DBC320246EB50100E6462A /* Calendar.swift */; };
 		33DBC323246FFCF200E6462A /* SaveNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DBC322246FFCF200E6462A /* SaveNoteController.swift */; };
+		33E3C3E9257E17A300E33CB4 /* MaisonNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33E3C3E4257E17A200E33CB4 /* MaisonNeue-Bold.ttf */; };
+		33E3C3EA257E17A300E33CB4 /* MaisonNeue-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33E3C3E5257E17A200E33CB4 /* MaisonNeue-Book.ttf */; };
+		33E3C3EB257E17A300E33CB4 /* MaisonNeue-Demi.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33E3C3E6257E17A300E33CB4 /* MaisonNeue-Demi.ttf */; };
+		33E3C3EC257E17A300E33CB4 /* MaisonNeue-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33E3C3E7257E17A300E33CB4 /* MaisonNeue-Light.ttf */; };
+		33E3C3ED257E17A300E33CB4 /* MaisonNeue-Mono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33E3C3E8257E17A300E33CB4 /* MaisonNeue-Mono.ttf */; };
+		33E3C3F0257E17AC00E33CB4 /* MaisonNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33E3C3E4257E17A200E33CB4 /* MaisonNeue-Bold.ttf */; };
+		33E3C3F3257E17B200E33CB4 /* MaisonNeue-Mono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33E3C3E8257E17A300E33CB4 /* MaisonNeue-Mono.ttf */; };
+		33E3C3F4257E17B200E33CB4 /* MaisonNeue-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33E3C3E5257E17A200E33CB4 /* MaisonNeue-Book.ttf */; };
+		33E3C3F5257E17B200E33CB4 /* MaisonNeue-Demi.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33E3C3E6257E17A300E33CB4 /* MaisonNeue-Demi.ttf */; };
+		33E3C3F6257E17B200E33CB4 /* MaisonNeue-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33E3C3E7257E17A300E33CB4 /* MaisonNeue-Light.ttf */; };
 		33FB4EE024B843570079B84C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E5F124471444009D3983 /* Extension.swift */; };
 		33FB4EE124B843570079B84C /* NotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81822475276000944CA5 /* NotesListView.swift */; };
 		33FB4EE224B843570079B84C /* NoteListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D818A2477E1DF00944CA5 /* NoteListViewCell.swift */; };
@@ -115,6 +125,11 @@
 		3398D21D24C6F6990022F2F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		33DBC320246EB50100E6462A /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		33DBC322246FFCF200E6462A /* SaveNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNoteController.swift; sourceTree = "<group>"; };
+		33E3C3E4257E17A200E33CB4 /* MaisonNeue-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MaisonNeue-Bold.ttf"; path = "../../../../../Downloads/MaisonNeue-Bold.ttf"; sourceTree = "<group>"; };
+		33E3C3E5257E17A200E33CB4 /* MaisonNeue-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MaisonNeue-Book.ttf"; path = "../../../../../Downloads/MaisonNeue-Book.ttf"; sourceTree = "<group>"; };
+		33E3C3E6257E17A300E33CB4 /* MaisonNeue-Demi.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MaisonNeue-Demi.ttf"; path = "../../../../../Downloads/MaisonNeue-Demi.ttf"; sourceTree = "<group>"; };
+		33E3C3E7257E17A300E33CB4 /* MaisonNeue-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MaisonNeue-Light.ttf"; path = "../../../../../Downloads/MaisonNeue-Light.ttf"; sourceTree = "<group>"; };
+		33E3C3E8257E17A300E33CB4 /* MaisonNeue-Mono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MaisonNeue-Mono.ttf"; path = "../../../../../Downloads/MaisonNeue-Mono.ttf"; sourceTree = "<group>"; };
 		33FB4F0524B843570079B84C /* WriteUpDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WriteUpDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33FB4F0624B843580079B84C /* WriteUpDev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = WriteUpDev.plist; path = /Users/AshwiniShalke/Practise_Swift/WriteUp/WriteUp/WriteUpDev.plist; sourceTree = "<absolute>"; };
 		35FB5654ABC33E0E2DE474E1 /* Pods_WriteUpDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WriteUpDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,6 +193,7 @@
 				3333CDE92445CB7A00E6EF3B /* AppDelegate.swift */,
 				3333CDEF2445CB7A00E6EF3B /* Main.storyboard */,
 				3333CDF22445CB7D00E6EF3B /* Assets.xcassets */,
+				33E3C3E2257E176800E33CB4 /* Resources */,
 				3333CDF42445CB7D00E6EF3B /* LaunchScreen.storyboard */,
 				3333CE032445DD8E00E6EF3B /* WriteUp.entitlements */,
 				3333CDF72445CB7D00E6EF3B /* Info.plist */,
@@ -248,6 +264,26 @@
 				332D81842476466C00944CA5 /* ShowAllNotesController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		33E3C3E2257E176800E33CB4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				33E3C3E3257E177F00E33CB4 /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		33E3C3E3257E177F00E33CB4 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				33E3C3E4257E17A200E33CB4 /* MaisonNeue-Bold.ttf */,
+				33E3C3E5257E17A200E33CB4 /* MaisonNeue-Book.ttf */,
+				33E3C3E6257E17A300E33CB4 /* MaisonNeue-Demi.ttf */,
+				33E3C3E7257E17A300E33CB4 /* MaisonNeue-Light.ttf */,
+				33E3C3E8257E17A300E33CB4 /* MaisonNeue-Mono.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		45B61ECD0D6CA2657A14F090 /* Pods */ = {
@@ -355,9 +391,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3333CDF62445CB7D00E6EF3B /* LaunchScreen.storyboard in Resources */,
+				33E3C3EC257E17A300E33CB4 /* MaisonNeue-Light.ttf in Resources */,
+				33E3C3EB257E17A300E33CB4 /* MaisonNeue-Demi.ttf in Resources */,
+				33E3C3ED257E17A300E33CB4 /* MaisonNeue-Mono.ttf in Resources */,
+				33E3C3EA257E17A300E33CB4 /* MaisonNeue-Book.ttf in Resources */,
 				3333CDF32445CB7D00E6EF3B /* Assets.xcassets in Resources */,
 				3333CDF12445CB7A00E6EF3B /* Main.storyboard in Resources */,
 				3398D21E24C6F6990022F2F7 /* GoogleService-Info.plist in Resources */,
+				33E3C3E9257E17A300E33CB4 /* MaisonNeue-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,10 +406,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33E3C3F6257E17B200E33CB4 /* MaisonNeue-Light.ttf in Resources */,
 				33FB4EFE24B843570079B84C /* LaunchScreen.storyboard in Resources */,
+				33E3C3F4257E17B200E33CB4 /* MaisonNeue-Book.ttf in Resources */,
 				33FB4EFF24B843570079B84C /* Assets.xcassets in Resources */,
 				33FB4F0024B843570079B84C /* Main.storyboard in Resources */,
+				33E3C3F3257E17B200E33CB4 /* MaisonNeue-Mono.ttf in Resources */,
 				3398D21F24C6F6990022F2F7 /* GoogleService-Info.plist in Resources */,
+				33E3C3F0257E17AC00E33CB4 /* MaisonNeue-Bold.ttf in Resources */,
+				33E3C3F5257E17B200E33CB4 /* MaisonNeue-Demi.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

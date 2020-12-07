@@ -24,12 +24,6 @@ class NotesListCell: UITableViewCell {
     
     let customView: UIView = {
         let cv = UIView()
-        cv.backgroundColor = .systemGray6
-        cv.layer.shadowColor = Constant.MainColor.cgColor
-        cv.layer.shadowOpacity = 0.5
-        cv.layer.shadowOffset = .zero
-        cv.layer.shadowRadius = 2 
-        cv.layer.cornerRadius = 5
         return cv
     }()
     
@@ -47,7 +41,7 @@ class NotesListCell: UITableViewCell {
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 2
         label.font = UIFont().itemDesc()
-        label.textColor = UIColor.darkGray
+        label.textColor = .black
         return label
     }()
     
@@ -64,16 +58,16 @@ class NotesListCell: UITableViewCell {
         let label = UILabel()
         label.text = "20/05/20"
         label.font = UIFont().tabBarTitle()
-        label.textColor = UIColor.darkGray
+        //label.textColor = UIColor.darkGray
         return label
     }()
     
     func setupLayout() {
         self.addSubview(customView)
-        customView.anchor(top: self.topAnchor, leading: self.leadingAnchor, bottom: self.bottomAnchor, trailing: self.trailingAnchor,padding: UIEdgeInsets(top: 5, left: 16, bottom: -5, right: -16))
+        customView.anchor(top: self.topAnchor, leading: self.leadingAnchor, bottom: self.bottomAnchor, trailing: self.trailingAnchor,padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         
         customView.addSubview(roundColorBar)
-        roundColorBar.anchor(top: customView.topAnchor, leading: customView.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 12, left: 12, bottom: 0, right: 0),size: CGSize(width: 12, height: 12))
+        roundColorBar.anchor(top: customView.topAnchor, leading: customView.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 11, left: 12, bottom: 0, right: 0),size: CGSize(width: 12, height: 12))
         
         customView.addSubview(noteTitleLabel)
         noteTitleLabel.anchor(top: customView.topAnchor, leading: roundColorBar.trailingAnchor, bottom: nil, trailing: customView.trailingAnchor, padding: UIEdgeInsets(top: 8 , left: 8, bottom: 0, right: -75),size: CGSize(width: 0, height: 20))
