@@ -18,3 +18,9 @@ struct Note {
         self.date = date
     }
 }
+
+struct SomeData: Codable {
+    let title, createdAt, summery: String?
+    let authorID: Int?
+    let tag, body: String?
+}

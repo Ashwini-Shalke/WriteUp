@@ -59,7 +59,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         if context == Constant.contextName.NewScreen {
             navigationItem.rightBarButtonItem = UIBarButtonItem(customView: nextButton)
             nextButton.setTitleColor(Constant.MainColor, for: .normal)
-            nextButton.addTarget(self, action: #selector(handleNewNote), for: .touchUpInside)
+            nextButton.addTarget(self, action: #selector(handleNext), for: .touchUpInside)
         } else {
             navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
             saveButton.setTitleColor(Constant.MainColor, for: .normal)
@@ -106,10 +106,10 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         textView.resignFirstResponder()
     }
     
-    @objc func handleNewNote(){
+    @objc func handleNext(){
         self.view.endEditing(true)
         let saveNote = SaveNoteController()
-        saveNote.sampleString = textView.text
+        saveNote.noteDescription = textView.text
         navigationController?.pushViewController(saveNote, animated: true)
     }
     

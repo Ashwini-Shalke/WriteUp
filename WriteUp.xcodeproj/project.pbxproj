@@ -247,8 +247,8 @@
 				3333CE012445CD8100E6EF3B /* HomeViewController.swift */,
 				3372E60E244F074D009D3983 /* ProfileLauncher.swift */,
 				332C576A2463DD0700891BBB /* EditProfileLauncher.swift */,
-				33DBC322246FFCF200E6462A /* SaveNoteController.swift */,
 				332D81802475229500944CA5 /* AddNewNoteController.swift */,
+				33DBC322246FFCF200E6462A /* SaveNoteController.swift */,
 				332D81842476466C00944CA5 /* ShowAllNotesController.swift */,
 			);
 			path = Controller;

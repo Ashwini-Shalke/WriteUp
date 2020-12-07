@@ -9,9 +9,8 @@
 import UIKit
 class SaveNoteController: UIViewController {
     let saveNoteView = SaveNoteView()
-    var sampleString: String = ""
+    var noteDescription: String = ""
     let i = 0
-    
     
     override func viewDidLoad() {
         view.backgroundColor = .white
@@ -20,13 +19,12 @@ class SaveNoteController: UIViewController {
         handleComponents()
         constructView()
         hideKeyboard()
-        handleTitle()
+        setTitleAndSummary()
     }
     
     func handleComponents(){
         saveNoteView.titleTextField.isUserInteractionEnabled = true
         saveNoteView.summaryTextField.isUserInteractionEnabled = true
-        
         saveNoteView.titleTextField.delegate = self
         saveNoteView.summaryTextField.delegate = self
     }
@@ -34,17 +32,56 @@ class SaveNoteController: UIViewController {
     func constructView(){
         view.addSubview(saveNoteView)
         saveNoteView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
-        
     }
     
     @objc func handleSaveNote() {
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
-        
         guard let controllersInStack = navigationController?.viewControllers else { return }
         if let _ = controllersInStack.first(where: { $0 is RootViewController }) {
             navigationController?.popToRootViewController(animated: true)
         }
+        
+//        let title = saveNoteView.titleTextField.text
+//        let summary = saveNoteView.summaryTextField.text
+//        let tag = "red"
+        let authorId = 2
+        
+        let urlString = "https://bestnoteapp.herokuapp.com/notes"
+        guard let url = URL(string: urlString) else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer gqIMHata6XHdx4kjNOd/eg==", forHTTPHeaderField: "Authorization")
+        
+        let parameters = ["title": "Jiva",
+                           "createdAt": "on 21 Oct",
+                           "summery": "just now",
+                           "tag": "Red",
+                           "body": "it awesome and short"]
+        
+        guard let uploadData = try? JSONEncoder().encode(parameters) else {return}
+        
+        URLSession.shared.uploadTask(with: request, from: uploadData){ (data, response, err ) in
+            if let err = err {
+                print("Error", err)
+            }
+           
+            let Notes = try! JSONDecoder().decode(SomeData.self, from: data!)
+            print("Api response", Notes)
+            guard let response = response as? HTTPURLResponse,
+                  (200...299).contains(response.statusCode) else {
+                print("Server Error")
+                return
+            }
+            if let mimeType = response.mimeType,
+               mimeType == "application/json",
+               let data = data,
+               let dataString = String(data: data, encoding: .utf8){
+                print(dataString)
+            }
+        }.resume()
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -70,9 +107,9 @@ extension SaveNoteController: UITextFieldDelegate {
         return updatedText.count <= 50
     }
     
-    func handleTitle(){
-        saveNoteView.titleTextField.text = sampleString.title
-        saveNoteView.summaryTextField.text = sampleString.description
+    func setTitleAndSummary(){
+        saveNoteView.titleTextField.text = noteDescription.title
+        saveNoteView.summaryTextField.text = noteDescription.description
     }
 }
 
