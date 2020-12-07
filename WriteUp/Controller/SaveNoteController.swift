@@ -12,6 +12,14 @@ class SaveNoteController: UIViewController {
     var noteDescription: String = ""
     let i = 0
     
+    let currentDate: String = {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat  = "dd/mm/yy"
+        let currentDate = dateFormatter.string(from: date)
+        return currentDate
+    }()
+    
     override func viewDidLoad() {
         view.backgroundColor = .white
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(handleSaveNote))
@@ -41,24 +49,17 @@ class SaveNoteController: UIViewController {
         if let _ = controllersInStack.first(where: { $0 is RootViewController }) {
             navigationController?.popToRootViewController(animated: true)
         }
-        
-//        let title = saveNoteView.titleTextField.text
-//        let summary = saveNoteView.summaryTextField.text
-//        let tag = "red"
-        let authorId = 2
-        
+    
         let urlString = "https://bestnoteapp.herokuapp.com/notes"
         guard let url = URL(string: urlString) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Bearer gqIMHata6XHdx4kjNOd/eg==", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer vBg+Le92nYG+XqP4cWqG/Q==", forHTTPHeaderField: "Authorization")
         
-        let parameters = ["title": "Jiva",
-                           "createdAt": "on 21 Oct",
-                           "summery": "just now",
-                           "tag": "Red",
-                           "body": "it awesome and short"]
+       
+        let parameters = SomeData(title: saveNoteView.titleTextField.text, createdAt: currentDate, summery: saveNoteView.summaryTextField.text, authorID: 4, tag: "lo", body: noteDescription)
+     
         
         guard let uploadData = try? JSONEncoder().encode(parameters) else {return}
         

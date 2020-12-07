@@ -19,8 +19,18 @@ struct Note {
     }
 }
 
-struct SomeData: Codable {
+struct SomeData :Codable {
     let title, createdAt, summery: String?
     let authorID: Int?
     let tag, body: String?
+    init(title : String?, createdAt: String?, summery : String?, authorID : Int?, tag: String?, body :String?){
+        self.title = title
+        self.createdAt = createdAt
+        self.summery = summery
+        self.authorID = authorID
+        self.tag = tag
+        self.body = body
+    }
 }
+
+
