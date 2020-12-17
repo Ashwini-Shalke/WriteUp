@@ -56,11 +56,8 @@ class SaveNoteController: UIViewController {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer vBg+Le92nYG+XqP4cWqG/Q==", forHTTPHeaderField: "Authorization")
-        
-       
-        let parameters = SomeData(title: saveNoteView.titleTextField.text, createdAt: currentDate, summery: saveNoteView.summaryTextField.text, authorID: 4, tag: "lo", body: noteDescription)
-     
-        
+        print(currentDate)
+        let parameters = NoteData(title: saveNoteView.titleTextField.text, createdAt: currentDate, summery: saveNoteView.summaryTextField.text, authorID: 4, tag: "lo", body: noteDescription)
         guard let uploadData = try? JSONEncoder().encode(parameters) else {return}
         
         URLSession.shared.uploadTask(with: request, from: uploadData){ (data, response, err ) in
@@ -68,7 +65,7 @@ class SaveNoteController: UIViewController {
                 print("Error", err)
             }
            
-            let Notes = try! JSONDecoder().decode(SomeData.self, from: data!)
+            let Notes = try! JSONDecoder().decode(NoteData.self, from: data!)
             print("Api response", Notes)
             guard let response = response as? HTTPURLResponse,
                   (200...299).contains(response.statusCode) else {

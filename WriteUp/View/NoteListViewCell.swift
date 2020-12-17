@@ -8,15 +8,15 @@
 
 import UIKit
 class NotesListCell: UITableViewCell {
-    var note: Note? {
+    var note: ListNoteData? {
         didSet {
             if let title = note?.title {
                  noteTitleLabel.text = title
             }
-            if let description = note?.description {
+            if let description = note?.summery {
                 noteDescription.text = description
             }
-            if let dateString = note?.date {
+            if let dateString = note?.createdAt {
                 dateLabel.text = dateString
             }
         }

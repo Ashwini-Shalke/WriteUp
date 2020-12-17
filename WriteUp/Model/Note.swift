@@ -19,7 +19,7 @@ struct Note {
     }
 }
 
-struct SomeData :Codable {
+struct NoteData :Codable {
     let title, createdAt, summery: String?
     let authorID: Int?
     let tag, body: String?
@@ -31,6 +31,12 @@ struct SomeData :Codable {
         self.tag = tag
         self.body = body
     }
+}
+
+struct ListNoteData: Decodable {
+    let title, createdAt, summery: String?
+    let authorID,id: Int?
+    let tag, body: String?
 }
 
 

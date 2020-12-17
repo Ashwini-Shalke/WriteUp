@@ -11,12 +11,13 @@ protocol noteListViewDelegate: AnyObject {
     func handleDidSelectRow()
 }
 
-class NotesListTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
+class NotesListTableView: UITableView {
     weak var noteListDelegate: noteListViewDelegate?
+    let authorId = 2 // WIP
+    var noteArray = [ListNoteData]()
+    var searchNote = [ListNoteData]()
     let cellId = Constant.tableCellId.cellId
     var searching = false
-    var searchNote = [Note]()
-    var noteArray = [Note(title: "NewYork Holiday Plan", description: "Top things to see during hoildays in NewYork and many other places, time to explore New York. yippppppppppppppppeeeeeeeeeeeeeeeeeeeee!!!", date: "21/05/20"),Note(title: "Paris Holiday Plan", description: "Top things to see during hoildays in Paris and many other places", date: "24/05/20"),Note(title: "Maldives Holiday Plan", description: "Top things to see during holidays in Maldives and many other places", date: "26/05/20"),Note(title: "Indonesia Holiday Plan", description: "Top things to see during hoildays in Indonesia and many other places, time to explore New York. yippppppppppppppppeeeeeeeeeeeeeeeeeeeee!!!", date: "21/05/20"),Note(title: "US Holiday Plan", description: "Top things to see during holidays in US and many other places", date: "24/05/20"),Note(title: "Japan Holiday Plan", description: "Top things to see during hoildays in Japan and many other places", date: "26/05/20")]
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -24,11 +25,48 @@ class NotesListTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
         self.separatorStyle = .none
         self.delegate = self
         self.dataSource = self
+        getNotesByUserID()
     }
     
     required init?(coder: NSCoder) {
         fatalError(Constant.initFatalError)
     }
+    
+    func getNotesByUserID(){
+        let authorId =  2 // will be implemented later
+        let id = String(describing: authorId)
+        let getURL = "https://bestnoteapp.herokuapp.com/users/\(id)/notes"
+        guard let url = URL(string: getURL) else { return }
+        URLSession.shared.dataTask(with: url) { (data, response, err) in
+            guard let data = data else { return }
+            do {
+                self.noteArray = try JSONDecoder().decode([ListNoteData].self,from: data)
+                DispatchQueue.main.async { self.reloadData() }
+            } catch let  err {
+                print("Unable to fetch list of Notes", err)
+            }
+        }.resume()
+    }
+    
+    func deleteNoteByNoteID(noteID : Int){
+        print(noteID)
+        let id = String(describing: noteID)
+        let getURL = "https://bestnoteapp.herokuapp.com/notes/\(id)"
+        guard let url = URL(string: getURL) else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        URLSession.shared.dataTask(with: request) { (data, response, err) in
+            do {
+                DispatchQueue.main.async {
+                    self.reloadData()
+                }
+            }
+        }.resume()
+    }
+}
+
+
+extension NotesListTableView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searching {
@@ -42,11 +80,11 @@ class NotesListTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! NotesListCell
         cell.selectionStyle = .none
         cell.note = noteArray[indexPath.row]
-                if searching {
-                    cell.note = searchNote[indexPath.row]
-                } else {
-                    cell.note = noteArray[indexPath.row]
-                }
+        if searching {
+            cell.note = searchNote[indexPath.row]
+        } else {
+            cell.note = noteArray[indexPath.row]
+        }
         return cell
     }
     
@@ -63,10 +101,11 @@ class NotesListTableView: UITableView, UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // handle delete (by removing the data from your array and updating the tableview)
+        if editingStyle == .delete{
+            guard let ID = noteArray[indexPath.row].id else {return}
             self.noteArray.remove(at: indexPath.row)
-            tableView.deleteRows(at: [(indexPath as IndexPath)], with: .automatic)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            deleteNoteByNoteID(noteID: ID)
         }
     }
     
