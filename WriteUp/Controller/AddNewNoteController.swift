@@ -16,6 +16,8 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     let nextButton = SecondaryButton(titleText: Constant.AddNote.nextButtonTitle)
     let saveButton = SecondaryButton(titleText: "Save")
     var context = Constant.contextName.NewScreen
+    let createDate : String = ""
+    var noteId : Int = 0
     
     lazy var inputAccesssoryToolView: BottomToolBar = {
         var  toolView = BottomToolBar()
@@ -39,20 +41,21 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         return textview
     }()
     
-    let dateLabel: UILabel = {
-        let label = UILabel()
-        label.text = "10 June 2020 at 11:21 AM"
-        label.font = UIFont().formControlSegmented()
-        label.textColor = Constant.SecondaryColor
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.frame = CGRect(x: 0, y: 0, width: 154, height: 0)
-        return label
-    }()
+//    let dateLabel: UILabel = {
+//        let label = UILabel()
+//        label.text = "78798"
+//        label.font = UIFont().formControlSegmented()
+//        label.textColor = Constant.SecondaryColor
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.frame = CGRect(x: 0, y: 0, width: 154, height: 0)
+//        return label
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setUpScreenButtons()
+        print(noteId)
     }
     
     func setUpScreenButtons(){
@@ -64,8 +67,14 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
             navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
             saveButton.setTitleColor(Constant.MainColor, for: .normal)
             saveButton.addTarget(self, action: #selector(handleSaveNote), for: .touchUpInside)
+//            handleUpdateNote(id: noteId)
         }
     }
+    
+    func handleUpdateNote(id :Int){
+           
+        }
+        
     
     override func viewSafeAreaInsetsDidChange() {
         if #available(iOS 11.0, *){
@@ -82,13 +91,14 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     
     func setupViews(){
         view.backgroundColor = .white
-        navigationItem.titleView = dateLabel
+//        navigationItem.titleView = dateLabel
         navigationItem.largeTitleDisplayMode = .never
         self.navigationItem.setHidesBackButton(false, animated: false)
         
         view.addSubview(bottomToolBar)
         bottomToolBar.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 50, left: 0, bottom: -1, right: 0))
         bottomToolBar.hideBackground()
+//        dateLabel.text = createDate.currentDate
     }
     
     func trashButton() {
@@ -113,10 +123,37 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         navigationController?.pushViewController(saveNote, animated: true)
     }
     
-    @objc func handleSaveNote(){
+    //need to work on it
+    @objc func handleSaveNote(id: Int){
+        print("hello")
         self.view.endEditing(true)
         navigationController?.popViewController(animated: true)
-    }
+        let fullURL = "https://bestnoteapp.herokuapp.com/notes/\(noteId)"
+        guard let url = URL(string: fullURL) else { return }
+        
+        let uploadDataModel = NoteData(title: "hiiWelcome", createdAt: createDate.currentDate,summery: "hello",authorID: 2, tag: "lo", body: "welcome")
+        guard let jsonData = try? JSONEncoder().encode(uploadDataModel) else {
+            print("Error: Trying to convert model to JSON data")
+                       return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer +Y/RdSbjir2E6wB1/8KK0w==", forHTTPHeaderField: "Authorization")
+        request.httpBody = jsonData
+        URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
+            if error != nil {
+                            print("error=\(error)")
+                            return
+                        }
+                        let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+                        print("responseString = \(responseString)")
+                        return
+                    }
+        .resume()
+            
+        }
+    
     
     @objc func keyboardWillShow(notification: NSNotification){
         let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue

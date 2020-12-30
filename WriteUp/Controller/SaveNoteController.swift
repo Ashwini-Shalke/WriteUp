@@ -11,14 +11,20 @@ class SaveNoteController: UIViewController {
     let saveNoteView = SaveNoteView()
     var noteDescription: String = ""
     let i = 0
+    let createDate:String = ""
     
-    let currentDate: String = {
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat  = "dd/mm/yy"
-        let currentDate = dateFormatter.string(from: date)
-        return currentDate
-    }()
+//    let currentDate: String = {
+////        let date = Date()
+////        let dateFormatter = DateFormatter()
+////        dateFormatter.dateFormat  = "dd/mm/yyyy"
+////        let currentDate = dateFormatter.string(from: date)
+////        return currentDate
+//        let f = ISO8601DateFormatter()
+//        f.formatOptions = [.withFullDate, .withDashSeparatorInDate]
+//        f.timeZone = TimeZone.current
+//        let s = f.string(from: Date())
+//        return s
+//    }()
     
     override func viewDidLoad() {
         view.backgroundColor = .white
@@ -55,9 +61,9 @@ class SaveNoteController: UIViewController {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Bearer vBg+Le92nYG+XqP4cWqG/Q==", forHTTPHeaderField: "Authorization")
-        print(currentDate)
-        let parameters = NoteData(title: saveNoteView.titleTextField.text, createdAt: currentDate, summery: saveNoteView.summaryTextField.text, authorID: 4, tag: "lo", body: noteDescription)
+        request.setValue("Bearer +Y/RdSbjir2E6wB1/8KK0w==", forHTTPHeaderField: "Authorization")
+        
+        let parameters = NoteData(title: saveNoteView.titleTextField.text, createdAt: createDate.currentDate , summery: saveNoteView.summaryTextField.text, authorID: 2, tag: "lo", body: noteDescription)
         guard let uploadData = try? JSONEncoder().encode(parameters) else {return}
         
         URLSession.shared.uploadTask(with: request, from: uploadData){ (data, response, err ) in

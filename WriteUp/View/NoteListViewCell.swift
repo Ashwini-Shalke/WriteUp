@@ -82,7 +82,7 @@ class NotesListCell: UITableViewCell {
         noteDescription.anchor(top: noteTitleLabel.bottomAnchor, leading: customView.leadingAnchor, bottom: nil, trailing: customView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 12, bottom: 0, right: -10),size: CGSize(width: 0, height: 34))
         
         customView.addSubview(dateLabel)
-        dateLabel.anchor(top: customView.topAnchor, leading: noteTitleLabel.trailingAnchor, bottom: nil, trailing: customView.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 12, bottom: 0, right: -10), size: CGSize(width: 0, height: 14))
+        dateLabel.anchor(top: customView.topAnchor, leading: noteTitleLabel.trailingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 8, left: 10, bottom: 0, right: -10), size: CGSize(width: 75, height: 14))
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

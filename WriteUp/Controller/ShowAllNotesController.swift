@@ -43,12 +43,21 @@ class ShowAllNotesController: UIViewController {
     }
 }
 
-extension ShowAllNotesController: UISearchBarDelegate, noteListViewDelegate {
-    func handleDidSelectRow() {
+extension ShowAllNotesController: UISearchBarDelegate, noteListTableViewDelegate {
+    
+    func handleDidSelectRow(noteID: Int) {
         let editNoteView = AddNewNoteController()
+        editNoteView.noteId = noteID
+        print(noteID)
         editNoteView.context = Constant.contextName.EditScreen
         navigationController?.pushViewController(editNoteView, animated: true)
     }
+    
+//    func handleDidSelectRow() {
+//        let editNoteView = AddNewNoteController()
+//        editNoteView.context = Constant.contextName.EditScreen
+//        navigationController?.pushViewController(editNoteView, animated: true)
+//    }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         notesListView.searchNote = notesListView.noteArray.filter({($0.title?.lowercased().prefix(searchText.count).elementsEqual(searchText.lowercased()))!
