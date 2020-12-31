@@ -11,7 +11,7 @@ class NotesListCell: UITableViewCell {
     var note: ListNoteData? {
         didSet {
             if let title = note?.title {
-                 noteTitleLabel.text = title
+                noteTitleLabel.text = title
             }
             if let description = note?.summery {
                 noteDescription.text = description
@@ -51,7 +51,7 @@ class NotesListCell: UITableViewCell {
         return label
     }()
     
-     let roundColorBar : UIButton = {
+    let roundColorBar : UIButton = {
         let button = UIButton(type: .system)
         button.frame = CGRect(x: 0, y: 0, width: 12, height: 0)
         button.layer.cornerRadius = button.frame.width/2
@@ -87,10 +87,9 @@ class NotesListCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-               setupLayout()
+        setupLayout()
     }
     
-
     required init?(coder: NSCoder) {
         fatalError(Constant.initFatalError)
     }

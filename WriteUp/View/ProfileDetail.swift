@@ -107,7 +107,7 @@ class ProfileDetail: BaseView,EditProfileDelegate {
         containerStackView.anchor(top: scrollView.topAnchor, leading: scrollView.leadingAnchor, bottom: scrollView.bottomAnchor, trailing: scrollView.trailingAnchor)
         
         //setup stackView
-        let viewArray = [nameLabel,nameTextField,phoneLabel,phoneTextField,emailLabel,emailTextField,noteLabel,noteTextField,switchView]
+        let viewArray = [nameLabel,nameTextField, phoneLabel, phoneTextField, emailLabel, emailTextField, noteLabel, noteTextField, switchView]
         let stackView = UIStackView(arrangedSubviews: viewArray)
         containerStackView.addSubview(stackView)
         stackView.anchor(top: containerStackView.topAnchor, leading: containerStackView.leadingAnchor, bottom: containerStackView.bottomAnchor, trailing: containerStackView.trailingAnchor)
@@ -117,12 +117,9 @@ class ProfileDetail: BaseView,EditProfileDelegate {
         stackView.spacing = 5
     }
     
-    
     func handleEdit() {
         //Todo: need to decide
     }
-    
-    
 }
 
 

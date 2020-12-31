@@ -34,41 +34,18 @@ class NotesListTableView: UITableView {
     }
     
     func getNotesByUserID(){
-        let authorId =  2 // will be implemented later
-        let id = String(describing: authorId)
-        let getURL = "https://bestnoteapp.herokuapp.com/users/\(id)/notes"
-        guard let url = URL(string: getURL) else { return }
-        URLSession.shared.dataTask(with: url) { (data, response, err) in
-            guard let data = data else { return }
-            do {
-                self.noteArray = try JSONDecoder().decode([ListNoteData].self,from: data)
-                DispatchQueue.main.async { self.reloadData() }
-            } catch let  err {
-                print("Unable to fetch list of Notes", err)
-            }
-        }.resume()
+        NoteAPIService.sharedInstance.fetchNoteListByAuthorId(authorID: 2) { (notes) in
+            self.noteArray = notes
+            self.reloadData()
+        }
     }
     
     func deleteNoteByNoteID(noteID : Int){
-        print(noteID)
-        let id = String(describing: noteID)
-        let getURL = "https://bestnoteapp.herokuapp.com/notes/\(id)"
-        guard let url = URL(string: getURL) else { return }
-        var request = URLRequest(url: url)
-        request.httpMethod = "DELETE"
-        URLSession.shared.dataTask(with: request) { (data, response, err) in
-            do {
-                DispatchQueue.main.async {
-                    self.reloadData()
-                }
-            }
-        }.resume()
+        NoteAPIService.sharedInstance.deleteNoteByNoteId(httpMethod: "DELETE", noteId: noteID)
     }
 }
 
-
 extension NotesListTableView: UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searching {
             return searchNote.count
@@ -113,5 +90,4 @@ extension NotesListTableView: UITableViewDelegate, UITableViewDataSource {
             deleteNoteByNoteID(noteID: ID)
         }
     }
-    
 }

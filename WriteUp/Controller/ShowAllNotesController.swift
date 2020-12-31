@@ -53,12 +53,6 @@ extension ShowAllNotesController: UISearchBarDelegate, noteListTableViewDelegate
         navigationController?.pushViewController(editNoteView, animated: true)
     }
     
-//    func handleDidSelectRow() {
-//        let editNoteView = AddNewNoteController()
-//        editNoteView.context = Constant.contextName.EditScreen
-//        navigationController?.pushViewController(editNoteView, animated: true)
-//    }
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         notesListView.searchNote = notesListView.noteArray.filter({($0.title?.lowercased().prefix(searchText.count).elementsEqual(searchText.lowercased()))!
         })
