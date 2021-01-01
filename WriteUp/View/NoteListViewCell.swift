@@ -16,8 +16,10 @@ class NotesListCell: UITableViewCell {
             if let description = note?.summery {
                 noteDescription.text = description
             }
-            if let dateString = note?.createdAt {
-                dateLabel.text = dateString
+            if let dateTimeString = note?.createdAt {
+                guard let index = dateTimeString.firstIndex(of: " ") else { return}
+                let dateString = dateTimeString[..<index]
+                dateLabel.text = String(dateString)
             }
         }
     }

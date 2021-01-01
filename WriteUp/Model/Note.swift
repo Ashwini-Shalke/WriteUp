@@ -5,9 +5,7 @@
 //  Created by Ashwini shalke on 22/05/20.
 //  Copyright © 2020 Ashwini Shalke. All rights reserved.
 //
-
 import Foundation
-
 struct Note {
     var title: String?
     var description:String?
@@ -20,7 +18,7 @@ struct Note {
 }
 
 struct NoteData :Codable {
-    let title, createdAt, summery: String?
+    var title, createdAt, summery: String?
     let authorID: Int?
     let tag, body: String?
     init(title : String?, createdAt: String?, summery : String?, authorID : Int?, tag: String?, body :String?){
@@ -34,7 +32,7 @@ struct NoteData :Codable {
 }
 
 struct ListNoteData: Decodable {
-    let title, createdAt, summery: String?
+    var title, createdAt, summery: String?
     let authorID,id: Int?
     let tag, body: String?
 }

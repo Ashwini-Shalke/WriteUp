@@ -8,6 +8,7 @@ import UIKit
 
 class NoteAPIService: NSObject {
     static let sharedInstance = NoteAPIService()
+    var sortedNoteArray = [ListNoteData]()
     let baseURL = "https://bestnoteapp.herokuapp.com/"
     
     func fetchNoteListByAuthorId(authorID: Int, completion: @escaping ([ListNoteData])-> ()){
@@ -26,14 +27,14 @@ class NoteAPIService: NSObject {
         operationsOnNoteFromURLStrings(urlString: "\(baseURL)notes/\(noteId)", httpMethod: httpMethod, data: data)
     }
     
-    
     func fetchNotesFromURLString(urlString: String, completion : @escaping ([ListNoteData]) -> ()) {
         guard let url = URL(string: urlString) else {return}
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else { return }
             do {
-                let notesArray = try JSONDecoder().decode([ListNoteData].self, from : data)
+                var notesArray = try JSONDecoder().decode([ListNoteData].self, from : data)
                 DispatchQueue.main.async {
+                    notesArray.sort{"\(String(describing: $0.createdAt))" < "\(String(describing: $1.createdAt))"}
                     completion(notesArray)
                 }
             }catch let jsonError {
