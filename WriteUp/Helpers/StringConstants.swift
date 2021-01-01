@@ -36,7 +36,7 @@ struct Constant {
     
     //MARK: NoteBar
     struct NoteBar {
-        static let notesLabel = "Activity"
+        static let notesLabel = "New Note"
         static let showAllButton = "Show All"
     }
     

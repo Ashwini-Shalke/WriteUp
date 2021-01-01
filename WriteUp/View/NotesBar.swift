@@ -13,6 +13,7 @@ protocol NoteBarDelegate: AnyObject {
 }
 
 class NotesBar: BaseView,HeaderNoteDelegate,ActivityDelegate {
+
     let cellId = Constant.tableCellId.cellId
     let headerID = Constant.tableCellId.headerId
     var generator: UISelectionFeedbackGenerator?
@@ -54,6 +55,10 @@ class NotesBar: BaseView,HeaderNoteDelegate,ActivityDelegate {
     
     func showAllNote() {
        noteDelegate?.showAllNotes()
+    }
+    
+    func handleNewNote() {
+        //need to work
     }
 }
 
