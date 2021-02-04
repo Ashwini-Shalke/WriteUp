@@ -16,6 +16,8 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     let nextButton = SecondaryButton(titleText: Constant.AddNote.nextButtonTitle)
     let saveButton = SecondaryButton(titleText: "Save")
     var context = Constant.contextName.NewScreen
+    let createDate : String = ""
+    var noteId : Int = 0
     
     lazy var inputAccesssoryToolView: BottomToolBar = {
         var  toolView = BottomToolBar()
@@ -39,33 +41,39 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         return textview
     }()
     
-    let dateLabel: UILabel = {
-        let label = UILabel()
-        label.text = "10 June 2020 at 11:21 AM"
-        label.font = UIFont().formControlSegmented()
-        label.textColor = Constant.SecondaryColor
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.frame = CGRect(x: 0, y: 0, width: 154, height: 0)
-        return label
-    }()
+    //    let dateLabel: UILabel = {
+    //        let label = UILabel()
+    //        label.text = "78798"
+    //        label.font = UIFont().formControlSegmented()
+    //        label.textColor = Constant.SecondaryColor
+    //        label.translatesAutoresizingMaskIntoConstraints = false
+    //        label.frame = CGRect(x: 0, y: 0, width: 154, height: 0)
+    //        return label
+    //    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setUpScreenButtons()
+        print(noteId)
     }
     
     func setUpScreenButtons(){
         if context == Constant.contextName.NewScreen {
             navigationItem.rightBarButtonItem = UIBarButtonItem(customView: nextButton)
             nextButton.setTitleColor(Constant.MainColor, for: .normal)
-            nextButton.addTarget(self, action: #selector(handleNewNote), for: .touchUpInside)
+            nextButton.addTarget(self, action: #selector(handleNext), for: .touchUpInside)
         } else {
             navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
             saveButton.setTitleColor(Constant.MainColor, for: .normal)
             saveButton.addTarget(self, action: #selector(handleSaveNote), for: .touchUpInside)
         }
     }
+    
+    func handleUpdateNote(id :Int){
+        
+    }
+    
     
     override func viewSafeAreaInsetsDidChange() {
         if #available(iOS 11.0, *){
@@ -82,13 +90,14 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     
     func setupViews(){
         view.backgroundColor = .white
-        navigationItem.titleView = dateLabel
+        //        navigationItem.titleView = dateLabel
         navigationItem.largeTitleDisplayMode = .never
         self.navigationItem.setHidesBackButton(false, animated: false)
         
         view.addSubview(bottomToolBar)
         bottomToolBar.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 50, left: 0, bottom: -1, right: 0))
         bottomToolBar.hideBackground()
+        //        dateLabel.text = createDate.currentDate
     }
     
     func trashButton() {
@@ -106,17 +115,21 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         textView.resignFirstResponder()
     }
     
-    @objc func handleNewNote(){
+    @objc func handleNext(){
         self.view.endEditing(true)
         let saveNote = SaveNoteController()
-        saveNote.sampleString = textView.text
+        saveNote.noteDescription = textView.text
         navigationController?.pushViewController(saveNote, animated: true)
     }
     
+    //need to work on it
     @objc func handleSaveNote(){
         self.view.endEditing(true)
         navigationController?.popViewController(animated: true)
+        let uploadData = NoteData(title: "hii Welcome", createdAt: createDate.currentDate,summery: "hello",authorID: 2, tag: "lo", body: "welcome")
+        NoteAPIService.sharedInstance.modifyNoteByNoteId(httpMethod: "PATCH", noteId: noteId, data: uploadData)
     }
+    
     
     @objc func keyboardWillShow(notification: NSNotification){
         let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue

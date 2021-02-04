@@ -119,7 +119,13 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
     }
 }
 
-extension HomeViewController: NoteBarDelegate,noteListViewDelegate,ActivityDelegate{
+extension HomeViewController: NoteBarDelegate,noteListTableViewDelegate,ActivityDelegate{
+    func handleDidSelectRow(noteID: Int) {
+        let editNoteView = AddNewNoteController()
+        editNoteView.context = Constant.contextName.EditScreen
+        navigationController?.pushViewController(editNoteView, animated: true)
+    }
+    
     func showAllNote() {
         showAllNotes()
     }
@@ -133,12 +139,6 @@ extension HomeViewController: NoteBarDelegate,noteListViewDelegate,ActivityDeleg
     func showAllNotes() {
         let showAllNotesView = ShowAllNotesController()
         navigationController?.pushViewController(showAllNotesView, animated: true)
-    }
-    
-    func handleDidSelectRow() {
-        let editNoteView = AddNewNoteController()
-        editNoteView.context = Constant.contextName.EditScreen
-        navigationController?.pushViewController(editNoteView, animated: true)
     }
 }
 

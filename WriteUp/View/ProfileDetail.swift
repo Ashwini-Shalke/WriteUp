@@ -43,16 +43,16 @@ class ProfileDetail: BaseView,EditProfileDelegate {
     }()
     
     let switchView: UIView = {
-       let switchView = UIView()
-       return switchView
+        let switchView = UIView()
+        return switchView
     }()
-
+    
     let screenLockSwitch = UISwitch()
     
     let switchStackView: UIStackView = {
-       let switchStackView = UIStackView()
-       switchStackView.backgroundColor = UIColor.green
-       return switchStackView
+        let switchStackView = UIStackView()
+        switchStackView.backgroundColor = UIColor.green
+        return switchStackView
     }()
     
     let topViewContainer : UIView = {
@@ -81,37 +81,33 @@ class ProfileDetail: BaseView,EditProfileDelegate {
     override func setup() {
         super.setup()
         backgroundColor = UIColor.white
-        addSubview(topViewContainer)
-        topViewContainer.addSubview(placeHolderButton)
-        addSubview(scrollView)
-        scrollView.addSubview(containerStackView)
         setupProfileDetailsView()
     }
     
-    func constructBottomView() {
-        screenLockSwitch.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
-        switchView.addSubview(switchLabel)
-        switchView.addSubview(screenLockSwitch)
-        switchLabel.anchor(top: switchView.topAnchor, leading: switchView.leadingAnchor, bottom: switchView.bottomAnchor, trailing: nil, size: CGSize(width: 300, height: 0))
-        screenLockSwitch.anchor(top: switchView.topAnchor , leading: switchLabel.trailingAnchor, bottom: nil, trailing: switchView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: -10))
-//        screenLockSwitch.addTarget(self, action: #selector(isScreenLocked), for: .valueChanged)
-    }
-    
     func setupProfileDetailsView(){
+        addSubview(topViewContainer)
         topViewContainer.anchor(top: safeAreaLayoutGuide.topAnchor , leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor,size: CGSize(width: 0, height: 175))
         
+        topViewContainer.addSubview(placeHolderButton)
         placeHolderButton.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, size: CGSize(width: 120, height: 120))
         placeHolderButton.centerXAnchor.constraint(equalTo: topViewContainer.centerXAnchor).isActive = true
         placeHolderButton.centerYAnchor.constraint(equalTo: topViewContainer.centerYAnchor).isActive = true
         
+        //setup screenLockSwitch
+        screenLockSwitch.transform = CGAffineTransform(scaleX: 0.75, y: 0.95)
+        switchView.addSubview(switchLabel)
+        switchView.addSubview(screenLockSwitch)
+        switchLabel.anchor(top: switchView.topAnchor, leading: switchView.leadingAnchor, bottom: switchView.bottomAnchor, trailing: nil, size: CGSize(width: 300, height: 0))
+        screenLockSwitch.anchor(top: switchView.topAnchor , leading: switchLabel.trailingAnchor, bottom: nil, trailing: switchView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: -10))
+        
+        addSubview(scrollView)
         scrollView.anchor(top: topViewContainer.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0))
+        
+        scrollView.addSubview(containerStackView)
         containerStackView.anchor(top: scrollView.topAnchor, leading: scrollView.leadingAnchor, bottom: scrollView.bottomAnchor, trailing: scrollView.trailingAnchor)
-        constructBottomView()
-        setupStackView()
-    }
-    
-    func setupStackView(){
-        let viewArray = [nameLabel,nameTextField,phoneLabel,phoneTextField,emailLabel,emailTextField,noteLabel,noteTextField,switchView]
+        
+        //setup stackView
+        let viewArray = [nameLabel,nameTextField, phoneLabel, phoneTextField, emailLabel, emailTextField, noteLabel, noteTextField, switchView]
         let stackView = UIStackView(arrangedSubviews: viewArray)
         containerStackView.addSubview(stackView)
         stackView.anchor(top: containerStackView.topAnchor, leading: containerStackView.leadingAnchor, bottom: containerStackView.bottomAnchor, trailing: containerStackView.trailingAnchor)
@@ -124,8 +120,6 @@ class ProfileDetail: BaseView,EditProfileDelegate {
     func handleEdit() {
         //Todo: need to decide
     }
-    
-    
 }
 
 

@@ -8,16 +8,18 @@
 
 import UIKit
 class NotesListCell: UITableViewCell {
-    var note: Note? {
+    var note: ListNoteData? {
         didSet {
             if let title = note?.title {
-                 noteTitleLabel.text = title
+                noteTitleLabel.text = title
             }
-            if let description = note?.description {
+            if let description = note?.summery {
                 noteDescription.text = description
             }
-            if let dateString = note?.date {
-                dateLabel.text = dateString
+            if let dateTimeString = note?.createdAt {
+                guard let index = dateTimeString.firstIndex(of: " ") else { return}
+                let dateString = dateTimeString[..<index]
+                dateLabel.text = String(dateString)
             }
         }
     }
@@ -51,7 +53,7 @@ class NotesListCell: UITableViewCell {
         return label
     }()
     
-     let roundColorBar : UIButton = {
+    let roundColorBar : UIButton = {
         let button = UIButton(type: .system)
         button.frame = CGRect(x: 0, y: 0, width: 12, height: 0)
         button.layer.cornerRadius = button.frame.width/2
@@ -82,15 +84,14 @@ class NotesListCell: UITableViewCell {
         noteDescription.anchor(top: noteTitleLabel.bottomAnchor, leading: customView.leadingAnchor, bottom: nil, trailing: customView.trailingAnchor, padding: UIEdgeInsets(top: 5, left: 12, bottom: 0, right: -10),size: CGSize(width: 0, height: 34))
         
         customView.addSubview(dateLabel)
-        dateLabel.anchor(top: customView.topAnchor, leading: noteTitleLabel.trailingAnchor, bottom: nil, trailing: customView.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 12, bottom: 0, right: -10), size: CGSize(width: 0, height: 14))
+        dateLabel.anchor(top: customView.topAnchor, leading: noteTitleLabel.trailingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 8, left: 10, bottom: 0, right: -10), size: CGSize(width: 75, height: 14))
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-               setupLayout()
+        setupLayout()
     }
     
-
     required init?(coder: NSCoder) {
         fatalError(Constant.initFatalError)
     }
