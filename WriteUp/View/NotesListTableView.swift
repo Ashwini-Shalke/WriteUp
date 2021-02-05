@@ -36,7 +36,7 @@ class NotesListTableView: UITableView {
     func getNotesByUserID(){
         NoteAPIService.sharedInstance.fetchNoteListByAuthorId(authorID: 2) { (notes) in
             self.noteArray = notes
-            self.reloadData()
+            DispatchQueue.main.async { self.reloadData() }
         }
     }
     

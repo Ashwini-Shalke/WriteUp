@@ -34,7 +34,7 @@ class NoteAPIService: NSObject {
             do {
                 var notesArray = try JSONDecoder().decode([ListNoteData].self, from : data)
                 DispatchQueue.main.async {
-                    notesArray.sort{"\(String(describing: $0.createdAt))" < "\(String(describing: $1.createdAt))"}
+                    notesArray.sort{"\(String(describing: $0.createdAt))" > "\(String(describing: $1.createdAt))"}
                     completion(notesArray)
                 }
             }catch let jsonError {

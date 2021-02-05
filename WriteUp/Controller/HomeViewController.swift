@@ -61,6 +61,12 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
         #endif
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.noteListView.getNotesByUserID()
+        self.noteListView.reloadData()
+        
+    }
+    
     func sendCalendarHeight(height: CGFloat?) {
         UIView.animate(withDuration: 0.1, delay: 0.1, options: .curveEaseInOut, animations: {
             self.calendarHeightConstraint?.constant = height ?? 0
@@ -85,9 +91,9 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
         activityBar.anchor(top: calendar.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding:UIEdgeInsets(top: 5, left: 16, bottom: 0, right: -16),size: CGSize(width: 0, height: 25))
         view.addSubview(notesLabel)
         notesLabel.anchor(top: activityBar.topAnchor, leading:activityBar.leadingAnchor, bottom: activityBar.bottomAnchor,trailing: nil,padding : UIEdgeInsets(top: 0, left: -16, bottom: 16, right: 0),size: CGSize(width: 100, height: 0))
+        
         view.addSubview(noteListView)
         noteListView.anchor(top: activityBar.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0) ,size: CGSize(width: 0, height: 500))
-        
     }
     
     func setupActions(){
