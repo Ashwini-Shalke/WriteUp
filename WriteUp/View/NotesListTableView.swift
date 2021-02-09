@@ -4,19 +4,17 @@
 //
 //  Created by Ashwini shalke on 20/05/20.
 //  Copyright © 2020 Ashwini Shalke. All rights reserved.
-//
 
 import UIKit
 protocol noteListTableViewDelegate: AnyObject {
-    func handleDidSelectRow(noteID: Int)
+    func handleDidSelectRow(noteDetail:ListNoteData)
 }
 
 class NotesListTableView: UITableView {
     weak var noteListDelegate: noteListTableViewDelegate?
     let authorId = 2 // WIP
     var noteID: Int = 0
-    var noteArray = [ListNoteData]()
-    var searchNote = [ListNoteData]()
+    var noteArray = [ListNoteData](), searchNote = [ListNoteData]()
     let cellId = Constant.tableCellId.cellId
     var searching = false
     
@@ -36,6 +34,7 @@ class NotesListTableView: UITableView {
     func getNotesByUserID(){
         NoteAPIService.sharedInstance.fetchNoteListByAuthorId(authorID: 2) { (notes) in
             self.noteArray = notes
+            print(self.noteArray)
             DispatchQueue.main.async { self.reloadData() }
         }
     }
@@ -71,10 +70,8 @@ extension NotesListTableView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let ID = noteArray[indexPath.row].id else {return}
-        noteID = ID
-        print(noteID)
-        noteListDelegate?.handleDidSelectRow(noteID: noteID)
+        let noteDetail = noteArray[indexPath.row]
+        noteListDelegate?.handleDidSelectRow(noteDetail: noteDetail)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -84,7 +81,6 @@ extension NotesListTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
             guard let ID = noteArray[indexPath.row].id else {return}
-            noteID = ID
             self.noteArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
             deleteNoteByNoteID(noteID: ID)

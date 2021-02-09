@@ -169,12 +169,12 @@ extension String {
         return arrayToRet
     }
     
-    var title: String {
+    var getTitle: String {
         return self.lines.first ?? self
     }
     
-    var description: String {
-        let string = self.replacingOccurrences(of: self.title, with: "")
+    var getSummary: String {
+        let string = self.replacingOccurrences(of: self.getTitle, with: "")
         let desc = string.trimmingCharacters(in: .whitespacesAndNewlines)
         return desc
     }

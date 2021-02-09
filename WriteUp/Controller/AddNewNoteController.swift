@@ -18,6 +18,8 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     var context = Constant.contextName.NewScreen
     let createDate : String = ""
     var noteId : Int = 0
+    var notedDetail = ListNoteData(title: nil, createdAt: nil, summery: nil, tag: nil, body: nil, authorID: nil, id: nil)
+    
     
     lazy var inputAccesssoryToolView: BottomToolBar = {
         var  toolView = BottomToolBar()
@@ -55,7 +57,8 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         super.viewDidLoad()
         setupViews()
         setUpScreenButtons()
-        print(noteId)
+        print("Add", notedDetail)
+        textView.text = notedDetail.body
     }
     
     func setUpScreenButtons(){
@@ -66,14 +69,10 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         } else {
             navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
             saveButton.setTitleColor(Constant.MainColor, for: .normal)
+            print("Note to Edit", noteId)
             saveButton.addTarget(self, action: #selector(handleSaveNote), for: .touchUpInside)
         }
     }
-    
-    func handleUpdateNote(id :Int){
-        
-    }
-    
     
     override func viewSafeAreaInsetsDidChange() {
         if #available(iOS 11.0, *){
@@ -119,6 +118,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         self.view.endEditing(true)
         let saveNote = SaveNoteController()
         saveNote.noteDescription = textView.text
+        print(saveNote.noteDescription)
         navigationController?.pushViewController(saveNote, animated: true)
     }
     
@@ -126,7 +126,11 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     @objc func handleSaveNote(){
         self.view.endEditing(true)
         navigationController?.popViewController(animated: true)
-        let uploadData = NoteData(title: "hii Welcome", createdAt: createDate.currentDate,summery: "hello",authorID: 2, tag: "lo", body: "welcome")
+        let body = textView.text
+        let title = notedDetail.title
+        let summary = notedDetail.summery
+        noteId = notedDetail.id!
+        let uploadData = NoteData(title: title, createdAt: createDate.currentDate,summery: summary,authorID: 2, tag: "lo", body: body)
         NoteAPIService.sharedInstance.modifyNoteByNoteId(httpMethod: "PATCH", noteId: noteId, data: uploadData)
     }
     

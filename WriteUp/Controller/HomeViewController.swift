@@ -61,7 +61,7 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
         #endif
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.noteListView.getNotesByUserID()
         self.noteListView.reloadData()
         
@@ -126,9 +126,10 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
 }
 
 extension HomeViewController: NoteBarDelegate,noteListTableViewDelegate,ActivityDelegate{
-    func handleDidSelectRow(noteID: Int) {
+    func handleDidSelectRow(noteDetail: ListNoteData) {
         let editNoteView = AddNewNoteController()
         editNoteView.context = Constant.contextName.EditScreen
+        editNoteView.notedDetail = noteDetail
         navigationController?.pushViewController(editNoteView, animated: true)
     }
     

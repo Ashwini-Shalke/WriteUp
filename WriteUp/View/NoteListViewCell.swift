@@ -85,6 +85,8 @@ class NotesListCell: UITableViewCell {
         
         customView.addSubview(dateLabel)
         dateLabel.anchor(top: customView.topAnchor, leading: noteTitleLabel.trailingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 8, left: 10, bottom: 0, right: -10), size: CGSize(width: 75, height: 14))
+        
+       
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

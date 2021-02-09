@@ -43,6 +43,7 @@ class SaveNoteController: UIViewController {
             navigationController?.popToRootViewController(animated: true)
         }
         let parameters = NoteData(title: saveNoteView.titleTextField.text, createdAt: createDate.currentDate , summery: saveNoteView.summaryTextField.text, authorID: 2, tag: "lo", body: noteDescription)
+        print("save", noteDescription)
         
         NoteAPIService.sharedInstance.createNote(httpMethod: "POST", data: parameters)
         navigationController?.popViewController(animated: true)
@@ -72,8 +73,8 @@ extension SaveNoteController: UITextFieldDelegate {
     }
     
     func setTitleAndSummary(){
-        saveNoteView.titleTextField.text = noteDescription.title
-        saveNoteView.summaryTextField.text = noteDescription.description
+        saveNoteView.titleTextField.text = noteDescription.getTitle
+        saveNoteView.summaryTextField.text = noteDescription.getSummary
     }
 }
 

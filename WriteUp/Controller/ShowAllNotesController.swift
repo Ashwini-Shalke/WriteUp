@@ -44,11 +44,9 @@ class ShowAllNotesController: UIViewController {
 }
 
 extension ShowAllNotesController: UISearchBarDelegate, noteListTableViewDelegate {
-    
-    func handleDidSelectRow(noteID: Int) {
+    func handleDidSelectRow(noteDetail: ListNoteData) {
         let editNoteView = AddNewNoteController()
-        editNoteView.noteId = noteID
-        print(noteID)
+        editNoteView.notedDetail = noteDetail
         editNoteView.context = Constant.contextName.EditScreen
         navigationController?.pushViewController(editNoteView, animated: true)
     }
