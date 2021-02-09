@@ -57,8 +57,9 @@ class NoteAPIService: NSObject {
                     print("error=\(String(describing: error))")
                     return
                 }
-                let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-                print("responseString = \(String(describing: responseString))")
+                _ = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+//                let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+//                print("responseString = \(String(describing: responseString))")
                 return
             }
         }.resume()

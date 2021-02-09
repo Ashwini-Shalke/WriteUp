@@ -42,9 +42,7 @@ class SaveNoteController: UIViewController {
         if let _ = controllersInStack.first(where: { $0 is RootViewController }) {
             navigationController?.popToRootViewController(animated: true)
         }
-        let parameters = NoteData(title: saveNoteView.titleTextField.text, createdAt: createDate.currentDate , summery: saveNoteView.summaryTextField.text, authorID: 2, tag: "lo", body: noteDescription)
-        print("save", noteDescription)
-        
+        let parameters = NoteData(title: saveNoteView.titleTextField.text, createdAt: createDate.currentDate , summery: saveNoteView.summaryTextField.text, authorID: 2, tag: "lo", body: noteDescription)        
         NoteAPIService.sharedInstance.createNote(httpMethod: "POST", data: parameters)
         navigationController?.popViewController(animated: true)
     }

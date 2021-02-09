@@ -28,7 +28,11 @@ class ShowAllNotesController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.notesListView.getNotesByUserID()
+        self.notesListView.reloadData()
     }
     
     func setupViews(){
@@ -46,7 +50,7 @@ class ShowAllNotesController: UIViewController {
 extension ShowAllNotesController: UISearchBarDelegate, noteListTableViewDelegate {
     func handleDidSelectRow(noteDetail: ListNoteData) {
         let editNoteView = AddNewNoteController()
-        editNoteView.notedDetail = noteDetail
+        editNoteView.noteDetail = noteDetail
         editNoteView.context = Constant.contextName.EditScreen
         navigationController?.pushViewController(editNoteView, animated: true)
     }

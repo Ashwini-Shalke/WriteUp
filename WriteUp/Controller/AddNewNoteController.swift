@@ -18,7 +18,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     var context = Constant.contextName.NewScreen
     let createDate : String = ""
     var noteId : Int = 0
-    var notedDetail = ListNoteData(title: nil, createdAt: nil, summery: nil, tag: nil, body: nil, authorID: nil, id: nil)
+    var noteDetail = ListNoteData(title: nil, createdAt: nil, summery: nil, tag: nil, body: nil, authorID: nil, id: nil)
     
     
     lazy var inputAccesssoryToolView: BottomToolBar = {
@@ -43,22 +43,20 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         return textview
     }()
     
-    //    let dateLabel: UILabel = {
-    //        let label = UILabel()
-    //        label.text = "78798"
-    //        label.font = UIFont().formControlSegmented()
-    //        label.textColor = Constant.SecondaryColor
-    //        label.translatesAutoresizingMaskIntoConstraints = false
-    //        label.frame = CGRect(x: 0, y: 0, width: 154, height: 0)
-    //        return label
-    //    }()
+        let dateLabel: UILabel = {
+            let label = UILabel()
+            label.text = ""
+            label.font = UIFont().formControlSegmented()
+            label.textColor = Constant.SecondaryColor
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.frame = CGRect(x: 0, y: 0, width: 154, height: 0)
+            return label
+        }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setUpScreenButtons()
-        print("Add", notedDetail)
-        textView.text = notedDetail.body
     }
     
     func setUpScreenButtons(){
@@ -69,7 +67,6 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         } else {
             navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
             saveButton.setTitleColor(Constant.MainColor, for: .normal)
-            print("Note to Edit", noteId)
             saveButton.addTarget(self, action: #selector(handleSaveNote), for: .touchUpInside)
         }
     }
@@ -89,14 +86,15 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     
     func setupViews(){
         view.backgroundColor = .white
-        //        navigationItem.titleView = dateLabel
+        navigationItem.titleView = dateLabel
         navigationItem.largeTitleDisplayMode = .never
         self.navigationItem.setHidesBackButton(false, animated: false)
         
         view.addSubview(bottomToolBar)
         bottomToolBar.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 50, left: 0, bottom: -1, right: 0))
         bottomToolBar.hideBackground()
-        //        dateLabel.text = createDate.currentDate
+        textView.text = noteDetail.body
+        dateLabel.text = noteDetail.createdAt
     }
     
     func trashButton() {
@@ -118,20 +116,26 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         self.view.endEditing(true)
         let saveNote = SaveNoteController()
         saveNote.noteDescription = textView.text
-        print(saveNote.noteDescription)
         navigationController?.pushViewController(saveNote, animated: true)
     }
     
     //need to work on it
     @objc func handleSaveNote(){
         self.view.endEditing(true)
-        navigationController?.popViewController(animated: true)
+//        navigationController?.popViewController(animated: true)
         let body = textView.text
-        let title = notedDetail.title
-        let summary = notedDetail.summery
-        noteId = notedDetail.id!
+        let title = body?.getTitle
+        let summary = body?.getSummary
+        if let id = noteDetail.id {
+            noteId = id
+        }
         let uploadData = NoteData(title: title, createdAt: createDate.currentDate,summery: summary,authorID: 2, tag: "lo", body: body)
         NoteAPIService.sharedInstance.modifyNoteByNoteId(httpMethod: "PATCH", noteId: noteId, data: uploadData)
+        dateLabel.text = createDate.currentDate
+        if textView.text == "" {
+                NoteAPIService.sharedInstance.deleteNoteByNoteId(httpMethod: "DELETE", noteId: noteDetail.id!)
+            
+        }
     }
     
     
