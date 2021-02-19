@@ -102,7 +102,7 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
     func setupNav(){
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.topItem?.title = Constant.HomeSC.barLabel
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: Constant.MainColor, NSAttributedString.Key.font: UIFont(name: "MarkerFelt-Thin", size: 34)!]
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont().formControlSegmented(size: 34)]
         navigationController?.navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
         navigationController?.navigationBar.tintColor = Constant.MainColor
