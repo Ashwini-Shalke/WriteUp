@@ -25,7 +25,10 @@ class NotesListCell: UITableViewCell {
     }
     
     let customView: UIView = {
-        return UIView()
+        let view = UIView()
+        view.layer.cornerRadius = 15
+        view.backgroundColor = Constant.AppLightGray
+        return view
     }()
     
     let noteTitleLabel: UILabel = {
@@ -65,7 +68,7 @@ class NotesListCell: UITableViewCell {
     
     func setupLayout() {
         self.addSubview(customView)
-        customView.anchor(top: self.topAnchor, leading: self.leadingAnchor, bottom: self.bottomAnchor, trailing: self.trailingAnchor,padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+        customView.anchor(top: self.topAnchor, leading: self.leadingAnchor, bottom: self.bottomAnchor, trailing: self.trailingAnchor,padding: UIEdgeInsets(top: 8, left: 8, bottom: -8, right: -8))
         
         customView.addSubview(roundColorBar)
         roundColorBar.anchor(top: customView.topAnchor, leading: customView.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 11, left: 12, bottom: 0, right: 0),size: CGSize(width: 12, height: 12))

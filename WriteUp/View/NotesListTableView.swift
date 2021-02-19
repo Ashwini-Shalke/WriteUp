@@ -21,10 +21,9 @@ class NotesListTableView: UITableView {
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         self.register(NotesListCell.self, forCellReuseIdentifier: cellId)
-        self.separatorStyle = .singleLine
-        self.separatorColor = .lightGray
         self.delegate = self
         self.dataSource = self
+        self.separatorColor = UIColor.clear
         getNotesByUserID()
     }
     
