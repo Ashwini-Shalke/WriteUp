@@ -87,7 +87,6 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     func setupViews(){
         view.backgroundColor = .white
         navigationItem.titleView = dateLabel
-        navigationItem.largeTitleDisplayMode = .never
         self.navigationItem.setHidesBackButton(false, animated: false)
         
         view.addSubview(bottomToolBar)

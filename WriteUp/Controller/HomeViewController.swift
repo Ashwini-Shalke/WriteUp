@@ -43,6 +43,12 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
         return button
     }()
     
+    private let createNoteButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage.init(named: "add"), for: .normal)
+        return button
+    }()
+    
     override func viewDidLoad() {
         setupNav()
         setupViews()
@@ -87,7 +93,8 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
     }
     
     func setupActions(){
-        profileButton.addTarget(self, action: #selector(handleProfileButton), for: UIControl.Event.touchUpInside)
+        profileButton.addTarget(self, action: #selector(handleProfileButton), for: .touchUpInside)
+        createNoteButton.addTarget(self, action: #selector(handleCreateNote), for: .touchUpInside)
     }
     
     func setupNav(){
@@ -95,7 +102,8 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
         navigationController?.navigationBar.topItem?.title = Constant.HomeSC.barLabel
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont().formControlSegmented(size: 34)]
         navigationController?.navigationItem.largeTitleDisplayMode = .always
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
+        navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: profileButton)
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: createNoteButton)
         navigationController?.navigationBar.tintColor = Constant.MainColor
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemPink,NSAttributedString.Key.font: UIFont().navLink()]
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -107,12 +115,19 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
         let profileLauncher = ProfileLauncher()
         profileLauncher.profileDelegate = self
         navigationController?.pushViewController(profileLauncher, animated: true)
+//        navigationController?.present(profileLauncher, animated: true, completion: nil)
+    }
+    
+    @objc func handleCreateNote(){
+        let addNewNote = AddNewNoteController()
+        addNewNote.context = Constant.contextName.NewScreen
+        navigationController?.pushViewController(addNewNote, animated: true)
     }
     
     func dismissHome() {
         #warning("setting the user defaults to true")        
         UserDefaults.standard.setIsSignedIn(value: true)
-//        UserDefaults.standard.setIsSignedIn(value: false)
+        //        UserDefaults.standard.setIsSignedIn(value: false)
         self.homeDelegate?.handleSignOut()
     }
 }
