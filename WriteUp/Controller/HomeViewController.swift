@@ -36,16 +36,23 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
     }()
     
     private let profileButton : UIButton = {
+        let smallConfiguration = UIImage.SymbolConfiguration(weight: UIImage.SymbolWeight.bold)
+        let smallSymbolImage = UIImage(systemName: "person.crop.circle", withConfiguration: smallConfiguration)
+        
         let button = UIButton(type: .system)
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 0)
         button.layer.cornerRadius = button.frame.width/2
-        button.backgroundColor = Constant.SecondaryColor
+        button.setImage(smallSymbolImage, for: .normal)
         return button
     }()
     
     private let createNoteButton : UIButton = {
+        
+        let smallConfiguration = UIImage.SymbolConfiguration(weight: UIImage.SymbolWeight.bold)
+        let smallSymbolImage = UIImage(systemName: "doc.badge.plus", withConfiguration: smallConfiguration)
+        
         let button = UIButton(type: .system)
-        button.setImage(UIImage.init(named: "add"), for: .normal)
+        button.setImage(smallSymbolImage, for: .normal)
         return button
     }()
     
