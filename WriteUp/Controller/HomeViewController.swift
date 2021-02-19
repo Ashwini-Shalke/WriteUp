@@ -119,7 +119,9 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
     }
     
     func dismissHome() {
-        UserDefaults.standard.setIsSignedIn(value: false)
+        #warning("setting the user defaults to true")        
+        UserDefaults.standard.setIsSignedIn(value: true)
+//        UserDefaults.standard.setIsSignedIn(value: false)
         self.homeDelegate?.handleSignOut()
     }
 }
