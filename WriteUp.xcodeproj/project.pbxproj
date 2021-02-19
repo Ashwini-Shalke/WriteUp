@@ -33,6 +33,16 @@
 		3338302625543EE60067705A /* WelcomeLockScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3338302425543EE60067705A /* WelcomeLockScreen.swift */; };
 		333830282554446E0067705A /* ErrorLockScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333830272554446E0067705A /* ErrorLockScreen.swift */; };
 		333830292554446E0067705A /* ErrorLockScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333830272554446E0067705A /* ErrorLockScreen.swift */; };
+		334E86C525DFAD2700065938 /* MaisonNeue-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 334E86C025DFAD2700065938 /* MaisonNeue-Book.ttf */; };
+		334E86C625DFAD2700065938 /* MaisonNeue-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 334E86C025DFAD2700065938 /* MaisonNeue-Book.ttf */; };
+		334E86C725DFAD2700065938 /* MaisonNeue-Mono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 334E86C125DFAD2700065938 /* MaisonNeue-Mono.ttf */; };
+		334E86C825DFAD2700065938 /* MaisonNeue-Mono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 334E86C125DFAD2700065938 /* MaisonNeue-Mono.ttf */; };
+		334E86C925DFAD2700065938 /* MaisonNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 334E86C225DFAD2700065938 /* MaisonNeue-Bold.ttf */; };
+		334E86CA25DFAD2700065938 /* MaisonNeue-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 334E86C225DFAD2700065938 /* MaisonNeue-Bold.ttf */; };
+		334E86CB25DFAD2700065938 /* MaisonNeue-Demi.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 334E86C325DFAD2700065938 /* MaisonNeue-Demi.ttf */; };
+		334E86CC25DFAD2700065938 /* MaisonNeue-Demi.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 334E86C325DFAD2700065938 /* MaisonNeue-Demi.ttf */; };
+		334E86CD25DFAD2700065938 /* MaisonNeue-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 334E86C425DFAD2700065938 /* MaisonNeue-Light.ttf */; };
+		334E86CE25DFAD2700065938 /* MaisonNeue-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 334E86C425DFAD2700065938 /* MaisonNeue-Light.ttf */; };
 		3351F705247B8C7D0041C3CC /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3351F704247B8C7D0041C3CC /* ColorPickerView.swift */; };
 		335324B024DC533A008A5D3D /* ActivityBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335324AF24DC533A008A5D3D /* ActivityBar.swift */; };
 		335324B124DC533A008A5D3D /* ActivityBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335324AF24DC533A008A5D3D /* ActivityBar.swift */; };
@@ -110,6 +120,11 @@
 		33348D0E2472A5C3002093B8 /* PrimaryBarLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryBarLabel.swift; sourceTree = "<group>"; };
 		3338302425543EE60067705A /* WelcomeLockScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeLockScreen.swift; sourceTree = "<group>"; };
 		333830272554446E0067705A /* ErrorLockScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorLockScreen.swift; sourceTree = "<group>"; };
+		334E86C025DFAD2700065938 /* MaisonNeue-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MaisonNeue-Book.ttf"; sourceTree = "<group>"; };
+		334E86C125DFAD2700065938 /* MaisonNeue-Mono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MaisonNeue-Mono.ttf"; sourceTree = "<group>"; };
+		334E86C225DFAD2700065938 /* MaisonNeue-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MaisonNeue-Bold.ttf"; sourceTree = "<group>"; };
+		334E86C325DFAD2700065938 /* MaisonNeue-Demi.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MaisonNeue-Demi.ttf"; sourceTree = "<group>"; };
+		334E86C425DFAD2700065938 /* MaisonNeue-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MaisonNeue-Light.ttf"; sourceTree = "<group>"; };
 		3351F704247B8C7D0041C3CC /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		335324AF24DC533A008A5D3D /* ActivityBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityBar.swift; sourceTree = "<group>"; };
 		3372E5F124471444009D3983 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -181,10 +196,10 @@
 				3333CDFD2445CBF900E6EF3B /* Model */,
 				3333CDFE2445CC0900E6EF3B /* View */,
 				3372E60B244ED6F0009D3983 /* Controller */,
+				334E86BE25DFA99400065938 /* Resources */,
 				3333CDEB2445CB7A00E6EF3B /* SceneDelegate.swift */,
 				3333CDE92445CB7A00E6EF3B /* AppDelegate.swift */,
 				3333CDEF2445CB7A00E6EF3B /* Main.storyboard */,
-				3333CDF22445CB7D00E6EF3B /* Assets.xcassets */,
 				3333CDF42445CB7D00E6EF3B /* LaunchScreen.storyboard */,
 				3333CE032445DD8E00E6EF3B /* WriteUp.entitlements */,
 				3333CDF72445CB7D00E6EF3B /* Info.plist */,
@@ -227,6 +242,27 @@
 				333830272554446E0067705A /* ErrorLockScreen.swift */,
 			);
 			path = LocalAuthentication;
+			sourceTree = "<group>";
+		};
+		334E86BE25DFA99400065938 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3333CDF22445CB7D00E6EF3B /* Assets.xcassets */,
+				334E86BF25DFA9E500065938 /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		334E86BF25DFA9E500065938 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				334E86C225DFAD2700065938 /* MaisonNeue-Bold.ttf */,
+				334E86C025DFAD2700065938 /* MaisonNeue-Book.ttf */,
+				334E86C325DFAD2700065938 /* MaisonNeue-Demi.ttf */,
+				334E86C425DFAD2700065938 /* MaisonNeue-Light.ttf */,
+				334E86C125DFAD2700065938 /* MaisonNeue-Mono.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		3372E5F0244713FF009D3983 /* Helpers */ = {
@@ -370,10 +406,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				334E86CD25DFAD2700065938 /* MaisonNeue-Light.ttf in Resources */,
 				3333CDF62445CB7D00E6EF3B /* LaunchScreen.storyboard in Resources */,
+				334E86C525DFAD2700065938 /* MaisonNeue-Book.ttf in Resources */,
+				334E86C925DFAD2700065938 /* MaisonNeue-Bold.ttf in Resources */,
 				3333CDF32445CB7D00E6EF3B /* Assets.xcassets in Resources */,
+				334E86C725DFAD2700065938 /* MaisonNeue-Mono.ttf in Resources */,
 				3333CDF12445CB7A00E6EF3B /* Main.storyboard in Resources */,
 				3398D21E24C6F6990022F2F7 /* GoogleService-Info.plist in Resources */,
+				334E86CB25DFAD2700065938 /* MaisonNeue-Demi.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,10 +422,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				334E86CE25DFAD2700065938 /* MaisonNeue-Light.ttf in Resources */,
 				33FB4EFE24B843570079B84C /* LaunchScreen.storyboard in Resources */,
+				334E86C625DFAD2700065938 /* MaisonNeue-Book.ttf in Resources */,
+				334E86CA25DFAD2700065938 /* MaisonNeue-Bold.ttf in Resources */,
 				33FB4EFF24B843570079B84C /* Assets.xcassets in Resources */,
+				334E86C825DFAD2700065938 /* MaisonNeue-Mono.ttf in Resources */,
 				33FB4F0024B843570079B84C /* Main.storyboard in Resources */,
 				3398D21F24C6F6990022F2F7 /* GoogleService-Info.plist in Resources */,
+				334E86CC25DFAD2700065938 /* MaisonNeue-Demi.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
