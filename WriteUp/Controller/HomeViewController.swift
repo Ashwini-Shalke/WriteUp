@@ -23,12 +23,6 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
         return cal
     }()
     
-    lazy var notesBar:NotesBar = {
-        let noteBar = NotesBar()
-        noteBar.noteDelegate = self
-        return noteBar
-    }()
-    
     lazy var noteListView: NotesListTableView = {
         var noteView = NotesListTableView()
         noteView.noteListDelegate = self
@@ -76,11 +70,8 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
     
     func setupViews(){
         view.backgroundColor = UIColor.white
-        view.addSubview(notesBar)
-        notesBar.anchor(top:view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16), size: CGSize(width: 0, height: 200))
-        
         view.addSubview(calendar)
-        calendar.anchor(top: notesBar.bottomAnchor, leading: nil, bottom: nil, trailing: nil ,padding: UIEdgeInsets(top: 0, left:  5, bottom: 0, right: -5))
+        calendar.anchor(top: self.view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: nil ,padding: UIEdgeInsets(top: 0, left:  5, bottom: 0, right: -5))
         calendar.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
         calendarHeightConstraint = NSLayoutConstraint(item: calendar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 300)
         NSLayoutConstraint.activate([calendarHeightConstraint!])
@@ -126,7 +117,7 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
     }
 }
 
-extension HomeViewController: NoteBarDelegate,noteListTableViewDelegate,ActivityDelegate{
+extension HomeViewController: noteListTableViewDelegate,ActivityDelegate{
     func handleDidSelectRow(noteDetail: ListNoteData) {
         let editNoteView = AddNewNoteController()
         editNoteView.context = Constant.contextName.EditScreen
@@ -135,18 +126,9 @@ extension HomeViewController: NoteBarDelegate,noteListTableViewDelegate,Activity
     }
     
     func showAllNote() {
-        showAllNotes()
-    }
-    
-    func showAddNote() {
-        let addNoteView = AddNewNoteController()
-        addNoteView.context = Constant.contextName.NewScreen
-        navigationController?.pushViewController(addNoteView, animated: true)
-    }
-    
-    func showAllNotes() {
         let showAllNotesView = ShowAllNotesController()
         navigationController?.pushViewController(showAllNotesView, animated: true)
+
     }
 }
 
