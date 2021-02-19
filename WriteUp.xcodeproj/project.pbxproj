@@ -10,7 +10,7 @@
 		332C576B2463DD0700891BBB /* EditProfileLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332C576A2463DD0700891BBB /* EditProfileLauncher.swift */; };
 		332D45FD246142660078BEA2 /* ProfileDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D45FC246142660078BEA2 /* ProfileDetail.swift */; };
 		332D81812475229500944CA5 /* AddNewNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81802475229500944CA5 /* AddNewNoteController.swift */; };
-		332D81832475276000944CA5 /* NotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81822475276000944CA5 /* NotesListView.swift */; };
+		332D81832475276000944CA5 /* NotesListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81822475276000944CA5 /* NotesListTableView.swift */; };
 		332D81852476466C00944CA5 /* ShowAllNotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81842476466C00944CA5 /* ShowAllNotesController.swift */; };
 		332D81872477BA4D00944CA5 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81862477BA4D00944CA5 /* Note.swift */; };
 		332D818B2477E1DF00944CA5 /* NoteListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D818A2477E1DF00944CA5 /* NoteListViewCell.swift */; };
@@ -40,12 +40,16 @@
 		3372E608244DEF9D009D3983 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E607244DEF9D009D3983 /* StringConstants.swift */; };
 		3372E60D244ED71D009D3983 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E60C244ED71D009D3983 /* RootViewController.swift */; };
 		3372E60F244F074D009D3983 /* ProfileLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E60E244F074D009D3983 /* ProfileLauncher.swift */; };
+		338A7C722577B6FB000E1B2B /* SaveNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338A7C712577B6FB000E1B2B /* SaveNoteView.swift */; };
+		338A7C732577B6FB000E1B2B /* SaveNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338A7C712577B6FB000E1B2B /* SaveNoteView.swift */; };
 		3398D21E24C6F6990022F2F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3398D21D24C6F6990022F2F7 /* GoogleService-Info.plist */; };
 		3398D21F24C6F6990022F2F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3398D21D24C6F6990022F2F7 /* GoogleService-Info.plist */; };
+		33D22766259CB84400A23885 /* NoteAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D22765259CB84400A23885 /* NoteAPIService.swift */; };
+		33D22767259CB84400A23885 /* NoteAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D22765259CB84400A23885 /* NoteAPIService.swift */; };
 		33DBC321246EB50100E6462A /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DBC320246EB50100E6462A /* Calendar.swift */; };
 		33DBC323246FFCF200E6462A /* SaveNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DBC322246FFCF200E6462A /* SaveNoteController.swift */; };
 		33FB4EE024B843570079B84C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E5F124471444009D3983 /* Extension.swift */; };
-		33FB4EE124B843570079B84C /* NotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81822475276000944CA5 /* NotesListView.swift */; };
+		33FB4EE124B843570079B84C /* NotesListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81822475276000944CA5 /* NotesListTableView.swift */; };
 		33FB4EE224B843570079B84C /* NoteListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D818A2477E1DF00944CA5 /* NoteListViewCell.swift */; };
 		33FB4EE324B843570079B84C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333CDFF2445CC3B00E6EF3B /* User.swift */; };
 		33FB4EE424B843570079B84C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333CDED2445CB7A00E6EF3B /* SignInViewController.swift */; };
@@ -82,7 +86,7 @@
 		332C576A2463DD0700891BBB /* EditProfileLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileLauncher.swift; sourceTree = "<group>"; };
 		332D45FC246142660078BEA2 /* ProfileDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetail.swift; sourceTree = "<group>"; };
 		332D81802475229500944CA5 /* AddNewNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNoteController.swift; sourceTree = "<group>"; };
-		332D81822475276000944CA5 /* NotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListView.swift; sourceTree = "<group>"; };
+		332D81822475276000944CA5 /* NotesListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListTableView.swift; sourceTree = "<group>"; };
 		332D81842476466C00944CA5 /* ShowAllNotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllNotesController.swift; sourceTree = "<group>"; };
 		332D81862477BA4D00944CA5 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		332D818A2477E1DF00944CA5 /* NoteListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListViewCell.swift; sourceTree = "<group>"; };
@@ -112,7 +116,9 @@
 		3372E607244DEF9D009D3983 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		3372E60C244ED71D009D3983 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		3372E60E244F074D009D3983 /* ProfileLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLauncher.swift; sourceTree = "<group>"; };
+		338A7C712577B6FB000E1B2B /* SaveNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNoteView.swift; sourceTree = "<group>"; };
 		3398D21D24C6F6990022F2F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		33D22765259CB84400A23885 /* NoteAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteAPIService.swift; sourceTree = "<group>"; };
 		33DBC320246EB50100E6462A /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		33DBC322246FFCF200E6462A /* SaveNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNoteController.swift; sourceTree = "<group>"; };
 		33FB4F0524B843570079B84C /* WriteUpDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WriteUpDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,6 +176,7 @@
 		3333CDE82445CB7A00E6EF3B /* WriteUp */ = {
 			isa = PBXGroup;
 			children = (
+				33D22764259CB76300A23885 /* API Service */,
 				3372E5F0244713FF009D3983 /* Helpers */,
 				3333CDFD2445CBF900E6EF3B /* Model */,
 				3333CDFE2445CC0900E6EF3B /* View */,
@@ -204,10 +211,11 @@
 				33DBC320246EB50100E6462A /* Calendar.swift */,
 				33329B44246D4AF300C40379 /* NoteBarCell.swift */,
 				33329B42246A9D5900C40379 /* NotesBar.swift */,
-				332D81822475276000944CA5 /* NotesListView.swift */,
 				332D818A2477E1DF00944CA5 /* NoteListViewCell.swift */,
+				332D81822475276000944CA5 /* NotesListTableView.swift */,
 				3351F704247B8C7D0041C3CC /* ColorPickerView.swift */,
 				332F5AE2248E0894003181E1 /* BottonToolBar.swift */,
+				338A7C712577B6FB000E1B2B /* SaveNoteView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -243,11 +251,19 @@
 				3333CE012445CD8100E6EF3B /* HomeViewController.swift */,
 				3372E60E244F074D009D3983 /* ProfileLauncher.swift */,
 				332C576A2463DD0700891BBB /* EditProfileLauncher.swift */,
-				33DBC322246FFCF200E6462A /* SaveNoteController.swift */,
 				332D81802475229500944CA5 /* AddNewNoteController.swift */,
+				33DBC322246FFCF200E6462A /* SaveNoteController.swift */,
 				332D81842476466C00944CA5 /* ShowAllNotesController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		33D22764259CB76300A23885 /* API Service */ = {
+			isa = PBXGroup;
+			children = (
+				33D22765259CB84400A23885 /* NoteAPIService.swift */,
+			);
+			path = "API Service";
 			sourceTree = "<group>";
 		};
 		45B61ECD0D6CA2657A14F090 /* Pods */ = {
@@ -322,7 +338,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1110;
-				LastUpgradeCheck = 1110;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "Ashwini Shalke";
 				TargetAttributes = {
 					3333CDE52445CB7A00E6EF3B = {
@@ -463,10 +479,11 @@
 				3372E5F224471444009D3983 /* Extension.swift in Sources */,
 				333830282554446E0067705A /* ErrorLockScreen.swift in Sources */,
 				3338302525543EE60067705A /* WelcomeLockScreen.swift in Sources */,
-				332D81832475276000944CA5 /* NotesListView.swift in Sources */,
+				332D81832475276000944CA5 /* NotesListTableView.swift in Sources */,
 				332D818B2477E1DF00944CA5 /* NoteListViewCell.swift in Sources */,
 				3333CE002445CC3B00E6EF3B /* User.swift in Sources */,
 				335324B024DC533A008A5D3D /* ActivityBar.swift in Sources */,
+				338A7C722577B6FB000E1B2B /* SaveNoteView.swift in Sources */,
 				3333CDEE2445CB7A00E6EF3B /* SignInViewController.swift in Sources */,
 				3333CE022445CD8100E6EF3B /* HomeViewController.swift in Sources */,
 				332D45FD246142660078BEA2 /* ProfileDetail.swift in Sources */,
@@ -485,6 +502,7 @@
 				332D81812475229500944CA5 /* AddNewNoteController.swift in Sources */,
 				33348D0F2472A5C3002093B8 /* PrimaryBarLabel.swift in Sources */,
 				33306BC424589BC2003CA89E /* PrimaryLabel.swift in Sources */,
+				33D22766259CB84400A23885 /* NoteAPIService.swift in Sources */,
 				332C576B2463DD0700891BBB /* EditProfileLauncher.swift in Sources */,
 				332D81872477BA4D00944CA5 /* Note.swift in Sources */,
 				33DBC323246FFCF200E6462A /* SaveNoteController.swift in Sources */,
@@ -499,10 +517,11 @@
 				33FB4EE024B843570079B84C /* Extension.swift in Sources */,
 				333830292554446E0067705A /* ErrorLockScreen.swift in Sources */,
 				3338302625543EE60067705A /* WelcomeLockScreen.swift in Sources */,
-				33FB4EE124B843570079B84C /* NotesListView.swift in Sources */,
+				33FB4EE124B843570079B84C /* NotesListTableView.swift in Sources */,
 				33FB4EE224B843570079B84C /* NoteListViewCell.swift in Sources */,
 				33FB4EE324B843570079B84C /* User.swift in Sources */,
 				335324B124DC533A008A5D3D /* ActivityBar.swift in Sources */,
+				338A7C732577B6FB000E1B2B /* SaveNoteView.swift in Sources */,
 				33FB4EE424B843570079B84C /* SignInViewController.swift in Sources */,
 				33FB4EE524B843570079B84C /* HomeViewController.swift in Sources */,
 				33FB4EE624B843570079B84C /* ProfileDetail.swift in Sources */,
@@ -521,6 +540,7 @@
 				33FB4EF324B843570079B84C /* AddNewNoteController.swift in Sources */,
 				33FB4EF424B843570079B84C /* PrimaryBarLabel.swift in Sources */,
 				33FB4EF524B843570079B84C /* PrimaryLabel.swift in Sources */,
+				33D22767259CB84400A23885 /* NoteAPIService.swift in Sources */,
 				33FB4EF724B843570079B84C /* EditProfileLauncher.swift in Sources */,
 				33FB4EF824B843570079B84C /* Note.swift in Sources */,
 				33FB4EF924B843570079B84C /* SaveNoteController.swift in Sources */,
@@ -576,6 +596,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -637,6 +658,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -779,6 +801,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -883,6 +906,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

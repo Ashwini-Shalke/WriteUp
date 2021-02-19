@@ -19,9 +19,9 @@ class NotesBar: BaseView,HeaderNoteDelegate,ActivityDelegate {
     weak var noteDelegate: NoteBarDelegate?
     
     lazy var activityBar: ActivityBar = {
-       var bar = ActivityBar()
+        var bar = ActivityBar()
         bar.activityDelegate = self
-       return bar
+        return bar
     }()
     
     lazy var collectionView: UICollectionView = {
@@ -41,19 +41,19 @@ class NotesBar: BaseView,HeaderNoteDelegate,ActivityDelegate {
         super.setup()
         addSubview(activityBar)
         activityBar.anchor(top: safeAreaLayoutGuide.topAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor,padding:UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0),size: CGSize(width: 0, height: 25))
-
+        
         addSubview(collectionView)
         collectionView.register(NoteCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.register(HeaderNoteBar.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
         collectionView.anchor(top: activityBar.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, trailing: safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0))
     }
- 
+    
     func addNote() {
         noteDelegate?.showAddNote()
     }
     
     func showAllNote() {
-       noteDelegate?.showAllNotes()
+        noteDelegate?.showAllNotes()
     }
 }
 
@@ -65,7 +65,7 @@ extension NotesBar: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId , for: indexPath) as! NoteCell
         return cell
-      }
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 102, height: 145)
