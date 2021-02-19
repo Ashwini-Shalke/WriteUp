@@ -12,7 +12,7 @@ protocol homeDelegate: AnyObject{
     func handleSignOut()
 }
 
-class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeightDelegate{
+class HomeViewController: UIViewController,CalendarHeightDelegate{
     weak var homeDelegate : homeDelegate?
     var calendarHeightConstraint:NSLayoutConstraint?
     let notesLabel = SecondaryButton(titleText: Constant.NoteBar.notesLabel)
@@ -122,7 +122,6 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
         let profileLauncher = ProfileLauncher()
         profileLauncher.profileDelegate = self
         navigationController?.pushViewController(profileLauncher, animated: true)
-//        navigationController?.present(profileLauncher, animated: true, completion: nil)
     }
     
     @objc func handleCreateNote(){
@@ -131,26 +130,28 @@ class HomeViewController: UIViewController,ProfileLauncherDelegate,CalendarHeigh
         navigationController?.pushViewController(addNewNote, animated: true)
     }
     
-    func dismissHome() {
-        #warning("setting the user defaults to true")        
-        UserDefaults.standard.setIsSignedIn(value: true)
-        //        UserDefaults.standard.setIsSignedIn(value: false)
-        self.homeDelegate?.handleSignOut()
-    }
+    
 }
 
-extension HomeViewController: noteListTableViewDelegate,ActivityDelegate{
+extension HomeViewController: noteListTableViewDelegate,ActivityDelegate,ProfileLauncherDelegate{
     func handleDidSelectRow(noteDetail: ListNoteData) {
         let editNoteView = AddNewNoteController()
         editNoteView.context = Constant.contextName.EditScreen
         editNoteView.noteDetail = noteDetail
         navigationController?.pushViewController(editNoteView, animated: true)
-    }
+    } 
     
     func showAllNote() {
         let showAllNotesView = ShowAllNotesController()
         navigationController?.pushViewController(showAllNotesView, animated: true)
 
+    }
+    
+    func dismissHome() {
+        #warning("setting the user defaults to true")
+        UserDefaults.standard.setIsSignedIn(value: true)
+        //        UserDefaults.standard.setIsSignedIn(value: false)
+        self.homeDelegate?.handleSignOut()
     }
 }
 

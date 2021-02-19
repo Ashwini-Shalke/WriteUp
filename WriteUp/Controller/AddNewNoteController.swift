@@ -121,7 +121,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     //need to work on it
     @objc func handleSaveNote(){
         self.view.endEditing(true)
-//        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
         let body = textView.text
         let title = body?.getTitle
         let summary = body?.getSummary
@@ -131,10 +131,6 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         let uploadData = NoteData(title: title, createdAt: createDate.currentDate,summery: summary,authorID: 2, tag: "lo", body: body)
         NoteAPIService.sharedInstance.modifyNoteByNoteId(httpMethod: "PATCH", noteId: noteId, data: uploadData)
         dateLabel.text = createDate.currentDate
-        if textView.text == "" {
-                NoteAPIService.sharedInstance.deleteNoteByNoteId(httpMethod: "DELETE", noteId: noteDetail.id!)
-            
-        }
     }
     
     
