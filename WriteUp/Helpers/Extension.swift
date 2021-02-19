@@ -67,7 +67,7 @@ extension UIFont {
     }
     
     func formControlTitle(size: CGFloat? = 17) -> UIFont{
-        return UIFont.systemFont(ofSize: 17, weight: .semibold)
+        return UIFont.systemFont(ofSize: 17, weight: .medium)
     }
     
     func formControlSegmented(size: CGFloat? = 13) -> UIFont {
@@ -80,7 +80,7 @@ extension UIFont {
     }
     
     func tabBarTitle(size: CGFloat? = 10) -> UIFont {
-        return UIFont(name: "MaisonNeue-Light", size: 10)!
+        return UIFont(name: "MaisonNeue-Light", size: size ?? 10)!
         //return UIFont.systemFont(ofSize: 10, weight: .medium)
     }
 }
