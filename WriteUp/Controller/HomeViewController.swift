@@ -36,23 +36,16 @@ class HomeViewController: UIViewController,CalendarHeightDelegate{
     }()
     
     private let profileButton : UIButton = {
-        let smallConfiguration = UIImage.SymbolConfiguration(weight: UIImage.SymbolWeight.bold)
-        let smallSymbolImage = UIImage(systemName: "person.crop.circle", withConfiguration: smallConfiguration)
-        
         let button = UIButton(type: .system)
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 0)
         button.layer.cornerRadius = button.frame.width/2
-        button.setImage(smallSymbolImage, for: .normal)
+        button.setImage(UIImage.NavBarIcon.profile, for: .normal)
         return button
     }()
     
     private let createNoteButton : UIButton = {
-        
-        let smallConfiguration = UIImage.SymbolConfiguration(weight: UIImage.SymbolWeight.bold)
-        let smallSymbolImage = UIImage(systemName: "doc.badge.plus", withConfiguration: smallConfiguration)
-        
         let button = UIButton(type: .system)
-        button.setImage(smallSymbolImage, for: .normal)
+        button.setImage(UIImage.NavBarIcon.createNote, for: .normal)
         return button
     }()
     
@@ -111,11 +104,9 @@ class HomeViewController: UIViewController,CalendarHeightDelegate{
         navigationController?.navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(customView: profileButton)
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(customView: createNoteButton)
-        navigationController?.navigationBar.tintColor = Constant.MainColor
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemPink,NSAttributedString.Key.font: UIFont().navLink()]
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.setBackgroundImage(UIImage.Common.empty, for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage.Common.empty
     }
     
     @objc func handleProfileButton(){

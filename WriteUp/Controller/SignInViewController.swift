@@ -18,7 +18,7 @@ class SignInViewController: UIViewController {
     
     let logoImageView: UIImageView = {
         let logo = UIImageView()
-        logo.image = UIImage(named: Constant.SignInSC.logoImageName)
+        logo.image = UIImage.Main.largeAppIcon
         logo.translatesAutoresizingMaskIntoConstraints = false
         logo.contentMode = .scaleAspectFit
         return logo

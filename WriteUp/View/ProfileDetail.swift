@@ -67,9 +67,8 @@ class ProfileDetail: BaseView,EditProfileDelegate {
     }()
     
     let placeHolderButton: UIButton = {
-        let button = UIButton()
-        let smallConfiguration = UIImage.SymbolConfiguration(scale: .large)
-        let smallSymbolImage = UIImage(systemName: "person.crop.circle", withConfiguration: smallConfiguration)
+        let button = UIButton()        
+        let smallSymbolImage = UIImage.Common.profilePlaceHolder
         button.setImage(smallSymbolImage, for: .normal)
         button.contentMode = .scaleAspectFit
         button.clipsToBounds = true
