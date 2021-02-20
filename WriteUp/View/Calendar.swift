@@ -11,6 +11,7 @@ import FSCalendar
 
 protocol CalendarHeightDelegate: AnyObject {
     func sendCalendarHeight(height: CGFloat?)
+    func handleDidSelectDate(selectedDate : String)
 }
 
 class Calendar: BaseView, UIGestureRecognizerDelegate {
@@ -98,8 +99,11 @@ extension Calendar: FSCalendarDelegate, FSCalendarDataSource {
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let formatter1 = DateFormatter()
-        formatter1.dateStyle = .short
+        formatter1.dateFormat = "dd/MM/yy HH:mm:ss"
         let dateString = formatter1.string(from: date)
-        print(dateString)
+        print("Calendar Date", dateString)
+        calendarDelegate?.handleDidSelectDate(selectedDate:dateString)
+     
     }
+    
 }

@@ -12,6 +12,8 @@ struct Constant {
     //MARK: Home screen
     struct HomeSC {
         static let barLabel = "WriteUp"
+        static let notFoundAlertTitle = "Not Found !!!"
+        static let notFoundAlertMessage = "Oops!! No notes created for this date "
     }
     
     //MARK: SignIn Screen
@@ -74,8 +76,8 @@ struct Constant {
     struct LocalAuth {
         static let localizedReason = "Unlock WriteUp"
         static let errorAttributedString = "WriteUp Locked"
-        static let alertTitle = "Biometry unavailable"
-        static let alertMessage = "Your device is not configured for biometric authentication."
+        static let biometricAlertTitle = "Biometry unavailable"
+        static let biometricAlertMessage = "Your device is not configured for biometric authentication."
     }
     
     struct tableCellId {

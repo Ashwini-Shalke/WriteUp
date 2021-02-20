@@ -34,19 +34,24 @@ class RootViewController: UIViewController, signInDelegate, homeDelegate{
     }
     
     func handleChild(){
-        if isSignedIn() {
-            if children == [signInViewController] {
-                signInViewController.remove()
-            }
-            self.addChild(homeViewController)
-            setupLayout(homeViewController)
-        } else {
-            if children == [homeViewController] {
-                homeViewController.remove()
-            }
-            self.addChild(signInViewController)
-            setupLayout(signInViewController)
-        }
+        #warning("Don't commit")
+        self.addChild(homeViewController)
+        setupLayout(homeViewController)
+
+
+//        if isSignedIn() {
+//            if children == [signInViewController] {
+//                signInViewController.remove()
+//            }
+//            self.addChild(homeViewController)
+//            setupLayout(homeViewController)
+//        } else {
+//            if children == [homeViewController] {
+//                homeViewController.remove()
+//            }
+//            self.addChild(signInViewController)
+//            setupLayout(signInViewController)
+//        }
     }
     
     func handleRoot(){

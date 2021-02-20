@@ -196,13 +196,16 @@ extension String {
         let df = DateFormatter()
         df.dateFormat = "dd/MM/yy HH:mm:ss"
         let dateString = df.string(from: date)
-//        let f = ISO8601DateFormatter()
-//        f.formatOptions = [.withFullDate, .withDashSeparatorInDate]
-//        f.timeZone = TimeZone.current
-//        let stringDate = f.string(from: Date())
-//        return stringDate
         return dateString
     }
+    
+    
+    var getSubStringDate: String {
+        let index = self.firstIndex(of: " ")
+        let dateString = self[..<index!]
+        return String(dateString)
+    }
+
 }
 
 #warning("Move Image extension to separate file")

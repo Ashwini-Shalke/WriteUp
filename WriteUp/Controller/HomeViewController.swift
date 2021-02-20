@@ -12,10 +12,12 @@ protocol homeDelegate: AnyObject{
     func handleSignOut()
 }
 
-class HomeViewController: UIViewController,CalendarHeightDelegate{
+class HomeViewController: UIViewController{
     weak var homeDelegate : homeDelegate?
     var calendarHeightConstraint:NSLayoutConstraint?
     let notesLabel = SecondaryButton(titleText: Constant.NoteBar.notesLabel)
+    var noteArray = [ListNoteData]()
+    let todayDate: String = ""
     
     lazy var calendar:Calendar = {
         let cal = Calendar()
@@ -44,6 +46,7 @@ class HomeViewController: UIViewController,CalendarHeightDelegate{
     }()
     
     private let createNoteButton : UIButton = {
+
         let button = UIButton(type: .system)
         button.setImage(UIImage.NavBarIcon.createNote, for: .normal)
         return button
@@ -53,6 +56,8 @@ class HomeViewController: UIViewController,CalendarHeightDelegate{
         setupNav()
         setupViews()
         setupActions()
+        getNotesByUserID()
+        showNotesFor(currentDate: todayDate.currentDate)
         
         #if DEVELOPMENT
         print("DEV")
@@ -62,18 +67,19 @@ class HomeViewController: UIViewController,CalendarHeightDelegate{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.noteListView.getNotesByUserID()
+//        self.noteListView.getNotesByUserID()
+        showNotesFor(currentDate: todayDate.currentDate)
+        getNotesByUserID()
         self.noteListView.reloadData()
     }
     
-    func sendCalendarHeight(height: CGFloat?) {
-        UIView.animate(withDuration: 0.1, delay: 0.1, options: .curveEaseInOut, animations: {
-            self.calendarHeightConstraint?.constant = height ?? 0
-            let generate = UIImpactFeedbackGenerator(style: .soft)
-            generate.impactOccurred()
-        }, completion: nil)
+    func getNotesByUserID(){
+        NoteAPIService.sharedInstance.fetchNoteListByAuthorId(authorID: 2) { (notes) in
+            self.noteArray = notes
+        }
     }
     
+  
     func setupViews(){
         view.backgroundColor = UIColor.white
         view.addSubview(calendar)
@@ -121,10 +127,46 @@ class HomeViewController: UIViewController,CalendarHeightDelegate{
         navigationController?.pushViewController(addNewNote, animated: true)
     }
     
-    
+    func showNotesFor(currentDate: String){
+        var noteListForCurrentDate = [ListNoteData]()
+        let displayedCurrentDate = currentDate.getSubStringDate
+        for index in self.noteArray {
+            guard let noteDate = index.createdAt else { return }
+            let selectedNoteDate = noteDate.getSubStringDate
+            if displayedCurrentDate == selectedNoteDate {
+                noteListForCurrentDate.append(index)
+            }
+        }
+        DispatchQueue.main.async {
+            self.noteListView.noteArray = noteListForCurrentDate
+            self.noteListView.reloadData()
+        }
+    }
 }
 
-extension HomeViewController: noteListTableViewDelegate,ActivityDelegate,ProfileLauncherDelegate{
+extension HomeViewController: noteListTableViewDelegate,ActivityDelegate,ProfileLauncherDelegate,CalendarHeightDelegate {
+    
+    func handleDidSelectDate(selectedDate: String) {
+        var list = [ListNoteData]()
+        let selectedCalendarDate = selectedDate.getSubStringDate
+        for index in self.noteArray {
+            guard let noteDate = index.createdAt else { return }
+            let selectedNoteDate = noteDate.getSubStringDate
+            if selectedCalendarDate == selectedNoteDate {
+                list.append(index)
+            }
+        }
+        if (list.isEmpty) {
+            let notFoundAlert = UIAlertController(title: Constant.HomeSC.notFoundAlertTitle, message: Constant.HomeSC.notFoundAlertMessage, preferredStyle: .alert)
+            notFoundAlert.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(notFoundAlert, animated: true, completion: nil)
+        }
+        DispatchQueue.main.async {
+            self.noteListView.noteArray = list
+            self.noteListView.reloadData()
+        }
+    }
+    
     func handleDidSelectRow(noteDetail: ListNoteData) {
         let editNoteView = AddNewNoteController()
         editNoteView.context = Constant.contextName.EditScreen
@@ -143,6 +185,14 @@ extension HomeViewController: noteListTableViewDelegate,ActivityDelegate,Profile
         UserDefaults.standard.setIsSignedIn(value: true)
         //        UserDefaults.standard.setIsSignedIn(value: false)
         self.homeDelegate?.handleSignOut()
+    }
+    
+    func sendCalendarHeight(height: CGFloat?) {
+        UIView.animate(withDuration: 0.1, delay: 0.1, options: .curveEaseInOut, animations: {
+            self.calendarHeightConstraint?.constant = height ?? 0
+            let generate = UIImpactFeedbackGenerator(style: .soft)
+            generate.impactOccurred()
+        }, completion: nil)
     }
 }
 

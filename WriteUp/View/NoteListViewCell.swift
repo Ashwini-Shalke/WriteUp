@@ -41,7 +41,7 @@ class NotesListCell: UITableViewCell {
     
     let noteDescription: UILabel = {
         let label = UILabel()
-        label.text = "Top things to see during hoildays in HongKong and many other places"
+        label.text = "Top things to see during holidays in HongKong and many other places"
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 2
         label.font = UIFont().tabBarTitle(size: 15)

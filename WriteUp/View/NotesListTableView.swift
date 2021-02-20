@@ -46,10 +46,11 @@ class NotesListTableView: UITableView {
 extension NotesListTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searching {
-            return searchNote.count
-        } else {
-            return noteArray.count
-        }
+                return searchNote.count
+            } else {
+                return noteArray.count
+            }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
