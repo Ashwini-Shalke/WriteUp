@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3320722125E16812001EFD37 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3320722025E16812001EFD37 /* BaseViewController.swift */; };
+		3320722225E16812001EFD37 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3320722025E16812001EFD37 /* BaseViewController.swift */; };
 		332C576B2463DD0700891BBB /* EditProfileLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332C576A2463DD0700891BBB /* EditProfileLauncher.swift */; };
 		332D45FD246142660078BEA2 /* ProfileDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D45FC246142660078BEA2 /* ProfileDetail.swift */; };
 		332D81812475229500944CA5 /* AddNewNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81802475229500944CA5 /* AddNewNoteController.swift */; };
@@ -95,6 +97,7 @@
 
 /* Begin PBXFileReference section */
 		27E06529D8D5ADA4E75B28C1 /* Pods-WriteUpDev.releasedev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUpDev.releasedev.xcconfig"; path = "Target Support Files/Pods-WriteUpDev/Pods-WriteUpDev.releasedev.xcconfig"; sourceTree = "<group>"; };
+		3320722025E16812001EFD37 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		332C576A2463DD0700891BBB /* EditProfileLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileLauncher.swift; sourceTree = "<group>"; };
 		332D45FC246142660078BEA2 /* ProfileDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetail.swift; sourceTree = "<group>"; };
 		332D81802475229500944CA5 /* AddNewNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNoteController.swift; sourceTree = "<group>"; };
@@ -277,6 +280,7 @@
 			children = (
 				3338302325543E6A0067705A /* LocalAuthentication */,
 				3372E60C244ED71D009D3983 /* RootViewController.swift */,
+				3320722025E16812001EFD37 /* BaseViewController.swift */,
 				3333CDED2445CB7A00E6EF3B /* SignInViewController.swift */,
 				3333CE012445CD8100E6EF3B /* HomeViewController.swift */,
 				3372E60E244F074D009D3983 /* ProfileLauncher.swift */,
@@ -531,6 +535,7 @@
 				332D45FD246142660078BEA2 /* ProfileDetail.swift in Sources */,
 				33306BC6245985AD003CA89E /* PrimaryText.swift in Sources */,
 				33329B43246A9D5900C40379 /* NotesBar.swift in Sources */,
+				3320722125E16812001EFD37 /* BaseViewController.swift in Sources */,
 				3372E60D244ED71D009D3983 /* RootViewController.swift in Sources */,
 				3351F705247B8C7D0041C3CC /* ColorPickerView.swift in Sources */,
 				33306BC8245C1AE7003CA89E /* PrimaryButton.swift in Sources */,
@@ -569,6 +574,7 @@
 				33FB4EE624B843570079B84C /* ProfileDetail.swift in Sources */,
 				33FB4EE724B843570079B84C /* PrimaryText.swift in Sources */,
 				33FB4EE824B843570079B84C /* NotesBar.swift in Sources */,
+				3320722225E16812001EFD37 /* BaseViewController.swift in Sources */,
 				33FB4EE924B843570079B84C /* RootViewController.swift in Sources */,
 				33FB4EEA24B843570079B84C /* ColorPickerView.swift in Sources */,
 				33FB4EEB24B843570079B84C /* PrimaryButton.swift in Sources */,
