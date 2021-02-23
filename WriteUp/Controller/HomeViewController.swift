@@ -46,7 +46,6 @@ class HomeViewController: UIViewController{
     }()
     
     private let createNoteButton : UIButton = {
-
         let button = UIButton(type: .system)
         button.setImage(UIImage.NavBarIcon.createNote, for: .normal)
         return button
@@ -56,8 +55,6 @@ class HomeViewController: UIViewController{
         setupNav()
         setupViews()
         setupActions()
-        getNotesByUserID()
-        showNotesFor(currentDate: todayDate.currentDate)
         
         #if DEVELOPMENT
         print("DEV")
@@ -67,10 +64,8 @@ class HomeViewController: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        self.noteListView.getNotesByUserID()
-        showNotesFor(currentDate: todayDate.currentDate)
+        self.noteListView.getNotesByUserID()
         getNotesByUserID()
-        self.noteListView.reloadData()
     }
     
     func getNotesByUserID(){
@@ -79,7 +74,6 @@ class HomeViewController: UIViewController{
         }
     }
     
-  
     func setupViews(){
         view.backgroundColor = UIColor.white
         view.addSubview(calendar)

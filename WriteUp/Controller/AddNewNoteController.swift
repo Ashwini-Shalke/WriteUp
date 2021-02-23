@@ -113,6 +113,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     
     @objc func handleNext(){
         self.view.endEditing(true)
+         
         let saveNote = SaveNoteController()
         saveNote.noteDescription = textView.text
         navigationController?.pushViewController(saveNote, animated: true)
