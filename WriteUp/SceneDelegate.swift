@@ -45,7 +45,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, errorLockDelegate{
                     }
                 }
             } else {
-                let ac = UIAlertController(title: Constant.LocalAuth.alertTitle, message: Constant.LocalAuth.alertMessage, preferredStyle: .alert)
+                let ac = UIAlertController(title: Constant.LocalAuth.biometricAlertTitle, message: Constant.LocalAuth.biometricAlertMessage, preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .default))
             }
         }

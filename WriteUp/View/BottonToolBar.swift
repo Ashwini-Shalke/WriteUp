@@ -25,19 +25,20 @@ class BottomToolBar: UIToolbar {
     func setupBarButtons(){
         toolBar.frame = CGRect(x: 0.0,y: 0.0,width: UIScreen.main.bounds.size.width,height: 44.0)
         let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let trashButton = UIBarButtonItem(image: UIImage(named: "trash"), style: .plain, target:self, action: #selector(handleTrashButton))
-        trashButton.tintColor = Constant.SecondaryColor
-        let clearButton = UIBarButtonItem(title: "clear", style: .plain, target: self, action: #selector(handleClearButton))
-        clearButton.tintColor = Constant.SecondaryColor
-        toolBar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
-        toolBar.setShadowImage(UIImage(), forToolbarPosition: UIBarPosition.any)
+        let trashButton = UIBarButtonItem(image: UIImage.ToolBarIcon.deleteNote, style: .plain, target:self, action: #selector(handleTrashButton))
+        trashButton.tintColor = .black
+        
+        let clearButton = UIBarButtonItem(image: UIImage.ToolBarIcon.clearText, style: .plain, target: self, action: #selector(handleClearButton))
+        clearButton.tintColor = .black
+        toolBar.setBackgroundImage(UIImage.Common.empty, forToolbarPosition: .any, barMetrics: .default)
+        toolBar.setShadowImage(UIImage.Common.empty, forToolbarPosition: UIBarPosition.any)
         toolBar.setItems([trashButton,flexible, clearButton], animated: false)
         addSubview(toolBar)
     }
     
     func hideBackground(){
-        setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
-        setShadowImage(UIImage(), forToolbarPosition: UIBarPosition.any)
+        setBackgroundImage(UIImage.Common.empty, forToolbarPosition: .any, barMetrics: .default)
+        setShadowImage(UIImage.Common.empty, forToolbarPosition: UIBarPosition.any)
     }
     
     @objc func handleTrashButton(){

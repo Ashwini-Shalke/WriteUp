@@ -36,7 +36,7 @@ class HeaderNoteBar: BaseCell {
     
     let addNoteButton: UIButton = {
         let button = UIButton()
-        let image = UIImage(named: Constant.HeaderNoteBar.addNoteImage)
+        let image = UIImage.Common.newNote
         button.setImage(image, for: .normal)
         button.contentMode = .scaleAspectFit
         return button

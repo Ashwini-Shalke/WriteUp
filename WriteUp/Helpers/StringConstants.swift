@@ -12,6 +12,8 @@ struct Constant {
     //MARK: Home screen
     struct HomeSC {
         static let barLabel = "WriteUp"
+        static let notFoundAlertTitle = "Not Found !!!"
+        static let notFoundAlertMessage = "Oops!! No notes created for this date "
     }
     
     //MARK: SignIn Screen
@@ -36,8 +38,8 @@ struct Constant {
     
     //MARK: NoteBar
     struct NoteBar {
-        static let notesLabel = "Activity"
-        static let showAllButton = "Show All"
+        static let notesLabel = "ACTIVITY"
+        static let showAllButton = "SHOW ALL"
     }
     
     //MARK: HeaderNoteBar
@@ -63,6 +65,7 @@ struct Constant {
     
     static let MainColor: UIColor = UIColor(red: 137/255, green: 70/255, blue: 157/255, alpha: 1.0)
     static let SecondaryColor: UIColor = UIColor(red: 240/255, green: 111/255, blue: 56/255, alpha: 1.0)
+    static let AppLightGray: UIColor = UIColor(red: 247/255, green: 248/255, blue: 249/255, alpha: 1.0)
     static let initFatalError:String = "init(coder:) has not been implemented"
     
     enum contextName {
@@ -73,8 +76,8 @@ struct Constant {
     struct LocalAuth {
         static let localizedReason = "Unlock WriteUp"
         static let errorAttributedString = "WriteUp Locked"
-        static let alertTitle = "Biometry unavailable"
-        static let alertMessage = "Your device is not configured for biometric authentication."
+        static let biometricAlertTitle = "Biometry unavailable"
+        static let biometricAlertMessage = "Your device is not configured for biometric authentication."
     }
     
     struct tableCellId {

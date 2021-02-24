@@ -21,7 +21,7 @@ class ShowAllNotesController: UIViewController {
         bar.delegate = self
         bar.backgroundColor = .white
         bar.tintColor = Constant.SecondaryColor
-        bar.backgroundImage = UIImage()
+        bar.backgroundImage = UIImage.Common.empty
         return bar
     }()
     

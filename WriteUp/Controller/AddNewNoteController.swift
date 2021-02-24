@@ -43,15 +43,15 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         return textview
     }()
     
-        let dateLabel: UILabel = {
-            let label = UILabel()
-            label.text = ""
-            label.font = UIFont().formControlSegmented()
-            label.textColor = Constant.SecondaryColor
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.frame = CGRect(x: 0, y: 0, width: 154, height: 0)
-            return label
-        }()
+    let dateLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.font = UIFont().formControlSegmented()
+        label.textColor = Constant.SecondaryColor
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.frame = CGRect(x: 0, y: 0, width: 154, height: 0)
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +78,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
             verticalSafeAreaInset = self.view.safeAreaInsets.top
         }
         view.addSubview(textView)
-        textView.anchor(top: view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor,bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 0,left: 16,bottom: 0,right: -16))
+        textView.anchor(top: view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor,bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: -50,left: 16,bottom: 0,right: -16))
         textfieldHeightConstraint = NSLayoutConstraint(item: textView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: textfieldHeightWithoutKeyboard - verticalSafeAreaInset)
         NSLayoutConstraint.activate([ textfieldHeightConstraint! ])
         view.layer.layoutIfNeeded()
@@ -87,9 +87,6 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     func setupViews(){
         view.backgroundColor = .white
         navigationItem.titleView = dateLabel
-        navigationItem.largeTitleDisplayMode = .never
-        self.navigationItem.setHidesBackButton(false, animated: false)
-        
         view.addSubview(bottomToolBar)
         bottomToolBar.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 50, left: 0, bottom: -1, right: 0))
         bottomToolBar.hideBackground()
@@ -114,6 +111,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     
     @objc func handleNext(){
         self.view.endEditing(true)
+         
         let saveNote = SaveNoteController()
         saveNote.noteDescription = textView.text
         navigationController?.pushViewController(saveNote, animated: true)
@@ -122,7 +120,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     //need to work on it
     @objc func handleSaveNote(){
         self.view.endEditing(true)
-//        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
         let body = textView.text
         let title = body?.getTitle
         let summary = body?.getSummary
@@ -132,12 +130,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         let uploadData = NoteData(title: title, createdAt: createDate.currentDate,summery: summary,authorID: 2, tag: "lo", body: body)
         NoteAPIService.sharedInstance.modifyNoteByNoteId(httpMethod: "PATCH", noteId: noteId, data: uploadData)
         dateLabel.text = createDate.currentDate
-        if textView.text == "" {
-                NoteAPIService.sharedInstance.deleteNoteByNoteId(httpMethod: "DELETE", noteId: noteDetail.id!)
-            
-        }
     }
-    
     
     @objc func keyboardWillShow(notification: NSNotification){
         let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue

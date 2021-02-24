@@ -21,9 +21,9 @@ class NotesListTableView: UITableView {
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         self.register(NotesListCell.self, forCellReuseIdentifier: cellId)
-        self.separatorStyle = .none
         self.delegate = self
         self.dataSource = self
+        self.separatorColor = UIColor.clear
         getNotesByUserID()
     }
     
@@ -46,10 +46,11 @@ class NotesListTableView: UITableView {
 extension NotesListTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searching {
-            return searchNote.count
-        } else {
-            return noteArray.count
-        }
+                return searchNote.count
+            } else {
+                return noteArray.count
+            }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -65,7 +66,7 @@ extension NotesListTableView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 84
+        return 100
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

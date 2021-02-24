@@ -11,6 +11,7 @@ import FSCalendar
 
 protocol CalendarHeightDelegate: AnyObject {
     func sendCalendarHeight(height: CGFloat?)
+    func handleDidSelectDate(selectedDate : String)
 }
 
 class Calendar: BaseView, UIGestureRecognizerDelegate {
@@ -28,10 +29,7 @@ class Calendar: BaseView, UIGestureRecognizerDelegate {
         self.calendar = calendar
         calendar.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
         calendar.register(FSCalendarCell.self, forCellReuseIdentifier: cellID)
-        calendar.appearance.headerTitleColor = Constant.MainColor
-        calendar.appearance.selectionColor = Constant.MainColor
-        calendar.appearance.weekdayTextColor =  Constant.MainColor
-        calendar.appearance.todayColor = Constant.SecondaryColor
+        setAppearance()
         
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeUp))
         swipeUp.direction = UISwipeGestureRecognizer.Direction.up
@@ -40,6 +38,17 @@ class Calendar: BaseView, UIGestureRecognizerDelegate {
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeDown))
         swipeDown.direction = UISwipeGestureRecognizer.Direction.down
         self.calendar.addGestureRecognizer(swipeDown)
+    }
+    
+    func setAppearance(){
+        calendar.appearance.headerTitleFont = UIFont().itemTitle(size: 17) //month 13
+        calendar.appearance.weekdayFont = UIFont().formControlSegmented(size: 15) //week 17
+        calendar.appearance.titleFont = UIFont().tabBarTitle(size: 14) //123 10
+        
+        calendar.appearance.headerTitleColor = Constant.MainColor
+        calendar.appearance.selectionColor = Constant.MainColor
+        calendar.appearance.weekdayTextColor =  Constant.MainColor
+        calendar.appearance.todayColor = Constant.SecondaryColor
     }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
@@ -98,8 +107,11 @@ extension Calendar: FSCalendarDelegate, FSCalendarDataSource {
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let formatter1 = DateFormatter()
-        formatter1.dateStyle = .short
+        formatter1.dateFormat = "dd/MM/yy HH:mm:ss"
         let dateString = formatter1.string(from: date)
-        print(dateString)
+        print("Calendar Date", dateString)
+        calendarDelegate?.handleDidSelectDate(selectedDate:dateString)
+     
     }
+    
 }
