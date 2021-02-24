@@ -52,6 +52,7 @@ struct Constant {
     struct AddNote {
         static let barLabel = "Add Note"
         static let nextButtonTitle = "Next"
+        static let saveButtonTitle = "Save"
         static let titleLabel = "Title"
         static let titleTextFieldPlaceHolder = "Keep it short"
         static let summaryLabel = "Summary"
