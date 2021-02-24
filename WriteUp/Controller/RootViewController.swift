@@ -26,7 +26,6 @@ class RootViewController: UIViewController, signInDelegate, homeDelegate{
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         view.backgroundColor = UIColor.green
         handleChild()
-        
     }
     
     fileprivate func isSignedIn() -> Bool {
@@ -34,24 +33,19 @@ class RootViewController: UIViewController, signInDelegate, homeDelegate{
     }
     
     func handleChild(){
-        #warning("Don't commit")
-        self.addChild(homeViewController)
-        setupLayout(homeViewController)
-
-
-//        if isSignedIn() {
-//            if children == [signInViewController] {
-//                signInViewController.remove()
-//            }
-//            self.addChild(homeViewController)
-//            setupLayout(homeViewController)
-//        } else {
-//            if children == [homeViewController] {
-//                homeViewController.remove()
-//            }
-//            self.addChild(signInViewController)
-//            setupLayout(signInViewController)
-//        }
+        if isSignedIn() {
+            if children == [signInViewController] {
+                signInViewController.remove()
+            }
+            self.addChild(homeViewController)
+            setupLayout(homeViewController)
+        } else {
+            if children == [homeViewController] {
+                homeViewController.remove()
+            }
+            self.addChild(signInViewController)
+            setupLayout(signInViewController)
+        }
     }
     
     func handleRoot(){

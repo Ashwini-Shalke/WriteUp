@@ -15,7 +15,6 @@ enum State {
 }
 
 class BaseViewController: UIViewController {
-    
     var state: State? {
         didSet {
             render()

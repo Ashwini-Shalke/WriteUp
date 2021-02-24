@@ -120,26 +120,9 @@ class HomeViewController: UIViewController{
         addNewNote.context = Constant.contextName.NewScreen
         navigationController?.pushViewController(addNewNote, animated: true)
     }
-    
-    func showNotesFor(currentDate: String){
-        var noteListForCurrentDate = [ListNoteData]()
-        let displayedCurrentDate = currentDate.getSubStringDate
-        for index in self.noteArray {
-            guard let noteDate = index.createdAt else { return }
-            let selectedNoteDate = noteDate.getSubStringDate
-            if displayedCurrentDate == selectedNoteDate {
-                noteListForCurrentDate.append(index)
-            }
-        }
-        DispatchQueue.main.async {
-            self.noteListView.noteArray = noteListForCurrentDate
-            self.noteListView.reloadData()
-        }
-    }
 }
 
 extension HomeViewController: noteListTableViewDelegate,ActivityDelegate,ProfileLauncherDelegate,CalendarHeightDelegate {
-    
     func handleDidSelectDate(selectedDate: String) {
         var list = [ListNoteData]()
         let selectedCalendarDate = selectedDate.getSubStringDate
@@ -171,13 +154,11 @@ extension HomeViewController: noteListTableViewDelegate,ActivityDelegate,Profile
     func showAllNote() {
         let showAllNotesView = ShowAllNotesController()
         navigationController?.pushViewController(showAllNotesView, animated: true)
-
+        
     }
     
     func dismissHome() {
-        #warning("setting the user defaults to true")
-        UserDefaults.standard.setIsSignedIn(value: true)
-        //        UserDefaults.standard.setIsSignedIn(value: false)
+        UserDefaults.standard.setIsSignedIn(value: false)
         self.homeDelegate?.handleSignOut()
     }
     

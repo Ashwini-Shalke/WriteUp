@@ -50,6 +50,8 @@
 		3351F705247B8C7D0041C3CC /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3351F704247B8C7D0041C3CC /* ColorPickerView.swift */; };
 		335324B024DC533A008A5D3D /* ActivityBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335324AF24DC533A008A5D3D /* ActivityBar.swift */; };
 		335324B124DC533A008A5D3D /* ActivityBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335324AF24DC533A008A5D3D /* ActivityBar.swift */; };
+		3364407C25E556CC009EDEA6 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3364407B25E556CC009EDEA6 /* ImageExtension.swift */; };
+		3364407D25E556CC009EDEA6 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3364407B25E556CC009EDEA6 /* ImageExtension.swift */; };
 		3372E5F224471444009D3983 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E5F124471444009D3983 /* Extension.swift */; };
 		3372E608244DEF9D009D3983 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E607244DEF9D009D3983 /* StringConstants.swift */; };
 		3372E60D244ED71D009D3983 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E60C244ED71D009D3983 /* RootViewController.swift */; };
@@ -133,6 +135,7 @@
 		334E86DE25DFB69200065938 /* MaisonNeue-Mono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MaisonNeue-Mono.ttf"; path = "Fonts/MaisonNeue-Mono.ttf"; sourceTree = "<group>"; };
 		3351F704247B8C7D0041C3CC /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		335324AF24DC533A008A5D3D /* ActivityBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityBar.swift; sourceTree = "<group>"; };
+		3364407B25E556CC009EDEA6 /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		3372E5F124471444009D3983 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		3372E607244DEF9D009D3983 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		3372E60C244ED71D009D3983 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -271,6 +274,7 @@
 				33306BC5245985AD003CA89E /* PrimaryText.swift */,
 				33348D0E2472A5C3002093B8 /* PrimaryBarLabel.swift */,
 				33306BC7245C1AE7003CA89E /* PrimaryButton.swift */,
+				3364407B25E556CC009EDEA6 /* ImageExtension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -553,6 +557,7 @@
 				332C576B2463DD0700891BBB /* EditProfileLauncher.swift in Sources */,
 				332D81872477BA4D00944CA5 /* Note.swift in Sources */,
 				33DBC323246FFCF200E6462A /* SaveNoteController.swift in Sources */,
+				3364407C25E556CC009EDEA6 /* ImageExtension.swift in Sources */,
 				3372E608244DEF9D009D3983 /* StringConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -592,6 +597,7 @@
 				33FB4EF724B843570079B84C /* EditProfileLauncher.swift in Sources */,
 				33FB4EF824B843570079B84C /* Note.swift in Sources */,
 				33FB4EF924B843570079B84C /* SaveNoteController.swift in Sources */,
+				3364407D25E556CC009EDEA6 /* ImageExtension.swift in Sources */,
 				33FB4EFA24B843570079B84C /* StringConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
