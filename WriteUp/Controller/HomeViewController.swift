@@ -12,7 +12,7 @@ protocol homeDelegate: AnyObject{
     func handleSignOut()
 }
 
-class HomeViewController: UIViewController{
+class HomeViewController: UIViewController, ProfileScreenDelegate{
     weak var homeDelegate : homeDelegate?
     var calendarHeightConstraint:NSLayoutConstraint?
     let notesLabel = SecondaryButton(titleText: Constant.NoteBar.notesLabel)
@@ -110,7 +110,7 @@ class HomeViewController: UIViewController{
     }
     
     @objc func handleProfileButton(){
-        let profileLauncher = ProfileLauncher()
+        let profileLauncher = ProfileScreen()
         profileLauncher.profileDelegate = self
         navigationController?.pushViewController(profileLauncher, animated: true)
     }
