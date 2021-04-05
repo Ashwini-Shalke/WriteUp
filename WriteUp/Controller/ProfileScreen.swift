@@ -20,7 +20,6 @@ class ProfileScreen: UIViewController{
     var userDict = [0:"Ashwini Shalke", 1:"ashwini@gmail.com", 2:"9075721798", 3:"10"]
     var activeTextField = UITextField()
     var activeTextFieldBounds = CGRect()
-    let signOutButton = PrimaryButton(titleText: Constant.ProfileSC.signOutButtonTitle)
     
     var isEditingNow: Bool? {
         didSet {
@@ -41,6 +40,7 @@ class ProfileScreen: UIViewController{
     let tableView: UITableView = {
         let table = UITableView()
         table.rowHeight = 70
+        table.showsVerticalScrollIndicator = false
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
@@ -48,42 +48,53 @@ class ProfileScreen: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        tableView.register(ProfileCell.self, forCellReuseIdentifier: cellID)
-        tableView.register(ProfileSwitchCell.self, forCellReuseIdentifier: switchCellID)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(allowEditing))
-        
+       NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        setupLayout()
+        tableView.tableFooterView = getFooterView()
+    }
+    
+    
+    func setupLayout(){
         view.addSubview(topViewContainer)
-        NSLayoutConstraint.activate([
-                                        topViewContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                                        topViewContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-                                        topViewContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-                                        topViewContainer.heightAnchor.constraint(equalToConstant:175)])
+        topViewContainer.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, size: CGSize(width: 0, height: 175))
         
         view.addSubview(tableView)
+        tableView.anchor(top: topViewContainer.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 16, left: 16, bottom: -20, right: -16))
         tableView.delegate = self
         tableView.dataSource = self
-        
-        NSLayoutConstraint.activate([
-                                        tableView.topAnchor.constraint(equalTo: topViewContainer.bottomAnchor, constant: 16),
-                                        tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-                                        tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-                                        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)])
-        
-        let customView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
-        customView.backgroundColor = .green
-        signOutButton.frame = CGRect(x: 0, y: 0, width: 800, height: 50)
-        
-       
-        signOutButton.addTarget(self, action: #selector(handleSignOut), for: .touchUpInside)
-        
-        customView.addSubview(signOutButton)
-
-        //Add that view in Table Footer View.
-        tableView.tableFooterView = customView // Her
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        tableView.register(ProfileCell.self, forCellReuseIdentifier: cellID)
+        tableView.register(ProfileSwitchCell.self, forCellReuseIdentifier: switchCellID)
     }
+    
+    
+    func getFooterView() -> UIView {
+        let footerView = UIView(frame: .zero)
+        footerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        let signOutButton = UIButton(frame: .zero)
+        signOutButton.setTitle("SignOut", for: .normal)
+        signOutButton.backgroundColor = .lightGray
+        signOutButton.reversesTitleShadowWhenHighlighted = false
+        signOutButton.titleLabel?.font    = UIFont(name: "georgia", size: 20)
+        signOutButton.setTitleColor(.white, for: .normal)
+        signOutButton.layer.borderColor   = UIColor.white.cgColor
+        signOutButton.layer.cornerRadius  = 5
+        signOutButton.backgroundColor     = Constant.SecondaryColor
+        signOutButton.addTarget(self, action: #selector(handleSignOut), for: .touchUpInside)
+        footerView.addSubview(signOutButton)
+        return signOutButton
+    }
+    
+    override func viewWillLayoutSubviews() {
+            super.viewWillLayoutSubviews()
+
+            if let footer = tableView.tableFooterView {
+                let newSize = footer.systemLayoutSizeFitting(CGSize(width: tableView.bounds.width, height: 10))
+                footer.frame.size.height = newSize.height
+            }
+        }
+    
     
     @objc func keyboardWillShow(notification: NSNotification){
         guard let userInfo = notification.userInfo else { return }
@@ -144,12 +155,12 @@ extension ProfileScreen: UITableViewDelegate,UITableViewDataSource,profileCellDe
             }
             return cell
         }
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: switchCellID, for: indexPath) as! ProfileSwitchCell
         cell.cellDelegate = self
         cell.accessoryView = cell.screenLockSwitch
         return cell
     }
+    
     
     func handleActiveTextField(_ textField: UITextField) {
         activeTextField = textField
@@ -172,6 +183,6 @@ extension ProfileScreen: UITableViewDelegate,UITableViewDataSource,profileCellDe
     }
      
     func handleScreenLockDelegate(tag: Int) {
-        print("*******", tag)
+        print("ScreenLocked Status", UserDefaults.standard.isScreenLockedOn())
     }
 }

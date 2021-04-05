@@ -14,8 +14,9 @@ protocol profileCellDelegate : class {
     func handleReturnTextField(_ textField: UITextField)
 }
 
-class ProfileCell: UITableViewCell, UITextFieldDelegate {
+class ProfileCell: UITableViewCell {
     var UserDetail = [Int: String]()
+    var state: Bool = false
     weak var cellDelegate : profileCellDelegate?
     
     enum TextFieldData: Int {
@@ -25,13 +26,18 @@ class ProfileCell: UITableViewCell, UITextFieldDelegate {
         case notesTextField
     }
     
-    var state: Bool = false
-    
     var user: [Int: String]?{
         didSet {
             guard let getUser = user  else { return }
             print("getUser", getUser)
             cellDelegate?.newData(user: getUser)
+        }
+    }
+    
+    var getTextValue : String? {
+        didSet {
+            guard let textValue = getTextValue else {return}
+            textName.text = textValue
         }
     }
     
@@ -43,13 +49,6 @@ class ProfileCell: UITableViewCell, UITextFieldDelegate {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    var getTextValue : String? {
-        didSet {
-            guard let textValue = getTextValue else {return}
-            textName.text = textValue
-        }
     }
     
     var labelName: UILabel = {
@@ -73,20 +72,16 @@ class ProfileCell: UITableViewCell, UITextFieldDelegate {
     
     func setupLayout(){
         self.addSubview(labelName)
-        NSLayoutConstraint.activate([
-                                        labelName.heightAnchor.constraint(equalToConstant: 20),
-                                        labelName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-                                        labelName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-                                        labelName.topAnchor.constraint(equalTo: self.topAnchor, constant: 12)])
+        labelName.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor,padding: UIEdgeInsets(top: 12, left: 16, bottom: 0, right: -16), size: CGSize(width: 0, height: 20))
+        
         self.addSubview(textName)
-        NSLayoutConstraint.activate([
-                                        textName.heightAnchor.constraint(equalToConstant: 30),
-                                        textName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-                                        textName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-                                        textName.topAnchor.constraint(equalTo: self.labelName.bottomAnchor, constant: -2)])
+        textName.anchor(top: labelName.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: UIEdgeInsets(top: -2, left: 16, bottom: 0, right: -16), size: CGSize(width: 0, height: 30))
+        
         textName.delegate = self
     }
-    
+}
+
+extension ProfileCell: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         cellDelegate?.handleActiveTextField(textField)

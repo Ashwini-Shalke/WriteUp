@@ -12,6 +12,7 @@ class PrimaryLabel: UILabel {
     init(labelName: String) {
         super.init(frame: .zero)
         self.text = labelName
+        self.textColor = .systemGray
         self.font = UIFont().formControlTitle()
         self.backgroundColor = .white
         self.adjustsFontSizeToFitWidth = true

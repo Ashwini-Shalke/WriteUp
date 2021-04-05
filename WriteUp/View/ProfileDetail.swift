@@ -106,8 +106,16 @@ class ProfileDetail: BaseView,EditProfileDelegate {
         scrollView.addSubview(containerStackView)
         containerStackView.anchor(top: scrollView.topAnchor, leading: scrollView.leadingAnchor, bottom: scrollView.bottomAnchor, trailing: scrollView.trailingAnchor)
         
-        //setup stackView
+  
         let viewArray = [nameLabel,nameTextField, phoneLabel, phoneTextField, emailLabel, emailTextField, noteLabel, noteTextField, switchView]
+  
+        
+         let lineLabel = UILabel()
+        lineLabel.text = ""
+        lineLabel.backgroundColor = .gray
+        lineLabel.frame =  CGRect(x: 0, y: 0, width: 50, height: 2)
+        
+        
         let stackView = UIStackView(arrangedSubviews: viewArray)
         containerStackView.addSubview(stackView)
         stackView.anchor(top: containerStackView.topAnchor, leading: containerStackView.leadingAnchor, bottom: containerStackView.bottomAnchor, trailing: containerStackView.trailingAnchor)

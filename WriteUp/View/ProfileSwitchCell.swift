@@ -40,7 +40,7 @@ class ProfileSwitchCell: UITableViewCell{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     
     func setupLayout(){
         self.contentView.addSubview(switchLabel)
@@ -49,7 +49,6 @@ class ProfileSwitchCell: UITableViewCell{
                                         switchLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: 16),
                                         switchLabel.widthAnchor.constraint(equalToConstant: 200)])
         
-
         screenLockSwitch.addTarget(self, action: #selector(handleButtonClicked(_:)), for: .valueChanged)
     }
     
@@ -58,7 +57,21 @@ class ProfileSwitchCell: UITableViewCell{
     }
     
     @objc func handleButtonClicked(_ sender: UIButton){
+        screenLockSwitch.isOn ? UserDefaults.standard.setIsScreenLockedOn(value: true) : UserDefaults.standard.setIsScreenLockedOn(value: false)
         cellDelegate?.handleScreenLockDelegate(tag: sender.tag)
     }
+    
+    fileprivate func isScreenLocked() -> Bool {
+        return UserDefaults.standard.isScreenLockedOn()
+    }
+    
+    func handleScreenLock(){
+        if isScreenLocked() {
+            screenLockSwitch.isOn = true
+        } else {
+            screenLockSwitch.isOn = false
+        }
+    }
+    
 }
 
