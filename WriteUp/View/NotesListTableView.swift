@@ -32,9 +32,9 @@ class NotesListTableView: UITableView {
     }
     
     func getNotesByUserID(){
-        NoteAPIService.sharedInstance.fetchNoteListByAuthorId(authorID: 2) { (notes) in
-            self.noteArray = notes
-            DispatchQueue.main.async { self.reloadData() }
+        NoteAPIService.sharedInstance.fetchNoteListByAuthorId(authorID: 2) { [weak self] (notes) in
+            self?.noteArray = notes
+            DispatchQueue.main.async { self?.reloadData() }
         }
     }
     

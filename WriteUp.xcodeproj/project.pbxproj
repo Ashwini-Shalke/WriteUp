@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		3320722125E16812001EFD37 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3320722025E16812001EFD37 /* BaseViewController.swift */; };
 		3320722225E16812001EFD37 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3320722025E16812001EFD37 /* BaseViewController.swift */; };
-		332C576B2463DD0700891BBB /* EditProfileLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332C576A2463DD0700891BBB /* EditProfileLauncher.swift */; };
-		332D45FD246142660078BEA2 /* ProfileDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D45FC246142660078BEA2 /* ProfileDetail.swift */; };
 		332D81812475229500944CA5 /* AddNewNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81802475229500944CA5 /* AddNewNoteController.swift */; };
 		332D81832475276000944CA5 /* NotesListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81822475276000944CA5 /* NotesListTableView.swift */; };
 		332D81852476466C00944CA5 /* ShowAllNotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81842476466C00944CA5 /* ShowAllNotesController.swift */; };
@@ -50,12 +48,17 @@
 		3351F705247B8C7D0041C3CC /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3351F704247B8C7D0041C3CC /* ColorPickerView.swift */; };
 		335324B024DC533A008A5D3D /* ActivityBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335324AF24DC533A008A5D3D /* ActivityBar.swift */; };
 		335324B124DC533A008A5D3D /* ActivityBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335324AF24DC533A008A5D3D /* ActivityBar.swift */; };
+		335644322600D43900A52766 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335644312600D43900A52766 /* ProfileScreen.swift */; };
+		335644332600D43900A52766 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335644312600D43900A52766 /* ProfileScreen.swift */; };
+		335644372600D56A00A52766 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335644362600D56A00A52766 /* ProfileCell.swift */; };
+		335644382600D56A00A52766 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335644362600D56A00A52766 /* ProfileCell.swift */; };
+		3356443C2600D5CA00A52766 /* ProfileSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356443B2600D5CA00A52766 /* ProfileSwitchCell.swift */; };
+		3356443D2600D5CA00A52766 /* ProfileSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3356443B2600D5CA00A52766 /* ProfileSwitchCell.swift */; };
 		3364407C25E556CC009EDEA6 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3364407B25E556CC009EDEA6 /* ImageExtension.swift */; };
 		3364407D25E556CC009EDEA6 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3364407B25E556CC009EDEA6 /* ImageExtension.swift */; };
 		3372E5F224471444009D3983 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E5F124471444009D3983 /* Extension.swift */; };
 		3372E608244DEF9D009D3983 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E607244DEF9D009D3983 /* StringConstants.swift */; };
 		3372E60D244ED71D009D3983 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E60C244ED71D009D3983 /* RootViewController.swift */; };
-		3372E60F244F074D009D3983 /* ProfileLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E60E244F074D009D3983 /* ProfileLauncher.swift */; };
 		338A7C722577B6FB000E1B2B /* SaveNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338A7C712577B6FB000E1B2B /* SaveNoteView.swift */; };
 		338A7C732577B6FB000E1B2B /* SaveNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338A7C712577B6FB000E1B2B /* SaveNoteView.swift */; };
 		3398D21E24C6F6990022F2F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3398D21D24C6F6990022F2F7 /* GoogleService-Info.plist */; };
@@ -70,7 +73,6 @@
 		33FB4EE324B843570079B84C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333CDFF2445CC3B00E6EF3B /* User.swift */; };
 		33FB4EE424B843570079B84C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333CDED2445CB7A00E6EF3B /* SignInViewController.swift */; };
 		33FB4EE524B843570079B84C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333CE012445CD8100E6EF3B /* HomeViewController.swift */; };
-		33FB4EE624B843570079B84C /* ProfileDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D45FC246142660078BEA2 /* ProfileDetail.swift */; };
 		33FB4EE724B843570079B84C /* PrimaryText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306BC5245985AD003CA89E /* PrimaryText.swift */; };
 		33FB4EE824B843570079B84C /* NotesBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33329B42246A9D5900C40379 /* NotesBar.swift */; };
 		33FB4EE924B843570079B84C /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E60C244ED71D009D3983 /* RootViewController.swift */; };
@@ -80,13 +82,11 @@
 		33FB4EED24B843570079B84C /* NoteBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33329B44246D4AF300C40379 /* NoteBarCell.swift */; };
 		33FB4EEE24B843570079B84C /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DBC320246EB50100E6462A /* Calendar.swift */; };
 		33FB4EEF24B843570079B84C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333CDE92445CB7A00E6EF3B /* AppDelegate.swift */; };
-		33FB4EF024B843570079B84C /* ProfileLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E60E244F074D009D3983 /* ProfileLauncher.swift */; };
 		33FB4EF124B843570079B84C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333CDEB2445CB7A00E6EF3B /* SceneDelegate.swift */; };
 		33FB4EF224B843570079B84C /* BottonToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332F5AE2248E0894003181E1 /* BottonToolBar.swift */; };
 		33FB4EF324B843570079B84C /* AddNewNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81802475229500944CA5 /* AddNewNoteController.swift */; };
 		33FB4EF424B843570079B84C /* PrimaryBarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33348D0E2472A5C3002093B8 /* PrimaryBarLabel.swift */; };
 		33FB4EF524B843570079B84C /* PrimaryLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33306BC324589BC2003CA89E /* PrimaryLabel.swift */; };
-		33FB4EF724B843570079B84C /* EditProfileLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332C576A2463DD0700891BBB /* EditProfileLauncher.swift */; };
 		33FB4EF824B843570079B84C /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81862477BA4D00944CA5 /* Note.swift */; };
 		33FB4EF924B843570079B84C /* SaveNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DBC322246FFCF200E6462A /* SaveNoteController.swift */; };
 		33FB4EFA24B843570079B84C /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372E607244DEF9D009D3983 /* StringConstants.swift */; };
@@ -100,8 +100,6 @@
 /* Begin PBXFileReference section */
 		27E06529D8D5ADA4E75B28C1 /* Pods-WriteUpDev.releasedev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUpDev.releasedev.xcconfig"; path = "Target Support Files/Pods-WriteUpDev/Pods-WriteUpDev.releasedev.xcconfig"; sourceTree = "<group>"; };
 		3320722025E16812001EFD37 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		332C576A2463DD0700891BBB /* EditProfileLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileLauncher.swift; sourceTree = "<group>"; };
-		332D45FC246142660078BEA2 /* ProfileDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetail.swift; sourceTree = "<group>"; };
 		332D81802475229500944CA5 /* AddNewNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNoteController.swift; sourceTree = "<group>"; };
 		332D81822475276000944CA5 /* NotesListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListTableView.swift; sourceTree = "<group>"; };
 		332D81842476466C00944CA5 /* ShowAllNotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllNotesController.swift; sourceTree = "<group>"; };
@@ -135,11 +133,13 @@
 		334E86DE25DFB69200065938 /* MaisonNeue-Mono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MaisonNeue-Mono.ttf"; path = "Fonts/MaisonNeue-Mono.ttf"; sourceTree = "<group>"; };
 		3351F704247B8C7D0041C3CC /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		335324AF24DC533A008A5D3D /* ActivityBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityBar.swift; sourceTree = "<group>"; };
+		335644312600D43900A52766 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		335644362600D56A00A52766 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		3356443B2600D5CA00A52766 /* ProfileSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSwitchCell.swift; sourceTree = "<group>"; };
 		3364407B25E556CC009EDEA6 /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		3372E5F124471444009D3983 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		3372E607244DEF9D009D3983 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		3372E60C244ED71D009D3983 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		3372E60E244F074D009D3983 /* ProfileLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLauncher.swift; sourceTree = "<group>"; };
 		338A7C712577B6FB000E1B2B /* SaveNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNoteView.swift; sourceTree = "<group>"; };
 		3398D21D24C6F6990022F2F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		33D22765259CB84400A23885 /* NoteAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteAPIService.swift; sourceTree = "<group>"; };
@@ -230,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				335324AF24DC533A008A5D3D /* ActivityBar.swift */,
-				332D45FC246142660078BEA2 /* ProfileDetail.swift */,
 				33DBC320246EB50100E6462A /* Calendar.swift */,
 				33329B44246D4AF300C40379 /* NoteBarCell.swift */,
 				33329B42246A9D5900C40379 /* NotesBar.swift */,
@@ -239,6 +238,8 @@
 				3351F704247B8C7D0041C3CC /* ColorPickerView.swift */,
 				332F5AE2248E0894003181E1 /* BottonToolBar.swift */,
 				338A7C712577B6FB000E1B2B /* SaveNoteView.swift */,
+				335644362600D56A00A52766 /* ProfileCell.swift */,
+				3356443B2600D5CA00A52766 /* ProfileSwitchCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -287,11 +288,10 @@
 				3320722025E16812001EFD37 /* BaseViewController.swift */,
 				3333CDED2445CB7A00E6EF3B /* SignInViewController.swift */,
 				3333CE012445CD8100E6EF3B /* HomeViewController.swift */,
-				3372E60E244F074D009D3983 /* ProfileLauncher.swift */,
-				332C576A2463DD0700891BBB /* EditProfileLauncher.swift */,
 				332D81802475229500944CA5 /* AddNewNoteController.swift */,
 				33DBC322246FFCF200E6462A /* SaveNoteController.swift */,
 				332D81842476466C00944CA5 /* ShowAllNotesController.swift */,
+				335644312600D43900A52766 /* ProfileScreen.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -536,7 +536,6 @@
 				338A7C722577B6FB000E1B2B /* SaveNoteView.swift in Sources */,
 				3333CDEE2445CB7A00E6EF3B /* SignInViewController.swift in Sources */,
 				3333CE022445CD8100E6EF3B /* HomeViewController.swift in Sources */,
-				332D45FD246142660078BEA2 /* ProfileDetail.swift in Sources */,
 				33306BC6245985AD003CA89E /* PrimaryText.swift in Sources */,
 				33329B43246A9D5900C40379 /* NotesBar.swift in Sources */,
 				3320722125E16812001EFD37 /* BaseViewController.swift in Sources */,
@@ -547,14 +546,15 @@
 				33329B45246D4AF300C40379 /* NoteBarCell.swift in Sources */,
 				33DBC321246EB50100E6462A /* Calendar.swift in Sources */,
 				3333CDEA2445CB7A00E6EF3B /* AppDelegate.swift in Sources */,
-				3372E60F244F074D009D3983 /* ProfileLauncher.swift in Sources */,
 				3333CDEC2445CB7A00E6EF3B /* SceneDelegate.swift in Sources */,
+				335644322600D43900A52766 /* ProfileScreen.swift in Sources */,
+				335644372600D56A00A52766 /* ProfileCell.swift in Sources */,
 				332F5AE3248E0894003181E1 /* BottonToolBar.swift in Sources */,
 				332D81812475229500944CA5 /* AddNewNoteController.swift in Sources */,
 				33348D0F2472A5C3002093B8 /* PrimaryBarLabel.swift in Sources */,
 				33306BC424589BC2003CA89E /* PrimaryLabel.swift in Sources */,
+				3356443C2600D5CA00A52766 /* ProfileSwitchCell.swift in Sources */,
 				33D22766259CB84400A23885 /* NoteAPIService.swift in Sources */,
-				332C576B2463DD0700891BBB /* EditProfileLauncher.swift in Sources */,
 				332D81872477BA4D00944CA5 /* Note.swift in Sources */,
 				33DBC323246FFCF200E6462A /* SaveNoteController.swift in Sources */,
 				3364407C25E556CC009EDEA6 /* ImageExtension.swift in Sources */,
@@ -576,7 +576,6 @@
 				338A7C732577B6FB000E1B2B /* SaveNoteView.swift in Sources */,
 				33FB4EE424B843570079B84C /* SignInViewController.swift in Sources */,
 				33FB4EE524B843570079B84C /* HomeViewController.swift in Sources */,
-				33FB4EE624B843570079B84C /* ProfileDetail.swift in Sources */,
 				33FB4EE724B843570079B84C /* PrimaryText.swift in Sources */,
 				33FB4EE824B843570079B84C /* NotesBar.swift in Sources */,
 				3320722225E16812001EFD37 /* BaseViewController.swift in Sources */,
@@ -587,14 +586,15 @@
 				33FB4EED24B843570079B84C /* NoteBarCell.swift in Sources */,
 				33FB4EEE24B843570079B84C /* Calendar.swift in Sources */,
 				33FB4EEF24B843570079B84C /* AppDelegate.swift in Sources */,
-				33FB4EF024B843570079B84C /* ProfileLauncher.swift in Sources */,
 				33FB4EF124B843570079B84C /* SceneDelegate.swift in Sources */,
+				335644332600D43900A52766 /* ProfileScreen.swift in Sources */,
+				335644382600D56A00A52766 /* ProfileCell.swift in Sources */,
 				33FB4EF224B843570079B84C /* BottonToolBar.swift in Sources */,
 				33FB4EF324B843570079B84C /* AddNewNoteController.swift in Sources */,
 				33FB4EF424B843570079B84C /* PrimaryBarLabel.swift in Sources */,
 				33FB4EF524B843570079B84C /* PrimaryLabel.swift in Sources */,
+				3356443D2600D5CA00A52766 /* ProfileSwitchCell.swift in Sources */,
 				33D22767259CB84400A23885 /* NoteAPIService.swift in Sources */,
-				33FB4EF724B843570079B84C /* EditProfileLauncher.swift in Sources */,
 				33FB4EF824B843570079B84C /* Note.swift in Sources */,
 				33FB4EF924B843570079B84C /* SaveNoteController.swift in Sources */,
 				3364407D25E556CC009EDEA6 /* ImageExtension.swift in Sources */,
