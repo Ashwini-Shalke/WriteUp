@@ -11,69 +11,59 @@ protocol ProfileScreenDelegate: AnyObject {
     func dismissHome()
 }
 
-class ProfileScreen: UIViewController{
-    let cellID = "CellID"
-    let switchCellID = "switchCellID"
+class ProfileScreen: UIViewController, UITextFieldDelegate{
     weak var profileDelegate: ProfileScreenDelegate?
+    let cellID = Constant.ProfileSC.cellId
+    let switchCellID = Constant.ProfileSC.switchCellID
+    let profileLabel = [Constant.ProfileSC.useNameLabel, Constant.ProfileSC.emailLabel, Constant.ProfileSC.phoneLabel,Constant.ProfileSC.noteLabel]
     
-    let profileLabel = ["Username", "Email", "Mobile Number","Total Notes"]
+    //MARK: Temporary values
     var userDict = [0:"Ashwini Shalke", 1:"ashwini@gmail.com", 2:"9075721798", 3:"10"]
     var activeTextField = UITextField()
     var activeTextFieldBounds = CGRect()
     
     var isEditingNow: Bool? {
         didSet {
-            if true {
+            if isEditingNow == true {
                 tableView.reloadData()
                 navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDone))
             }
         }
     }
     
-    let topViewContainer : UIView = {
-        let topView = UIView()
-        topView.translatesAutoresizingMaskIntoConstraints = false
-        topView.backgroundColor = .systemPurple
-        return topView
-    }()
-    
     let tableView: UITableView = {
         let table = UITableView()
         table.rowHeight = 70
         table.showsVerticalScrollIndicator = false
-        table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationItem.title = Constant.ProfileSC.navTitle
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(allowEditing))
-       NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         setupLayout()
         tableView.tableFooterView = getFooterView()
     }
     
-    
     func setupLayout(){
-        view.addSubview(topViewContainer)
-        topViewContainer.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, size: CGSize(width: 0, height: 175))
+     view.addSubview(tableView)
+        tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 16, bottom: -20, right: -16))
         
-        view.addSubview(tableView)
-        tableView.anchor(top: topViewContainer.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 16, left: 16, bottom: -20, right: -16))
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ProfileCell.self, forCellReuseIdentifier: cellID)
         tableView.register(ProfileSwitchCell.self, forCellReuseIdentifier: switchCellID)
     }
     
-    
     func getFooterView() -> UIView {
         let footerView = UIView(frame: .zero)
         footerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         let signOutButton = UIButton(frame: .zero)
-        signOutButton.setTitle("SignOut", for: .normal)
+        signOutButton.setTitle(Constant.ProfileSC.signOutButtonTitle, for: .normal)
         signOutButton.backgroundColor = .lightGray
         signOutButton.reversesTitleShadowWhenHighlighted = false
         signOutButton.titleLabel?.font    = UIFont(name: "georgia", size: 20)
@@ -87,14 +77,13 @@ class ProfileScreen: UIViewController{
     }
     
     override func viewWillLayoutSubviews() {
-            super.viewWillLayoutSubviews()
-
-            if let footer = tableView.tableFooterView {
-                let newSize = footer.systemLayoutSizeFitting(CGSize(width: tableView.bounds.width, height: 10))
-                footer.frame.size.height = newSize.height
-            }
+        super.viewWillLayoutSubviews()
+        
+        if let footer = tableView.tableFooterView {
+            let newSize = footer.systemLayoutSizeFitting(CGSize(width: tableView.bounds.width, height: 10))
+            footer.frame.size.height = newSize.height
         }
-    
+    }
     
     @objc func keyboardWillShow(notification: NSNotification){
         guard let userInfo = notification.userInfo else { return }
@@ -118,7 +107,6 @@ class ProfileScreen: UIViewController{
         }, completion: nil)
     }
     
-    
     @objc func handleSignOut(){
         self.navigationController?.popViewController(animated: false)
         profileDelegate?.dismissHome()
@@ -126,6 +114,9 @@ class ProfileScreen: UIViewController{
     
     @objc func allowEditing(){
         isEditingNow = true
+        if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? ProfileCell {
+            cell.textName.becomeFirstResponder()
+        }
     }
 
     @objc func handleDone(){
@@ -150,8 +141,6 @@ extension ProfileScreen: UITableViewDelegate,UITableViewDataSource,profileCellDe
             cell.cellDelegate = self
             if let state = isEditingNow {
                 cell.state = state
-            }else {
-                cell.state = false
             }
             return cell
         }
@@ -160,7 +149,6 @@ extension ProfileScreen: UITableViewDelegate,UITableViewDataSource,profileCellDe
         cell.accessoryView = cell.screenLockSwitch
         return cell
     }
-    
     
     func handleActiveTextField(_ textField: UITextField) {
         activeTextField = textField

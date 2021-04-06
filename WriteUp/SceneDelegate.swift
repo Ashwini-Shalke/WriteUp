@@ -12,7 +12,7 @@ import LocalAuthentication
 class SceneDelegate: UIResponder, UIWindowSceneDelegate, errorLockDelegate{
     var window: UIWindow?
     let navigationController = UINavigationController(rootViewController: RootViewController())
-    let editProfileDetail = EditProfileLauncher()
+//    let editProfileDetail = EditProfileLauncher()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         window?.rootViewController = navigationController

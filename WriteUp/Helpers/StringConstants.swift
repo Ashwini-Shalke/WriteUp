@@ -26,14 +26,16 @@ struct Constant {
         static let labelHeight = CGSize(width: 0, height: 32)
         static let textfieldHeight = CGSize(width: 37, height: 32)
         static let signOutButtonTitle = "Sign out"
-        static let placeholderImageName = "placeholder_photo"
-        static let nameLabel = "Name"
+//        static let placeholderImageName = "placeholder_photo"
+        static let useNameLabel = "UserName"
         static let emailLabel = "Email"
         static let phoneLabel = "Phone Number"
         static let noteLabel = "Total notes"
-        static let noOfNotes = "0"
-        static let navTitle = "Profile"
         static let switchLabel = "Screen Lock"
+        static let navTitle = "Profile"
+
+        static let cellId = "cell Id"
+        static let switchCellID = "switchCellID"
     }
     
     //MARK: NoteBar

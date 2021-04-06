@@ -16,10 +16,16 @@ protocol profileCellDelegate : class {
 
 class ProfileCell: UITableViewCell {
     var UserDetail = [Int: String]()
-    var state: Bool = false
+    
+    lazy var state: Bool = false {
+        didSet {
+          state == true ? (self.textName.isUserInteractionEnabled = true) : (self.textName.isUserInteractionEnabled = false)
+        }
+    }
+        
     weak var cellDelegate : profileCellDelegate?
     
-    enum TextFieldData: Int {
+    enum TextFieldData: Int { 
         case usernameTextField = 0
         case emailTextField
         case mobileTextField
@@ -29,7 +35,6 @@ class ProfileCell: UITableViewCell {
     var user: [Int: String]?{
         didSet {
             guard let getUser = user  else { return }
-            print("getUser", getUser)
             cellDelegate?.newData(user: getUser)
         }
     }
@@ -95,14 +100,15 @@ extension ProfileCell: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if state {
             textName.becomeFirstResponder()
-            textName.isUserInteractionEnabled = true
+//            textName.isUserInteractionEnabled = true
             textName.clearButtonMode = .whileEditing
         }
         else {
-            textName.isUserInteractionEnabled = false
+//            textName.isUserInteractionEnabled = false
         }
     }
     
+   
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField.tag {

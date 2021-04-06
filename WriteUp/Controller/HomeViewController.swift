@@ -122,7 +122,7 @@ class HomeViewController: UIViewController, ProfileScreenDelegate{
     }
 }
 
-extension HomeViewController: noteListTableViewDelegate,ActivityDelegate,ProfileLauncherDelegate,CalendarHeightDelegate {
+extension HomeViewController: noteListTableViewDelegate,ActivityDelegate,CalendarHeightDelegate {
     func handleDidSelectDate(selectedDate: String) {
         var list = [ListNoteData]()
         let selectedCalendarDate = selectedDate.getSubStringDate

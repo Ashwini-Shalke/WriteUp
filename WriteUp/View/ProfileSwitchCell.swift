@@ -20,7 +20,7 @@ class ProfileSwitchCell: UITableViewCell{
         switchLabel.textColor = .black
         switchLabel.font = UIFont.systemFont(ofSize: 18,weight: .semibold)
         switchLabel.textAlignment = .left
-        switchLabel.text = "Screen Lock"
+        switchLabel.text = Constant.ProfileSC.switchLabel
         switchLabel.translatesAutoresizingMaskIntoConstraints = false
         return switchLabel
     }()
@@ -38,9 +38,8 @@ class ProfileSwitchCell: UITableViewCell{
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Constant.initFatalError)
     }
-    
     
     func setupLayout(){
         self.contentView.addSubview(switchLabel)
@@ -72,6 +71,5 @@ class ProfileSwitchCell: UITableViewCell{
             screenLockSwitch.isOn = false
         }
     }
-    
 }
 

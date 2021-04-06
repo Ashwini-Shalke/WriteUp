@@ -11,6 +11,18 @@ protocol ActivityDelegate: AnyObject {
     func showAllNote()
 }
 
+class BaseView: UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    func setup(){}
+    required init?(coder: NSCoder) {
+        fatalError(Constant.initFatalError)
+    }
+}
+
 class ActivityBar: BaseView {
     weak var activityDelegate:ActivityDelegate?
     let showAllButton = ShowAllButton(titleText: Constant.NoteBar.showAllButton)
