@@ -40,6 +40,14 @@ extension UIViewController {
 }
 
 extension UIFont {
+    /*
+     MaisonNeue-Book
+     MaisonNeue-Mono
+     MaisonNeue-Light
+     MaisonNeue-Demi =
+     MaisonNeue-Bold = Title
+     */
+    
     func pageTitle(size:CGFloat? = 34) -> UIFont {
         return UIFont.systemFont(ofSize: 34, weight: .semibold)
     }
@@ -49,18 +57,22 @@ extension UIFont {
     }
     
     func itemTitle(size: CGFloat? = 17) -> UIFont {
-        return UIFont.systemFont(ofSize: 17, weight: .medium)
+//        return UIFont(name: "MaisonNeue-Demi", size: 17)!
+        UIFont.systemFont(ofSize: 17, weight: .medium)
     }
     
     func itemDesc(size: CGFloat? = 15) -> UIFont {
-        return UIFont.systemFont(ofSize: 15, weight: .regular)
+//        return UIFont(name: "MaisonNeue-book", size: 14)!
+        UIFont.systemFont(ofSize: 15, weight: .regular)
     }
     
-    func formControlTitle(size: CGFloat? = 17) -> UIFont{
-        return UIFont.systemFont(ofSize: 17, weight: .semibold)
+    func formControlTitle(size: CGFloat? = 15) -> UIFont{
+//        return UIFont(name:"MaisonNeue-Light", size: 15)!
+        return UIFont.systemFont(ofSize: 17, weight: .medium)
     }
     
     func formControlSegmented(size: CGFloat? = 13) -> UIFont {
+//        return UIFont(name: "MaisonNeue-Bold", size: size!)!
         return UIFont.systemFont(ofSize: 13, weight: .regular)
     }
     
@@ -69,6 +81,7 @@ extension UIFont {
     }
     
     func tabBarTitle(size: CGFloat? = 10) -> UIFont {
+//        return UIFont(name: "MaisonNeue-Light", size: size ?? 10)!
         return UIFont.systemFont(ofSize: 10, weight: .medium)
     }
 }
@@ -169,13 +182,66 @@ extension String {
         return arrayToRet
     }
     
-    var title: String {
+    var getTitle: String {
         return self.lines.first ?? self
     }
     
-    var description: String {
-        let string = self.replacingOccurrences(of: self.title, with: "")
+    var getSummary: String {
+        let string = self.replacingOccurrences(of: self.getTitle, with: "")
         let desc = string.trimmingCharacters(in: .whitespacesAndNewlines)
         return desc
     }
+    
+    var currentDate: String {
+        let date = Date()
+        let df = DateFormatter()
+        df.dateFormat = "dd/MM/yy HH:mm:ss"
+        let dateString = df.string(from: date)
+        return dateString
+    }
+    
+    
+    var getSubStringDate: String {
+        let index = self.firstIndex(of: " ")
+        let dateString = self[..<index!]
+        return String(dateString)
+    }
+
 }
+
+//#warning("Move Image extension to separate file")
+//extension UIImage {
+//    
+//    struct IconConfig {
+//        static let navbar = UIImage.SymbolConfiguration(weight: UIImage.SymbolWeight.bold)
+//    }
+//    
+//    struct ImageConfig {
+//        #warning("Need to create config for bigger image")
+//        static let profilePlaceHolder = UIImage.SymbolConfiguration(weight: UIImage.SymbolWeight.bold)
+//    }
+//    
+//    struct Common {
+//        static let empty = UIImage()
+//        static let newNote = UIImage(named: Constant.HeaderNoteBar.addNoteImage)
+//        static let profilePlaceHolder = UIImage(systemName: "person.crop.circle", withConfiguration: UIImage.ImageConfig.profilePlaceHolder)
+//    }
+//    
+//    struct NavBarIcon {
+//        static let createNote = UIImage(systemName: "doc.badge.plus", withConfiguration: UIImage.IconConfig.navbar)
+//        static let profile = UIImage(systemName: "person.crop.circle", withConfiguration: UIImage.IconConfig.navbar)
+//    }
+//    
+//    struct ToolBarIcon {        
+//        static let deleteNote = UIImage(systemName: "trash.circle", withConfiguration: UIImage.IconConfig.navbar)
+//        static let clearText = UIImage(systemName: "xmark.circle", withConfiguration: UIImage.IconConfig.navbar)
+//    }
+//    
+//    struct Image {
+//        static let smallSymbolImage = UIImage(systemName: "person.crop.circle", withConfiguration: UIImage.ImageConfig.profilePlaceHolder)
+//    }
+//    
+//    struct Main {
+//        static let largeAppIcon = UIImage(named: Constant.SignInSC.logoImageName)
+//    }
+//}

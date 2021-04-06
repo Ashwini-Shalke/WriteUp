@@ -32,7 +32,7 @@ class SecondaryButton: UIButton {
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.setTitleColor(UIColor.black, for: .normal)
-        self.titleLabel?.font = UIFont().formControlTitle(size: 20)
+        self.titleLabel?.font = UIFont().formControlSegmented(size: 17)
         self.setTitle(titleText, for: .normal)
     }
     required init?(coder: NSCoder) {
@@ -44,10 +44,7 @@ class ShowAllButton: UIButton {
     let button = UIButton(frame: CGRect.zero)
     init(titleText: String){
         super.init(frame: .zero)
-        self.backgroundColor = Constant.SecondaryColor
-        self.layer.borderColor   = Constant.SecondaryColor.cgColor
-        self.layer.cornerRadius  = 10
-        self.setTitleColor(UIColor.white, for: .normal)
+        self.setTitleColor(Constant.SecondaryColor, for: .normal)
         self.titleLabel?.font = UIFont().formControlSegmented()
         self.setTitle(titleText, for: .normal)
     }

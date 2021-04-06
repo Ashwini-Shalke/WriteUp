@@ -12,7 +12,7 @@ import LocalAuthentication
 class SceneDelegate: UIResponder, UIWindowSceneDelegate, errorLockDelegate{
     var window: UIWindow?
     let navigationController = UINavigationController(rootViewController: RootViewController())
-    let editProfileDetail = EditProfileLauncher()
+//    let editProfileDetail = EditProfileLauncher()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         window?.rootViewController = navigationController
@@ -45,7 +45,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, errorLockDelegate{
                     }
                 }
             } else {
-                let ac = UIAlertController(title: Constant.LocalAuth.alertTitle, message: Constant.LocalAuth.alertMessage, preferredStyle: .alert)
+                let ac = UIAlertController(title: Constant.LocalAuth.biometricAlertTitle, message: Constant.LocalAuth.biometricAlertMessage, preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .default))
             }
         }

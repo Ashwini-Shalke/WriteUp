@@ -13,34 +13,34 @@ protocol HeaderNoteDelegate: AnyObject {
 }
 
 class BaseCell: UICollectionViewCell {
-  override init(frame: CGRect) {
-      super.init(frame: frame)
-      setup()
-  }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
     
-  func setup(){}
-  required init?(coder: NSCoder) {
-      fatalError(Constant.initFatalError)
-  }
+    func setup(){}
+    required init?(coder: NSCoder) {
+        fatalError(Constant.initFatalError)
+    }
 }
 
 class HeaderNoteBar: BaseCell {
-   weak var headerDelegate: HeaderNoteDelegate?
-   let addNoteLabel = NoteBarLabel(labelName: Constant.HeaderNoteBar.addNoteLabel)
+    weak var headerDelegate: HeaderNoteDelegate?
+    let addNoteLabel = NoteBarLabel(labelName: Constant.HeaderNoteBar.addNoteLabel)
     
-   let containerView: UIView = {
-          let v = UIView()
-          v.backgroundColor = .white
-          return v
-      }()
-      
-      let addNoteButton: UIButton = {
-          let button = UIButton()
-          let image = UIImage(named: Constant.HeaderNoteBar.addNoteImage)
-          button.setImage(image, for: .normal)
-          button.contentMode = .scaleAspectFit
-          return button
-      }()
+    let containerView: UIView = {
+        let v = UIView()
+        v.backgroundColor = .white
+        return v
+    }()
+    
+    let addNoteButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage.Common.newNote
+        button.setImage(image, for: .normal)
+        button.contentMode = .scaleAspectFit
+        return button
+    }()
     
     override func setup() {
         super.setup()

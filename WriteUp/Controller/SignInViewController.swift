@@ -18,7 +18,7 @@ class SignInViewController: UIViewController {
     
     let logoImageView: UIImageView = {
         let logo = UIImageView()
-        logo.image = UIImage(named: Constant.SignInSC.logoImageName)
+        logo.image = UIImage.Main.largeAppIcon
         logo.translatesAutoresizingMaskIntoConstraints = false
         logo.contentMode = .scaleAspectFit
         return logo
@@ -78,7 +78,7 @@ class SignInViewController: UIViewController {
 
 extension SignInViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-     print("Something is Wrong")
+        print("Something is Wrong")
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {

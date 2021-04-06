@@ -21,13 +21,18 @@ class ShowAllNotesController: UIViewController {
         bar.delegate = self
         bar.backgroundColor = .white
         bar.tintColor = Constant.SecondaryColor
-        bar.backgroundImage = UIImage()
+        bar.backgroundImage = UIImage.Common.empty
         return bar
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.notesListView.getNotesByUserID()
+        self.notesListView.reloadData()
     }
     
     func setupViews(){
@@ -42,9 +47,10 @@ class ShowAllNotesController: UIViewController {
     }
 }
 
-extension ShowAllNotesController: UISearchBarDelegate, noteListViewDelegate {
-    func handleDidSelectRow() {
+extension ShowAllNotesController: UISearchBarDelegate, noteListTableViewDelegate {
+    func handleDidSelectRow(noteDetail: ListNoteData) {
         let editNoteView = AddNewNoteController()
+        editNoteView.noteDetail = noteDetail
         editNoteView.context = Constant.contextName.EditScreen
         navigationController?.pushViewController(editNoteView, animated: true)
     }

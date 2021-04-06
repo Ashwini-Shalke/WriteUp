@@ -16,6 +16,10 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     let nextButton = SecondaryButton(titleText: Constant.AddNote.nextButtonTitle)
     let saveButton = SecondaryButton(titleText: "Save")
     var context = Constant.contextName.NewScreen
+    let createDate : String = ""
+    var noteId : Int = 0
+    var noteDetail = ListNoteData(title: nil, createdAt: nil, summery: nil, tag: nil, body: nil, authorID: nil, id: nil)
+    
     
     lazy var inputAccesssoryToolView: BottomToolBar = {
         var  toolView = BottomToolBar()
@@ -41,7 +45,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     
     let dateLabel: UILabel = {
         let label = UILabel()
-        label.text = "10 June 2020 at 11:21 AM"
+        label.text = ""
         label.font = UIFont().formControlSegmented()
         label.textColor = Constant.SecondaryColor
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +63,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         if context == Constant.contextName.NewScreen {
             navigationItem.rightBarButtonItem = UIBarButtonItem(customView: nextButton)
             nextButton.setTitleColor(Constant.MainColor, for: .normal)
-            nextButton.addTarget(self, action: #selector(handleNewNote), for: .touchUpInside)
+            nextButton.addTarget(self, action: #selector(handleNext), for: .touchUpInside)
         } else {
             navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
             saveButton.setTitleColor(Constant.MainColor, for: .normal)
@@ -74,7 +78,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
             verticalSafeAreaInset = self.view.safeAreaInsets.top
         }
         view.addSubview(textView)
-        textView.anchor(top: view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor,bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: 0,left: 16,bottom: 0,right: -16))
+        textView.anchor(top: view.safeAreaLayoutGuide.topAnchor,leading: view.safeAreaLayoutGuide.leadingAnchor,bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor,padding: UIEdgeInsets(top: -50,left: 16,bottom: 0,right: -16))
         textfieldHeightConstraint = NSLayoutConstraint(item: textView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: textfieldHeightWithoutKeyboard - verticalSafeAreaInset)
         NSLayoutConstraint.activate([ textfieldHeightConstraint! ])
         view.layer.layoutIfNeeded()
@@ -83,12 +87,11 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     func setupViews(){
         view.backgroundColor = .white
         navigationItem.titleView = dateLabel
-        navigationItem.largeTitleDisplayMode = .never
-        self.navigationItem.setHidesBackButton(false, animated: false)
-        
         view.addSubview(bottomToolBar)
         bottomToolBar.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 50, left: 0, bottom: -1, right: 0))
         bottomToolBar.hideBackground()
+        textView.text = noteDetail.body
+        dateLabel.text = noteDetail.createdAt
     }
     
     func trashButton() {
@@ -106,16 +109,27 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         textView.resignFirstResponder()
     }
     
-    @objc func handleNewNote(){
+    @objc func handleNext(){
         self.view.endEditing(true)
+         
         let saveNote = SaveNoteController()
-        saveNote.sampleString = textView.text
+        saveNote.noteDescription = textView.text
         navigationController?.pushViewController(saveNote, animated: true)
     }
     
+    //need to work on it
     @objc func handleSaveNote(){
         self.view.endEditing(true)
         navigationController?.popViewController(animated: true)
+        let body = textView.text
+        let title = body?.getTitle
+        let summary = body?.getSummary
+        if let id = noteDetail.id {
+            noteId = id
+        }
+        let uploadData = NoteData(title: title, createdAt: createDate.currentDate,summery: summary,authorID: 2, tag: "lo", body: body)
+        NoteAPIService.sharedInstance.modifyNoteByNoteId(httpMethod: "PATCH", noteId: noteId, data: uploadData)
+        dateLabel.text = createDate.currentDate
     }
     
     @objc func keyboardWillShow(notification: NSNotification){
