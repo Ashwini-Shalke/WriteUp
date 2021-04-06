@@ -63,8 +63,11 @@ class HomeViewController: UIViewController{
         #endif
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         self.noteListView.getNotesByUserID()
+        DispatchQueue.main.async {
+            self.noteListView.reloadData()
+        }
         getNotesByUserID()
     }
     
