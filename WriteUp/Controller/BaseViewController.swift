@@ -14,6 +14,10 @@ enum State {
     case loaded
 }
 
+protocol BaseViewControllerProtocol: class {
+   func showSuccessView()
+}
+
 class BaseViewController: UIViewController {
     var state: State? {
         didSet {
@@ -21,9 +25,24 @@ class BaseViewController: UIViewController {
         }
     }
     
+    let errorLabel: UILabel = {
+        let errorLabel = UILabel()
+        errorLabel.text = "Apologies something went wrong. Please try again later."
+        errorLabel.textAlignment = .center
+        errorLabel.numberOfLines = 0
+        errorLabel.isHidden = false
+        return errorLabel
+    }()
+    
+    var dataView: UIView = UIView()
+    private var errorView: UIView = UIView()
+    private var isLoading: Bool = false
+    weak var delegate: BaseViewControllerProtocol?
+    
     var loadingView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
         indicator.startAnimating()
@@ -55,16 +74,14 @@ class BaseViewController: UIViewController {
         if isLoading {
             removeLoadingView()
         }
-        errorView.backgroundColor = .red
-        self.view.addSubview(errorView)
-        
-        errorView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            errorView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            errorView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            errorView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            errorView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
-        ])
+        self.view.addSubview(errorLabel)
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    errorLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+                    errorLabel.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+                    errorLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+                    errorLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
+                ])
     }
     
     private func showLoadingView() {
@@ -84,16 +101,7 @@ class BaseViewController: UIViewController {
         if isLoading {
             removeLoadingView()
         }
-        dataView.backgroundColor = .green
-        self.view.addSubview(dataView)
-        
-        dataView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            dataView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            dataView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            dataView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            dataView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
-        ])
+        delegate?.showSuccessView()
     }
     
     fileprivate func removeLoadingView() {
@@ -101,3 +109,6 @@ class BaseViewController: UIViewController {
         isLoading = false
     }
 }
+
+
+

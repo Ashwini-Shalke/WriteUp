@@ -24,6 +24,7 @@ class NotesListTableView: UITableView {
         self.delegate = self
         self.dataSource = self
         self.separatorColor = UIColor.clear
+        self.showsVerticalScrollIndicator = false
         getNotesByUserID()
     }
     
@@ -32,8 +33,10 @@ class NotesListTableView: UITableView {
     }
     
     func getNotesByUserID(){
-        NoteAPIService.sharedInstance.fetchNoteListByAuthorId(authorID: 2) { [weak self] (notes) in
-            self?.noteArray = notes
+        NoteAPIService.sharedInstance.fetchNoteListByAuthorId(authorID: 2) { [weak self] (notes,error) in
+            guard let noteList = notes else {return}
+            self?.noteArray = noteList
+            
             DispatchQueue.main.async { self?.reloadData() }
         }
     }
@@ -66,7 +69,7 @@ extension NotesListTableView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 90
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

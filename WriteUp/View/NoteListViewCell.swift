@@ -55,6 +55,7 @@ class NotesListCell: UITableViewCell {
         button.layer.cornerRadius = button.frame.width/2
         button.backgroundColor = Constant.SecondaryColor
         button.isUserInteractionEnabled = false
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -83,13 +84,13 @@ class NotesListCell: UITableViewCell {
   
         addSubview(customView)
         customView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor,padding: UIEdgeInsets(top: 8, left: 8, bottom: 0, right: -8))
-
+        
         customView.addSubview(roundColorBar)
         roundColorBar.anchor(top: customView.topAnchor, leading: customView.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 20, left: 8, bottom: 0, right: 0), size: CGSize(width: 12, height: 12))
-
+        
         customView.addSubview(noteTitleLabel)
         noteTitleLabel.anchor(top: customView.topAnchor, leading: roundColorBar.trailingAnchor, bottom: nil, trailing:customView.trailingAnchor, padding: UIEdgeInsets(top: 16, left: 8, bottom: 0, right: -75), size: CGSize(width: 0, height: 20))
-
+        
         customView.addSubview(noteDescription)
         noteDescription.anchor(top: noteTitleLabel.bottomAnchor, leading: roundColorBar.trailingAnchor, bottom: customView.bottomAnchor, trailing: customView.trailingAnchor, padding: UIEdgeInsets(top: -8, left: 8, bottom: -8, right: -26))
         
