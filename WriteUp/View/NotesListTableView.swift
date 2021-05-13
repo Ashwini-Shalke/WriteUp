@@ -14,7 +14,7 @@ class NotesListTableView: UITableView {
     weak var noteListDelegate: noteListTableViewDelegate?
     let authorId = 2 // WIP
     var noteID: Int = 0
-    var noteArray = [ListNoteData](), searchNote = [ListNoteData]()
+    var noteArray = [ListNoteData]() , searchNote = [ListNoteData]()
     let cellId = Constant.tableCellId.cellId
     var searching = false
     
@@ -25,19 +25,17 @@ class NotesListTableView: UITableView {
         self.dataSource = self
         self.separatorColor = UIColor.clear
         self.showsVerticalScrollIndicator = false
-        getNotesByUserID()
     }
     
     required init?(coder: NSCoder) {
         fatalError(Constant.initFatalError)
     }
     
-    func getNotesByUserID(){
-        NoteAPIService.sharedInstance.fetchNoteListByAuthorId(authorID: 2) { [weak self] (notes,error) in
-            guard let noteList = notes else {return}
-            self?.noteArray = noteList
-            
-            DispatchQueue.main.async { self?.reloadData() }
+    var noteListArray: [ListNoteData]? {
+        didSet{
+            guard let listArray = noteListArray else { return }
+            noteArray = listArray
+            DispatchQueue.main.async { self.reloadData() }
         }
     }
     
@@ -49,11 +47,10 @@ class NotesListTableView: UITableView {
 extension NotesListTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searching {
-                return searchNote.count
-            } else {
-                return noteArray.count
-            }
-        
+            return searchNote.count
+        } else {
+            return noteArray.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

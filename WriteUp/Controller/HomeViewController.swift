@@ -52,10 +52,11 @@ class HomeViewController: BaseViewController, ProfileScreenDelegate {
     }()
     
     override func viewDidLoad() {
+        super.delegate = self
         setupNav()
         setupActions()
         self.state = State.loading
-        super.delegate = self
+    
         #if DEVELOPMENT
         print("DEV")
         #else
@@ -63,33 +64,26 @@ class HomeViewController: BaseViewController, ProfileScreenDelegate {
         #endif
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        self.noteListView.getNotesByUserID()
-        DispatchQueue.main.async {
-            self.noteListView.reloadData()
-        }
+    override func viewWillAppear(_ animated: Bool) {
         getNotesByUserID()
     }
     
     func getNotesByUserID(){
         NoteAPIService.sharedInstance.fetchNoteListByAuthorId(authorID: 2) {(notes,error) in
             if let _ = error {
-                DispatchQueue.main.async {
-                    self.state = State.error
-                }
+                DispatchQueue.main.async { self.state = State.error }
             } else {
                 guard let noteList = notes else { return }
                 self.noteArray = noteList
-                DispatchQueue.main.async {
-                    self.state = State.loaded
-                }
+                self.noteListView.noteArray = self.noteArray
+                DispatchQueue.main.async { self.state = State.loaded }
             }
         }
     }
     
     func setupViews(){
         view.backgroundColor = UIColor.white
-
+        
         view.addSubview(calendar)
         calendar.translatesAutoresizingMaskIntoConstraints = false
         calendar.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: nil ,padding: UIEdgeInsets(top: 0, left:  5, bottom: 0, right: -5))
@@ -188,8 +182,6 @@ extension HomeViewController: noteListTableViewDelegate,ActivityDelegate,Calenda
             generate.impactOccurred()
         }, completion: nil)
     }
-    
-    
 }
 
 

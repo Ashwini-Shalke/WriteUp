@@ -15,7 +15,7 @@ enum State {
 }
 
 protocol BaseViewControllerProtocol: class {
-   func showSuccessView()
+    func showSuccessView()
 }
 
 class BaseViewController: UIViewController {
@@ -35,7 +35,6 @@ class BaseViewController: UIViewController {
     }()
     
     var dataView: UIView = UIView()
-    private var errorView: UIView = UIView()
     private var isLoading: Bool = false
     weak var delegate: BaseViewControllerProtocol?
     
@@ -53,7 +52,6 @@ class BaseViewController: UIViewController {
             indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             indicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        
         return view
     }()
     
@@ -76,19 +74,18 @@ class BaseViewController: UIViewController {
         }
         self.view.addSubview(errorLabel)
         errorLabel.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                    errorLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-                    errorLabel.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-                    errorLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-                    errorLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
-                ])
+        NSLayoutConstraint.activate([
+            errorLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            errorLabel.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            errorLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            errorLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
+        ])
     }
     
     private func showLoadingView() {
-        errorView.removeFromSuperview()
+        errorLabel.removeFromSuperview()
         isLoading = true
         self.view.addSubview(loadingView)
-        
         NSLayoutConstraint.activate([
             loadingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             loadingView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),

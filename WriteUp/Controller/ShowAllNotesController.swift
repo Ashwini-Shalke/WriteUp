@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ShowAllNotesController: UIViewController {
+class ShowAllNotesController: BaseViewController {
+    var noteArray = [ListNoteData]()
+    
     lazy var notesListView: NotesListTableView = {
         var notesView = NotesListTableView()
         notesView.noteListDelegate = self
@@ -27,27 +29,48 @@ class ShowAllNotesController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+        super.delegate = self
+        state = State.loading
+        setUpNav()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.notesListView.getNotesByUserID()
-        self.notesListView.reloadData()
+        getNotesByUserID()
     }
     
-    func setupViews(){
+    func setUpNav(){
+        view.backgroundColor = .white
+        navigationItem.title = Constant.ShowAllNote.barLabel
+        
         view.addSubview(searchBar)
         searchBar.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16),size: CGSize(width: 0, height: 36))
         
+    }
+
+    func setUpViews(){
         view.addSubview(notesListView)
         notesListView.anchor(top: searchBar.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0))
-        
-        view.backgroundColor = .white
-        navigationItem.title = Constant.ShowAllNote.barLabel
+    }
+    
+    func getNotesByUserID() {
+        NoteAPIService.sharedInstance.fetchNoteListByAuthorId(authorID: 2) {(notes,error) in
+            if let _ = error {
+                DispatchQueue.main.async { self.state = State.error }
+            } else {
+                guard let noteList = notes else { return }
+                self.noteArray = noteList
+                self.notesListView.noteListArray = self.noteArray
+                DispatchQueue.main.async { self.state = State.loaded }
+            }
+        }
     }
 }
 
-extension ShowAllNotesController: UISearchBarDelegate, noteListTableViewDelegate {
+extension ShowAllNotesController: UISearchBarDelegate, noteListTableViewDelegate, BaseViewControllerProtocol {
+    func showSuccessView() {
+      setUpViews()
+    }
+    
     func handleDidSelectRow(noteDetail: ListNoteData) {
         let editNoteView = AddNewNoteController()
         editNoteView.noteDetail = noteDetail

@@ -39,7 +39,6 @@ class NoteAPIService: NSObject {
                 }
             } catch let jsonError{
                 completion(nil, jsonError)
-                print("Unable to fetch data", jsonError)
             }
         }.resume()
     }
