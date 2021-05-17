@@ -6,6 +6,8 @@ def shared_pods
  pod 'FSCalendar'
  pod 'Firebase/Core'
  pod 'Firebase/Crashlytics'
+ pod 'Firebase/Auth'
+ pod 'Firebase/Database'
 end
 
 
