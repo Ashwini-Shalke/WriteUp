@@ -233,6 +233,7 @@ THE SOFTWARE.
       identification within third-party archives.
 
    Copyright [yyyy] [name of copyright owner]
+<<<<<<< HEAD
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -879,6 +880,8 @@ THE SOFTWARE.
       identification within third-party archives.
 
    Copyright [yyyy] [name of copyright owner]
+=======
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -895,7 +898,21 @@ THE SOFTWARE.
 			<key>License</key>
 			<string>Apache</string>
 			<key>Title</key>
+<<<<<<< HEAD
 			<string>FirebaseCoreDiagnostics</string>
+=======
+			<string>Firebase</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Copyright 2021 Google</string>
+			<key>License</key>
+			<string>Copyright</string>
+			<key>Title</key>
+			<string>FirebaseAnalytics</string>
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

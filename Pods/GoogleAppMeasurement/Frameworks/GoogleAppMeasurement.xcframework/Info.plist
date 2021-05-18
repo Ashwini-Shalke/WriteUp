@@ -6,12 +6,17 @@
 	<array>
 		<dict>
 			<key>LibraryIdentifier</key>
+<<<<<<< HEAD
 			<string>ios-arm64_i386_x86_64-simulator</string>
+=======
+			<string>ios-arm64_armv7</string>
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 			<key>LibraryPath</key>
 			<string>GoogleAppMeasurement.framework</string>
 			<key>SupportedArchitectures</key>
 			<array>
 				<string>arm64</string>
+<<<<<<< HEAD
 				<string>i386</string>
 				<string>x86_64</string>
 			</array>
@@ -23,15 +28,35 @@
 		<dict>
 			<key>LibraryIdentifier</key>
 			<string>ios-arm64_armv7</string>
+=======
+				<string>armv7</string>
+			</array>
+			<key>SupportedPlatform</key>
+			<string>ios</string>
+		</dict>
+		<dict>
+			<key>LibraryIdentifier</key>
+			<string>ios-arm64_i386_x86_64-simulator</string>
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 			<key>LibraryPath</key>
 			<string>GoogleAppMeasurement.framework</string>
 			<key>SupportedArchitectures</key>
 			<array>
 				<string>arm64</string>
+<<<<<<< HEAD
 				<string>armv7</string>
 			</array>
 			<key>SupportedPlatform</key>
 			<string>ios</string>
+=======
+				<string>i386</string>
+				<string>x86_64</string>
+			</array>
+			<key>SupportedPlatform</key>
+			<string>ios</string>
+			<key>SupportedPlatformVariant</key>
+			<string>simulator</string>
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 		</dict>
 	</array>
 	<key>CFBundlePackageType</key>

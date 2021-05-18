@@ -17,7 +17,11 @@ a customized adaptation.
 
 After the CI is green:
 * Update the version in the podspec to match the latest entry in the [CHANGELOG.md](CHANGELOG.md)
+<<<<<<< HEAD
 * Checkout the `main` branch and ensure it is up to date
+=======
+* Checkout the `main` branch and ensure it is up to date.
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
   ```console
   git checkout main
   git pull
@@ -55,12 +59,17 @@ After the CI is green:
     ```
     </details>
 * Run Firebase CI by waiting until next nightly or adding a PR that touches `Gemfile`.
+<<<<<<< HEAD
 * On google3, run copybara using the command below. Then, start a global TAP on the generated CL. Deflake as needed.
+=======
+* On google3, create a workspace. Then copybara and run a global TAP.
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
   ```console
   third_party/firebase/ios/Releases/run_copy_bara.py --directory GoogleUtilities --branch main
   ```
 
 ## Publishing
+<<<<<<< HEAD
 The release process is as follows:
 1. [Tag and release for Swift PM](#swift-package-manager)
 2. [Publish to CocoaPods](#cocoapods)
@@ -105,6 +114,13 @@ The release process is as follows:
   git commit -m "Post GoogleUtilities {version} release cleanup"
   git push
   ```
+=======
+  * Add a version tag for Swift PM
+    * `git tag {version}`
+    * `git push origin {version}`
+  * `pod trunk push GoogleUtilities.podspec`
+  * Clean up SpecsStaging
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 
 ## Development
 

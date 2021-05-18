@@ -149,5 +149,9 @@ install_xcframework() {
   echo "Copied $source to $destination"
 }
 
+<<<<<<< HEAD
 install_xcframework "${PODS_ROOT}/GoogleAppMeasurement/Frameworks/GoogleAppMeasurement.xcframework" "GoogleAppMeasurement" "framework" "ios-arm64_i386_x86_64-simulator" "ios-arm64_armv7"
+=======
+install_xcframework "${PODS_ROOT}/GoogleAppMeasurement/Frameworks/GoogleAppMeasurement.xcframework" "GoogleAppMeasurement" "framework" "ios-arm64_armv7" "ios-arm64_i386_x86_64-simulator"
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 

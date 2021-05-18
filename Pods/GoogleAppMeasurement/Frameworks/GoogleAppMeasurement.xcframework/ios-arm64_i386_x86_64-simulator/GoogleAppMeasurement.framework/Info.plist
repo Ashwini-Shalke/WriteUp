@@ -13,7 +13,11 @@
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleVersion</key>
+<<<<<<< HEAD
 	<string>8.0.0</string>
+=======
+	<string>7.11.0</string>
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 	<key>DTSDKName</key>
 	<string>iphonesimulator11.2</string>
 </dict>

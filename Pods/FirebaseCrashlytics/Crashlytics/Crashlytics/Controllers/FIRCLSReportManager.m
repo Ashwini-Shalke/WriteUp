@@ -340,6 +340,19 @@ typedef NSNumber FIRCLSWrappedReportAction;
   return promise;
 }
 
+<<<<<<< HEAD
+=======
+- (void)checkAndRotateInstallUUIDIfNeededWithReport:(FIRCLSInternalReport *)report {
+  [self.installIDModel regenerateInstallIDIfNeededWithBlock:^(BOOL didRotate) {
+    if (!didRotate) {
+      return;
+    }
+
+    FIRCLSContextUpdateMetadata(report, self.settings, self.installIDModel, self->_fileManager);
+  }];
+}
+
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 - (void)beginSettingsWithToken:(FIRCLSDataCollectionToken *)token {
   if (self.settings.isCacheExpired) {
     // This method can be called more than once if the user calls

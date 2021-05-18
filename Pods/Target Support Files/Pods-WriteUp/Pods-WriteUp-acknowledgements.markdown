@@ -216,6 +216,7 @@ THE SOFTWARE.
       identification within third-party archives.
 
    Copyright [yyyy] [name of copyright owner]
+<<<<<<< HEAD
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -838,6 +839,8 @@ Copyright 2021 Google
       identification within third-party archives.
 
    Copyright [yyyy] [name of copyright owner]
+=======
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -852,7 +855,15 @@ Copyright 2021 Google
    limitations under the License.
 
 
+<<<<<<< HEAD
 ## FirebaseCrashlytics
+=======
+## FirebaseAnalytics
+
+Copyright 2021 Google
+
+## FirebaseCore
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 
 
                                  Apache License

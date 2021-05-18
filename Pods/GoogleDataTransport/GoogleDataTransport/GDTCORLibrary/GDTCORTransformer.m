@@ -87,7 +87,11 @@
         }
       } else {
         GDTCORLogError(GDTCORMCETransformerDoesntImplementTransform,
+<<<<<<< HEAD
                        @"Transformer doesn't implement transformGDTEvent: %@", transformer);
+=======
+                       @"Transformer doesn't implement transform: %@", transformer);
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
         completionWrapper(NO, nil);
         return;
       }

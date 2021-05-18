@@ -18,8 +18,11 @@
 
 #include "Crashlytics/Protogen/nanopb/crashlytics.nanopb.h"
 
+<<<<<<< HEAD
 #import "Crashlytics/Crashlytics/Models/FIRCLSInstallIdentifierModel.h"
 
+=======
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 #import <GoogleDataTransport/GoogleDataTransport.h>
 
 /// This class is responsible for reading the persisted crash reports from disk and converting them

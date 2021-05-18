@@ -24,7 +24,7 @@ class RootViewController: UIViewController, signInDelegate, homeDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        view.backgroundColor = UIColor.green
+        view.backgroundColor = UIColor.white
         handleChild()
     }
     

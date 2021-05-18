@@ -48,6 +48,7 @@ NSString* FIRCLSApplicationGetPlatform(void) {
   return @"tvos";
 #elif TARGET_OS_WATCH
   return @"ios";  // TODO: temporarily use iOS until Firebase can add watchos to the backend
+<<<<<<< HEAD
 #endif
 }
 
@@ -59,6 +60,8 @@ NSString* FIRCLSApplicationGetFirebasePlatform(void) {
       UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
     return @"ipados";
   }
+=======
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 #endif
 
   return firebasePlatform;

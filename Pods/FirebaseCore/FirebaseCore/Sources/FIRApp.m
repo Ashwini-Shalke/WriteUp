@@ -95,9 +95,12 @@ NSString *const FIRAuthStateDidChangeInternalNotificationUIDKey =
  */
 NSString *const kFirebaseCoreErrorDomain = @"com.firebase.core";
 
+<<<<<<< HEAD
 /** The NSUserDefaults suite name for FirebaseCore, for those storage locations that use it. */
 NSString *const kFirebaseCoreDefaultsSuiteName = @"com.firebase.core";
 
+=======
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 /**
  * The URL to download plist files.
  */

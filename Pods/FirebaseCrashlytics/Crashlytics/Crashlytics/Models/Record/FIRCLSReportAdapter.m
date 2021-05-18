@@ -25,12 +25,15 @@
 #import <nanopb/pb.h>
 #import <nanopb/pb_decode.h>
 #import <nanopb/pb_encode.h>
+<<<<<<< HEAD
 
 @interface FIRCLSReportAdapter ()
 
 @property(nonatomic, strong) FIRCLSInstallIdentifierModel *installIDModel;
 
 @end
+=======
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 
 @implementation FIRCLSReportAdapter
 

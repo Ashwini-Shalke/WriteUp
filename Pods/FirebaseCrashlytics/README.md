@@ -3,7 +3,10 @@
 [![Platform](https://img.shields.io/cocoapods/p/Firebase.svg?style=flat)](https://cocoapods.org/pods/Firebase)
 
 [![Actions Status][gh-abtesting-badge]][gh-actions]
+<<<<<<< HEAD
 [![Actions Status][gh-appcheck-badge]][gh-actions]
+=======
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 [![Actions Status][gh-appdistribution-badge]][gh-actions]
 [![Actions Status][gh-auth-badge]][gh-actions]
 [![Actions Status][gh-cocoapods-integration-badge]][gh-actions]
@@ -41,8 +44,11 @@ monetize your app. More information about Firebase can be found at
 The repository also includes GoogleUtilities and GoogleDataTransport source
 which are utilities used by Firebase and other Google products.
 
+<<<<<<< HEAD
 **Note** _FirebaseCombineSwift_ contains support for Apple's Combine framework. This module is currently under development, and not yet supported for use in production environments. Fore more details, please refer to the [docs](FirebaseCombineSwift/README.md).
 
+=======
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 ## Installation
 
 See the subsections below for details about the different installation methods.
@@ -58,10 +64,17 @@ Go to
 have a new Mac with an Apple silicon chip, please see [these instructions](AppleSilicon.md).
 
 ### Swift Package Manager (Beta)
+<<<<<<< HEAD
 
 Instructions for the Beta of [Swift Package Manager](https://swift.org/package-manager/)
 support can be found at [SwiftPackageManager.md](SwiftPackageManager.md).
 
+=======
+
+Instructions for the Beta of [Swift Package Manager](https://swift.org/package-manager/)
+support can be found at [SwiftPackageManager.md](SwiftPackageManager.md).
+
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 ### Installing from GitHub
 
 These instructions can be used to access the Firebase repo at other branches,
@@ -312,7 +325,10 @@ Your use of Firebase is governed by the
 
 [gh-actions]: https://github.com/firebase/firebase-ios-sdk/actions
 [gh-abtesting-badge]: https://github.com/firebase/firebase-ios-sdk/workflows/abtesting/badge.svg
+<<<<<<< HEAD
 [gh-appcheck-badge]: https://github.com/firebase/firebase-ios-sdk/workflows/app_check/badge.svg
+=======
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 [gh-appdistribution-badge]: https://github.com/firebase/firebase-ios-sdk/workflows/appdistribution/badge.svg
 [gh-auth-badge]: https://github.com/firebase/firebase-ios-sdk/workflows/auth/badge.svg
 [gh-cocoapods-integration-badge]: https://github.com/firebase/firebase-ios-sdk/workflows/cocoapods-integration/badge.svg

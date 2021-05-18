@@ -40,9 +40,12 @@ extern NSString *const kFIRAppIsDefaultAppKey;
 extern NSString *const kFIRAppNameKey;
 extern NSString *const kFIRGoogleAppIDKey;
 extern NSString *const kFirebaseCoreErrorDomain;
+<<<<<<< HEAD
 
 /** The NSUserDefaults suite name for FirebaseCore, for those storage locations that use it. */
 extern NSString *const kFirebaseCoreDefaultsSuiteName;
+=======
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 
 /**
  * The format string for the User Defaults key used for storing the data collection enabled flag.
