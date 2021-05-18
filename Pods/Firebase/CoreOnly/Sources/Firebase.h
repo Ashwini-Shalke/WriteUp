@@ -22,6 +22,13 @@
     #import <FirebaseAnalytics/FirebaseAnalytics.h>
   #endif
 
+<<<<<<< HEAD
+  #if __has_include(<FirebaseAppCheck/FirebaseAppCheck.h>)
+    #import <FirebaseAppCheck/FirebaseAppCheck.h>
+  #endif
+
+=======
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
   #if __has_include(<FirebaseAppDistribution/FirebaseAppDistribution.h>)
     #import <FirebaseAppDistribution/FirebaseAppDistribution.h>
   #endif
@@ -40,12 +47,15 @@
 
   #if __has_include(<FirebaseDynamicLinks/FirebaseDynamicLinks.h>)
     #import <FirebaseDynamicLinks/FirebaseDynamicLinks.h>
+<<<<<<< HEAD
+=======
     #if TARGET_OS_IOS && !__has_include(<FirebaseAnalytics/FirebaseAnalytics.h>)
       #ifndef FIREBASE_ANALYTICS_SUPPRESS_WARNING
         #warning "FirebaseAnalytics.framework is not included in your target. Please add the \
 FirebaseAnalytics dependency to your project to ensure Firebase Dynamic Links works as intended."
       #endif // #ifndef FIREBASE_ANALYTICS_SUPPRESS_WARNING
     #endif
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
   #endif
 
   #if __has_include(<FirebaseFirestore/FirebaseFirestore.h>)
@@ -58,6 +68,8 @@ FirebaseAnalytics dependency to your project to ensure Firebase Dynamic Links wo
 
   #if __has_include(<FirebaseInAppMessaging/FirebaseInAppMessaging.h>)
     #import <FirebaseInAppMessaging/FirebaseInAppMessaging.h>
+<<<<<<< HEAD
+=======
     #if TARGET_OS_IOS && !__has_include(<FirebaseAnalytics/FirebaseAnalytics.h>)
       #ifndef FIREBASE_ANALYTICS_SUPPRESS_WARNING
         #warning "FirebaseAnalytics.framework is not included in your target. Please add the \
@@ -68,14 +80,17 @@ FirebaseAnalytics dependency to your project to ensure Firebase In App Messaging
 
   #if __has_include(<FirebaseInstallations/FirebaseInstallations.h>)
     #import <FirebaseInstallations/FirebaseInstallations.h>
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
   #endif
 
-  #if __has_include(<FirebaseInstanceID/FirebaseInstanceID.h>)
-    #import <FirebaseInstanceID/FirebaseInstanceID.h>
+  #if __has_include(<FirebaseInstallations/FirebaseInstallations.h>)
+    #import <FirebaseInstallations/FirebaseInstallations.h>
   #endif
 
   #if __has_include(<FirebaseMessaging/FirebaseMessaging.h>)
     #import <FirebaseMessaging/FirebaseMessaging.h>
+<<<<<<< HEAD
+=======
       #if TARGET_OS_IOS && !__has_include(<FirebaseAnalytics/FirebaseAnalytics.h>)
       #ifndef FIREBASE_ANALYTICS_SUPPRESS_WARNING
         #warning "FirebaseAnalytics.framework is not included in your target. Please add the \
@@ -95,6 +110,7 @@ FirebaseAnalytics dependency to your project to ensure Messaging works as intend
 
   #if __has_include(<FirebaseMLVision/FirebaseMLVision.h>)
     #import <FirebaseMLVision/FirebaseMLVision.h>
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
   #endif
 
   #if __has_include(<FirebasePerformance/FirebasePerformance.h>)
@@ -103,16 +119,21 @@ FirebaseAnalytics dependency to your project to ensure Messaging works as intend
 
   #if __has_include(<FirebaseRemoteConfig/FirebaseRemoteConfig.h>)
     #import <FirebaseRemoteConfig/FirebaseRemoteConfig.h>
+<<<<<<< HEAD
+=======
     #if TARGET_OS_IOS && !TARGET_OS_MACCATALYST && !__has_include(<FirebaseAnalytics/FirebaseAnalytics.h>)
       #ifndef FIREBASE_ANALYTICS_SUPPRESS_WARNING
         #warning "FirebaseAnalytics.framework is not included in your target. Please add the \
 FirebaseAnalytics dependency to your project to ensure Firebase Remote Config works as intended."
       #endif // #ifndef FIREBASE_ANALYTICS_SUPPRESS_WARNING
     #endif
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
   #endif
 
   #if __has_include(<FirebaseStorage/FirebaseStorage.h>)
     #import <FirebaseStorage/FirebaseStorage.h>
+<<<<<<< HEAD
+=======
   #endif
 
   #if __has_include(<GoogleMobileAds/GoogleMobileAds.h>)
@@ -125,6 +146,7 @@ FirebaseAnalytics dependency to your project to ensure Firebase Remote Config wo
 
   #if __has_include(<Crashlytics/Crashlytics.h>)
     #import <Crashlytics/Crashlytics.h>
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
   #endif
 
 #endif  // defined(__has_include)

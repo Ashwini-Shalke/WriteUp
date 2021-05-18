@@ -15,8 +15,8 @@ class RootViewController: UIViewController, signInDelegate, homeDelegate{
         return homeController
     }()
     
-    lazy var signInViewController : SignInViewController = {
-        var signInController = SignInViewController()
+    lazy var signInViewController : SignInWithApple = {
+        var signInController = SignInWithApple()
         signInController.signInDelegate = self
         return signInController
     }()
@@ -30,6 +30,7 @@ class RootViewController: UIViewController, signInDelegate, homeDelegate{
     
     fileprivate func isSignedIn() -> Bool {
         return UserDefaults.standard.isSignedIn()
+        
     }
     
     func handleChild(){

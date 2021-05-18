@@ -40,6 +40,10 @@
 }
 
 @property(nonatomic, strong) GDTCORTransport *googleTransport;
+<<<<<<< HEAD
+@property(nonatomic, strong) FIRCLSInstallIdentifierModel *installIDModel;
+=======
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 
 @property(nonatomic, readonly) NSString *googleAppID;
 
@@ -56,6 +60,10 @@
   _operationQueue = managerData.operationQueue;
   _googleAppID = managerData.googleAppID;
   _googleTransport = managerData.googleTransport;
+<<<<<<< HEAD
+  _installIDModel = managerData.installIDModel;
+=======
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
   _fileManager = managerData.fileManager;
   _analytics = managerData.analytics;
 
@@ -84,6 +92,19 @@
   // symbolication operation may be computationally intensive.
   FIRCLSApplicationActivity(
       FIRCLSApplicationActivityDefault, @"Crashlytics Crash Report Processing", ^{
+<<<<<<< HEAD
+        // Run this only once because it can be run multiple times in succession,
+        // and if it's slow it could delay crash upload too much without providing
+        // user benefit.
+        static dispatch_once_t regenerateOnceToken;
+        dispatch_once(&regenerateOnceToken, ^{
+          // Check to see if the FID has rotated before we construct the payload
+          // so that the payload has an updated value.
+          [self.installIDModel regenerateInstallIDIfNeeded];
+        });
+
+=======
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
         // Run on-device symbolication before packaging if we should process
         if (shouldProcess) {
           if (![self.fileManager moveItemAtPath:report.path
@@ -163,7 +184,12 @@
   }
 
   FIRCLSReportAdapter *adapter = [[FIRCLSReportAdapter alloc] initWithPath:path
+<<<<<<< HEAD
+                                                               googleAppId:self.googleAppID
+                                                            installIDModel:self.installIDModel];
+=======
                                                                googleAppId:self.googleAppID];
+>>>>>>> eba5dd4d2479827a6bc1ce5d34ceb3148d482d37
 
   GDTCOREvent *event = [self.googleTransport eventForTransport];
   event.dataObject = adapter;

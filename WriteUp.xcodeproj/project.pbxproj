@@ -63,6 +63,8 @@
 		338A7C732577B6FB000E1B2B /* SaveNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338A7C712577B6FB000E1B2B /* SaveNoteView.swift */; };
 		3398D21E24C6F6990022F2F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3398D21D24C6F6990022F2F7 /* GoogleService-Info.plist */; };
 		3398D21F24C6F6990022F2F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3398D21D24C6F6990022F2F7 /* GoogleService-Info.plist */; };
+		33C0D859264D5E590092144B /* SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C0D858264D5E590092144B /* SignInWithApple.swift */; };
+		33C0D85A264D5E590092144B /* SignInWithApple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C0D858264D5E590092144B /* SignInWithApple.swift */; };
 		33D22766259CB84400A23885 /* NoteAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D22765259CB84400A23885 /* NoteAPIService.swift */; };
 		33D22767259CB84400A23885 /* NoteAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D22765259CB84400A23885 /* NoteAPIService.swift */; };
 		33DBC321246EB50100E6462A /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DBC320246EB50100E6462A /* Calendar.swift */; };
@@ -142,6 +144,7 @@
 		3372E60C244ED71D009D3983 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		338A7C712577B6FB000E1B2B /* SaveNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNoteView.swift; sourceTree = "<group>"; };
 		3398D21D24C6F6990022F2F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		33C0D858264D5E590092144B /* SignInWithApple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithApple.swift; sourceTree = "<group>"; };
 		33D22765259CB84400A23885 /* NoteAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteAPIService.swift; sourceTree = "<group>"; };
 		33DBC320246EB50100E6462A /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		33DBC322246FFCF200E6462A /* SaveNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNoteController.swift; sourceTree = "<group>"; };
@@ -287,6 +290,7 @@
 				3372E60C244ED71D009D3983 /* RootViewController.swift */,
 				3320722025E16812001EFD37 /* BaseViewController.swift */,
 				3333CDED2445CB7A00E6EF3B /* SignInViewController.swift */,
+				33C0D858264D5E590092144B /* SignInWithApple.swift */,
 				3333CE012445CD8100E6EF3B /* HomeViewController.swift */,
 				332D81802475229500944CA5 /* AddNewNoteController.swift */,
 				33DBC322246FFCF200E6462A /* SaveNoteController.swift */,
@@ -534,6 +538,7 @@
 				3333CE002445CC3B00E6EF3B /* User.swift in Sources */,
 				335324B024DC533A008A5D3D /* ActivityBar.swift in Sources */,
 				338A7C722577B6FB000E1B2B /* SaveNoteView.swift in Sources */,
+				33C0D859264D5E590092144B /* SignInWithApple.swift in Sources */,
 				3333CDEE2445CB7A00E6EF3B /* SignInViewController.swift in Sources */,
 				3333CE022445CD8100E6EF3B /* HomeViewController.swift in Sources */,
 				33306BC6245985AD003CA89E /* PrimaryText.swift in Sources */,
@@ -574,6 +579,7 @@
 				33FB4EE324B843570079B84C /* User.swift in Sources */,
 				335324B124DC533A008A5D3D /* ActivityBar.swift in Sources */,
 				338A7C732577B6FB000E1B2B /* SaveNoteView.swift in Sources */,
+				33C0D85A264D5E590092144B /* SignInWithApple.swift in Sources */,
 				33FB4EE424B843570079B84C /* SignInViewController.swift in Sources */,
 				33FB4EE524B843570079B84C /* HomeViewController.swift in Sources */,
 				33FB4EE724B843570079B84C /* PrimaryText.swift in Sources */,

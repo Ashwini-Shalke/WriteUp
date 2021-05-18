@@ -6,7 +6,7 @@
 //  Copyright © 2020 Ashwini Shalke. All rights reserved.
 //
 
-//import Firebase
+import Firebase
 import FirebaseCore
 import UIKit
 

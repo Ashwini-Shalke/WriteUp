@@ -35,6 +35,7 @@ class ProfileSwitchCell: UITableViewCell{
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         setupLayout()
+        handleScreenLock()
     }
     
     required init?(coder: NSCoder) {

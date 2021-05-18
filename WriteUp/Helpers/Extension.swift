@@ -12,10 +12,13 @@ extension UserDefaults {
     enum UserDefaultKey: String {
         case isSignedIn
         case isLockedOn
+        case appleAuthorizedUserIDKey
     }
     
     func setIsSignedIn(value:Bool) {
-        set(value, forKey: UserDefaultKey.isSignedIn.rawValue)
+//        set(value, forKey: UserDefaultKey.isSignedIn.rawValue)
+        set(value, forKey: UserDefaultKey.appleAuthorizedUserIDKey.rawValue)
+        
         synchronize()
     }
     
@@ -25,7 +28,8 @@ extension UserDefaults {
     }
     
     func isSignedIn() -> Bool {
-        return bool(forKey: UserDefaultKey.isSignedIn.rawValue)
+//        return bool(forKey: UserDefaultKey.isSignedIn.rawValue)
+        return bool(forKey: UserDefaultKey.appleAuthorizedUserIDKey.rawValue)
     }
     
     func isScreenLockedOn()-> Bool {
