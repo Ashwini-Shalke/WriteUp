@@ -11,7 +11,7 @@ class NoteAPIService: NSObject {
     var sortedNoteArray = [ListNoteData]()
     let baseURL = "https://bestnoteapp.herokuapp.com/"
     
-    func fetchNoteListByAuthorId(authorID: Int, completion: @escaping ([ListNoteData])-> ()){
+    func fetchNoteListByAuthorId(authorID: Int, completion: @escaping ([ListNoteData]?, Error?)-> ()){
         fetchNotesFromURLString(urlString: "\(baseURL)users/\(authorID)/notes", completion: completion)
     }
     
@@ -27,7 +27,7 @@ class NoteAPIService: NSObject {
         operationsOnNoteFromURLStrings(urlString: "\(baseURL)notes/\(noteId)", httpMethod: httpMethod, data: data)
     }
     
-    func fetchNotesFromURLString(urlString: String, completion : @escaping ([ListNoteData]) -> ()) {
+    func fetchNotesFromURLString(urlString: String, completion : @escaping ([ListNoteData]?, Error?) -> ()) {
         guard let url = URL(string: urlString) else {return}
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else { return }
@@ -35,10 +35,10 @@ class NoteAPIService: NSObject {
                 var notesArray = try JSONDecoder().decode([ListNoteData].self, from : data)
                 DispatchQueue.main.async {
                     notesArray.sort{"\(String(describing: $0.createdAt))" > "\(String(describing: $1.createdAt))"}
-                    completion(notesArray)
+                    completion(notesArray, nil)
                 }
-            }catch let jsonError {
-                print("Unable to fetch data", jsonError)
+            } catch let jsonError{
+                completion(nil, jsonError)
             }
         }.resume()
     }

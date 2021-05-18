@@ -14,6 +14,10 @@ enum State {
     case loaded
 }
 
+protocol BaseViewControllerProtocol: class {
+    func showSuccessView()
+}
+
 class BaseViewController: UIViewController {
     var state: State? {
         didSet {
@@ -21,9 +25,23 @@ class BaseViewController: UIViewController {
         }
     }
     
+    let errorLabel: UILabel = {
+        let errorLabel = UILabel()
+        errorLabel.text = "Apologies something went wrong. Please try again later."
+        errorLabel.textAlignment = .center
+        errorLabel.numberOfLines = 0
+        errorLabel.isHidden = false
+        return errorLabel
+    }()
+    
+    var dataView: UIView = UIView()
+    private var isLoading: Bool = false
+    weak var delegate: BaseViewControllerProtocol?
+    
     var loadingView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
         
         let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
         indicator.startAnimating()
@@ -33,21 +51,16 @@ class BaseViewController: UIViewController {
         NSLayoutConstraint.activate([
             indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             indicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-            ])
-        view.translatesAutoresizingMaskIntoConstraints = false
+        ])
         return view
     }()
-    
-    
-    private var errorView: UIView = UIView()
-    private var isLoading: Bool = false
     
     func render() {
         switch state {
         case .loading:
             self.showLoadingView()
         case .error:
-            self.showLoadingView()
+            self.showErrorView()
         case .loaded:
             self.showDataView()
         case .none:
@@ -59,32 +72,33 @@ class BaseViewController: UIViewController {
         if isLoading {
             removeLoadingView()
         }
-        errorView.backgroundColor = .red
-        errorView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(errorLabel)
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            errorView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            errorView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            errorView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            errorView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+            errorLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            errorLabel.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            errorLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            errorLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
     
     private func showLoadingView() {
-        errorView.removeFromSuperview()
+        errorLabel.removeFromSuperview()
         isLoading = true
         self.view.addSubview(loadingView)
-        
         NSLayoutConstraint.activate([
-            loadingView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            loadingView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            loadingView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            loadingView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+            loadingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            loadingView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            loadingView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            loadingView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
     
-    
     private func showDataView() {
-        
+        if isLoading {
+            removeLoadingView()
+        }
+        delegate?.showSuccessView()
     }
     
     fileprivate func removeLoadingView() {
@@ -92,3 +106,6 @@ class BaseViewController: UIViewController {
         isLoading = false
     }
 }
+
+
+

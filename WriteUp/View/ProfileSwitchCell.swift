@@ -42,6 +42,7 @@ class ProfileSwitchCell: UITableViewCell{
     }
     
     func setupLayout(){
+        handleScreenLock()
         self.contentView.addSubview(switchLabel)
         NSLayoutConstraint.activate([
                                         switchLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
