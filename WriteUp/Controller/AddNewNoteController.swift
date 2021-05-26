@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarDelegate {
     var textfieldHeightConstraint:NSLayoutConstraint?
@@ -19,7 +20,9 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     var noteBody, noteTitle, noteSummary : String?
     var noteId : Int = 0
     var noteDetail = ListNoteData(title: nil, createdAt: nil, summery: nil, tag: nil, body: nil, authorID: nil, id: nil)
-    
+    var userId = String()
+    let db = Firestore.firestore()
+
     lazy var inputAccesssoryToolView: BottomToolBar = {
         var  toolView = BottomToolBar()
         toolView.toolbarDelegate = self
@@ -56,6 +59,9 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         super.viewDidLoad()
         setupViews()
         setUpScreenButtons()
+        if let user = Auth.auth().currentUser {
+            userId = user.uid
+        }
     }
     
     func setUpScreenButtons(){
@@ -95,6 +101,7 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     
     func setNoteDetails(){
         noteBody = textView.text
+        
         noteTitle = noteBody?.getTitle
         noteSummary = noteBody?.getSummary
     }
@@ -117,8 +124,20 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     @objc func handleNewNote(){
         self.view.endEditing(true)
         setNoteDetails()
-        let parameters = NoteData(title: noteTitle, createdAt: createDate.currentDate , summery: noteSummary, authorID: 2, tag: "lo", body: noteBody)
-        NoteAPIService.sharedInstance.createNote(httpMethod: "POST", data: parameters)
+        //        let parameters = NoteData(title: noteTitle, createdAt: createDate.currentDate , summery: noteSummary, authorID: 2, tag: "lo", body: noteBody)
+        //        NoteAPIService.sharedInstance.createNote(httpMethod: "POST", data: parameters)
+        let newNote = db.collection(userId).document()
+        newNote.setData(["title" : noteTitle as Any,
+                         "createdAt" : createDate.currentDate,
+                         "summary": noteSummary as Any,
+                         "colorTag": "red",
+                         "body": noteBody as Any,
+                         "id" : newNote.documentID])
+        
+        //        let newDocument = db.collection(userId).document()
+        //        newDocument.setData(["quote": quote,
+        //                             "author":author,
+        //                             "id":newDocument.documentID])
         navigationController?.popViewController(animated: true)
     }
     
@@ -126,8 +145,16 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         self.view.endEditing(true)
         setNoteDetails()
         if let id = noteDetail.id { noteId = id } 
-        let uploadData = NoteData(title: noteTitle, createdAt: createDate.currentDate,summery: noteSummary,authorID: 2, tag: "lo", body: noteBody)
-        NoteAPIService.sharedInstance.modifyNoteByNoteId(httpMethod: "PATCH", noteId: noteId, data: uploadData)
+        //        let uploadData = NoteData(title: noteTitle, createdAt: createDate.currentDate,summery: noteSummary,authorID: 2, tag: "lo", body: noteBody)
+        //        NoteAPIService.sharedInstance.modifyNoteByNoteId(httpMethod: "PATCH", noteId: noteId, data: uploadData)
+        
+        db.collection(userId).document("jdV0UVm5sXJeys7l0EJT")
+            .setData(["title" : noteTitle,
+                      "createdAt" : createDate.currentDate,
+                      "summary": noteSummary,
+                      "colorTag": "red",
+                      "body": noteBody as Any], merge: true)
+        
         dateLabel.text = createDate.currentDate
         navigationController?.popViewController(animated: true)
     }
