@@ -74,8 +74,12 @@ class HomeViewController: BaseViewController, ProfileScreenDelegate {
         print("prod")
         #endif
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
+//    
+//    override func viewWillAppear(_ animated: Bool) {
+//        getNotesByUserID()
+//    }
+//    
+    override func viewDidAppear(_ animated: Bool) {
         getNotesByUserID()
     }
     
@@ -87,7 +91,9 @@ class HomeViewController: BaseViewController, ProfileScreenDelegate {
             }
             self.notes = documents.compactMap({ (queryDocumentSnapshot) -> Note? in
                 return try? queryDocumentSnapshot.data(as: Note.self)
+                
             })
+            self.notes.sort{"\(String(describing: $0.createdAt))" > "\(String(describing: $1.createdAt))"}
             self.noteArray = self.notes
             self.noteListView.noteArray = self.noteArray
             DispatchQueue.main.async { self.state = State.loaded }

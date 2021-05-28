@@ -1,9 +1,9 @@
-//  APIService.swift
-//  WriteUp
+////  APIService.swift
+////  WriteUp
+////
+////  Created by Ashwini shalke on 30/12/20.
+////  Copyright © 2020 Ashwini Shalke. All rights reserved.
 //
-//  Created by Ashwini shalke on 30/12/20.
-//  Copyright © 2020 Ashwini Shalke. All rights reserved.
-
 //import UIKit
 //
 //class NoteAPIService: NSObject {
@@ -65,4 +65,4 @@
 //        }.resume()
 //    }
 //}
- 
+// 

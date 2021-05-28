@@ -70,7 +70,9 @@ class ShowAllNotesController: BaseViewController {
             }
             self.notes = documents.compactMap({ (queryDocumentSnapshot) -> Note? in
                 return try? queryDocumentSnapshot.data(as: Note.self)
+                
             })
+            self.notes.sort{"\(String(describing: $0.createdAt))" > "\(String(describing: $1.createdAt))"}
             self.noteArray = self.notes
             self.notesListView.noteListArray = self.noteArray
             DispatchQueue.main.async { self.state = State.loaded }
