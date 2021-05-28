@@ -74,8 +74,12 @@ class HomeViewController: BaseViewController, ProfileScreenDelegate {
         print("prod")
         #endif
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
+//    
+//    override func viewWillAppear(_ animated: Bool) {
+//        getNotesByUserID()
+//    }
+//    
+    override func viewDidAppear(_ animated: Bool) {
         getNotesByUserID()
     }
     
@@ -87,8 +91,12 @@ class HomeViewController: BaseViewController, ProfileScreenDelegate {
             }
             self.notes = documents.compactMap({ (queryDocumentSnapshot) -> Note? in
                 return try? queryDocumentSnapshot.data(as: Note.self)
+                
             })
-            self.noteArray = self.notes
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yy HH:mm:ss"
+            let sortedNotes = self.notes.sorted(by: { dateFormatter.date(from:$0.createdAt!)!.compare(dateFormatter.date(from:$1.createdAt!)!) == .orderedDescending })
+            self.noteArray = sortedNotes
             self.noteListView.noteArray = self.noteArray
             DispatchQueue.main.async { self.state = State.loaded }
             

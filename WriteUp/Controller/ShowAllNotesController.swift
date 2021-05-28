@@ -71,7 +71,10 @@ class ShowAllNotesController: BaseViewController {
             self.notes = documents.compactMap({ (queryDocumentSnapshot) -> Note? in
                 return try? queryDocumentSnapshot.data(as: Note.self)
             })
-            self.noteArray = self.notes
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yy HH:mm:ss"
+            let sortedNotes = self.notes.sorted(by: { dateFormatter.date(from:$0.createdAt!)!.compare(dateFormatter.date(from:$1.createdAt!)!) == .orderedDescending })
+            self.noteArray = sortedNotes
             self.notesListView.noteListArray = self.noteArray
             DispatchQueue.main.async { self.state = State.loaded }
         }
