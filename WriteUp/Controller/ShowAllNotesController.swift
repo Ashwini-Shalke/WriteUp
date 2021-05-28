@@ -7,9 +7,16 @@
 //
 
 import UIKit
+import FirebaseFirestoreSwift
+import FirebaseFirestore
+import FirebaseAuth
 
 class ShowAllNotesController: BaseViewController {
-    var noteArray = [ListNoteData]()
+//    var noteArray = [ListNoteData]()
+    var noteArray = [Note]()
+    var db = Firestore.firestore()
+    var userId = String()
+  @Published var notes = [Note]()
     
     lazy var notesListView: NotesListTableView = {
         var notesView = NotesListTableView()
@@ -31,6 +38,9 @@ class ShowAllNotesController: BaseViewController {
         super.viewDidLoad()
         super.delegate = self
         state = State.loading
+        if let user = Auth.auth().currentUser {
+            userId = user.uid
+        }
         setUpNav()
     }
     
@@ -53,16 +63,28 @@ class ShowAllNotesController: BaseViewController {
     }
     
     func getNotesByUserID() {
-        NoteAPIService.sharedInstance.fetchNoteListByAuthorId(authorID: 2) {(notes,error) in
-            if let _ = error {
+        db.collection(userId).addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
                 DispatchQueue.main.async { self.state = State.error }
-            } else {
-                guard let noteList = notes else { return }
-                self.noteArray = noteList
-                self.notesListView.noteListArray = self.noteArray
-                DispatchQueue.main.async { self.state = State.loaded }
+                return
             }
+            self.notes = documents.compactMap({ (queryDocumentSnapshot) -> Note? in
+                return try? queryDocumentSnapshot.data(as: Note.self)
+            })
+            self.noteArray = self.notes
+            self.notesListView.noteListArray = self.noteArray
+            DispatchQueue.main.async { self.state = State.loaded }
         }
+        //     NoteAPIService.sharedInstance.fetchNoteListByAuthorId(authorID: 2) {(notes,error) in
+        //            if let _ = error {
+        //                DispatchQueue.main.async { self.state = State.error }
+        //            } else {
+        //                guard let noteList = notes else { return }
+        //                self.noteArray = noteList
+        //                self.notesListView.noteListArray = self.noteArray
+        //                DispatchQueue.main.async { self.state = State.loaded }
+        //            }
+        //        }
     }
 }
 
@@ -71,7 +93,8 @@ extension ShowAllNotesController: UISearchBarDelegate, noteListTableViewDelegate
       setUpViews()
     }
     
-    func handleDidSelectRow(noteDetail: ListNoteData) {
+//    func handleDidSelectRow(noteDetail: ListNoteData) {
+    func handleDidSelectRow(noteDetail: Note) {
         let editNoteView = AddNewNoteController()
         editNoteView.noteDetail = noteDetail
         editNoteView.context = Constant.contextName.EditScreen
@@ -79,7 +102,7 @@ extension ShowAllNotesController: UISearchBarDelegate, noteListTableViewDelegate
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        notesListView.searchNote = notesListView.noteArray.filter({($0.title?.lowercased().prefix(searchText.count).elementsEqual(searchText.lowercased()))!
+        notesListView.searchNote = notesListView.noteArray.filter({($0.title!.lowercased().prefix(searchText.count).elementsEqual(searchText.lowercased()))
         })
         notesListView.searching = true
         notesListView.reloadData()

@@ -9,6 +9,7 @@ def shared_pods
  pod 'Firebase/Auth'
  pod 'Firebase/Database'
  pod 'Firebase/Firestore'
+ pod 'FirebaseFirestoreSwift'
 end
 
 

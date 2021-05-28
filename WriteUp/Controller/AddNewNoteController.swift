@@ -7,7 +7,9 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseFirestore
+import FirebaseAuth
+import FirebaseFirestoreSwift
 
 class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarDelegate {
     var textfieldHeightConstraint:NSLayoutConstraint?
@@ -19,7 +21,8 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     let createDate : String = " "
     var noteBody, noteTitle, noteSummary : String?
     var noteId : Int = 0
-    var noteDetail = ListNoteData(title: nil, createdAt: nil, summery: nil, tag: nil, body: nil, authorID: nil, id: nil)
+//    var noteDetail = ListNoteData(title: nil, createdAt: nil, summery: nil, tag: nil, body: nil, authorID: nil, id: nil)
+    var noteDetail = Note(id: nil, title: nil, summary: nil, body: nil, colorTag: nil, createdAt: nil)
     var userId = String()
     let db = Firestore.firestore()
 
@@ -101,7 +104,6 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
     
     func setNoteDetails(){
         noteBody = textView.text
-        
         noteTitle = noteBody?.getTitle
         noteSummary = noteBody?.getSummary
     }
@@ -126,37 +128,37 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         setNoteDetails()
         //        let parameters = NoteData(title: noteTitle, createdAt: createDate.currentDate , summery: noteSummary, authorID: 2, tag: "lo", body: noteBody)
         //        NoteAPIService.sharedInstance.createNote(httpMethod: "POST", data: parameters)
-        let newNote = db.collection(userId).document()
-        newNote.setData(["title" : noteTitle as Any,
-                         "createdAt" : createDate.currentDate,
-                         "summary": noteSummary as Any,
-                         "colorTag": "red",
-                         "body": noteBody as Any,
-                         "id" : newNote.documentID])
-        
-        //        let newDocument = db.collection(userId).document()
-        //        newDocument.setData(["quote": quote,
-        //                             "author":author,
-        //                             "id":newDocument.documentID])
+        guard let tile = noteTitle, let summary = noteSummary, let body = noteBody else { return }
+        addNote(note: Note(title: tile, summary: summary, body: body, colorTag: "red", createdAt: createDate.currentDate))
         navigationController?.popViewController(animated: true)
+    }
+    
+    func addNote(note: Note){
+        do {
+            let _ =  try db.collection(userId).addDocument(from: note)
+        } catch {
+            
+        }
     }
     
     @objc func handleSaveNote(){
         self.view.endEditing(true)
         setNoteDetails()
-        if let id = noteDetail.id { noteId = id } 
+        guard let id = noteDetail.id else {return}
         //        let uploadData = NoteData(title: noteTitle, createdAt: createDate.currentDate,summery: noteSummary,authorID: 2, tag: "lo", body: noteBody)
         //        NoteAPIService.sharedInstance.modifyNoteByNoteId(httpMethod: "PATCH", noteId: noteId, data: uploadData)
-        
-        db.collection(userId).document("jdV0UVm5sXJeys7l0EJT")
-            .setData(["title" : noteTitle,
-                      "createdAt" : createDate.currentDate,
-                      "summary": noteSummary,
-                      "colorTag": "red",
-                      "body": noteBody as Any], merge: true)
-        
+        guard let tile = noteTitle, let summary = noteSummary, let body = noteBody else { return }
+        modifyNote(id: id, note: Note(title: tile, summary: summary, body: body, colorTag: "red", createdAt: createDate.currentDate))
         dateLabel.text = createDate.currentDate
         navigationController?.popViewController(animated: true)
+    }
+    
+    func modifyNote(id: String, note: Note){
+        do {
+            let _ =  try db.collection(userId).document(id).setData(from: note, merge: true)
+        } catch {
+            
+        }
     }
     
     @objc func keyboardWillShow(notification: NSNotification){
