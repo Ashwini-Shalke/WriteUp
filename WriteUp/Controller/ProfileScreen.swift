@@ -83,18 +83,13 @@ class ProfileScreen: UIViewController, UITextFieldDelegate{
                     let documentData = document?.data()
                     guard let firstName = documentData?["firstName"],let lastName = documentData?["lastName"], let email = documentData?["email"], let phoneNumber = documentData?["phoneNumber"]  else { return }
                     let fullName = "\(firstName)"+" "+"\(lastName)"
-//                    self.userDict[0] = fullName
-//                    self.userDict[1] = email as? String
-//                    self.userDict[2] = phoneNumber as? String
+
                     self.userDict.updateValue(fullName, forKey: 0)
                     self.userDict.updateValue(email as! String, forKey: 1)
                     self.userDict.updateValue(phoneNumber as! String, forKey: 2)
                     DispatchQueue.main.async {
                         tableView.reloadData()
                     }
-                    print("document", documentData!)
-                    print("loading", userDict)
-                
                 }
             }
         }
