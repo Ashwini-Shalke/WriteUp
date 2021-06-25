@@ -12,6 +12,7 @@ protocol profileCellDelegate : class {
     func newData(user: [Int: String])
     func handleActiveTextField(_ textField: UITextField)
     func handleReturnTextField(_ textField: UITextField)
+    func handleClearTextField(_ textField: UITextField)
 }
 
 class ProfileCell: UITableViewCell {
@@ -90,6 +91,7 @@ extension ProfileCell: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         cellDelegate?.handleActiveTextField(textField)
+        textName.clearButtonMode = .whileEditing
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -97,11 +99,16 @@ extension ProfileCell: UITextFieldDelegate {
         return true
     }
     
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        cellDelegate?.handleClearTextField(textField)
+        return true
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if state {
             textName.becomeFirstResponder()
 //            textName.isUserInteractionEnabled = true
-            textName.clearButtonMode = .whileEditing
+//            textName.clearButtonMode = .whileEditing
         }
         else {
 //            textName.isUserInteractionEnabled = false

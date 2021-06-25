@@ -207,6 +207,10 @@ extension ProfileScreen: UITableViewDelegate,UITableViewDataSource,profileCellDe
         textField.resignFirstResponder()
     }
     
+    func handleClearTextField(_ textField: UITextField){
+        textField.text = " "
+    }
+    
     func newData(user: [Int : String]) {
         if let name = user[0] { userDict.updateValue(name, forKey: 0) }
         
@@ -218,11 +222,13 @@ extension ProfileScreen: UITableViewDelegate,UITableViewDataSource,profileCellDe
 //        print ("Complete User", userDict)
         print(userDict)
         
+     
        
-            let _ =  db.collection("Users").document("QnjBKEXEynSCxRYjCgG9uwP4vr43").setData(["firstName" : userDict[0] ?? " " ,
-                                                                          "lastName": " ",
-                                                                          "email" : userDict[1] ?? " ",
-                                                                          "phoneNumber" : userDict[2] ?? " "], merge: true)
+       
+        let _ =  db.collection("Users").document("QnjBKEXEynSCxRYjCgG9uwP4vr43")
+            .setData(["firstName" : userDict[0] ?? " " ,
+                      "email" : userDict[1] ?? " ",
+                      "phoneNumber" : userDict[2] ?? " "], merge: true)
     }
      
     
