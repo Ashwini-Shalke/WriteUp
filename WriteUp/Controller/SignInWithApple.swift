@@ -111,6 +111,8 @@ extension SignInWithApple: ASAuthorizationControllerDelegate {
                 // User is signed in to Firebase with Apple.
                 // ...
                 UserDefaults.standard.setIsSignedIn(value: true)
+                let profileScreen = ProfileScreen()
+                profileScreen.userDetails = User(credentials: appleIDCredential)
                 self.signInDelegate?.handleRoot()
             }
         }

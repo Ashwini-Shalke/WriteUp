@@ -29,7 +29,7 @@ class ProfileCell: UITableViewCell {
         case usernameTextField = 0
         case emailTextField
         case mobileTextField
-        case notesTextField
+//        case notesTextField
     }
     
     var user: [Int: String]?{
@@ -121,8 +121,8 @@ extension ProfileCell: UITextFieldDelegate {
         case TextFieldData.mobileTextField.rawValue:
             user = [textField.tag: textField.text!]
             
-        case TextFieldData.notesTextField.rawValue:
-            user = [textField.tag: textField.text!]
+//        case TextFieldData.notesTextField.rawValue:
+//            user = [textField.tag: textField.text!]
             
         default:
             break

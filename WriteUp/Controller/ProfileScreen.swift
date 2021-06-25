@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+
 protocol ProfileScreenDelegate: AnyObject {
     func dismissHome()
 }
@@ -15,10 +19,27 @@ class ProfileScreen: UIViewController, UITextFieldDelegate{
     weak var profileDelegate: ProfileScreenDelegate?
     let cellID = Constant.ProfileSC.cellId
     let switchCellID = Constant.ProfileSC.switchCellID
-    let profileLabel = [Constant.ProfileSC.useNameLabel, Constant.ProfileSC.emailLabel, Constant.ProfileSC.phoneLabel,Constant.ProfileSC.noteLabel]
+    let profileLabel = [Constant.ProfileSC.useNameLabel, Constant.ProfileSC.emailLabel, Constant.ProfileSC.phoneLabel]
+    let db = Firestore.firestore()
+    var userId = String()
+    var userDetails: User? {
+        didSet {
+            if let user = Auth.auth().currentUser {
+                userId = user.uid
+            }
+            db.collection("Users").document(userId).setData(["firstName" : userDetails?.firstName ?? "" ,
+                                                                   "lastName": userDetails?.lastName ?? " ",
+                                                                   "email" : userDetails?.email ?? " ",
+                                                                   "phoneNumber" : " ",
+                                                                   "id": userId], merge: true)
+        }
+    }
+    
     
     //MARK: Temporary values
-    var userDict = [0:"Ashwini Shalke", 1:"ashwini@gmail.com", 2:"9075721798", 3:"10"]
+//    var userDict = [0:"Ashwini Shalke", 1:"ashwini@gmail.com", 2:"9075721798", 3:"10"]
+    var userDict = [Int:String]()
+    
     var activeTextField = UITextField()
     var activeTextFieldBounds = CGRect()
     
@@ -47,6 +68,36 @@ class ProfileScreen: UIViewController, UITextFieldDelegate{
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         setupLayout()
         tableView.tableFooterView = getFooterView()
+        readUserDetails()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        readUserDetails()
+    }
+    
+    func readUserDetails(){
+        print("userId", userId)
+        db.collection("Users").document("QnjBKEXEynSCxRYjCgG9uwP4vr43").getDocument { [self] (document, error) in
+            if error == nil {
+                if document != nil && ((document?.exists) != nil) {
+                    let documentData = document?.data()
+                    guard let firstName = documentData?["firstName"],let lastName = documentData?["lastName"], let email = documentData?["email"], let phoneNumber = documentData?["phoneNumber"]  else { return }
+                    let fullName = "\(firstName)"+" "+"\(lastName)"
+//                    self.userDict[0] = fullName
+//                    self.userDict[1] = email as? String
+//                    self.userDict[2] = phoneNumber as? String
+                    self.userDict.updateValue(fullName, forKey: 0)
+                    self.userDict.updateValue(email as! String, forKey: 1)
+                    self.userDict.updateValue(phoneNumber as! String, forKey: 2)
+                    DispatchQueue.main.async {
+                        tableView.reloadData()
+                    }
+                    print("document", documentData!)
+                    print("loading", userDict)
+                
+                }
+            }
+        }
     }
     
     func setupLayout(){
@@ -123,17 +174,18 @@ class ProfileScreen: UIViewController, UITextFieldDelegate{
         isEditingNow = false
         tableView.reloadData()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(allowEditing))
+        
     }
 }
 
 extension ProfileScreen: UITableViewDelegate,UITableViewDataSource,profileCellDelegate, SwitchCellDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row < 4 {
+        if indexPath.row < 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! ProfileCell
             cell.labelName.text = profileLabel[indexPath.row]
             cell.getTextValue = userDict[indexPath.row]
@@ -142,6 +194,7 @@ extension ProfileScreen: UITableViewDelegate,UITableViewDataSource,profileCellDe
             if let state = isEditingNow {
                 cell.state = state
             }
+            
             return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: switchCellID, for: indexPath) as! ProfileSwitchCell
@@ -166,10 +219,18 @@ extension ProfileScreen: UITableViewDelegate,UITableViewDataSource,profileCellDe
         
         if let phoneNumber = user[2] { userDict.updateValue(phoneNumber, forKey: 2) }
         
-        if let noteCount = user[3] { userDict.updateValue(noteCount, forKey: 3) }
-        print ("Complete User", userDict)
+//        if let noteCount = user[3] { userDict.updateValue(noteCount, forKey: 3) }
+//        print ("Complete User", userDict)
+        print(userDict)
+        
+       
+            let _ =  db.collection("Users").document("QnjBKEXEynSCxRYjCgG9uwP4vr43").setData(["firstName" : userDict[0] ?? " " ,
+                                                                          "lastName": " ",
+                                                                          "email" : userDict[1] ?? " ",
+                                                                          "phoneNumber" : userDict[2] ?? " "], merge: true)
     }
      
+    
     func handleScreenLockDelegate(tag: Int) {
         print("ScreenLocked Status", UserDefaults.standard.isScreenLockedOn())
     }

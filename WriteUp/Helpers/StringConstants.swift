@@ -30,7 +30,7 @@ struct Constant {
         static let useNameLabel = "UserName"
         static let emailLabel = "Email"
         static let phoneLabel = "Phone Number"
-        static let noteLabel = "Total notes"
+//        static let noteLabel = "Total notes"
         static let switchLabel = "Screen Lock"
         static let navTitle = "Profile"
 
