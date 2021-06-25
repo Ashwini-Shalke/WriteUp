@@ -74,12 +74,9 @@ class HomeViewController: BaseViewController, ProfileScreenDelegate {
         print("prod")
         #endif
     }
-//    
-//    override func viewWillAppear(_ animated: Bool) {
-//        getNotesByUserID()
-//    }
-//    
-    override func viewDidAppear(_ animated: Bool) {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         getNotesByUserID()
     }
     

@@ -61,23 +61,20 @@ extension UIFont {
     }
     
     func itemTitle(size: CGFloat? = 17) -> UIFont {
-//        return UIFont(name: "MaisonNeue-Demi", size: 17)!
-        UIFont.systemFont(ofSize: 17, weight: .medium)
+        UIFont(name: "MaisonNeue-Demi", size: 17) ?? UIFont.systemFont(ofSize: 17, weight: .medium)
+
     }
     
     func itemDesc(size: CGFloat? = 15) -> UIFont {
-//        return UIFont(name: "MaisonNeue-book", size: 14)!
-        UIFont.systemFont(ofSize: 15, weight: .regular)
+        UIFont(name: "MaisonNeue-book", size: 14) ?? UIFont.systemFont(ofSize: 15, weight: .regular)
     }
     
     func formControlTitle(size: CGFloat? = 15) -> UIFont{
-//        return UIFont(name:"MaisonNeue-Light", size: 15)!
-        return UIFont.systemFont(ofSize: 17, weight: .medium)
+        return UIFont(name:"MaisonNeue-Light", size: 15) ?? UIFont.systemFont(ofSize: 17, weight: .medium)
     }
     
     func formControlSegmented(size: CGFloat? = 13) -> UIFont {
-//        return UIFont(name: "MaisonNeue-Bold", size: size!)!
-        return UIFont.systemFont(ofSize: 13, weight: .regular)
+        return UIFont(name: "MaisonNeue-Bold", size: size!) ?? UIFont.systemFont(ofSize: 13, weight: .regular)
     }
     
     func textInput(size: CGFloat? = 17) -> UIFont {
@@ -85,8 +82,7 @@ extension UIFont {
     }
     
     func tabBarTitle(size: CGFloat? = 10) -> UIFont {
-//        return UIFont(name: "MaisonNeue-Light", size: size ?? 10)!
-        return UIFont.systemFont(ofSize: 10, weight: .medium)
+        return UIFont(name: "MaisonNeue-Light", size: size ?? 10) ?? UIFont.systemFont(ofSize: 10, weight: .medium)
     }
 }
 
