@@ -27,7 +27,9 @@ class ProfileCell: UITableViewCell {
     weak var cellDelegate : profileCellDelegate?
     
     enum TextFieldData: Int { 
-        case usernameTextField = 0
+//        case usernameTextField = 0
+        case firstNameTextField = 0
+        case lastNameTextField
         case emailTextField
         case mobileTextField
 //        case notesTextField
@@ -119,7 +121,10 @@ extension ProfileCell: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField.tag {
-        case TextFieldData.usernameTextField.rawValue:
+        case TextFieldData.firstNameTextField.rawValue:
+            user = [textField.tag: textField.text!]
+          
+        case TextFieldData.lastNameTextField.rawValue:
             user = [textField.tag: textField.text!]
             
         case TextFieldData.emailTextField.rawValue:

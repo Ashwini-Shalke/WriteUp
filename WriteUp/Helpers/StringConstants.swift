@@ -27,7 +27,9 @@ struct Constant {
         static let textfieldHeight = CGSize(width: 37, height: 32)
         static let signOutButtonTitle = "Sign out"
 //        static let placeholderImageName = "placeholder_photo"
-        static let useNameLabel = "UserName"
+//        static let useNameLabel = "UserName"
+        static let firstNameLabel = "First Name"
+        static let lastNameLabel = "Last Name"
         static let emailLabel = "Email"
         static let phoneLabel = "Phone Number"
 //        static let noteLabel = "Total notes"

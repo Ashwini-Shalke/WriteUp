@@ -119,7 +119,7 @@ extension SignInWithApple: ASAuthorizationControllerDelegate {
                 if let user = Auth.auth().currentUser {
                 self.userId = user.uid }
                 self.db.collection("Users").document(self.userId).setData(["firstName" : appleIDCredential.fullName?.givenName  ?? "" ,"lastName": appleIDCredential.fullName?.familyName ?? " ","email" : appleIDCredential.email ?? " ",
-                 "phoneNumber" : "010 ","id": self.userId], merge: true)
+                 "phoneNumber" : " ","id": self.userId], merge: true)
                 self.signInDelegate?.handleRoot()
             }
         }

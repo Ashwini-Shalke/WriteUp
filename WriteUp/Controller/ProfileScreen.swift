@@ -19,7 +19,7 @@ class ProfileScreen: UIViewController, UITextFieldDelegate{
     weak var profileDelegate: ProfileScreenDelegate?
     let cellID = Constant.ProfileSC.cellId
     let switchCellID = Constant.ProfileSC.switchCellID
-    let profileLabel = [Constant.ProfileSC.useNameLabel, Constant.ProfileSC.emailLabel, Constant.ProfileSC.phoneLabel]
+    let profileLabel = [Constant.ProfileSC.firstNameLabel,Constant.ProfileSC.lastNameLabel,Constant.ProfileSC.emailLabel, Constant.ProfileSC.phoneLabel]
     let db = Firestore.firestore()
     var userId = String()
 //    var userDetails: User? {
@@ -85,11 +85,12 @@ class ProfileScreen: UIViewController, UITextFieldDelegate{
                 if document != nil && ((document?.exists) != nil) {
                     let documentData = document?.data()
                     guard let firstName = documentData?["firstName"],let lastName = documentData?["lastName"], let email = documentData?["email"], let phoneNumber = documentData?["phoneNumber"]  else { return }
-                    let fullName = "\(firstName)"+" "+"\(lastName)"
-
-                    self.userDict.updateValue(fullName, forKey: 0)
-                    self.userDict.updateValue(email as! String, forKey: 1)
-                    self.userDict.updateValue(phoneNumber as! String, forKey: 2)
+                
+//                    self.userDict.updateValue(fullName, forKey: 0)
+                    self.userDict.updateValue(firstName as! String, forKey: 0)
+                    self.userDict.updateValue(lastName as! String, forKey: 1)
+                    self.userDict.updateValue(email as! String, forKey: 2)
+                    self.userDict.updateValue(phoneNumber as! String, forKey: 3)
                     DispatchQueue.main.async {
                         tableView.reloadData()
                     }
@@ -179,11 +180,11 @@ class ProfileScreen: UIViewController, UITextFieldDelegate{
 extension ProfileScreen: UITableViewDelegate,UITableViewDataSource,profileCellDelegate, SwitchCellDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row < 3 {
+        if indexPath.row < 4 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! ProfileCell
             cell.labelName.text = profileLabel[indexPath.row]
             cell.getTextValue = userDict[indexPath.row]
@@ -215,21 +216,21 @@ extension ProfileScreen: UITableViewDelegate,UITableViewDataSource,profileCellDe
     }
     
     func newData(user: [Int : String]) {
-        if let name = user[0] { userDict.updateValue(name, forKey: 0) }
-        if let email = user[1] { userDict.updateValue(email, forKey: 1) }
-        if let phoneNumber = user[2] { userDict.updateValue(phoneNumber, forKey: 2) }
+        //        if let name = user[0] { userDict.updateValue(name, forKey: 0) }
+        if let firstName = user[0] { userDict.updateValue(firstName, forKey: 0) }
+        if let lastName = user[1] { userDict.updateValue(lastName, forKey: 1) }
+        if let email = user[2] { userDict.updateValue(email, forKey: 2) }
+        if let phoneNumber = user[3] { userDict.updateValue(phoneNumber, forKey: 3) }
         
-//        if let noteCount = user[3] { userDict.updateValue(noteCount, forKey: 3) }
-//        print ("Complete User", userDict)
+        //        if let noteCount = user[3] { userDict.updateValue(noteCount, forKey: 3) }
+        //        print ("Complete User", userDict)
         print(userDict)
         
-     
-       
-       
         let _ =  db.collection("Users").document(userId)
             .setData(["firstName" : userDict[0] ?? " " ,
-                      "email" : userDict[1] ?? " ",
-                      "phoneNumber" : userDict[2] ?? " "], merge: true)
+                      "lastName": userDict[1] ?? " ",
+                      "email" : userDict[2] ?? " ",
+                      "phoneNumber" : userDict[3] ?? " "], merge: true)
     }
      
     
