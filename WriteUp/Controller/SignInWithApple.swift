@@ -8,6 +8,7 @@
 
 import UIKit
 import AuthenticationServices
+import FirebaseFirestore
 import FirebaseAuth
 
 protocol signInDelegate: AnyObject{
@@ -16,7 +17,9 @@ protocol signInDelegate: AnyObject{
 
 class SignInWithApple: UIViewController {
     weak var signInDelegate: signInDelegate?
-    
+    let db = Firestore.firestore()
+    var userId = String()
+   
     let logoImageView: UIImageView = {
         let logo = UIImageView()
         logo.image = UIImage.Main.largeAppIcon
@@ -111,8 +114,12 @@ extension SignInWithApple: ASAuthorizationControllerDelegate {
                 // User is signed in to Firebase with Apple.
                 // ...
                 UserDefaults.standard.setIsSignedIn(value: true)
-                let profileScreen = ProfileScreen()
-                profileScreen.userDetails = User(credentials: appleIDCredential)
+               
+                
+                if let user = Auth.auth().currentUser {
+                self.userId = user.uid }
+                self.db.collection("Users").document(self.userId).setData(["firstName" : appleIDCredential.fullName?.givenName  ?? "" ,"lastName": appleIDCredential.fullName?.familyName ?? " ","email" : appleIDCredential.email ?? " ",
+                 "phoneNumber" : "010 ","id": self.userId], merge: true)
                 self.signInDelegate?.handleRoot()
             }
         }

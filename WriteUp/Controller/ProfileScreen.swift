@@ -22,18 +22,18 @@ class ProfileScreen: UIViewController, UITextFieldDelegate{
     let profileLabel = [Constant.ProfileSC.useNameLabel, Constant.ProfileSC.emailLabel, Constant.ProfileSC.phoneLabel]
     let db = Firestore.firestore()
     var userId = String()
-    var userDetails: User? {
-        didSet {
-            if let user = Auth.auth().currentUser {
-                userId = user.uid
-            }
-            db.collection("Users").document(userId).setData(["firstName" : userDetails?.firstName ?? "" ,
-                                                                   "lastName": userDetails?.lastName ?? " ",
-                                                                   "email" : userDetails?.email ?? " ",
-                                                                   "phoneNumber" : " ",
-                                                                   "id": userId], merge: true)
-        }
-    }
+//    var userDetails: User? {
+//        didSet {
+//            if let user = Auth.auth().currentUser {
+//                userId = user.uid
+//            }
+//            db.collection("Users").document(userId).setData(["firstName" : userDetails?.firstName ?? "" ,
+//                                                                   "lastName": userDetails?.lastName ?? " ",
+//                                                                   "email" : userDetails?.email ?? " ",
+//                                                                   "phoneNumber" : " ",
+//                                                                   "id": userId], merge: true)
+//        }
+//    }
     
     
     //MARK: Temporary values
@@ -61,6 +61,9 @@ class ProfileScreen: UIViewController, UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let user = Auth.auth().currentUser {
+                      userId = user.uid
+                  }
         view.backgroundColor = .white
         navigationItem.title = Constant.ProfileSC.navTitle
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(allowEditing))
@@ -77,7 +80,7 @@ class ProfileScreen: UIViewController, UITextFieldDelegate{
     
     func readUserDetails(){
         print("userId", userId)
-        db.collection("Users").document("QnjBKEXEynSCxRYjCgG9uwP4vr43").getDocument { [self] (document, error) in
+        db.collection("Users").document(userId).getDocument { [self] (document, error) in
             if error == nil {
                 if document != nil && ((document?.exists) != nil) {
                     let documentData = document?.data()
@@ -213,9 +216,7 @@ extension ProfileScreen: UITableViewDelegate,UITableViewDataSource,profileCellDe
     
     func newData(user: [Int : String]) {
         if let name = user[0] { userDict.updateValue(name, forKey: 0) }
-        
         if let email = user[1] { userDict.updateValue(email, forKey: 1) }
-        
         if let phoneNumber = user[2] { userDict.updateValue(phoneNumber, forKey: 2) }
         
 //        if let noteCount = user[3] { userDict.updateValue(noteCount, forKey: 3) }
@@ -225,7 +226,7 @@ extension ProfileScreen: UITableViewDelegate,UITableViewDataSource,profileCellDe
      
        
        
-        let _ =  db.collection("Users").document("QnjBKEXEynSCxRYjCgG9uwP4vr43")
+        let _ =  db.collection("Users").document(userId)
             .setData(["firstName" : userDict[0] ?? " " ,
                       "email" : userDict[1] ?? " ",
                       "phoneNumber" : userDict[2] ?? " "], merge: true)
