@@ -7,20 +7,25 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import FirebaseAuth
+import FirebaseFirestoreSwift
 
 class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarDelegate {
     var textfieldHeightConstraint:NSLayoutConstraint?
     var textfieldHeightWithKeyboard = (UIScreen.main.bounds.height)
     var textfieldHeightWithoutKeyboard = (UIScreen.main.bounds.height - 50)
     var verticalSafeAreaInset = CGFloat()
-    let nextButton = SecondaryButton(titleText: Constant.AddNote.nextButtonTitle)
-    let saveButton = SecondaryButton(titleText: "Save")
+    let saveButton = SecondaryButton(titleText: Constant.AddNote.saveButtonTitle)
     var context = Constant.contextName.NewScreen
-    let createDate : String = ""
+    let createDate : String = " "
+    var noteBody, noteTitle, noteSummary : String?
     var noteId : Int = 0
-    var noteDetail = ListNoteData(title: nil, createdAt: nil, summery: nil, tag: nil, body: nil, authorID: nil, id: nil)
-    
-    
+//    var noteDetail = ListNoteData(title: nil, createdAt: nil, summery: nil, tag: nil, body: nil, authorID: nil, id: nil)
+    var noteDetail = Note(id: nil, title: nil, summary: nil, body: nil, colorTag: nil, createdAt: nil)
+    var userId = String()
+    let db = Firestore.firestore()
+
     lazy var inputAccesssoryToolView: BottomToolBar = {
         var  toolView = BottomToolBar()
         toolView.toolbarDelegate = self
@@ -57,13 +62,16 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         super.viewDidLoad()
         setupViews()
         setUpScreenButtons()
+        if let user = Auth.auth().currentUser {
+            userId = user.uid
+        }
     }
     
     func setUpScreenButtons(){
         if context == Constant.contextName.NewScreen {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(customView: nextButton)
-            nextButton.setTitleColor(Constant.MainColor, for: .normal)
-            nextButton.addTarget(self, action: #selector(handleNext), for: .touchUpInside)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
+            saveButton.setTitleColor(Constant.MainColor, for: .normal)
+            saveButton.addTarget(self, action: #selector(handleNewNote), for: .touchUpInside)
         } else {
             navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
             saveButton.setTitleColor(Constant.MainColor, for: .normal)
@@ -94,6 +102,12 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         dateLabel.text = noteDetail.createdAt
     }
     
+    func setNoteDetails(){
+        noteBody = textView.text
+        noteTitle = noteBody?.getTitle
+        noteSummary = noteBody?.getSummary
+    }
+    
     func trashButton() {
         navigationController?.popViewController(animated: true)
     }
@@ -109,27 +123,42 @@ class AddNewNoteController: UIViewController, UITextViewDelegate, bottomToolBarD
         textView.resignFirstResponder()
     }
     
-    @objc func handleNext(){
+    @objc func handleNewNote(){
         self.view.endEditing(true)
-         
-        let saveNote = SaveNoteController()
-        saveNote.noteDescription = textView.text
-        navigationController?.pushViewController(saveNote, animated: true)
+        setNoteDetails()
+        //        let parameters = NoteData(title: noteTitle, createdAt: createDate.currentDate , summery: noteSummary, authorID: 2, tag: "lo", body: noteBody)
+        //        NoteAPIService.sharedInstance.createNote(httpMethod: "POST", data: parameters)
+        guard let tile = noteTitle, let summary = noteSummary, let body = noteBody else { return }
+        addNote(note: Note(title: tile, summary: summary, body: body, colorTag: "red", createdAt: createDate.currentDate))
+        navigationController?.popViewController(animated: true)
     }
     
-    //need to work on it
+    func addNote(note: Note){
+        do {
+            let _ =  try db.collection(userId).addDocument(from: note)
+        } catch {
+            
+        }
+    }
+    
     @objc func handleSaveNote(){
         self.view.endEditing(true)
-        navigationController?.popViewController(animated: true)
-        let body = textView.text
-        let title = body?.getTitle
-        let summary = body?.getSummary
-        if let id = noteDetail.id {
-            noteId = id
-        }
-        let uploadData = NoteData(title: title, createdAt: createDate.currentDate,summery: summary,authorID: 2, tag: "lo", body: body)
-        NoteAPIService.sharedInstance.modifyNoteByNoteId(httpMethod: "PATCH", noteId: noteId, data: uploadData)
+        setNoteDetails()
+        guard let id = noteDetail.id else {return}
+        //        let uploadData = NoteData(title: noteTitle, createdAt: createDate.currentDate,summery: noteSummary,authorID: 2, tag: "lo", body: noteBody)
+        //        NoteAPIService.sharedInstance.modifyNoteByNoteId(httpMethod: "PATCH", noteId: noteId, data: uploadData)
+        guard let tile = noteTitle, let summary = noteSummary, let body = noteBody else { return }
+        modifyNote(id: id, note: Note(title: tile, summary: summary, body: body, colorTag: "red", createdAt: createDate.currentDate))
         dateLabel.text = createDate.currentDate
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func modifyNote(id: String, note: Note){
+        do {
+            let _ =  try db.collection(userId).document(id).setData(from: note, merge: true)
+        } catch {
+            
+        }
     }
     
     @objc func keyboardWillShow(notification: NSNotification){

@@ -35,6 +35,7 @@ class ProfileSwitchCell: UITableViewCell{
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         setupLayout()
+        handleScreenLock()
     }
     
     required init?(coder: NSCoder) {
@@ -42,6 +43,7 @@ class ProfileSwitchCell: UITableViewCell{
     }
     
     func setupLayout(){
+        handleScreenLock()
         self.contentView.addSubview(switchLabel)
         NSLayoutConstraint.activate([
                                         switchLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),

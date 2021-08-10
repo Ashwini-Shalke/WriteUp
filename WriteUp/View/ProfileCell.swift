@@ -12,6 +12,7 @@ protocol profileCellDelegate : class {
     func newData(user: [Int: String])
     func handleActiveTextField(_ textField: UITextField)
     func handleReturnTextField(_ textField: UITextField)
+    func handleClearTextField(_ textField: UITextField)
 }
 
 class ProfileCell: UITableViewCell {
@@ -26,10 +27,12 @@ class ProfileCell: UITableViewCell {
     weak var cellDelegate : profileCellDelegate?
     
     enum TextFieldData: Int { 
-        case usernameTextField = 0
+//        case usernameTextField = 0
+        case firstNameTextField = 0
+        case lastNameTextField
         case emailTextField
         case mobileTextField
-        case notesTextField
+//        case notesTextField
     }
     
     var user: [Int: String]?{
@@ -90,6 +93,7 @@ extension ProfileCell: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         cellDelegate?.handleActiveTextField(textField)
+        textName.clearButtonMode = .whileEditing
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -97,11 +101,16 @@ extension ProfileCell: UITextFieldDelegate {
         return true
     }
     
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        cellDelegate?.handleClearTextField(textField)
+        return true
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if state {
             textName.becomeFirstResponder()
 //            textName.isUserInteractionEnabled = true
-            textName.clearButtonMode = .whileEditing
+//            textName.clearButtonMode = .whileEditing
         }
         else {
 //            textName.isUserInteractionEnabled = false
@@ -112,7 +121,10 @@ extension ProfileCell: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField.tag {
-        case TextFieldData.usernameTextField.rawValue:
+        case TextFieldData.firstNameTextField.rawValue:
+            user = [textField.tag: textField.text!]
+          
+        case TextFieldData.lastNameTextField.rawValue:
             user = [textField.tag: textField.text!]
             
         case TextFieldData.emailTextField.rawValue:
@@ -121,8 +133,8 @@ extension ProfileCell: UITextFieldDelegate {
         case TextFieldData.mobileTextField.rawValue:
             user = [textField.tag: textField.text!]
             
-        case TextFieldData.notesTextField.rawValue:
-            user = [textField.tag: textField.text!]
+//        case TextFieldData.notesTextField.rawValue:
+//            user = [textField.tag: textField.text!]
             
         default:
             break

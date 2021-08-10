@@ -21,7 +21,7 @@ class Calendar: BaseView, UIGestureRecognizerDelegate {
     
     override func setup() {
         super.setup()
-        let calendar = FSCalendar(frame: CGRect(x: 0, y: 0, width: 320, height: 300))
+        let calendar = FSCalendar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 300))
         calendar.dataSource = self
         calendar.delegate = self
         

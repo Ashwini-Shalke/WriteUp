@@ -6,6 +6,8 @@
 //  Copyright © 2020 Ashwini Shalke. All rights reserved.
 //
 import Foundation
+import FirebaseFirestoreSwift
+
 //struct Note {
 //    var title: String?
 //    var description:String?
@@ -31,9 +33,19 @@ struct NoteData :Codable {
     }
 }
 
-struct ListNoteData: Decodable {
+struct ListNoteData: Codable {
     var title, createdAt, summery,tag, body: String?
     let authorID,id: Int?
+}
+
+
+struct Note: Codable {
+   @DocumentID var id: String? = UUID().uuidString
+    var title: String?
+    var summary: String?
+    var body:String?
+    var colorTag: String?
+    var createdAt: String?
 }
 
 

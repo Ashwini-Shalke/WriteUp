@@ -15,8 +15,8 @@ class RootViewController: UIViewController, signInDelegate, homeDelegate{
         return homeController
     }()
     
-    lazy var signInViewController : SignInViewController = {
-        var signInController = SignInViewController()
+    lazy var signInViewController : SignInWithApple = {
+        var signInController = SignInWithApple()
         signInController.signInDelegate = self
         return signInController
     }()
@@ -24,12 +24,13 @@ class RootViewController: UIViewController, signInDelegate, homeDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        view.backgroundColor = UIColor.green
+        view.backgroundColor = UIColor.white
         handleChild()
     }
     
     fileprivate func isSignedIn() -> Bool {
         return UserDefaults.standard.isSignedIn()
+        
     }
     
     func handleChild(){

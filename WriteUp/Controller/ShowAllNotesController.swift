@@ -7,8 +7,17 @@
 //
 
 import UIKit
+import FirebaseFirestoreSwift
+import FirebaseFirestore
+import FirebaseAuth
 
-class ShowAllNotesController: UIViewController {
+class ShowAllNotesController: BaseViewController {
+//    var noteArray = [ListNoteData]()
+    var noteArray = [Note]()
+    var db = Firestore.firestore()
+    var userId = String()
+  @Published var notes = [Note]()
+    
     lazy var notesListView: NotesListTableView = {
         var notesView = NotesListTableView()
         notesView.noteListDelegate = self
@@ -27,28 +36,73 @@ class ShowAllNotesController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+        super.delegate = self
+        state = State.loading
+        if let user = Auth.auth().currentUser {
+            userId = user.uid
+        }
+        setUpNav()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        self.notesListView.getNotesByUserID()
-        self.notesListView.reloadData()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getNotesByUserID()
     }
     
-    func setupViews(){
+    func setUpNav(){
+        view.backgroundColor = .white
+        navigationItem.title = Constant.ShowAllNote.barLabel
+        
         view.addSubview(searchBar)
         searchBar.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16),size: CGSize(width: 0, height: 36))
         
+    }
+
+    func setUpViews(){
         view.addSubview(notesListView)
         notesListView.anchor(top: searchBar.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 16, left: 0, bottom: 0, right: 0))
-        
-        view.backgroundColor = .white
-        navigationItem.title = Constant.ShowAllNote.barLabel
+    }
+    
+    func getNotesByUserID() {
+        db.collection(userId).addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                DispatchQueue.main.async { self.state = State.error }
+                return
+            }
+            self.notes = documents.compactMap({ (queryDocumentSnapshot) -> Note? in
+                return try? queryDocumentSnapshot.data(as: Note.self)
+                
+            })
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yy HH:mm:ss"
+            let sortedNotes = self.notes.sorted(by: { dateFormatter.date(from:$0.createdAt!)!.compare(dateFormatter.date(from:$1.createdAt!)!) == .orderedDescending })
+            self.noteArray = sortedNotes
+
+            self.notes.sort{"\(String(describing: $0.createdAt))" > "\(String(describing: $1.createdAt))"}
+            self.noteArray = self.notes
+            self.notesListView.noteListArray = self.noteArray
+            DispatchQueue.main.async { self.state = State.loaded }
+        }
+        //     NoteAPIService.sharedInstance.fetchNoteListByAuthorId(authorID: 2) {(notes,error) in
+        //            if let _ = error {
+        //                DispatchQueue.main.async { self.state = State.error }
+        //            } else {
+        //                guard let noteList = notes else { return }
+        //                self.noteArray = noteList
+        //                self.notesListView.noteListArray = self.noteArray
+        //                DispatchQueue.main.async { self.state = State.loaded }
+        //            }
+        //        }
     }
 }
 
-extension ShowAllNotesController: UISearchBarDelegate, noteListTableViewDelegate {
-    func handleDidSelectRow(noteDetail: ListNoteData) {
+extension ShowAllNotesController: UISearchBarDelegate, noteListTableViewDelegate, BaseViewControllerProtocol {
+    func showSuccessView() {
+      setUpViews()
+    }
+    
+//    func handleDidSelectRow(noteDetail: ListNoteData) {
+    func handleDidSelectRow(noteDetail: Note) {
         let editNoteView = AddNewNoteController()
         editNoteView.noteDetail = noteDetail
         editNoteView.context = Constant.contextName.EditScreen
@@ -56,7 +110,7 @@ extension ShowAllNotesController: UISearchBarDelegate, noteListTableViewDelegate
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        notesListView.searchNote = notesListView.noteArray.filter({($0.title?.lowercased().prefix(searchText.count).elementsEqual(searchText.lowercased()))!
+        notesListView.searchNote = notesListView.noteArray.filter({($0.title!.lowercased().prefix(searchText.count).elementsEqual(searchText.lowercased()))
         })
         notesListView.searching = true
         notesListView.reloadData()
