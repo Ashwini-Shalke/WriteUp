@@ -114,12 +114,12 @@ extension SignInWithApple: ASAuthorizationControllerDelegate {
                 // User is signed in to Firebase with Apple.
                 // ...
                 UserDefaults.standard.setIsSignedIn(value: true)
-               
+                
                 
                 if let user = Auth.auth().currentUser {
-                self.userId = user.uid }
+                    self.userId = user.uid }
                 self.db.collection("Users").document(self.userId).setData(["firstName" : appleIDCredential.fullName?.givenName  ?? "" ,"lastName": appleIDCredential.fullName?.familyName ?? " ","email" : appleIDCredential.email ?? " ",
-                 "phoneNumber" : " ","id": self.userId], merge: true)
+                                                                           "phoneNumber" : " ","id": self.userId], merge: true)
                 self.signInDelegate?.handleRoot()
             }
         }
