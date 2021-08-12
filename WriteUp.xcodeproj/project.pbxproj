@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		036EFF039AE5A907607577BB /* Pods_WriteUpDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0C5A2F1A5B5199109351EB3 /* Pods_WriteUpDev.framework */; };
+		04DA7B49490557845A68C6B1 /* Pods_WriteUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E89E596D69863E41A7E9B67 /* Pods_WriteUp.framework */; };
 		3320722125E16812001EFD37 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3320722025E16812001EFD37 /* BaseViewController.swift */; };
 		3320722225E16812001EFD37 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3320722025E16812001EFD37 /* BaseViewController.swift */; };
 		332D81812475229500944CA5 /* AddNewNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D81802475229500944CA5 /* AddNewNoteController.swift */; };
@@ -95,12 +97,12 @@
 		33FB4EFE24B843570079B84C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3333CDF42445CB7D00E6EF3B /* LaunchScreen.storyboard */; };
 		33FB4EFF24B843570079B84C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3333CDF22445CB7D00E6EF3B /* Assets.xcassets */; };
 		33FB4F0024B843570079B84C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3333CDEF2445CB7A00E6EF3B /* Main.storyboard */; };
-		4A79CADE85FA1D8AEF471E53 /* Pods_WriteUp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E244723E895B609624B7CFC /* Pods_WriteUp.framework */; };
-		97DD88476933A56E71E13738 /* Pods_WriteUpDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35FB5654ABC33E0E2DE474E1 /* Pods_WriteUpDev.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		27E06529D8D5ADA4E75B28C1 /* Pods-WriteUpDev.releasedev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUpDev.releasedev.xcconfig"; path = "Target Support Files/Pods-WriteUpDev/Pods-WriteUpDev.releasedev.xcconfig"; sourceTree = "<group>"; };
+		1E89E596D69863E41A7E9B67 /* Pods_WriteUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WriteUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		217E2D1AE324D02C9C73437D /* Pods-WriteUpDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUpDev.release.xcconfig"; path = "Target Support Files/Pods-WriteUpDev/Pods-WriteUpDev.release.xcconfig"; sourceTree = "<group>"; };
+		2246CE9DB8999F00CA1865F5 /* Pods-WriteUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUp.debug.xcconfig"; path = "Target Support Files/Pods-WriteUp/Pods-WriteUp.debug.xcconfig"; sourceTree = "<group>"; };
 		3320722025E16812001EFD37 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		332D81802475229500944CA5 /* AddNewNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewNoteController.swift; sourceTree = "<group>"; };
 		332D81822475276000944CA5 /* NotesListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListTableView.swift; sourceTree = "<group>"; };
@@ -149,15 +151,13 @@
 		33DBC320246EB50100E6462A /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		33DBC322246FFCF200E6462A /* SaveNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNoteController.swift; sourceTree = "<group>"; };
 		33FB4F0524B843570079B84C /* WriteUpDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WriteUpDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		35FB5654ABC33E0E2DE474E1 /* Pods_WriteUpDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WriteUpDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F7E8AF88A5C1F27D4DEC001 /* Pods-WriteUpDev.debugdev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUpDev.debugdev.xcconfig"; path = "Target Support Files/Pods-WriteUpDev/Pods-WriteUpDev.debugdev.xcconfig"; sourceTree = "<group>"; };
-		55B9418ED97E9839F143E517 /* Pods-WriteUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUp.release.xcconfig"; path = "Target Support Files/Pods-WriteUp/Pods-WriteUp.release.xcconfig"; sourceTree = "<group>"; };
-		7CDEF153E541E89F80350ADD /* Pods-WriteUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUp.debug.xcconfig"; path = "Target Support Files/Pods-WriteUp/Pods-WriteUp.debug.xcconfig"; sourceTree = "<group>"; };
-		82458D792DC0D1ACDFCD2343 /* Pods-WriteUpDev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUpDev.debug.xcconfig"; path = "Target Support Files/Pods-WriteUpDev/Pods-WriteUpDev.debug.xcconfig"; sourceTree = "<group>"; };
-		8E244723E895B609624B7CFC /* Pods_WriteUp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WriteUp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD13B48D2CD7099154AE3D76 /* Pods-WriteUp.debugdev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUp.debugdev.xcconfig"; path = "Target Support Files/Pods-WriteUp/Pods-WriteUp.debugdev.xcconfig"; sourceTree = "<group>"; };
-		E6F64395B45306CCED28A7A9 /* Pods-WriteUpDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUpDev.release.xcconfig"; path = "Target Support Files/Pods-WriteUpDev/Pods-WriteUpDev.release.xcconfig"; sourceTree = "<group>"; };
-		EFAF2A093F3D462DDB229D54 /* Pods-WriteUp.releasedev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUp.releasedev.xcconfig"; path = "Target Support Files/Pods-WriteUp/Pods-WriteUp.releasedev.xcconfig"; sourceTree = "<group>"; };
+		4A40B8DE45B5C245DD4E9896 /* Pods-WriteUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUp.release.xcconfig"; path = "Target Support Files/Pods-WriteUp/Pods-WriteUp.release.xcconfig"; sourceTree = "<group>"; };
+		546E20B601821502AFA93D19 /* Pods-WriteUpDev.releasedev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUpDev.releasedev.xcconfig"; path = "Target Support Files/Pods-WriteUpDev/Pods-WriteUpDev.releasedev.xcconfig"; sourceTree = "<group>"; };
+		62E4C1913B2D6A5E551AB5B5 /* Pods-WriteUp.debugdev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUp.debugdev.xcconfig"; path = "Target Support Files/Pods-WriteUp/Pods-WriteUp.debugdev.xcconfig"; sourceTree = "<group>"; };
+		86C718F1222DFFDDE4AEB22D /* Pods-WriteUpDev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUpDev.debug.xcconfig"; path = "Target Support Files/Pods-WriteUpDev/Pods-WriteUpDev.debug.xcconfig"; sourceTree = "<group>"; };
+		A0C5A2F1A5B5199109351EB3 /* Pods_WriteUpDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WriteUpDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE42BA0BDBDF78723050055F /* Pods-WriteUp.releasedev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUp.releasedev.xcconfig"; path = "Target Support Files/Pods-WriteUp/Pods-WriteUp.releasedev.xcconfig"; sourceTree = "<group>"; };
+		E0F4112F59B89D8177C73FEE /* Pods-WriteUpDev.debugdev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WriteUpDev.debugdev.xcconfig"; path = "Target Support Files/Pods-WriteUpDev/Pods-WriteUpDev.debugdev.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,7 +165,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A79CADE85FA1D8AEF471E53 /* Pods_WriteUp.framework in Frameworks */,
+				04DA7B49490557845A68C6B1 /* Pods_WriteUp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,7 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97DD88476933A56E71E13738 /* Pods_WriteUpDev.framework in Frameworks */,
+				036EFF039AE5A907607577BB /* Pods_WriteUpDev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,7 +186,7 @@
 				3333CDE82445CB7A00E6EF3B /* WriteUp */,
 				3333CDE72445CB7A00E6EF3B /* Products */,
 				45B61ECD0D6CA2657A14F090 /* Pods */,
-				5B6CD421662F07EDA4732AC6 /* Frameworks */,
+				C7FEDCDD15E699B4F5F27E99 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -311,23 +311,23 @@
 		45B61ECD0D6CA2657A14F090 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7CDEF153E541E89F80350ADD /* Pods-WriteUp.debug.xcconfig */,
-				DD13B48D2CD7099154AE3D76 /* Pods-WriteUp.debugdev.xcconfig */,
-				55B9418ED97E9839F143E517 /* Pods-WriteUp.release.xcconfig */,
-				EFAF2A093F3D462DDB229D54 /* Pods-WriteUp.releasedev.xcconfig */,
-				82458D792DC0D1ACDFCD2343 /* Pods-WriteUpDev.debug.xcconfig */,
-				3F7E8AF88A5C1F27D4DEC001 /* Pods-WriteUpDev.debugdev.xcconfig */,
-				E6F64395B45306CCED28A7A9 /* Pods-WriteUpDev.release.xcconfig */,
-				27E06529D8D5ADA4E75B28C1 /* Pods-WriteUpDev.releasedev.xcconfig */,
+				2246CE9DB8999F00CA1865F5 /* Pods-WriteUp.debug.xcconfig */,
+				62E4C1913B2D6A5E551AB5B5 /* Pods-WriteUp.debugdev.xcconfig */,
+				4A40B8DE45B5C245DD4E9896 /* Pods-WriteUp.release.xcconfig */,
+				AE42BA0BDBDF78723050055F /* Pods-WriteUp.releasedev.xcconfig */,
+				86C718F1222DFFDDE4AEB22D /* Pods-WriteUpDev.debug.xcconfig */,
+				E0F4112F59B89D8177C73FEE /* Pods-WriteUpDev.debugdev.xcconfig */,
+				217E2D1AE324D02C9C73437D /* Pods-WriteUpDev.release.xcconfig */,
+				546E20B601821502AFA93D19 /* Pods-WriteUpDev.releasedev.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		5B6CD421662F07EDA4732AC6 /* Frameworks */ = {
+		C7FEDCDD15E699B4F5F27E99 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8E244723E895B609624B7CFC /* Pods_WriteUp.framework */,
-				35FB5654ABC33E0E2DE474E1 /* Pods_WriteUpDev.framework */,
+				1E89E596D69863E41A7E9B67 /* Pods_WriteUp.framework */,
+				A0C5A2F1A5B5199109351EB3 /* Pods_WriteUpDev.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -339,11 +339,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3333CDFA2445CB7D00E6EF3B /* Build configuration list for PBXNativeTarget "WriteUp" */;
 			buildPhases = (
-				6403912DCDB6A36DDA669DC1 /* [CP] Check Pods Manifest.lock */,
+				A4161AAC9DB9768BD00551CE /* [CP] Check Pods Manifest.lock */,
 				3333CDE22445CB7A00E6EF3B /* Sources */,
 				3333CDE32445CB7A00E6EF3B /* Frameworks */,
 				3333CDE42445CB7A00E6EF3B /* Resources */,
-				E0BF3DAD74D6439D5F5C299D /* [CP] Embed Pods Frameworks */,
+				306F37DB3F2CB9C80488E866 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -358,11 +358,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 33FB4F0224B843570079B84C /* Build configuration list for PBXNativeTarget "WriteUpDev" */;
 			buildPhases = (
-				F526C7F50963963D65B3959A /* [CP] Check Pods Manifest.lock */,
+				80F92201EC0CBA418B7464FE /* [CP] Check Pods Manifest.lock */,
 				33FB4EDE24B843570079B84C /* Sources */,
 				33FB4EFB24B843570079B84C /* Frameworks */,
 				33FB4EFD24B843570079B84C /* Resources */,
-				A48AF3D4151B694EFAC2C172 /* [CP] Embed Pods Frameworks */,
+				06D1CEA069BCD13A4B925BEF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -445,29 +445,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6403912DCDB6A36DDA669DC1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-WriteUp-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A48AF3D4151B694EFAC2C172 /* [CP] Embed Pods Frameworks */ = {
+		06D1CEA069BCD13A4B925BEF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -484,7 +462,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WriteUpDev/Pods-WriteUpDev-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E0BF3DAD74D6439D5F5C299D /* [CP] Embed Pods Frameworks */ = {
+		306F37DB3F2CB9C80488E866 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -501,7 +479,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WriteUp/Pods-WriteUp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F526C7F50963963D65B3959A /* [CP] Check Pods Manifest.lock */ = {
+		80F92201EC0CBA418B7464FE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -517,6 +495,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-WriteUpDev-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A4161AAC9DB9768BD00551CE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WriteUp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -633,7 +633,7 @@
 		3333CDF82445CB7D00E6EF3B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -695,7 +695,7 @@
 		3333CDF92445CB7D00E6EF3B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -750,7 +750,7 @@
 		};
 		3333CDFB2445CB7D00E6EF3B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7CDEF153E541E89F80350ADD /* Pods-WriteUp.debug.xcconfig */;
+			baseConfigurationReference = 2246CE9DB8999F00CA1865F5 /* Pods-WriteUp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WriteUp/WriteUp.entitlements;
@@ -773,7 +773,7 @@
 		};
 		3333CDFC2445CB7D00E6EF3B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55B9418ED97E9839F143E517 /* Pods-WriteUp.release.xcconfig */;
+			baseConfigurationReference = 4A40B8DE45B5C245DD4E9896 /* Pods-WriteUp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WriteUp/WriteUp.entitlements;
@@ -795,7 +795,7 @@
 		};
 		33FB4F0324B843570079B84C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82458D792DC0D1ACDFCD2343 /* Pods-WriteUpDev.debug.xcconfig */;
+			baseConfigurationReference = 86C718F1222DFFDDE4AEB22D /* Pods-WriteUpDev.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WriteUp/WriteUp.entitlements;
@@ -816,7 +816,7 @@
 		};
 		33FB4F0424B843570079B84C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E6F64395B45306CCED28A7A9 /* Pods-WriteUpDev.release.xcconfig */;
+			baseConfigurationReference = 217E2D1AE324D02C9C73437D /* Pods-WriteUpDev.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WriteUp/WriteUp.entitlements;
@@ -838,7 +838,7 @@
 		33FB4F0724B845830079B84C /* DebugDev */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -899,7 +899,7 @@
 		};
 		33FB4F0824B845830079B84C /* DebugDev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD13B48D2CD7099154AE3D76 /* Pods-WriteUp.debugdev.xcconfig */;
+			baseConfigurationReference = 62E4C1913B2D6A5E551AB5B5 /* Pods-WriteUp.debugdev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WriteUp/WriteUp.entitlements;
@@ -921,7 +921,7 @@
 		};
 		33FB4F0924B845830079B84C /* DebugDev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F7E8AF88A5C1F27D4DEC001 /* Pods-WriteUpDev.debugdev.xcconfig */;
+			baseConfigurationReference = E0F4112F59B89D8177C73FEE /* Pods-WriteUpDev.debugdev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WriteUp/WriteUp.entitlements;
@@ -943,7 +943,7 @@
 		33FB4F0A24B845870079B84C /* ReleaseDev */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -998,7 +998,7 @@
 		};
 		33FB4F0B24B845870079B84C /* ReleaseDev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EFAF2A093F3D462DDB229D54 /* Pods-WriteUp.releasedev.xcconfig */;
+			baseConfigurationReference = AE42BA0BDBDF78723050055F /* Pods-WriteUp.releasedev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WriteUp/WriteUp.entitlements;
@@ -1020,7 +1020,7 @@
 		};
 		33FB4F0C24B845870079B84C /* ReleaseDev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 27E06529D8D5ADA4E75B28C1 /* Pods-WriteUpDev.releasedev.xcconfig */;
+			baseConfigurationReference = 546E20B601821502AFA93D19 /* Pods-WriteUpDev.releasedev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WriteUp/WriteUp.entitlements;
